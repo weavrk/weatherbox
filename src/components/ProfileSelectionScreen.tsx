@@ -55,87 +55,87 @@ export function ProfileSelectionScreen() {
         
         if (userCount === 1) {
           // 1 column
-          gridTemplateColumns = '1fr';
+          gridTemplateColumns = 'auto';
         } else if (userCount === 2) {
           // 2 columns
-          gridTemplateColumns = 'repeat(2, 1fr)';
+          gridTemplateColumns = 'repeat(2, auto)';
         } else if (userCount === 3) {
           // 3 columns
-          gridTemplateColumns = 'repeat(3, 1fr)';
+          gridTemplateColumns = 'repeat(3, auto)';
         } else if (userCount === 4) {
           if (isMobile) {
             // Mobile: 3 columns (with 1 wrapping)
-            gridTemplateColumns = 'repeat(3, 1fr)';
+            gridTemplateColumns = 'repeat(3, auto)';
             gridTemplateRows = 'repeat(2, auto)';
           } else if (isMedium) {
             // 960px+: 4 columns (1 row - cleaner layout)
-            gridTemplateColumns = 'repeat(4, 1fr)';
+            gridTemplateColumns = 'repeat(4, auto)';
             gridTemplateRows = ''; // Clear rows for single row layout
           } else {
             // 480px-959px: 3 columns (2 rows - cleaner layout)
-            gridTemplateColumns = 'repeat(3, 1fr)';
+            gridTemplateColumns = 'repeat(3, auto)';
             gridTemplateRows = 'repeat(2, auto)';
           }
         } else if (userCount === 5) {
           if (isMobile) {
             // Mobile: 3 columns (2 rows - cleaner layout)
-            gridTemplateColumns = 'repeat(3, 1fr)';
+            gridTemplateColumns = 'repeat(3, auto)';
             gridTemplateRows = 'repeat(2, auto)';
           } else if (isLarge) {
             // 1280px+: 5 columns (1 row - cleaner layout)
-            gridTemplateColumns = 'repeat(5, 1fr)';
+            gridTemplateColumns = 'repeat(5, auto)';
             gridTemplateRows = ''; // Clear rows for single row layout
           } else if (isMedium) {
             // 960px-1279px: 4 columns (2 rows - cleaner layout)
-            gridTemplateColumns = 'repeat(4, 1fr)';
+            gridTemplateColumns = 'repeat(4, auto)';
             gridTemplateRows = 'repeat(2, auto)';
           } else {
             // 480px-959px: 3 columns (2 rows - cleaner layout)
-            gridTemplateColumns = 'repeat(3, 1fr)';
+            gridTemplateColumns = 'repeat(3, auto)';
             gridTemplateRows = 'repeat(2, auto)';
           }
         } else if (userCount === 6) {
           if (isMobile) {
             // Mobile: 3 columns
-            gridTemplateColumns = 'repeat(3, 1fr)';
+            gridTemplateColumns = 'repeat(3, auto)';
             gridTemplateRows = 'repeat(2, auto)';
           } else if (isLarge) {
             // 1280px+: 5 columns (2 rows, last one wraps)
-            gridTemplateColumns = 'repeat(5, 1fr)';
+            gridTemplateColumns = 'repeat(5, auto)';
             gridTemplateRows = 'repeat(2, auto)';
           } else if (isMedium) {
             // 960px-1279px: 4 columns
-            gridTemplateColumns = 'repeat(4, 1fr)';
+            gridTemplateColumns = 'repeat(4, auto)';
             gridTemplateRows = 'repeat(2, auto)';
           } else {
             // 480px-959px: 3 columns
-            gridTemplateColumns = 'repeat(3, 1fr)';
+            gridTemplateColumns = 'repeat(3, auto)';
             gridTemplateRows = 'repeat(2, auto)';
           }
         } else if (userCount >= 7) {
           if (isMobile) {
             // Mobile: 3 columns
             const rows = Math.ceil(userCount / 3);
-            gridTemplateColumns = 'repeat(3, 1fr)';
+            gridTemplateColumns = 'repeat(3, auto)';
             gridTemplateRows = `repeat(${rows}, auto)`;
           } else if (isLarge) {
             // 1280px+: Use 5 columns (or smart layout if more than 5 would be better)
             // For 7-10: use 5 columns, for 11+: calculate optimal
             const cols = userCount <= 10 ? 5 : Math.min(5, Math.ceil(Math.sqrt(userCount)));
             const rows = Math.ceil(userCount / cols);
-            gridTemplateColumns = `repeat(${cols}, 1fr)`;
+            gridTemplateColumns = `repeat(${cols}, auto)`;
             gridTemplateRows = `repeat(${rows}, auto)`;
           } else if (isMedium) {
             // 960px-1279px: Use 4 columns (or smart layout if more than 4 would be better)
             // For 7-8: use 4 columns, for 9+: calculate optimal but cap at 4
             const cols = userCount <= 8 ? 4 : Math.min(4, Math.ceil(Math.sqrt(userCount)));
             const rows = Math.ceil(userCount / cols);
-            gridTemplateColumns = `repeat(${cols}, 1fr)`;
+            gridTemplateColumns = `repeat(${cols}, auto)`;
             gridTemplateRows = `repeat(${rows}, auto)`;
           } else {
             // 480px-959px: 3 columns
             const rows = Math.ceil(userCount / 3);
-            gridTemplateColumns = 'repeat(3, 1fr)';
+            gridTemplateColumns = 'repeat(3, auto)';
             gridTemplateRows = `repeat(${rows}, auto)`;
           }
         }
