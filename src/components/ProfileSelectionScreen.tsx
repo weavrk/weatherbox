@@ -172,6 +172,7 @@ export function ProfileSelectionScreen() {
         birthday: birthday || undefined
       });
       setShowCreateModal(false);
+      setEditMode(false); // Exit edit mode and return to normal landing screen
       await loadUsers(); // Refresh list
     } catch (error) {
       console.error('Failed to create user:', error);

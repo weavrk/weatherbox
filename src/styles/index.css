@@ -223,6 +223,22 @@ img {
   letter-spacing: 0.02em;
 }
 
+/* Above mobile: larger sizes */
+@media (min-width: 480px) {
+  .brand-header {
+    margin-bottom: 96px;
+  }
+  
+  .brand-logo-large {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .app-title-large {
+    font-size: 56px;
+  }
+}
+
 .subtitle {
   font-family: var(--font-family);
   font-size: 1.25rem;
@@ -235,15 +251,29 @@ img {
 .profiles-wrapper {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: 56px; /* Spacing between avatars and add/edit buttons */
 }
 
 .profiles-grid {
   display: grid;
-  gap: var(--spacing-lg);
+  gap: 44px; /* Mobile: more spacing (44px, was 40px) */
   justify-items: center;
   width: fit-content;
   margin: 0 auto;
+}
+
+/* Around 680px: perfect spacing (52px) */
+@media (min-width: 600px) and (max-width: 750px) {
+  .profiles-grid {
+    gap: 52px; /* More spacing at 680px (was 28px) */
+  }
+}
+
+/* Above 750px: maintain visible spacing (52px) */
+@media (min-width: 750px) {
+  .profiles-grid {
+    gap: 52px; /* Keep visible gaps on larger screens (was 28px) */
+  }
 }
 
 /* Layout 1: Single column */
@@ -251,30 +281,44 @@ img {
   grid-template-columns: 1fr;
 }
 
-/* Layout 2: 2 columns */
+/* Layout 2: 2 columns - hug avatars */
 .layout-2 {
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, auto);
+  justify-content: center;
 }
 
-/* Layout 3: 3 columns */
+/* Layout 3: 3 columns - hug avatars */
 .layout-3 {
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
 }
 
-/* Layout 4: Mobile 2 columns, Desktop 4 columns */
+/* Mobile: max 2 columns for all layouts */
+@media (max-width: 479px) {
+  .profiles-grid.layout-3,
+  .profiles-grid.layout-5,
+  .profiles-grid.layout-6 {
+    grid-template-columns: repeat(2, auto) !important;
+  }
+}
+
+/* Layout 4: Mobile 2 columns, Desktop 4 columns - hug avatars */
 .layout-4.mobile {
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, auto);
   grid-template-rows: repeat(2, auto);
+  justify-content: center;
 }
 
 .layout-4.desktop {
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, auto);
+  justify-content: center;
 }
 
-/* Layout 5: 3 columns, 2 below centered */
+/* Layout 5: 3 columns, 2 below centered - hug avatars */
 .layout-5 {
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, auto);
   grid-template-rows: repeat(2, auto);
+  justify-content: center;
 }
 
 .layout-5 .profile-card:nth-child(4) {
@@ -285,16 +329,17 @@ img {
   grid-column: 2;
 }
 
-/* Layout 6: 3x3 (3 columns, 2 rows) */
+/* Layout 6: 3x3 (3 columns, 2 rows) - hug avatars */
 .layout-6 {
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, auto);
   grid-template-rows: repeat(2, auto);
+  justify-content: center;
 }
 
-/* Breakpoint: 480px - fill width for desktop */
+/* Breakpoint: 480px - keep fit-content to hug avatars */
 @media (min-width: 480px) {
   .profiles-grid.desktop {
-    width: 100%;
+    width: fit-content; /* Hug avatars instead of filling width */
   }
   
   .profiles-grid.mobile {
@@ -415,14 +460,15 @@ img {
 
 .profile-name {
   font-family: var(--font-family);
-  font-size: 1rem;
+  font-size: 1.25rem; /* Increased by 4px (was 1rem/16px, now 1.25rem/20px) */
   font-weight: 400;
   line-height: 1.5;
-  color: var(--text-secondary);
+  color: var(--text-primary);
+  margin-top: 8px; /* Move down 8px */
 }
 
 .profile-card:hover .profile-name {
-  color: var(--text-primary);
+  color: var(--text-primary); /* Keep primary color on hover */
 }
 
 .profile-avatar {
@@ -1531,6 +1577,13 @@ img {
   justify-content: center;
 }
 
+/* Mobile: max 2 columns */
+@media (max-width: 479px) {
+  .avatar-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .avatar-option {
   background: #cccccc;
   border: 3px solid transparent;
@@ -1552,6 +1605,11 @@ img {
 .avatar-option.selected {
   border-color: var(--accent);
   border-width: 4px;
+}
+
+/* Dim unselected avatars by 15% when one is selected */
+.avatar-grid:has(.avatar-option.selected) .avatar-option:not(.selected) {
+  opacity: 0.85;
 }
 
 .avatar-thumbnail {
