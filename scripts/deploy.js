@@ -190,11 +190,37 @@ async function deploy() {
         
         // Upload API files
         const apiSrc = path.join(ROOT_DIR, 'api');
+        const baseRemotePath = env.FTP_REMOTE_PATH.replace('/hrefs/watchbox', '');
         if (fs.existsSync(apiSrc)) {
-          const apiRemotePath = env.FTP_REMOTE_PATH.replace('/hrefs/watchbox', '') + '/api';
+          const apiRemotePath = baseRemotePath + '/api';
           await client.ensureDir(apiRemotePath);
           await client.uploadFromDir(apiSrc, apiRemotePath);
           console.log('   Uploaded api/ files');
+        }
+        
+        // Upload data/users folder (user profiles)
+        const usersDir = path.join(ROOT_DIR, 'data', 'users');
+        if (fs.existsSync(usersDir)) {
+          const usersRemotePath = baseRemotePath + '/data/users';
+          await client.ensureDir(usersRemotePath);
+          await client.uploadFromDir(usersDir, usersRemotePath);
+          console.log('   Uploaded data/users/ files');
+        }
+        
+        // Upload data/avatars folder (avatar SVGs)
+        const avatarsDir = path.join(ROOT_DIR, 'data', 'avatars');
+        if (fs.existsSync(avatarsDir)) {
+          const avatarsRemotePath = baseRemotePath + '/data/avatars';
+          await client.ensureDir(avatarsRemotePath);
+          // Upload only SVG files, skip x.archive subfolder
+          const avatarFiles = fs.readdirSync(avatarsDir);
+          for (const file of avatarFiles) {
+            const filePath = path.join(avatarsDir, file);
+            if (fs.statSync(filePath).isFile() && file.endsWith('.svg')) {
+              await client.uploadFrom(filePath, avatarsRemotePath + '/' + file);
+            }
+          }
+          console.log('   Uploaded data/avatars/ files');
         }
         
         client.close();
