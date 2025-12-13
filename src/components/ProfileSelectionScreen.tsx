@@ -275,12 +275,20 @@ export function ProfileSelectionScreen() {
 
   return (
     <div className="profile-selection-screen gradient-background">
+      {editMode && (
+        <button
+          className="done-button"
+          onClick={() => setEditMode(false)}
+        >
+          Done
+        </button>
+      )}
       <div className="profile-container">
         <div className="brand-header">
           <img src="/logo.svg" alt="WatchBox Logo" className="brand-logo-large" />
           <h1 className="app-title-large">WatchBox</h1>
         </div>
-        <div className="profiles-wrapper">
+        <div className={`profiles-wrapper ${editMode ? 'edit-mode' : ''}`}>
           <div className="profiles-grid" ref={gridRef}>
             {users.map((user, index) => (
               <button
@@ -298,7 +306,8 @@ export function ProfileSelectionScreen() {
                 <div 
                   className="profile-avatar"
                   style={{
-                    backgroundColor: avatarColors[user.user_id] || '#4A90E2'
+                    backgroundColor: avatarColors[user.user_id] || '#4A90E2',
+                    outlineColor: avatarColors[user.user_id] || '#4A90E2'
                   }}
                 >
                   <img
@@ -329,17 +338,17 @@ export function ProfileSelectionScreen() {
               </button>
             ))}
           </div>
-          {!editMode && (
-            <div className="profiles-actions" ref={actionsGridRef}>
-              <button
-                className="profile-card create-profile"
-                onClick={() => setShowCreateModal(true)}
-              >
-                <div className="profile-avatar add-avatar">
-                  <span className="plus-icon">+</span>
-                </div>
-                <span className="profile-name">Add</span>
-              </button>
+          <div className="profiles-actions" ref={actionsGridRef}>
+            <button
+              className="profile-card create-profile"
+              onClick={() => setShowCreateModal(true)}
+            >
+              <div className="profile-avatar add-avatar">
+                <span className="plus-icon">+</span>
+              </div>
+              <span className="profile-name">Add</span>
+            </button>
+            {!editMode && (
               <button
                 className="profile-card edit-profiles"
                 onClick={() => setEditMode(true)}
@@ -349,8 +358,8 @@ export function ProfileSelectionScreen() {
                 </div>
                 <span className="profile-name">Edit</span>
               </button>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </div>

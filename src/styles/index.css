@@ -161,6 +161,34 @@ img {
   align-items: center;
   justify-content: center;
   padding: var(--spacing-lg);
+  position: relative;
+}
+
+.done-button {
+  position: fixed;
+  top: var(--spacing-lg);
+  right: var(--spacing-lg);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: 999px;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.done-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.done-button:active {
+  transform: scale(0.98);
 }
 
 .profile-container {
@@ -178,8 +206,8 @@ img {
 }
 
 .brand-logo-large {
-  width: 36px;
-  height: auto;
+  width: 32px;
+  height: 32px;
   filter: brightness(0) saturate(100%) invert(80%) sepia(27%) saturate(965%) hue-rotate(153deg) brightness(95%) contrast(90%);
 }
 
@@ -310,13 +338,26 @@ img {
   width: var(--avatar-size, 120px);
   height: var(--avatar-size, 120px);
   border-radius: 50%;
-  overflow: hidden;
+  overflow: visible;
   border: 3px solid transparent;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, outline-color 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #4A90E2;
+  position: relative;
+  outline: 3px solid;
+  outline-offset: 4px;
+}
+
+.profile-avatar > * {
+  border-radius: 50%;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .profile-card:hover .profile-avatar {
@@ -334,6 +375,19 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 3px solid transparent;
+  transition: border-color 0.2s;
+  box-shadow: none;
+  outline: none;
+}
+
+.add-avatar::after {
+  display: none;
+}
+
+/* In edit mode, change Add Profile border to white */
+.profiles-wrapper.edit-mode .create-profile .add-avatar {
+  border-color: var(--text-primary);
 }
 
 .plus-icon {
@@ -380,10 +434,21 @@ img {
   border-radius: 50%;
   opacity: 0;
   transition: opacity 0.2s;
+  z-index: 1;
 }
 
 .profile-card:hover .edit-overlay {
   opacity: 1;
+}
+
+/* Edit mode: always show edit overlay and dim images */
+.profiles-wrapper.edit-mode .edit-overlay {
+  opacity: 1;
+}
+
+.profiles-wrapper.edit-mode .profile-image {
+  opacity: 0.4;
+  transition: opacity 0.2s;
 }
 
 .edit-icon {
@@ -1272,7 +1337,7 @@ img {
   bottom: 0;
   background-color: var(--bg-primary);
   padding-top: var(--spacing-md);
-  padding-bottom: var(--spacing-sm);
+  padding-bottom: var(--spacing-lg);
   padding-left: var(--spacing-lg);
   padding-right: var(--spacing-lg);
   border: none;
@@ -1284,7 +1349,7 @@ img {
   width: 100vw;
   left: 0;
   margin-left: calc((100% - 100vw) / 2);
-  margin-bottom: calc(-1 * var(--spacing-lg));
+  margin-bottom: 0;
   /* Neumorphic shadow - increased for more pronounced elevation */
   box-shadow: 
     0 -24px 64px rgba(0, 0, 0, 0.35),
