@@ -76,18 +76,28 @@ npm run build
 
 This creates optimized files in the `dist/` directory ready for deployment.
 
-## Deployment to GoDaddy
+## Deployment
 
-See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions.
+See [DEPLOY.md](./DEPLOY.md) for detailed deployment instructions.
 
-### Quick Overview
+### Quick Deploy
 
-1. Build the project: `npm run build`
-2. Upload `dist/` contents to `/public_html/hrefs/watchbox/`
-3. Upload `api/` to `/public_html/api/`
-4. Upload `data/` to `/public_html/data/`
-5. Upload `public/service-worker.js` to `/public_html/hrefs/watchbox/`
-6. Set proper permissions on data directories (755)
+**Auto-deploy with GitHub** (recommended):
+```bash
+git add -A
+git commit -m "Your changes"
+git push
+# GitHub Actions automatically deploys!
+```
+
+**Manual deploy**:
+```bash
+npm run deploy
+```
+
+### Live Site
+- Production: https://weavrk.com/hrefs/watchbox/
+- GitHub: https://github.com/weavrk/watchbox
 
 ## Usage
 
