@@ -184,6 +184,98 @@ export function getServiceKey(filename: string): string {
 }
 
 /**
+ * Get default streaming services (available to all users)
+ */
+export async function getDefaultStreamingServices(): Promise<import('../types').StreamingService[]> {
+  try {
+    const response = await fetch(`/api/get_default_streaming_services.php?t=${Date.now()}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch default streaming services');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to load default streaming services:', error);
+    return [];
+  }
+}
+
+/**
+ * Get streaming service logo URL
+ */
+export function getServiceLogoUrl(logo: string): string {
+  return `/data/streaming/${logo}`;
+}
+
+/**
+ * Search TMDB for streaming providers
+ */
+export interface TMDBProvider {
+  provider_id: number;
+  provider_name: string;
+  logo_path: string;
+  display_priority: number;
+}
+
+export async function searchTMDBProviders(query: string): Promise<{ providers: TMDBProvider[], imageBaseUrl: string }> {
+  try {
+    const response = await fetch(`/api/search_tmdb_providers.php?query=${encodeURIComponent(query)}`);
+    const data = await response.json();
+    
+    console.log('API Response:', data);
+    
+    if (!response.ok || !data.success) {
+      const errorMsg = data.message || data.error || 'Failed to search TMDB providers';
+      console.error('TMDB API Error:', data);
+      throw new Error(errorMsg);
+    }
+    
+    return {
+      providers: data.providers || [],
+      imageBaseUrl: data.tmdb_image_base_url || ''
+    };
+  } catch (error) {
+    console.error('Failed to search TMDB providers:', error);
+    throw error;
+  }
+}
+
+/**
+ * Add streaming service to user's profile
+ */
+export async function addUserStreamingService(
+  userId: string,
+  serviceName: string,
+  logoUrl: string,
+  tmdbProviderId?: number
+): Promise<{ success: boolean; service?: import('../types').StreamingService; error?: string }> {
+  try {
+    const response = await fetch('/api/add_user_streaming_service.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user_id: userId,
+        service_name: serviceName,
+        logo_url: logoUrl,
+        tmdb_provider_id: tmdbProviderId
+      }),
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok) {
+      return { success: false, error: data.error || 'Failed to add service' };
+    }
+    
+    return { success: true, service: data.service };
+  } catch (error) {
+    console.error('Failed to add streaming service:', error);
+    return { success: false, error: 'Network error' };
+  }
+}
+
+/**
  * Explore content types
  */
 export interface ExploreItem {

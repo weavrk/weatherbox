@@ -3,6 +3,23 @@
   "name": "kat",
   "avatar_filename": "avatar-28.svg",
   "items": [],
-  "streaming_services": [],
-  "updated_at": "2025-11-30T23:07:51.624Z"
+  "streaming_services": [
+    {
+      "name": "Netflix",
+      "logo": "netflix.webp",
+      "tmdb_provider_id": 8
+    },
+    {
+      "name": "Hulu",
+      "logo": "hulu.webp",
+      "tmdb_provider_id": 15
+    },
+    {
+      "name": "Disney Plus",
+      "logo": "disney-plue.webp",
+      "tmdb_provider_id": 337
+    }
+  ],
+  "birthday": "02/20/1982",
+  "updated_at": "2025-12-13T13:54:56.520Z"
 }

@@ -28,6 +28,7 @@ export function ProfileSelectionScreen() {
         const userCount = users.length;
         const width = window.innerWidth;
         const isMobile = width < 480;
+        const isLargeDesktop = width >= 1280;
         
         // Determine avatar size
         let avatarWidth = 120; // Default mobile
@@ -36,13 +37,18 @@ export function ProfileSelectionScreen() {
           if (userCount >= 3) {
             avatarWidth = 96;
           }
+        } else if (isLargeDesktop) {
+          // 1280px+: use 200px
+          avatarWidth = 200;
         } else {
-          // 480px+: keep 160px (don't change at 1280+)
+          // 480px-1279px: use 160px
           avatarWidth = 160;
         }
         
         // Set avatar size
         gridRef.current.style.setProperty('--avatar-size', `${avatarWidth}px`);
+        // Set action button size (50% of avatar size)
+        gridRef.current.style.setProperty('--action-avatar-size', `${avatarWidth * 0.5}px`);
         
         // Smart layout rules
         let gridTemplateColumns = '';
@@ -99,6 +105,7 @@ export function ProfileSelectionScreen() {
       if (actionsGridRef.current) {
         const width = window.innerWidth;
         const isMobile = width < 480;
+        const isLargeDesktop = width >= 1280;
         let avatarWidth = 120; // Default mobile
         
         if (isMobile) {
@@ -106,12 +113,17 @@ export function ProfileSelectionScreen() {
           if (users.length >= 3) {
             avatarWidth = 96;
           }
+        } else if (isLargeDesktop) {
+          // 1280px+: use 200px
+          avatarWidth = 200;
         } else {
-          // 480px+: keep 160px
+          // 480px-1279px: use 160px
           avatarWidth = 160;
         }
         
         actionsGridRef.current.style.setProperty('--avatar-size', `${avatarWidth}px`);
+        // Set action button size (50% of avatar size)
+        actionsGridRef.current.style.setProperty('--action-avatar-size', `${avatarWidth * 0.5}px`);
       }
     };
 
@@ -150,12 +162,13 @@ export function ProfileSelectionScreen() {
     }
   };
 
-  const handleCreateProfile = async (name: string, avatarFilename: string, streamingServices: string[]) => {
+  const handleCreateProfile = async (name: string, avatarFilename: string, streamingServices: import('../types').StreamingService[], birthday: string) => {
     try {
       await createUser({ 
         name, 
         avatar_filename: avatarFilename,
-        streaming_services: streamingServices
+        streaming_services: streamingServices,
+        birthday: birthday || undefined
       });
       setShowCreateModal(false);
       await loadUsers(); // Refresh list
@@ -165,7 +178,7 @@ export function ProfileSelectionScreen() {
     }
   };
 
-  const handleEditProfile = async (userId: string, name: string, avatarFilename: string, streamingServices: string[]) => {
+  const handleEditProfile = async (userId: string, name: string, avatarFilename: string, streamingServices: import('../types').StreamingService[], birthday: string) => {
     try {
       // Get current user data to preserve items
       const currentUser = await getUser(userId);
@@ -174,7 +187,8 @@ export function ProfileSelectionScreen() {
         name,
         avatar_filename: avatarFilename,
         items: currentUser.items,
-        streaming_services: streamingServices
+        streaming_services: streamingServices,
+        birthday: birthday || undefined
       });
       setEditingUser(null);
       setEditMode(false); // Exit edit mode
@@ -207,7 +221,8 @@ export function ProfileSelectionScreen() {
           user_id: fullUser.user_id,
           name: fullUser.name,
           avatar_filename: fullUser.avatar_filename,
-          streaming_services: fullUser.streaming_services
+          streaming_services: fullUser.streaming_services,
+          birthday: fullUser.birthday
         });
       } catch (error) {
         console.error('Failed to load user data:', error);
@@ -261,8 +276,10 @@ export function ProfileSelectionScreen() {
   return (
     <div className="profile-selection-screen">
       <div className="profile-container">
-        <h1 className="app-title-large">WatchBox</h1>
-        <h2 className="subtitle">Who's watching?</h2>
+        <div className="brand-header">
+          <img src="/logo.svg" alt="WatchBox Logo" className="brand-logo-large" />
+          <h1 className="app-title-large">WatchBox</h1>
+        </div>
         <div className="profiles-wrapper">
           <div className="profiles-grid" ref={gridRef}>
             {users.map((user, index) => (
@@ -321,7 +338,7 @@ export function ProfileSelectionScreen() {
                 <div className="profile-avatar add-avatar">
                   <span className="plus-icon">+</span>
                 </div>
-                <span className="profile-name">Add Profile</span>
+                <span className="profile-name">Add</span>
               </button>
               <button
                 className="profile-card edit-profiles"
@@ -330,7 +347,7 @@ export function ProfileSelectionScreen() {
                 <div className="profile-avatar add-avatar">
                   <span className="edit-icon-large">✎</span>
                 </div>
-                <span className="profile-name">Edit Profiles</span>
+                <span className="profile-name">Edit</span>
               </button>
             </div>
           )}

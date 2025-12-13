@@ -29,7 +29,8 @@ export function MainWatchBoxScreen() {
         user_id: userData.user_id,
         name: userData.name,
         avatar_filename: userData.avatar_filename,
-        streaming_services: userData.streaming_services
+        streaming_services: userData.streaming_services,
+        birthday: userData.birthday
       });
       setShowEditProfile(true);
     } catch (error) {
@@ -37,7 +38,7 @@ export function MainWatchBoxScreen() {
     }
   };
 
-  const handleSaveProfile = async (userId: string, name: string, avatarFilename: string, streamingServices: string[]) => {
+  const handleSaveProfile = async (userId: string, name: string, avatarFilename: string, streamingServices: import('../types').StreamingService[], birthday: string) => {
     if (!currentUser) return;
     try {
       await saveUser({
@@ -45,7 +46,8 @@ export function MainWatchBoxScreen() {
         name,
         avatar_filename: avatarFilename,
         items: currentUser.items,
-        streaming_services: streamingServices
+        streaming_services: streamingServices,
+        birthday: birthday || undefined
       });
       setShowEditProfile(false);
       setEditingUser(null);
@@ -69,7 +71,8 @@ export function MainWatchBoxScreen() {
       name: currentUser.name,
       avatar_filename: currentUser.avatar_filename,
       items: updatedItems,
-      streaming_services: currentUser.streaming_services
+      streaming_services: currentUser.streaming_services,
+      birthday: currentUser.birthday
     });
   };
 
@@ -87,7 +90,8 @@ export function MainWatchBoxScreen() {
       name: currentUser.name,
       avatar_filename: currentUser.avatar_filename,
       items: updatedItems,
-      streaming_services: currentUser.streaming_services
+      streaming_services: currentUser.streaming_services,
+      birthday: currentUser.birthday
     });
   };
 

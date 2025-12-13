@@ -54,7 +54,9 @@ $user = [
     'name' => $data['name'],
     'avatar_filename' => $data['avatar_filename'],
     'updated_at' => date('c'),
-    'items' => $data['items']
+    'items' => $data['items'],
+    'streaming_services' => isset($data['streaming_services']) ? $data['streaming_services'] : [],
+    'birthday' => isset($data['birthday']) && !empty($data['birthday']) ? $data['birthday'] : ''
 ];
 
 // Save to file

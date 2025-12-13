@@ -34,11 +34,21 @@ foreach ($files as $file) {
             ? $userData['avatar_filename'] 
             : (isset($userData['avatar_poster_id']) ? "avatar-{$userData['avatar_poster_id']}.png" : "avatar-1.png");
         
-        $users[] = [
+        $userSummary = [
             'user_id' => $userData['user_id'],
             'name' => $userData['name'],
             'avatar_filename' => $avatarFilename
         ];
+        
+        // Add optional fields if present
+        if (isset($userData['streaming_services'])) {
+            $userSummary['streaming_services'] = $userData['streaming_services'];
+        }
+        if (isset($userData['birthday'])) {
+            $userSummary['birthday'] = $userData['birthday'];
+        }
+        
+        $users[] = $userSummary;
     }
 }
 

@@ -27,6 +27,7 @@ export function Header({ avatarFilename, userName, onSwitchAccount, onEditProfil
   return (
     <header className="app-header">
       <div className="header-left">
+        <img src="/logo.svg" alt="WatchBox Logo" className="brand-logo-header" />
         <h1 className="app-title">WatchBox</h1>
       </div>
       <div className="header-right">

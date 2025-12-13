@@ -1,20 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowLeft, Check } from 'lucide-react';
-import { getAvatarUrl, getAvailableAvatars, getAvailableStreamingServices, getServiceIcon, getServiceLabel, getServiceKey, clearAvatarCache } from '../services/api';
+import { ArrowLeft, Plus } from 'lucide-react';
+import { getAvatarUrl, getAvailableAvatars, getDefaultStreamingServices, getServiceLogoUrl, clearAvatarCache } from '../services/api';
 import { extractDominantColor } from '../utils/colorExtraction';
+import type { StreamingService } from '../types';
 
 interface CreateProfilePageProps {
   onBack: () => void;
-  onCreate: (name: string, avatarFilename: string, streamingServices: string[]) => void;
+  onCreate: (name: string, avatarFilename: string, streamingServices: StreamingService[], birthday: string) => void;
 }
 
 export function CreateProfilePage({ onBack, onCreate }: CreateProfilePageProps) {
   const [name, setName] = useState('');
   const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
-  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [selectedServices, setSelectedServices] = useState<StreamingService[]>([]);
   const [availableAvatars, setAvailableAvatars] = useState<string[]>([]);
-  const [availableServices, setAvailableServices] = useState<string[]>([]);
+  const [defaultServices, setDefaultServices] = useState<StreamingService[]>([]);
   const [avatarColors, setAvatarColors] = useState<Record<string, string>>({});
+  const [month, setMonth] = useState('');
+  const [day, setDay] = useState('');
+  const [year, setYear] = useState('');
   const imageRefs = useRef<Record<string, HTMLImageElement>>({});
 
   useEffect(() => {
@@ -31,9 +35,9 @@ export function CreateProfilePage({ onBack, onCreate }: CreateProfilePageProps) 
       }
     });
     
-    // Load streaming services on mount
-    getAvailableStreamingServices().then(services => {
-      setAvailableServices(services);
+    // Load default streaming services
+    getDefaultStreamingServices().then(services => {
+      setDefaultServices(services);
     });
   }, []);
 
@@ -50,18 +54,31 @@ export function CreateProfilePage({ onBack, onCreate }: CreateProfilePageProps) 
     setAvatarColors(prev => ({ ...prev, [avatarFilename]: color }));
   };
 
-  const handleServiceToggle = (service: string) => {
-    setSelectedServices(prev => 
-      prev.includes(service) 
-        ? prev.filter(s => s !== service)
-        : [...prev, service]
-    );
+  const handleServiceToggle = (service: StreamingService) => {
+    const isSelected = selectedServices.some(s => s.name === service.name);
+    
+    if (isSelected) {
+      setSelectedServices(prev => prev.filter(s => s.name !== service.name));
+    } else {
+      setSelectedServices(prev => [...prev, service]);
+    }
+  };
+
+  const formatBirthday = (): string => {
+    if (!month && !day && !year) return '';
+    
+    // Pad month and day with leading zeros if needed
+    const paddedMonth = month.padStart(2, '0');
+    const paddedDay = day.padStart(2, '0');
+    
+    return `${paddedMonth}/${paddedDay}/${year}`;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (name.trim() && selectedAvatar) {
-      onCreate(name.trim(), selectedAvatar, selectedServices);
+      const birthday = formatBirthday();
+      onCreate(name.trim(), selectedAvatar, selectedServices, birthday);
     }
   };
 
@@ -124,32 +141,81 @@ export function CreateProfilePage({ onBack, onCreate }: CreateProfilePageProps) 
               </div>
             </div>
             <div className="form-group">
-              <label>Streaming Services</label>
+              <label>Streaming Service Subscriptions</label>
               <div className="services-grid">
-                {availableServices.map((serviceFilename) => {
-                  const serviceKey = getServiceKey(serviceFilename);
-                  const serviceLabel = getServiceLabel(serviceFilename);
+                {defaultServices.map((service) => {
+                  const isSelected = selectedServices.some(s => s.name === service.name);
                   return (
                     <button
-                      key={serviceKey}
+                      key={service.name}
                       type="button"
-                      className={`service-option ${selectedServices.includes(serviceKey) ? 'selected' : ''}`}
-                      onClick={() => handleServiceToggle(serviceKey)}
+                      className={`service-option ${isSelected ? 'selected' : ''}`}
+                      onClick={() => handleServiceToggle(service)}
                     >
                       <img
-                        src={getServiceIcon(serviceFilename)}
-                        alt={serviceLabel}
+                        src={getServiceLogoUrl(service.logo)}
+                        alt={service.name}
                         className="service-icon-large"
                       />
-                      {selectedServices.includes(serviceKey) && (
-                        <div className="service-checkmark">
-                          <Check size={20} />
-                        </div>
-                      )}
+                      <span className="service-label">{service.name}</span>
                     </button>
                   );
                 })}
+                
+                {/* Add Service button - disabled during creation */}
+                <button
+                  type="button"
+                  className="service-option service-add service-add-disabled"
+                  onClick={() => alert('Create your profile first, then you can add custom services by editing your profile.')}
+                  title="Add custom services after creating your profile"
+                >
+                  <div className="service-add-icon">
+                    <Plus size={32} />
+                  </div>
+                  <span className="service-label">Add</span>
+                </button>
               </div>
+            </div>
+            <div className="form-group">
+              <label>Birthday</label>
+              <div className="birthday-fields">
+                <input
+                  type="text"
+                  value={month}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/\D/g, '').slice(0, 2);
+                    setMonth(val);
+                  }}
+                  placeholder="MM"
+                  className="birthday-input"
+                  maxLength={2}
+                />
+                <span className="birthday-separator">/</span>
+                <input
+                  type="text"
+                  value={day}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/\D/g, '').slice(0, 2);
+                    setDay(val);
+                  }}
+                  placeholder="DD"
+                  className="birthday-input"
+                  maxLength={2}
+                />
+                <span className="birthday-separator">/</span>
+                <input
+                  type="text"
+                  value={year}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/\D/g, '').slice(0, 4);
+                    setYear(val);
+                  }}
+                  placeholder="YYYY"
+                  className="birthday-input birthday-year"
+                  maxLength={4}
+                />
+              </div>
+              <p className="help-text">Enter birthday as MM/DD/YYYY</p>
             </div>
           </form>
         </div>
@@ -157,7 +223,7 @@ export function CreateProfilePage({ onBack, onCreate }: CreateProfilePageProps) 
           <button 
             type="submit"
             form="create-profile-form"
-            className="create-button-full"
+            className="ds-button-primary"
             disabled={!name.trim() || !selectedAvatar}
           >
             Create

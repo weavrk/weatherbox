@@ -1,5 +1,11 @@
 // Type definitions for WatchBox
 
+export interface StreamingService {
+  name: string;
+  logo: string; // filename in data/streaming/
+  tmdb_provider_id?: number;
+}
+
 export interface WatchBoxItem {
   id: string;
   title: string;
@@ -16,20 +22,23 @@ export interface User {
   avatar_filename: string;
   updated_at?: string;
   items: WatchBoxItem[];
-  streaming_services?: string[];
+  streaming_services?: StreamingService[];
+  birthday?: string; // Format: "MM/DD/YYYY"
 }
 
 export interface UserSummary {
   user_id: string;
   name: string;
   avatar_filename: string;
-  streaming_services?: string[];
+  streaming_services?: StreamingService[];
+  birthday?: string; // Format: "MM/DD/YYYY"
 }
 
 export interface CreateUserRequest {
   name: string;
   avatar_filename: string;
-  streaming_services?: string[];
+  streaming_services?: StreamingService[];
+  birthday?: string; // Format: "MM/DD/YYYY"
 }
 
 export interface SaveUserRequest {
@@ -37,6 +46,7 @@ export interface SaveUserRequest {
   name: string;
   avatar_filename: string;
   items: WatchBoxItem[];
-  streaming_services?: string[];
+  streaming_services?: StreamingService[];
+  birthday?: string; // Format: "MM/DD/YYYY"
 }
 
