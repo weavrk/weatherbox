@@ -629,6 +629,13 @@ img {
   margin-bottom: var(--spacing-lg);
 }
 
+/* Mobile: center tabs */
+@media (max-width: 479px) {
+  .tabs-container {
+    justify-content: center;
+  }
+}
+
 .tab-button {
   background: transparent;
   border: none;
@@ -2011,11 +2018,6 @@ img {
   
   .explore-grid {
     grid-template-columns: repeat(5, 1fr);
-  }
-  
-  .content {
-    max-width: 1400px;
-    margin: 0 auto;
   }
   
   .fab {
