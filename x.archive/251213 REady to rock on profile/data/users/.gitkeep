@@ -1,0 +1,12 @@
+# User JSON files will be stored here
+# Each user gets their own file: <user_id>.json
+# Example: katherine.json
+
+# Sample user JSON structure:
+# {
+#   "user_id": "katherine",
+#   "name": "Katherine",
+#   "avatar_poster_id": 1,
+#   "updated_at": "2025-11-21T00:00:00Z",
+#   "items": []
+# }
