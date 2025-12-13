@@ -1,0 +1,3 @@
+# Poster images will be stored here
+# Each poster: <poster_id>.jpg (where poster_id typically matches tmdb_id)
+# Example: 12345.jpg

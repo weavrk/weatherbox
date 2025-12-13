@@ -1,0 +1,4391 @@
+[
+  {
+    "id": "paw-patrol.jpg-57532",
+    "title": "PAW Patrol",
+    "tmdb_id": 57532,
+    "poster_filename": "paw-patrol-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2013-08-12"
+  },
+  {
+    "id": "jurassic-world-chaos-theory.jpg-237512",
+    "title": "Jurassic World: Chaos Theory",
+    "tmdb_id": 237512,
+    "poster_filename": "jurassic-world-chaos-theory-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2024-05-24"
+  },
+  {
+    "id": "cobra-kai.jpg-77169",
+    "title": "Cobra Kai",
+    "tmdb_id": 77169,
+    "poster_filename": "cobra-kai-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2018-05-02"
+  },
+  {
+    "id": "the-resident.jpg-74016",
+    "title": "The Resident",
+    "tmdb_id": 74016,
+    "poster_filename": "the-resident-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2018-01-21"
+  },
+  {
+    "id": "outlander.jpg-56570",
+    "title": "Outlander",
+    "tmdb_id": 56570,
+    "poster_filename": "outlander-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2014-08-09"
+  },
+  {
+    "id": "bridgerton.jpg-91239",
+    "title": "Bridgerton",
+    "tmdb_id": 91239,
+    "poster_filename": "bridgerton-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2020-12-25"
+  },
+  {
+    "id": "peppa-pig.jpg-12225",
+    "title": "Peppa Pig",
+    "tmdb_id": 12225,
+    "poster_filename": "peppa-pig-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2004-05-31"
+  },
+  {
+    "id": "the-walking-dead-daryl-dixon.jpg-211684",
+    "title": "The Walking Dead: Daryl Dixon",
+    "tmdb_id": 211684,
+    "poster_filename": "the-walking-dead-daryl-dixon.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2023-09-10"
+  },
+  {
+    "id": "riverdale.jpg-69050",
+    "title": "Riverdale",
+    "tmdb_id": 69050,
+    "poster_filename": "riverdale-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2017-01-26"
+  },
+  {
+    "id": "the-last-kingdom.jpg-63333",
+    "title": "The Last Kingdom",
+    "tmdb_id": 63333,
+    "poster_filename": "the-last-kingdom.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2015-10-10"
+  },
+  {
+    "id": "sex-education.jpg-81356",
+    "title": "Sex Education",
+    "tmdb_id": 81356,
+    "poster_filename": "sex-education-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2019-01-11"
+  },
+  {
+    "id": "supergirl.jpg-62688",
+    "title": "Supergirl",
+    "tmdb_id": 62688,
+    "poster_filename": "supergirl-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2015-10-26"
+  },
+  {
+    "id": "the-crown.jpg-65494",
+    "title": "The Crown",
+    "tmdb_id": 65494,
+    "poster_filename": "the-crown.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2016-11-04"
+  },
+  {
+    "id": "ninjago-masters-of-spinjitzu.jpg-38693",
+    "title": "Ninjago: Masters of Spinjitzu",
+    "tmdb_id": 38693,
+    "poster_filename": "ninjago-masters-of-spinjitzu-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2012-01-11"
+  },
+  {
+    "id": "heartland.jpg-14929",
+    "title": "Heartland",
+    "tmdb_id": 14929,
+    "poster_filename": "heartland-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2007-10-14"
+  },
+  {
+    "id": "blindspot.jpg-62710",
+    "title": "Blindspot",
+    "tmdb_id": 62710,
+    "poster_filename": "blindspot-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2015-09-21"
+  },
+  {
+    "id": "bojack-horseman.jpg-61222",
+    "title": "BoJack Horseman",
+    "tmdb_id": 61222,
+    "poster_filename": "bojack-horseman-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2014-08-22"
+  },
+  {
+    "id": "the-fairly-oddparents.jpg-4630",
+    "title": "The Fairly OddParents",
+    "tmdb_id": 4630,
+    "poster_filename": "the-fairly-oddparents.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2001-03-30"
+  },
+  {
+    "id": "orange-is-the-new-black.jpg-1424",
+    "title": "Orange Is the New Black",
+    "tmdb_id": 1424,
+    "poster_filename": "orange-is-the-new-black-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2013-07-11"
+  },
+  {
+    "id": "call-the-midwife.jpg-39793",
+    "title": "Call the Midwife",
+    "tmdb_id": 39793,
+    "poster_filename": "call-the-midwife-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2012-01-15"
+  },
+  {
+    "id": "fear-the-walking-dead.jpg-62286",
+    "title": "Fear the Walking Dead",
+    "tmdb_id": 62286,
+    "poster_filename": "fear-the-walking-dead-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2015-08-23"
+  },
+  {
+    "id": "the-loud-house.jpg-68073",
+    "title": "The Loud House",
+    "tmdb_id": 68073,
+    "poster_filename": "the-loud-house.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2016-05-02"
+  },
+  {
+    "id": "scandal.jpg-39269",
+    "title": "Scandal",
+    "tmdb_id": 39269,
+    "poster_filename": "scandal-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2012-04-05"
+  },
+  {
+    "id": "dcs-legends-of-tomorrow.jpg-62643",
+    "title": "DC's Legends of Tomorrow",
+    "tmdb_id": 62643,
+    "poster_filename": "dcs-legends-of-tomorrow-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2016-01-21"
+  },
+  {
+    "id": "my-little-pony-friendship-is-magic.jpg-33765",
+    "title": "My Little Pony: Friendship Is Magic",
+    "tmdb_id": 33765,
+    "poster_filename": "my-little-pony-friendship-is-magic-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2010-10-10"
+  },
+  {
+    "id": "icarly.jpg-5371",
+    "title": "iCarly",
+    "tmdb_id": 5371,
+    "poster_filename": "icarly-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2007-09-08"
+  },
+  {
+    "id": "dawsons-creek.jpg-2327",
+    "title": "Dawson's Creek",
+    "tmdb_id": 2327,
+    "poster_filename": "dawsons-creek-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "1998-01-20"
+  },
+  {
+    "id": "narcos.jpg-63351",
+    "title": "Narcos",
+    "tmdb_id": 63351,
+    "poster_filename": "narcos-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2015-08-28"
+  },
+  {
+    "id": "arcane.jpg-94605",
+    "title": "Arcane",
+    "tmdb_id": 94605,
+    "poster_filename": "arcane-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2021-11-06"
+  },
+  {
+    "id": "legacies.jpg-79460",
+    "title": "Legacies",
+    "tmdb_id": 79460,
+    "poster_filename": "legacies-1.jpg",
+    "listType": "top",
+    "services": [
+      "netflix"
+    ],
+    "release_date": "2018-10-25"
+  },
+  {
+    "id": "teen-wolf.jpg-34524",
+    "title": "Teen Wolf",
+    "tmdb_id": 34524,
+    "poster_filename": "teen-wolf-1.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2011-06-05"
+  },
+  {
+    "id": "adventure-time.jpg-15260",
+    "title": "Adventure Time",
+    "tmdb_id": 15260,
+    "poster_filename": "adventure-time-1.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2010-04-05"
+  },
+  {
+    "id": "regular-show.jpg-31132",
+    "title": "Regular Show",
+    "tmdb_id": 31132,
+    "poster_filename": "regular-show-1.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2010-09-06"
+  },
+  {
+    "id": "elementary.jpg-1415",
+    "title": "Elementary",
+    "tmdb_id": 1415,
+    "poster_filename": "elementary-1.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2012-09-27"
+  },
+  {
+    "id": "the-amazing-world-of-gumball.jpg-37606",
+    "title": "The Amazing World of Gumball",
+    "tmdb_id": 37606,
+    "poster_filename": "the-amazing-world-of-gumball.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2011-05-03"
+  },
+  {
+    "id": "alien-earth.jpg-157239",
+    "title": "Alien: Earth",
+    "tmdb_id": 157239,
+    "poster_filename": "alien-earth-1.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2025-08-12"
+  },
+  {
+    "id": "scrubs.jpg-4556",
+    "title": "Scrubs",
+    "tmdb_id": 4556,
+    "poster_filename": "scrubs-1.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2001-10-02"
+  },
+  {
+    "id": "king-of-the-hill.jpg-2122",
+    "title": "King of the Hill",
+    "tmdb_id": 2122,
+    "poster_filename": "king-of-the-hill-1.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "1997-01-12"
+  },
+  {
+    "id": "futurama.jpg-615",
+    "title": "Futurama",
+    "tmdb_id": 615,
+    "poster_filename": "futurama-1.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "1999-03-28"
+  },
+  {
+    "id": "its-always-sunny-in-philadelphia.jpg-2710",
+    "title": "It's Always Sunny in Philadelphia",
+    "tmdb_id": 2710,
+    "poster_filename": "its-always-sunny-in-philadelphia-1.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2005-08-04"
+  },
+  {
+    "id": "teen-titans-go.jpg-45140",
+    "title": "Teen Titans Go!",
+    "tmdb_id": 45140,
+    "poster_filename": "teen-titans-go.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2013-04-23"
+  },
+  {
+    "id": "once-upon-a-time.jpg-39272",
+    "title": "Once Upon a Time",
+    "tmdb_id": 39272,
+    "poster_filename": "once-upon-a-time.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2011-10-23"
+  },
+  {
+    "id": "phineas-and-ferb.jpg-1877",
+    "title": "Phineas and Ferb",
+    "tmdb_id": 1877,
+    "poster_filename": "phineas-and-ferb.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2007-08-17"
+  },
+  {
+    "id": "buffy-the-vampire-slayer.jpg-95",
+    "title": "Buffy the Vampire Slayer",
+    "tmdb_id": 95,
+    "poster_filename": "buffy-the-vampire-slayer.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "1997-03-10"
+  },
+  {
+    "id": "sleepy-hollow.jpg-50825",
+    "title": "Sleepy Hollow",
+    "tmdb_id": 50825,
+    "poster_filename": "sleepy-hollow.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2013-09-16"
+  },
+  {
+    "id": "murdoch-mysteries.jpg-12786",
+    "title": "Murdoch Mysteries",
+    "tmdb_id": 12786,
+    "poster_filename": "murdoch-mysteries.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2008-01-24"
+  },
+  {
+    "id": "only-murders-in-the-building.jpg-107113",
+    "title": "Only Murders in the Building",
+    "tmdb_id": 107113,
+    "poster_filename": "only-murders-in-the-building.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2021-08-31"
+  },
+  {
+    "id": "white-collar.jpg-21510",
+    "title": "White Collar",
+    "tmdb_id": 21510,
+    "poster_filename": "white-collar.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2009-10-23"
+  },
+  {
+    "id": "this-is-us.jpg-67136",
+    "title": "This Is Us",
+    "tmdb_id": 67136,
+    "poster_filename": "this-is-us.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2016-09-20"
+  },
+  {
+    "id": "boston-legal.jpg-4598",
+    "title": "Boston Legal",
+    "tmdb_id": 4598,
+    "poster_filename": "boston-legal.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2004-10-03"
+  },
+  {
+    "id": "star-wars-the-clone-wars.jpg-4194",
+    "title": "Star Wars: The Clone Wars",
+    "tmdb_id": 4194,
+    "poster_filename": "star-wars-the-clone-wars.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2008-10-03"
+  },
+  {
+    "id": "new-girl.jpg-1420",
+    "title": "New Girl",
+    "tmdb_id": 1420,
+    "poster_filename": "new-girl.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2011-09-20"
+  },
+  {
+    "id": "archer.jpg-10283",
+    "title": "Archer",
+    "tmdb_id": 10283,
+    "poster_filename": "archer.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2009-09-17"
+  },
+  {
+    "id": "snowfall.jpg-71694",
+    "title": "Snowfall",
+    "tmdb_id": 71694,
+    "poster_filename": "snowfall.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2017-07-05"
+  },
+  {
+    "id": "stargate-atlantis.jpg-2290",
+    "title": "Stargate Atlantis",
+    "tmdb_id": 2290,
+    "poster_filename": "stargate-atlantis.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2004-07-15"
+  },
+  {
+    "id": "the-handmaids-tale.jpg-69478",
+    "title": "The Handmaid's Tale",
+    "tmdb_id": 69478,
+    "poster_filename": "the-handmaids-tale.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2017-04-26"
+  },
+  {
+    "id": "hells-kitchen.jpg-2370",
+    "title": "Hell's Kitchen",
+    "tmdb_id": 2370,
+    "poster_filename": "hells-kitchen.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2005-05-30"
+  },
+  {
+    "id": "community.jpg-18347",
+    "title": "Community",
+    "tmdb_id": 18347,
+    "poster_filename": "community.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2009-09-17"
+  },
+  {
+    "id": "the-goldbergs.jpg-49009",
+    "title": "The Goldbergs",
+    "tmdb_id": 49009,
+    "poster_filename": "the-goldbergs.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2013-09-24"
+  },
+  {
+    "id": "the-shield.jpg-1414",
+    "title": "The Shield",
+    "tmdb_id": 1414,
+    "poster_filename": "the-shield.jpg",
+    "listType": "top",
+    "services": [
+      "hulu"
+    ],
+    "release_date": "2002-03-12"
+  },
+  {
+    "id": "adventure-time-fionna-cake.jpg-131378",
+    "title": "Adventure Time: Fionna & Cake",
+    "tmdb_id": 131378,
+    "poster_filename": "adventure-time-fionna-cake.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2023-08-31"
+  },
+  {
+    "id": "the-boondocks.jpg-2604",
+    "title": "The Boondocks",
+    "tmdb_id": 2604,
+    "poster_filename": "the-boondocks.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2005-11-06"
+  },
+  {
+    "id": "silicon-valley.jpg-60573",
+    "title": "Silicon Valley",
+    "tmdb_id": 60573,
+    "poster_filename": "silicon-valley.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2014-04-06"
+  },
+  {
+    "id": "band-of-brothers.jpg-4613",
+    "title": "Band of Brothers",
+    "tmdb_id": 4613,
+    "poster_filename": "band-of-brothers.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2001-09-09"
+  },
+  {
+    "id": "lego-ninjago-dragons-rising.jpg-212989",
+    "title": "LEGO Ninjago: Dragons Rising",
+    "tmdb_id": 212989,
+    "poster_filename": "lego-ninjago-dragons-rising.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2023-06-01"
+  },
+  {
+    "id": "warrior.jpg-73544",
+    "title": "Warrior",
+    "tmdb_id": 73544,
+    "poster_filename": "warrior.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2019-04-05"
+  },
+  {
+    "id": "the-last-ship.jpg-60802",
+    "title": "The Last Ship",
+    "tmdb_id": 60802,
+    "poster_filename": "the-last-ship.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2014-06-22"
+  },
+  {
+    "id": "looney-tunes-cartoons.jpg-102321",
+    "title": "Looney Tunes Cartoons",
+    "tmdb_id": 102321,
+    "poster_filename": "looney-tunes-cartoons.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2020-05-27"
+  },
+  {
+    "id": "craig-of-the-creek.jpg-79061",
+    "title": "Craig of the Creek",
+    "tmdb_id": 79061,
+    "poster_filename": "craig-of-the-creek.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2018-03-30"
+  },
+  {
+    "id": "six-feet-under.jpg-1274",
+    "title": "Six Feet Under",
+    "tmdb_id": 1274,
+    "poster_filename": "six-feet-under.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2001-06-03"
+  },
+  {
+    "id": "the-chair-company.jpg-271267",
+    "title": "The Chair Company",
+    "tmdb_id": 271267,
+    "poster_filename": "the-chair-company.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2025-10-12"
+  },
+  {
+    "id": "the-penguin.jpg-194764",
+    "title": "The Penguin",
+    "tmdb_id": 194764,
+    "poster_filename": "the-penguin.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2024-09-19"
+  },
+  {
+    "id": "the-sex-lives-of-college-girls.jpg-134373",
+    "title": "The Sex Lives of College Girls",
+    "tmdb_id": 134373,
+    "poster_filename": "the-sex-lives-of-college-girls.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2021-11-18"
+  },
+  {
+    "id": "samurai-jack.jpg-2723",
+    "title": "Samurai Jack",
+    "tmdb_id": 2723,
+    "poster_filename": "samurai-jack.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2001-08-10"
+  },
+  {
+    "id": "veep.jpg-2947",
+    "title": "Veep",
+    "tmdb_id": 2947,
+    "poster_filename": "veep.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2012-04-22"
+  },
+  {
+    "id": "chopped.jpg-17404",
+    "title": "Chopped",
+    "tmdb_id": 17404,
+    "poster_filename": "chopped.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2009-01-13"
+  },
+  {
+    "id": "deadwood.jpg-1406",
+    "title": "Deadwood",
+    "tmdb_id": 1406,
+    "poster_filename": "deadwood.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2004-03-21"
+  },
+  {
+    "id": "diners-drive-ins-and-dives.jpg-4086",
+    "title": "Diners, Drive-Ins and Dives",
+    "tmdb_id": 4086,
+    "poster_filename": "diners-drive-ins-and-dives.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2007-04-23"
+  },
+  {
+    "id": "the-righteous-gemstones.jpg-82782",
+    "title": "The Righteous Gemstones",
+    "tmdb_id": 82782,
+    "poster_filename": "the-righteous-gemstones.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2019-08-18"
+  },
+  {
+    "id": "girls.jpg-42282",
+    "title": "Girls",
+    "tmdb_id": 42282,
+    "poster_filename": "girls.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2012-04-15"
+  },
+  {
+    "id": "barry.jpg-73107",
+    "title": "Barry",
+    "tmdb_id": 73107,
+    "poster_filename": "barry.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2018-03-25"
+  },
+  {
+    "id": "the-leftovers.jpg-54344",
+    "title": "The Leftovers",
+    "tmdb_id": 54344,
+    "poster_filename": "the-leftovers.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2014-06-29"
+  },
+  {
+    "id": "ballers.jpg-62704",
+    "title": "Ballers",
+    "tmdb_id": 62704,
+    "poster_filename": "ballers.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2015-06-21"
+  },
+  {
+    "id": "naked-and-afraid.jpg-58832",
+    "title": "Naked and Afraid",
+    "tmdb_id": 58832,
+    "poster_filename": "naked-and-afraid.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2013-06-23"
+  },
+  {
+    "id": "doom-patrol.jpg-79501",
+    "title": "Doom Patrol",
+    "tmdb_id": 79501,
+    "poster_filename": "doom-patrol.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2019-02-15"
+  },
+  {
+    "id": "beat-bobby-flay.jpg-62481",
+    "title": "Beat Bobby Flay",
+    "tmdb_id": 62481,
+    "poster_filename": "beat-bobby-flay.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2013-08-24"
+  },
+  {
+    "id": "walker.jpg-99121",
+    "title": "Walker",
+    "tmdb_id": 99121,
+    "poster_filename": "walker.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2021-01-21"
+  },
+  {
+    "id": "impractical-jokers.jpg-59186",
+    "title": "Impractical Jokers",
+    "tmdb_id": 59186,
+    "poster_filename": "impractical-jokers.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2011-12-15"
+  },
+  {
+    "id": "harley-quinn.jpg-74440",
+    "title": "Harley Quinn",
+    "tmdb_id": 74440,
+    "poster_filename": "harley-quinn.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2019-11-29"
+  },
+  {
+    "id": "the-cleaning-lady.jpg-125282",
+    "title": "The Cleaning Lady",
+    "tmdb_id": 125282,
+    "poster_filename": "the-cleaning-lady.jpg",
+    "listType": "top",
+    "services": [
+      "hbomax"
+    ],
+    "release_date": "2022-01-03"
+  },
+  {
+    "id": "duel-masters.jpg-46392",
+    "title": "Duel Masters",
+    "tmdb_id": 46392,
+    "poster_filename": "duel-masters.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2002-10-21"
+  },
+  {
+    "id": "underbelly.jpg-13796",
+    "title": "Underbelly",
+    "tmdb_id": 13796,
+    "poster_filename": "underbelly.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2008-02-13"
+  },
+  {
+    "id": "the-practice.jpg-3050",
+    "title": "The Practice",
+    "tmdb_id": 3050,
+    "poster_filename": "the-practice.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "1997-03-04"
+  },
+  {
+    "id": "bates-motel.jpg-46786",
+    "title": "Bates Motel",
+    "tmdb_id": 46786,
+    "poster_filename": "bates-motel.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2013-03-18"
+  },
+  {
+    "id": "heroes.jpg-1639",
+    "title": "Heroes",
+    "tmdb_id": 1639,
+    "poster_filename": "heroes.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2006-09-25"
+  },
+  {
+    "id": "the-wheel-of-time.jpg-71914",
+    "title": "The Wheel of Time",
+    "tmdb_id": 71914,
+    "poster_filename": "the-wheel-of-time.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2021-11-18"
+  },
+  {
+    "id": "fallout.jpg-106379",
+    "title": "Fallout",
+    "tmdb_id": 106379,
+    "poster_filename": "fallout.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2024-04-10"
+  },
+  {
+    "id": "endeavour.jpg-44264",
+    "title": "Endeavour",
+    "tmdb_id": 44264,
+    "poster_filename": "endeavour.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2013-04-14"
+  },
+  {
+    "id": "how-to-get-away-with-murder.jpg-61056",
+    "title": "How to Get Away with Murder",
+    "tmdb_id": 61056,
+    "poster_filename": "how-to-get-away-with-murder.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2014-09-25"
+  },
+  {
+    "id": "goliath.jpg-67384",
+    "title": "Goliath",
+    "tmdb_id": 67384,
+    "poster_filename": "goliath.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2016-10-13"
+  },
+  {
+    "id": "animal-kingdom.jpg-66025",
+    "title": "Animal Kingdom",
+    "tmdb_id": 66025,
+    "poster_filename": "animal-kingdom.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2016-06-14"
+  },
+  {
+    "id": "down-cemetery-road.jpg-252000",
+    "title": "Down Cemetery Road",
+    "tmdb_id": 252000,
+    "poster_filename": "down-cemetery-road.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2025-10-29"
+  },
+  {
+    "id": "project-runway.jpg-1685",
+    "title": "Project Runway",
+    "tmdb_id": 1685,
+    "poster_filename": "project-runway.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2004-12-01"
+  },
+  {
+    "id": "yellowjackets.jpg-117488",
+    "title": "Yellowjackets",
+    "tmdb_id": 117488,
+    "poster_filename": "yellowjackets.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2021-11-14"
+  },
+  {
+    "id": "the-terminal-list-dark-wolf.jpg-219760",
+    "title": "The Terminal List: Dark Wolf",
+    "tmdb_id": 219760,
+    "poster_filename": "the-terminal-list-dark-wolf.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2025-08-27"
+  },
+  {
+    "id": "xena-warrior-princess.jpg-4616",
+    "title": "Xena: Warrior Princess",
+    "tmdb_id": 4616,
+    "poster_filename": "xena-warrior-princess.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "1995-09-04"
+  },
+  {
+    "id": "the-tudors.jpg-2942",
+    "title": "The Tudors",
+    "tmdb_id": 2942,
+    "poster_filename": "the-tudors.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2007-04-01"
+  },
+  {
+    "id": "hannibal.jpg-40008",
+    "title": "Hannibal",
+    "tmdb_id": 40008,
+    "poster_filename": "hannibal.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2013-04-04"
+  },
+  {
+    "id": "power.jpg-54650",
+    "title": "Power",
+    "tmdb_id": 54650,
+    "poster_filename": "power.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2014-06-07"
+  },
+  {
+    "id": "fbi-international.jpg-121658",
+    "title": "FBI: International",
+    "tmdb_id": 121658,
+    "poster_filename": "fbi-international.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2021-09-21"
+  },
+  {
+    "id": "merlin.jpg-7225",
+    "title": "Merlin",
+    "tmdb_id": 7225,
+    "poster_filename": "merlin.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2008-09-20"
+  },
+  {
+    "id": "tom-clancys-jack-ryan.jpg-73375",
+    "title": "Tom Clancy's Jack Ryan",
+    "tmdb_id": 73375,
+    "poster_filename": "tom-clancys-jack-ryan.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2018-08-30"
+  },
+  {
+    "id": "ancient-aliens.jpg-32608",
+    "title": "Ancient Aliens",
+    "tmdb_id": 32608,
+    "poster_filename": "ancient-aliens.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2010-04-20"
+  },
+  {
+    "id": "power-book-iv-force.jpg-119845",
+    "title": "Power Book IV: Force",
+    "tmdb_id": 119845,
+    "poster_filename": "power-book-iv-force.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2022-02-06"
+  },
+  {
+    "id": "shameless.jpg-1906",
+    "title": "Shameless",
+    "tmdb_id": 1906,
+    "poster_filename": "shameless-1.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2004-01-13"
+  },
+  {
+    "id": "agatha-christies-marple.jpg-6127",
+    "title": "Agatha Christie's Marple",
+    "tmdb_id": 6127,
+    "poster_filename": "agatha-christies-marple.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2004-12-12"
+  },
+  {
+    "id": "lethal-weapon.jpg-67116",
+    "title": "Lethal Weapon",
+    "tmdb_id": 67116,
+    "poster_filename": "lethal-weapon.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2016-09-21"
+  },
+  {
+    "id": "clarence.jpg-50035",
+    "title": "Clarence",
+    "tmdb_id": 50035,
+    "poster_filename": "clarence.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2014-04-14"
+  },
+  {
+    "id": "crossing-jordan.jpg-2406",
+    "title": "Crossing Jordan",
+    "tmdb_id": 2406,
+    "poster_filename": "crossing-jordan.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2001-09-24"
+  },
+  {
+    "id": "warehouse-13.jpg-15819",
+    "title": "Warehouse 13",
+    "tmdb_id": 15819,
+    "poster_filename": "warehouse-13.jpg",
+    "listType": "top",
+    "services": [
+      "prime"
+    ],
+    "release_date": "2009-07-07"
+  },
+  {
+    "id": "the-ren-stimpy-show.jpg-504",
+    "title": "The Ren & Stimpy Show",
+    "tmdb_id": 504,
+    "poster_filename": "the-ren-stimpy-show.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "1991-08-11"
+  },
+  {
+    "id": "henry-danger.jpg-61852",
+    "title": "Henry Danger",
+    "tmdb_id": 61852,
+    "poster_filename": "henry-danger.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2014-07-26"
+  },
+  {
+    "id": "sabrina-the-teenage-witch.jpg-605",
+    "title": "Sabrina, the Teenage Witch",
+    "tmdb_id": 605,
+    "poster_filename": "sabrina-the-teenage-witch.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "1996-09-27"
+  },
+  {
+    "id": "1923.jpg-157744",
+    "title": "1923",
+    "tmdb_id": 157744,
+    "poster_filename": "1923.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2022-12-18"
+  },
+  {
+    "id": "teenage-mutant-ninja-turtles.jpg-2284",
+    "title": "Teenage Mutant Ninja Turtles",
+    "tmdb_id": 2284,
+    "poster_filename": "teenage-mutant-ninja-turtles.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2003-02-08"
+  },
+  {
+    "id": "the-equalizer.jpg-95205",
+    "title": "The Equalizer",
+    "tmdb_id": 95205,
+    "poster_filename": "the-equalizer.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2021-02-07"
+  },
+  {
+    "id": "evil.jpg-86848",
+    "title": "Evil",
+    "tmdb_id": 86848,
+    "poster_filename": "evil.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2019-09-26"
+  },
+  {
+    "id": "beavis-and-butt-head.jpg-13943",
+    "title": "Beavis and Butt-Head",
+    "tmdb_id": 13943,
+    "poster_filename": "beavis-and-butt-head.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "1993-03-08"
+  },
+  {
+    "id": "hey-arnold.jpg-537",
+    "title": "Hey Arnold!",
+    "tmdb_id": 537,
+    "poster_filename": "hey-arnold.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "1996-10-07"
+  },
+  {
+    "id": "reno-911.jpg-2187",
+    "title": "Reno 911!",
+    "tmdb_id": 2187,
+    "poster_filename": "reno-911.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2003-07-23"
+  },
+  {
+    "id": "fire-country.jpg-202297",
+    "title": "Fire Country",
+    "tmdb_id": 202297,
+    "poster_filename": "fire-country.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2022-10-07"
+  },
+  {
+    "id": "the-amazing-race.jpg-30957",
+    "title": "The Amazing Race",
+    "tmdb_id": 30957,
+    "poster_filename": "the-amazing-race.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2001-09-05"
+  },
+  {
+    "id": "ncis-new-orleans.jpg-61387",
+    "title": "NCIS: New Orleans",
+    "tmdb_id": 61387,
+    "poster_filename": "ncis-new-orleans.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2014-09-23"
+  },
+  {
+    "id": "touched-by-an-angel.jpg-2243",
+    "title": "Touched by an Angel",
+    "tmdb_id": 2243,
+    "poster_filename": "touched-by-an-angel.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "1994-09-21"
+  },
+  {
+    "id": "the-legend-of-korra.jpg-33880",
+    "title": "The Legend of Korra",
+    "tmdb_id": 33880,
+    "poster_filename": "the-legend-of-korra.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2012-04-14"
+  },
+  {
+    "id": "dora-the-explorer.jpg-79",
+    "title": "Dora the Explorer",
+    "tmdb_id": 79,
+    "poster_filename": "dora-the-explorer.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2000-08-14"
+  },
+  {
+    "id": "elsbeth.jpg-226285",
+    "title": "Elsbeth",
+    "tmdb_id": 226285,
+    "poster_filename": "elsbeth.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2024-02-29"
+  },
+  {
+    "id": "under-the-dome.jpg-46331",
+    "title": "Under the Dome",
+    "tmdb_id": 46331,
+    "poster_filename": "under-the-dome.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2013-06-24"
+  },
+  {
+    "id": "georgie-mandys-first-marriage.jpg-243875",
+    "title": "Georgie & Mandy's First Marriage",
+    "tmdb_id": 243875,
+    "poster_filename": "georgie-mandys-first-marriage.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2024-10-17"
+  },
+  {
+    "id": "star-trek-strange-new-worlds.jpg-103516",
+    "title": "Star Trek: Strange New Worlds",
+    "tmdb_id": 103516,
+    "poster_filename": "star-trek-strange-new-worlds.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2022-05-05"
+  },
+  {
+    "id": "the-good-fight.jpg-69158",
+    "title": "The Good Fight",
+    "tmdb_id": 69158,
+    "poster_filename": "the-good-fight.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2017-02-19"
+  },
+  {
+    "id": "star-trek-lower-decks.jpg-85948",
+    "title": "Star Trek: Lower Decks",
+    "tmdb_id": 85948,
+    "poster_filename": "star-trek-lower-decks.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2020-08-06"
+  },
+  {
+    "id": "longmire.jpg-43901",
+    "title": "Longmire",
+    "tmdb_id": 43901,
+    "poster_filename": "longmire.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2012-06-03"
+  },
+  {
+    "id": "victorious.jpg-31251",
+    "title": "Victorious",
+    "tmdb_id": 31251,
+    "poster_filename": "victorious.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2010-03-27"
+  },
+  {
+    "id": "the-neighborhood.jpg-81144",
+    "title": "The Neighborhood",
+    "tmdb_id": 81144,
+    "poster_filename": "the-neighborhood.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2018-10-01"
+  },
+  {
+    "id": "star-trek-picard.jpg-85949",
+    "title": "Star Trek: Picard",
+    "tmdb_id": 85949,
+    "poster_filename": "star-trek-picard.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2020-01-23"
+  },
+  {
+    "id": "hell-on-wheels.jpg-1401",
+    "title": "Hell on Wheels",
+    "tmdb_id": 1401,
+    "poster_filename": "hell-on-wheels.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2011-11-06"
+  },
+  {
+    "id": "the-thundermans.jpg-58981",
+    "title": "The Thundermans",
+    "tmdb_id": 58981,
+    "poster_filename": "the-thundermans.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2013-10-14"
+  },
+  {
+    "id": "ridiculousness.jpg-38657",
+    "title": "Ridiculousness",
+    "tmdb_id": 38657,
+    "poster_filename": "ridiculousness.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2011-08-29"
+  },
+  {
+    "id": "the-adventures-of-jimmy-neutron-boy-genius.jpg-2129",
+    "title": "The Adventures of Jimmy Neutron: Boy Genius",
+    "tmdb_id": 2129,
+    "poster_filename": "the-adventures-of-jimmy-neutron-boy-genius.jpg",
+    "listType": "top",
+    "services": [
+      "paramount"
+    ],
+    "release_date": "2002-07-20"
+  },
+  {
+    "id": "marvels-agents-of-shield.jpg-1403",
+    "title": "Marvel's Agents of S.H.I.E.L.D.",
+    "tmdb_id": 1403,
+    "poster_filename": "marvels-agents-of-shield.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "2013-09-24"
+  },
+  {
+    "id": "bluey.jpg-82728",
+    "title": "Bluey",
+    "tmdb_id": 82728,
+    "poster_filename": "bluey.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "2018-10-01"
+  },
+  {
+    "id": "fortnite-x-the-simpsons.jpg-304530",
+    "title": "Fortnite x The Simpsons",
+    "tmdb_id": 304530,
+    "poster_filename": "fortnite-x-the-simpsons.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "2025-11-01"
+  },
+  {
+    "id": "the-mandalorian.jpg-82856",
+    "title": "The Mandalorian",
+    "tmdb_id": 82856,
+    "poster_filename": "the-mandalorian.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "2019-11-12"
+  },
+  {
+    "id": "marvels-daredevil.jpg-61889",
+    "title": "Marvel's Daredevil",
+    "tmdb_id": 61889,
+    "poster_filename": "marvels-daredevil.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "2015-04-10"
+  },
+  {
+    "id": "mickey-mouse-clubhouse.jpg-3934",
+    "title": "Mickey Mouse Clubhouse",
+    "tmdb_id": 3934,
+    "poster_filename": "mickey-mouse-clubhouse.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "2006-05-05"
+  },
+  {
+    "id": "the-bear.jpg-136315",
+    "title": "The Bear",
+    "tmdb_id": 136315,
+    "poster_filename": "the-bear.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "2022-06-23"
+  },
+  {
+    "id": "gravity-falls.jpg-40075",
+    "title": "Gravity Falls",
+    "tmdb_id": 40075,
+    "poster_filename": "gravity-falls.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "2012-06-15"
+  },
+  {
+    "id": "recess.jpg-1546",
+    "title": "Recess",
+    "tmdb_id": 1546,
+    "poster_filename": "recess.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "1997-09-13"
+  },
+  {
+    "id": "home-improvement.jpg-1558",
+    "title": "Home Improvement",
+    "tmdb_id": 1558,
+    "poster_filename": "home-improvement.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "1991-09-17"
+  },
+  {
+    "id": "andor.jpg-83867",
+    "title": "Andor",
+    "tmdb_id": 83867,
+    "poster_filename": "andor.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "2022-09-21"
+  },
+  {
+    "id": "star-vs-the-forces-of-evil.jpg-61923",
+    "title": "Star vs. the Forces of Evil",
+    "tmdb_id": 61923,
+    "poster_filename": "star-vs-the-forces-of-evil.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "2015-01-18"
+  },
+  {
+    "id": "loki.jpg-84958",
+    "title": "Loki",
+    "tmdb_id": 84958,
+    "poster_filename": "loki.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "2021-06-09"
+  },
+  {
+    "id": "what-if.jpg-91363",
+    "title": "What If...?",
+    "tmdb_id": 91363,
+    "poster_filename": "what-if.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "2021-08-11"
+  },
+  {
+    "id": "jake-and-the-never-land-pirates.jpg-34891",
+    "title": "Jake and the Never Land Pirates",
+    "tmdb_id": 34891,
+    "poster_filename": "jake-and-the-never-land-pirates.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "2011-02-14"
+  },
+  {
+    "id": "pawn-stars.jpg-21755",
+    "title": "Pawn Stars",
+    "tmdb_id": 21755,
+    "poster_filename": "pawn-stars.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "2009-07-19"
+  },
+  {
+    "id": "marvel-zombies.jpg-138505",
+    "title": "Marvel Zombies",
+    "tmdb_id": 138505,
+    "poster_filename": "marvel-zombies.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "2025-09-24"
+  },
+  {
+    "id": "modern-marvels.jpg-6145",
+    "title": "Modern Marvels",
+    "tmdb_id": 6145,
+    "poster_filename": "modern-marvels.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "1993-12-10"
+  },
+  {
+    "id": "kim-possible.jpg-2345",
+    "title": "Kim Possible",
+    "tmdb_id": 2345,
+    "poster_filename": "kim-possible.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "2002-06-07"
+  },
+  {
+    "id": "spider-man.jpg-888",
+    "title": "Spider-Man",
+    "tmdb_id": 888,
+    "poster_filename": "spider-man-1.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "1994-11-19"
+  },
+  {
+    "id": "sofia-the-first.jpg-46928",
+    "title": "Sofia the First",
+    "tmdb_id": 46928,
+    "poster_filename": "sofia-the-first.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "2013-01-11"
+  },
+  {
+    "id": "lilo-stitch-the-series.jpg-2355",
+    "title": "Lilo & Stitch: The Series",
+    "tmdb_id": 2355,
+    "poster_filename": "lilo-stitch-the-series.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "2003-09-20"
+  },
+  {
+    "id": "boy-meets-world.jpg-1777",
+    "title": "Boy Meets World",
+    "tmdb_id": 1777,
+    "poster_filename": "boy-meets-world.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "1993-09-24"
+  },
+  {
+    "id": "marvels-the-punisher.jpg-67178",
+    "title": "Marvel's The Punisher",
+    "tmdb_id": 67178,
+    "poster_filename": "marvels-the-punisher.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "2017-11-17"
+  },
+  {
+    "id": "star-wars-rebels.jpg-60554",
+    "title": "Star Wars Rebels",
+    "tmdb_id": 60554,
+    "poster_filename": "star-wars-rebels.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "2014-10-13"
+  },
+  {
+    "id": "ironheart.jpg-114471",
+    "title": "Ironheart",
+    "tmdb_id": 114471,
+    "poster_filename": "ironheart.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "2025-06-24"
+  },
+  {
+    "id": "talespin.jpg-2720",
+    "title": "TaleSpin",
+    "tmdb_id": 2720,
+    "poster_filename": "talespin.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "1990-09-09"
+  },
+  {
+    "id": "hannah-montana.jpg-4610",
+    "title": "Hannah Montana",
+    "tmdb_id": 4610,
+    "poster_filename": "hannah-montana.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "2006-03-24"
+  },
+  {
+    "id": "the-owl-house.jpg-92685",
+    "title": "The Owl House",
+    "tmdb_id": 92685,
+    "poster_filename": "the-owl-house.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "2020-01-10"
+  },
+  {
+    "id": "ducktales.jpg-72350",
+    "title": "DuckTales",
+    "tmdb_id": 72350,
+    "poster_filename": "ducktales.jpg",
+    "listType": "top",
+    "services": [
+      "disney"
+    ],
+    "release_date": "2017-08-12"
+  },
+  {
+    "id": "the-last-frontier.jpg-221079",
+    "title": "The Last Frontier",
+    "tmdb_id": 221079,
+    "poster_filename": "the-last-frontier-1.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2025-10-09"
+  },
+  {
+    "id": "silo.jpg-125988",
+    "title": "Silo",
+    "tmdb_id": 125988,
+    "poster_filename": "silo.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2023-05-04"
+  },
+  {
+    "id": "foundation.jpg-93740",
+    "title": "Foundation",
+    "tmdb_id": 93740,
+    "poster_filename": "foundation.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2021-09-23"
+  },
+  {
+    "id": "severance.jpg-95396",
+    "title": "Severance",
+    "tmdb_id": 95396,
+    "poster_filename": "severance.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2022-02-17"
+  },
+  {
+    "id": "see.jpg-80752",
+    "title": "See",
+    "tmdb_id": 80752,
+    "poster_filename": "see.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2019-11-01"
+  },
+  {
+    "id": "invasion.jpg-127235",
+    "title": "Invasion",
+    "tmdb_id": 127235,
+    "poster_filename": "invasion.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2021-10-21"
+  },
+  {
+    "id": "ted-lasso.jpg-97546",
+    "title": "Ted Lasso",
+    "tmdb_id": 97546,
+    "poster_filename": "ted-lasso.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2020-08-14"
+  },
+  {
+    "id": "chief-of-war.jpg-196890",
+    "title": "Chief of War",
+    "tmdb_id": 196890,
+    "poster_filename": "chief-of-war.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2025-07-31"
+  },
+  {
+    "id": "for-all-mankind.jpg-87917",
+    "title": "For All Mankind",
+    "tmdb_id": 87917,
+    "poster_filename": "for-all-mankind.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2019-11-01"
+  },
+  {
+    "id": "loot.jpg-197449",
+    "title": "Loot",
+    "tmdb_id": 197449,
+    "poster_filename": "loot.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2022-06-23"
+  },
+  {
+    "id": "the-studio.jpg-247767",
+    "title": "The Studio",
+    "tmdb_id": 247767,
+    "poster_filename": "the-studio.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2025-03-25"
+  },
+  {
+    "id": "monarch-legacy-of-monsters.jpg-202411",
+    "title": "Monarch: Legacy of Monsters",
+    "tmdb_id": 202411,
+    "poster_filename": "monarch-legacy-of-monsters.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2023-11-16"
+  },
+  {
+    "id": "black-bird.jpg-155537",
+    "title": "Black Bird",
+    "tmdb_id": 155537,
+    "poster_filename": "black-bird.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2022-07-07"
+  },
+  {
+    "id": "shrinking.jpg-136311",
+    "title": "Shrinking",
+    "tmdb_id": 136311,
+    "poster_filename": "shrinking.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2023-01-26"
+  },
+  {
+    "id": "dark-matter.jpg-196322",
+    "title": "Dark Matter",
+    "tmdb_id": 196322,
+    "poster_filename": "dark-matter.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2024-05-07"
+  },
+  {
+    "id": "acapulco.jpg-133727",
+    "title": "Acapulco",
+    "tmdb_id": 133727,
+    "poster_filename": "acapulco.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2021-10-08"
+  },
+  {
+    "id": "palm-royale.jpg-157367",
+    "title": "Palm Royale",
+    "tmdb_id": 157367,
+    "poster_filename": "palm-royale.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2024-03-19"
+  },
+  {
+    "id": "platonic.jpg-112211",
+    "title": "Platonic",
+    "tmdb_id": 112211,
+    "poster_filename": "platonic.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2023-05-23"
+  },
+  {
+    "id": "murderbot.jpg-241554",
+    "title": "Murderbot",
+    "tmdb_id": 241554,
+    "poster_filename": "murderbot.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2025-05-15"
+  },
+  {
+    "id": "servant.jpg-88055",
+    "title": "Servant",
+    "tmdb_id": 88055,
+    "poster_filename": "servant.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2019-11-28"
+  },
+  {
+    "id": "mythic-quest.jpg-94951",
+    "title": "Mythic Quest",
+    "tmdb_id": 94951,
+    "poster_filename": "mythic-quest.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2020-02-07"
+  },
+  {
+    "id": "hijack.jpg-198102",
+    "title": "Hijack",
+    "tmdb_id": 198102,
+    "poster_filename": "hijack.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2023-06-28"
+  },
+  {
+    "id": "pachinko.jpg-110382",
+    "title": "Pachinko",
+    "tmdb_id": 110382,
+    "poster_filename": "pachinko.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2022-03-24"
+  },
+  {
+    "id": "carpool-karaoke-the-series.jpg-72610",
+    "title": "Carpool Karaoke: The Series",
+    "tmdb_id": 72610,
+    "poster_filename": "carpool-karaoke-the-series.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2017-08-08"
+  },
+  {
+    "id": "masters-of-the-air.jpg-46518",
+    "title": "Masters of the Air",
+    "tmdb_id": 46518,
+    "poster_filename": "masters-of-the-air.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2024-01-25"
+  },
+  {
+    "id": "truth-be-told.jpg-80054",
+    "title": "Truth Be Told",
+    "tmdb_id": 80054,
+    "poster_filename": "truth-be-told.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2019-12-06"
+  },
+  {
+    "id": "tehran.jpg-103913",
+    "title": "Tehran",
+    "tmdb_id": 103913,
+    "poster_filename": "tehran.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2020-06-22"
+  },
+  {
+    "id": "smoke.jpg-215995",
+    "title": "Smoke",
+    "tmdb_id": 215995,
+    "poster_filename": "smoke.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2025-06-26"
+  },
+  {
+    "id": "dickinson.jpg-89901",
+    "title": "Dickinson",
+    "tmdb_id": 89901,
+    "poster_filename": "dickinson.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2019-11-01"
+  },
+  {
+    "id": "harriet-the-spy.jpg-136300",
+    "title": "Harriet the Spy",
+    "tmdb_id": 136300,
+    "poster_filename": "harriet-the-spy.jpg",
+    "listType": "top",
+    "services": [
+      "appletv"
+    ],
+    "release_date": "2021-11-18"
+  },
+  {
+    "id": "playdate.jpg-1248226",
+    "title": "Playdate",
+    "tmdb_id": 1248226,
+    "poster_filename": "playdate-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-11-05"
+  },
+  {
+    "id": "now-you-see-me-now-you-dont.jpg-425274",
+    "title": "Now You See Me: Now You Don't",
+    "tmdb_id": 425274,
+    "poster_filename": "now-you-see-me-now-you-dont-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-11-12"
+  },
+  {
+    "id": "demon-slayer-kimetsu-no-yaiba-infinity-castle.jpg-1311031",
+    "title": "Demon Slayer: Kimetsu no Yaiba Infinity Castle",
+    "tmdb_id": 1311031,
+    "poster_filename": "demon-slayer-kimetsu-no-yaiba-infinity-castle-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-07-18"
+  },
+  {
+    "id": "stand-your-ground.jpg-1296504",
+    "title": "Stand Your Ground",
+    "tmdb_id": 1296504,
+    "poster_filename": "stand-your-ground-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-05-09"
+  },
+  {
+    "id": "zootopia-2.jpg-1084242",
+    "title": "Zootopia 2",
+    "tmdb_id": 1084242,
+    "poster_filename": "zootopia-2-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-11-26"
+  },
+  {
+    "id": "train-dreams.jpg-1241983",
+    "title": "Train Dreams",
+    "tmdb_id": 1241983,
+    "poster_filename": "train-dreams-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-11-05"
+  },
+  {
+    "id": "tee-yai-born-to-be-bad.jpg-1429738",
+    "title": "Tee Yai: Born to Be Bad",
+    "tmdb_id": 1429738,
+    "poster_filename": "tee-yai-born-to-be-bad-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-11-12"
+  },
+  {
+    "id": "chainsaw-man-the-movie-reze-arc.jpg-1218925",
+    "title": "Chainsaw Man - The Movie: Reze Arc",
+    "tmdb_id": 1218925,
+    "poster_filename": "chainsaw-man-the-movie-reze-arc-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-09-19"
+  },
+  {
+    "id": "kpop-demon-hunters.jpg-803796",
+    "title": "KPop Demon Hunters",
+    "tmdb_id": 803796,
+    "poster_filename": "kpop-demon-hunters-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-06-20"
+  },
+  {
+    "id": "after-the-hunt.jpg-1265063",
+    "title": "After the Hunt",
+    "tmdb_id": 1265063,
+    "poster_filename": "after-the-hunt-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-09"
+  },
+  {
+    "id": "code-3.jpg-1161617",
+    "title": "Code 3",
+    "tmdb_id": 1161617,
+    "poster_filename": "code-3-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-09-12"
+  },
+  {
+    "id": "the-fantastic-4-first-steps.jpg-617126",
+    "title": "The Fantastic 4: First Steps",
+    "tmdb_id": 617126,
+    "poster_filename": "the-fantastic-4-first-steps-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-07-23"
+  },
+  {
+    "id": "stitch-head.jpg-1214130",
+    "title": "Stitch Head",
+    "tmdb_id": 1214130,
+    "poster_filename": "stitch-head-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-16"
+  },
+  {
+    "id": "roofman.jpg-1242419",
+    "title": "Roofman",
+    "tmdb_id": 1242419,
+    "poster_filename": "roofman-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-08"
+  },
+  {
+    "id": "in-your-dreams.jpg-1117857",
+    "title": "In Your Dreams",
+    "tmdb_id": 1117857,
+    "poster_filename": "in-your-dreams-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-11-07"
+  },
+  {
+    "id": "the-running-man.jpg-798645",
+    "title": "The Running Man",
+    "tmdb_id": 798645,
+    "poster_filename": "the-running-man-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-11-11"
+  },
+  {
+    "id": "mission-impossible-the-final-reckoning.jpg-575265",
+    "title": "Mission: Impossible - The Final Reckoning",
+    "tmdb_id": 575265,
+    "poster_filename": "mission-impossible-the-final-reckoning-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-05-17"
+  },
+  {
+    "id": "altered.jpg-1309012",
+    "title": "Altered",
+    "tmdb_id": 1309012,
+    "poster_filename": "altered-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-09-18"
+  },
+  {
+    "id": "champagne-problems.jpg-1323475",
+    "title": "Champagne Problems",
+    "tmdb_id": 1323475,
+    "poster_filename": "champagne-problems-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-11-18"
+  },
+  {
+    "id": "afterburn.jpg-507244",
+    "title": "Afterburn",
+    "tmdb_id": 507244,
+    "poster_filename": "afterburn-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-08-20"
+  },
+  {
+    "id": "jurassic-world-rebirth.jpg-1234821",
+    "title": "Jurassic World Rebirth",
+    "tmdb_id": 1234821,
+    "poster_filename": "jurassic-world-rebirth-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-07-01"
+  },
+  {
+    "id": "sisu-road-to-revenge.jpg-1223601",
+    "title": "Sisu: Road to Revenge",
+    "tmdb_id": 1223601,
+    "poster_filename": "sisu-road-to-revenge-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-21"
+  },
+  {
+    "id": "superman.jpg-1061474",
+    "title": "Superman",
+    "tmdb_id": 1061474,
+    "poster_filename": "superman-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-07-09"
+  },
+  {
+    "id": "31-minutes-one-hot-christmas.jpg-1237082",
+    "title": "31 Minutes: One Hot Christmas",
+    "tmdb_id": 1237082,
+    "poster_filename": "31-minutes-one-hot-christmas-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-11-19"
+  },
+  {
+    "id": "no-other-choice.jpg-639988",
+    "title": "No Other Choice",
+    "tmdb_id": 639988,
+    "poster_filename": "no-other-choice-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-09-24"
+  },
+  {
+    "id": "a-very-jonas-christmas-movie.jpg-1425122",
+    "title": "A Very Jonas Christmas Movie",
+    "tmdb_id": 1425122,
+    "poster_filename": "a-very-jonas-christmas-movie-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-11-10"
+  },
+  {
+    "id": "our-fault.jpg-1156594",
+    "title": "Our Fault",
+    "tmdb_id": 1156594,
+    "poster_filename": "our-fault-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-15"
+  },
+  {
+    "id": "the-son-of-a-thousand-men.jpg-1299209",
+    "title": "The Son of a Thousand Men",
+    "tmdb_id": 1299209,
+    "poster_filename": "the-son-of-a-thousand-men-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-30"
+  },
+  {
+    "id": "grand-prix-of-europe.jpg-1316147",
+    "title": "Grand Prix of Europe",
+    "tmdb_id": 1316147,
+    "poster_filename": "grand-prix-of-europe-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-07-24"
+  },
+  {
+    "id": "if-i-had-legs-id-kick-you.jpg-1160360",
+    "title": "If I Had Legs I'd Kick You",
+    "tmdb_id": 1160360,
+    "poster_filename": "if-i-had-legs-id-kick-you-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-10"
+  },
+  {
+    "id": "how-to-make-a-killing.jpg-1210732",
+    "title": "How to Make a Killing",
+    "tmdb_id": 1210732,
+    "poster_filename": "how-to-make-a-killing-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-01-01"
+  },
+  {
+    "id": "f1.jpg-911430",
+    "title": "F1",
+    "tmdb_id": 911430,
+    "poster_filename": "f1-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-06-25"
+  },
+  {
+    "id": "nobody-2.jpg-1007734",
+    "title": "Nobody 2",
+    "tmdb_id": 1007734,
+    "poster_filename": "nobody-2-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-08-13"
+  },
+  {
+    "id": "the-toxic-avenger-unrated.jpg-338969",
+    "title": "The Toxic Avenger Unrated",
+    "tmdb_id": 338969,
+    "poster_filename": "the-toxic-avenger-unrated-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-08-28"
+  },
+  {
+    "id": "dead-of-winter.jpg-1235746",
+    "title": "Dead of Winter",
+    "tmdb_id": 1235746,
+    "poster_filename": "dead-of-winter-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-09-23"
+  },
+  {
+    "id": "inside-furioza.jpg-1072699",
+    "title": "Inside Furioza",
+    "tmdb_id": 1072699,
+    "poster_filename": "inside-furioza-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-14"
+  },
+  {
+    "id": "laila.jpg-1403735",
+    "title": "Laila",
+    "tmdb_id": 1403735,
+    "poster_filename": "laila-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-02-14"
+  },
+  {
+    "id": "how-to-train-your-dragon.jpg-1087192",
+    "title": "How to Train Your Dragon",
+    "tmdb_id": 1087192,
+    "poster_filename": "how-to-train-your-dragon-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-06-06"
+  },
+  {
+    "id": "the-senior.jpg-1135303",
+    "title": "The Senior",
+    "tmdb_id": 1135303,
+    "poster_filename": "the-senior.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-09-18"
+  },
+  {
+    "id": "the-naked-gun.jpg-1035259",
+    "title": "The Naked Gun",
+    "tmdb_id": 1035259,
+    "poster_filename": "the-naked-gun.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-07-30"
+  },
+  {
+    "id": "the-follies.jpg-1548092",
+    "title": "The Follies",
+    "tmdb_id": 1548092,
+    "poster_filename": "the-follies.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-11-13"
+  },
+  {
+    "id": "the-bad-guys-2.jpg-1175942",
+    "title": "The Bad Guys 2",
+    "tmdb_id": 1175942,
+    "poster_filename": "the-bad-guys-2-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-07-24"
+  },
+  {
+    "id": "ne-zha-2.jpg-980477",
+    "title": "Ne Zha 2",
+    "tmdb_id": 980477,
+    "poster_filename": "ne-zha-2-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-01-29"
+  },
+  {
+    "id": "tron-ares.jpg-533533",
+    "title": "TRON: Ares",
+    "tmdb_id": 533533,
+    "poster_filename": "tron-ares-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-08"
+  },
+  {
+    "id": "marco.jpg-1186350",
+    "title": "Marco",
+    "tmdb_id": 1186350,
+    "poster_filename": "marco-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-12-20"
+  },
+  {
+    "id": "a-little-womens-christmas.jpg-1340828",
+    "title": "A Little Women's Christmas",
+    "tmdb_id": 1340828,
+    "poster_filename": "a-little-womens-christmas-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-11-23"
+  },
+  {
+    "id": "a-merry-little-ex-mas.jpg-1401318",
+    "title": "A Merry Little Ex-Mas",
+    "tmdb_id": 1401318,
+    "poster_filename": "a-merry-little-ex-mas-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-11-12"
+  },
+  {
+    "id": "fuuto-pi-the-portrait-of-kamen-rider-skull.jpg-1310672",
+    "title": "Fuuto PI: The Portrait of Kamen Rider Skull",
+    "tmdb_id": 1310672,
+    "poster_filename": "fuuto-pi-the-portrait-of-kamen-rider-skull-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-11-08"
+  },
+  {
+    "id": "ballerina.jpg-541671",
+    "title": "Ballerina",
+    "tmdb_id": 541671,
+    "poster_filename": "ballerina-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-06-04"
+  },
+  {
+    "id": "lilo-stitch.jpg-552524",
+    "title": "Lilo & Stitch",
+    "tmdb_id": 552524,
+    "poster_filename": "lilo-stitch-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-05-17"
+  },
+  {
+    "id": "avatar-fire-and-ash.jpg-83533",
+    "title": "Avatar: Fire and Ash",
+    "tmdb_id": 83533,
+    "poster_filename": "avatar-fire-and-ash-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-12-17"
+  },
+  {
+    "id": "kulong.jpg-1266990",
+    "title": "Kulong",
+    "tmdb_id": 1266990,
+    "poster_filename": "kulong-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-05-24"
+  },
+  {
+    "id": "valiant-one.jpg-1009640",
+    "title": "Valiant One",
+    "tmdb_id": 1009640,
+    "poster_filename": "valiant-one-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-01-30"
+  },
+  {
+    "id": "play-dirty.jpg-941109",
+    "title": "Play Dirty",
+    "tmdb_id": 941109,
+    "poster_filename": "play-dirty-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-09-30"
+  },
+  {
+    "id": "regretting-you.jpg-1327862",
+    "title": "Regretting You",
+    "tmdb_id": 1327862,
+    "poster_filename": "regretting-you-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-22"
+  },
+  {
+    "id": "the-hand-that-rocks-the-cradle.jpg-1362315",
+    "title": "The Hand That Rocks the Cradle",
+    "tmdb_id": 1362315,
+    "poster_filename": "the-hand-that-rocks-the-cradle-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-16"
+  },
+  {
+    "id": "elio.jpg-1022787",
+    "title": "Elio",
+    "tmdb_id": 1022787,
+    "poster_filename": "elio-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-06-18"
+  },
+  {
+    "id": "a-minecraft-movie.jpg-950387",
+    "title": "A Minecraft Movie",
+    "tmdb_id": 950387,
+    "poster_filename": "a-minecraft-movie-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-03-31"
+  },
+  {
+    "id": "the-lost-princess.jpg-1086910",
+    "title": "The Lost Princess",
+    "tmdb_id": 1086910,
+    "poster_filename": "the-lost-princess-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-16"
+  },
+  {
+    "id": "freakier-friday.jpg-1125257",
+    "title": "Freakier Friday",
+    "tmdb_id": 1125257,
+    "poster_filename": "freakier-friday-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-08-06"
+  },
+  {
+    "id": "wild-diamond.jpg-1108336",
+    "title": "Wild Diamond",
+    "tmdb_id": 1108336,
+    "poster_filename": "wild-diamond-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-10-09"
+  },
+  {
+    "id": "inside-out-2.jpg-1022789",
+    "title": "Inside Out 2",
+    "tmdb_id": 1022789,
+    "poster_filename": "inside-out-2-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-06-11"
+  },
+  {
+    "id": "the-gorge.jpg-950396",
+    "title": "The Gorge",
+    "tmdb_id": 950396,
+    "poster_filename": "the-gorge.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-02-13"
+  },
+  {
+    "id": "deadpool-wolverine.jpg-533535",
+    "title": "Deadpool & Wolverine",
+    "tmdb_id": 533535,
+    "poster_filename": "deadpool-wolverine-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-07-24"
+  },
+  {
+    "id": "ballad-of-a-small-player.jpg-1272166",
+    "title": "Ballad of a Small Player",
+    "tmdb_id": 1272166,
+    "poster_filename": "ballad-of-a-small-player-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-15"
+  },
+  {
+    "id": "mantis.jpg-1267319",
+    "title": "Mantis",
+    "tmdb_id": 1267319,
+    "poster_filename": "mantis-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-09-26"
+  },
+  {
+    "id": "moana-2.jpg-1241982",
+    "title": "Moana 2",
+    "tmdb_id": 1241982,
+    "poster_filename": "moana-2-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-11-21"
+  },
+  {
+    "id": "nobody.jpg-1304434",
+    "title": "Nobody",
+    "tmdb_id": 1304434,
+    "poster_filename": "nobody-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-08-02"
+  },
+  {
+    "id": "ice-road-vengeance.jpg-1119878",
+    "title": "Ice Road: Vengeance",
+    "tmdb_id": 1119878,
+    "poster_filename": "ice-road-vengeance.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-06-27"
+  },
+  {
+    "id": "pets-on-a-train.jpg-1107216",
+    "title": "Pets on a Train",
+    "tmdb_id": 1107216,
+    "poster_filename": "pets-on-a-train.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-07-02"
+  },
+  {
+    "id": "gabbys-dollhouse-the-movie.jpg-1280282",
+    "title": "Gabby's Dollhouse: The Movie",
+    "tmdb_id": 1280282,
+    "poster_filename": "gabbys-dollhouse-the-movie.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-09-13"
+  },
+  {
+    "id": "predator-killer-of-killers.jpg-1376434",
+    "title": "Predator: Killer of Killers",
+    "tmdb_id": 1376434,
+    "poster_filename": "predator-killer-of-killers.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-06-05"
+  },
+  {
+    "id": "django-undisputed.jpg-1357886",
+    "title": "Django Undisputed",
+    "tmdb_id": 1357886,
+    "poster_filename": "django-undisputed.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-04-22"
+  },
+  {
+    "id": "prisoner-of-war.jpg-1328803",
+    "title": "Prisoner of War",
+    "tmdb_id": 1328803,
+    "poster_filename": "prisoner-of-war.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-09-19"
+  },
+  {
+    "id": "good-fortune.jpg-1114967",
+    "title": "Good Fortune",
+    "tmdb_id": 1114967,
+    "poster_filename": "good-fortune-1.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-14"
+  },
+  {
+    "id": "war-2.jpg-1109086",
+    "title": "War 2",
+    "tmdb_id": 1109086,
+    "poster_filename": "war-2.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-08-13"
+  },
+  {
+    "id": "a-working-man.jpg-1197306",
+    "title": "A Working Man",
+    "tmdb_id": 1197306,
+    "poster_filename": "a-working-man.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-03-26"
+  },
+  {
+    "id": "red-one.jpg-845781",
+    "title": "Red One",
+    "tmdb_id": 845781,
+    "poster_filename": "red-one.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-10-31"
+  },
+  {
+    "id": "m3gan-20.jpg-1071585",
+    "title": "M3GAN 2.0",
+    "tmdb_id": 1071585,
+    "poster_filename": "m3gan-20.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-06-25"
+  },
+  {
+    "id": "sonic-the-hedgehog-3.jpg-939243",
+    "title": "Sonic the Hedgehog 3",
+    "tmdb_id": 939243,
+    "poster_filename": "sonic-the-hedgehog-3.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-12-19"
+  },
+  {
+    "id": "akin-ang-gabi.jpg-1580234",
+    "title": "Akin Ang Gabi",
+    "tmdb_id": 1580234,
+    "poster_filename": "akin-ang-gabi.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-11-21"
+  },
+  {
+    "id": "bugonia.jpg-701387",
+    "title": "Bugonia",
+    "tmdb_id": 701387,
+    "poster_filename": "bugonia.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-23"
+  },
+  {
+    "id": "lover.jpg-1219158",
+    "title": "Lover",
+    "tmdb_id": 1219158,
+    "poster_filename": "lover.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-02-07"
+  },
+  {
+    "id": "striking-rescue.jpg-1382406",
+    "title": "Striking Rescue",
+    "tmdb_id": 1382406,
+    "poster_filename": "striking-rescue.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-12-05"
+  },
+  {
+    "id": "ligaw.jpg-1470086",
+    "title": "Ligaw",
+    "tmdb_id": 1470086,
+    "poster_filename": "ligaw.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-05-09"
+  },
+  {
+    "id": "the-smashing-machine.jpg-760329",
+    "title": "The Smashing Machine",
+    "tmdb_id": 760329,
+    "poster_filename": "the-smashing-machine.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-01"
+  },
+  {
+    "id": "the-wild-robot.jpg-1184918",
+    "title": "The Wild Robot",
+    "tmdb_id": 1184918,
+    "poster_filename": "the-wild-robot.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-09-12"
+  },
+  {
+    "id": "anniversary.jpg-1126336",
+    "title": "Anniversary",
+    "tmdb_id": 1126336,
+    "poster_filename": "anniversary.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-29"
+  },
+  {
+    "id": "genshin-impact-star-odyssey.jpg-1496735",
+    "title": "Genshin Impact: Star Odyssey",
+    "tmdb_id": 1496735,
+    "poster_filename": "genshin-impact-star-odyssey.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-06-12"
+  },
+  {
+    "id": "thunderbolts.jpg-986056",
+    "title": "Thunderbolts*",
+    "tmdb_id": 986056,
+    "poster_filename": "thunderbolts.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-04-30"
+  },
+  {
+    "id": "despicable-me-4.jpg-519182",
+    "title": "Despicable Me 4",
+    "tmdb_id": 519182,
+    "poster_filename": "despicable-me-4.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-06-20"
+  },
+  {
+    "id": "venom-the-last-dance.jpg-912649",
+    "title": "Venom: The Last Dance",
+    "tmdb_id": 912649,
+    "poster_filename": "venom-the-last-dance.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-10-22"
+  },
+  {
+    "id": "captain-avispa.jpg-1198426",
+    "title": "Captain Avispa",
+    "tmdb_id": 1198426,
+    "poster_filename": "captain-avispa.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-04-04"
+  },
+  {
+    "id": "the-beekeeper.jpg-866398",
+    "title": "The Beekeeper",
+    "tmdb_id": 866398,
+    "poster_filename": "the-beekeeper.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-01-08"
+  },
+  {
+    "id": "red-sonja.jpg-13494",
+    "title": "Red Sonja",
+    "tmdb_id": 13494,
+    "poster_filename": "red-sonja.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-07-31"
+  },
+  {
+    "id": "rental-family.jpg-1208348",
+    "title": "Rental Family",
+    "tmdb_id": 1208348,
+    "poster_filename": "rental-family.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-11-20"
+  },
+  {
+    "id": "a-house-of-dynamite.jpg-1290159",
+    "title": "A House of Dynamite",
+    "tmdb_id": 1290159,
+    "poster_filename": "a-house-of-dynamite.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-02"
+  },
+  {
+    "id": "dr-seusss-the-sneetches.jpg-1497036",
+    "title": "Dr. Seuss's The Sneetches",
+    "tmdb_id": 1497036,
+    "poster_filename": "dr-seusss-the-sneetches.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-11-03"
+  },
+  {
+    "id": "heads-of-state.jpg-749170",
+    "title": "Heads of State",
+    "tmdb_id": 749170,
+    "poster_filename": "heads-of-state.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-06-24"
+  },
+  {
+    "id": "karate-kid-legends.jpg-1011477",
+    "title": "Karate Kid: Legends",
+    "tmdb_id": 1011477,
+    "poster_filename": "karate-kid-legends.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-05-08"
+  },
+  {
+    "id": "the-lost-bus.jpg-1236470",
+    "title": "The Lost Bus",
+    "tmdb_id": 1236470,
+    "poster_filename": "the-lost-bus.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-09-19"
+  },
+  {
+    "id": "mufasa-the-lion-king.jpg-762509",
+    "title": "Mufasa: The Lion King",
+    "tmdb_id": 762509,
+    "poster_filename": "mufasa-the-lion-king.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-12-18"
+  },
+  {
+    "id": "el-apocalipsis-de-san-juan.jpg-1262299",
+    "title": "El Apocalipsis de san Juan",
+    "tmdb_id": 1262299,
+    "poster_filename": "el-apocalipsis-de-san-juan.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-10-07"
+  },
+  {
+    "id": "the-carman-family-deaths.jpg-1363282",
+    "title": "The Carman Family Deaths",
+    "tmdb_id": 1363282,
+    "poster_filename": "the-carman-family-deaths.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-11-18"
+  },
+  {
+    "id": "balahibong-pusa.jpg-1549517",
+    "title": "Balahibong Pusa",
+    "tmdb_id": 1549517,
+    "poster_filename": "balahibong-pusa.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-11-28"
+  },
+  {
+    "id": "your-fault.jpg-1156593",
+    "title": "Your Fault",
+    "tmdb_id": 1156593,
+    "poster_filename": "your-fault.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-12-26"
+  },
+  {
+    "id": "smurfs.jpg-936108",
+    "title": "Smurfs",
+    "tmdb_id": 936108,
+    "poster_filename": "smurfs.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-07-05"
+  },
+  {
+    "id": "the-rookie-guide.jpg-1191666",
+    "title": "The Rookie Guide",
+    "tmdb_id": 1191666,
+    "poster_filename": "the-rookie-guide.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-04-02"
+  },
+  {
+    "id": "nuremberg.jpg-1214931",
+    "title": "Nuremberg",
+    "tmdb_id": 1214931,
+    "poster_filename": "nuremberg.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-11-06"
+  },
+  {
+    "id": "trust.jpg-1244953",
+    "title": "Trust",
+    "tmdb_id": 1244953,
+    "poster_filename": "trust.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-08-22"
+  },
+  {
+    "id": "captain-america-brave-new-world.jpg-822119",
+    "title": "Captain America: Brave New World",
+    "tmdb_id": 822119,
+    "poster_filename": "captain-america-brave-new-world.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-02-12"
+  },
+  {
+    "id": "hostile-takeover.jpg-1319895",
+    "title": "Hostile Takeover",
+    "tmdb_id": 1319895,
+    "poster_filename": "hostile-takeover.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-08-08"
+  },
+  {
+    "id": "dear-stranger.jpg-1469141",
+    "title": "Dear Stranger",
+    "tmdb_id": 1469141,
+    "poster_filename": "dear-stranger.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-09-12"
+  },
+  {
+    "id": "fight-another-day.jpg-1053008",
+    "title": "Fight Another Day",
+    "tmdb_id": 1053008,
+    "poster_filename": "fight-another-day.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-10-09"
+  },
+  {
+    "id": "groom-two-brides.jpg-1446358",
+    "title": "Groom & Two Brides",
+    "tmdb_id": 1446358,
+    "poster_filename": "groom-two-brides.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-11-06"
+  },
+  {
+    "id": "eenie-meanie.jpg-1151334",
+    "title": "Eenie Meanie",
+    "tmdb_id": 1151334,
+    "poster_filename": "eenie-meanie.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-08-21"
+  },
+  {
+    "id": "eks.jpg-1241742",
+    "title": "EKS",
+    "tmdb_id": 1241742,
+    "poster_filename": "eks.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-03-01"
+  },
+  {
+    "id": "gladiator-ii.jpg-558449",
+    "title": "Gladiator II",
+    "tmdb_id": 558449,
+    "poster_filename": "gladiator-ii.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-11-13"
+  },
+  {
+    "id": "rita.jpg-1241752",
+    "title": "Rita",
+    "tmdb_id": 1241752,
+    "poster_filename": "rita.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-03-22"
+  },
+  {
+    "id": "beln.jpg-1301844",
+    "title": "Belén",
+    "tmdb_id": 1301844,
+    "poster_filename": "beln.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-09-18"
+  },
+  {
+    "id": "flow.jpg-823219",
+    "title": "Flow",
+    "tmdb_id": 823219,
+    "poster_filename": "flow.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-08-29"
+  },
+  {
+    "id": "light-of-the-world.jpg-1374686",
+    "title": "Light of the World",
+    "tmdb_id": 1374686,
+    "poster_filename": "light-of-the-world.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-09-04"
+  },
+  {
+    "id": "the-amateur.jpg-1087891",
+    "title": "The Amateur",
+    "tmdb_id": 1087891,
+    "poster_filename": "the-amateur.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-04-09"
+  },
+  {
+    "id": "young-hearts.jpg-1232449",
+    "title": "Young Hearts",
+    "tmdb_id": 1232449,
+    "poster_filename": "young-hearts.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-10-26"
+  },
+  {
+    "id": "the-age-of-disclosure.jpg-1422166",
+    "title": "The Age of Disclosure",
+    "tmdb_id": 1422166,
+    "poster_filename": "the-age-of-disclosure.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-11-21"
+  },
+  {
+    "id": "godzilla-x-kong-the-new-empire.jpg-823464",
+    "title": "Godzilla x Kong: The New Empire",
+    "tmdb_id": 823464,
+    "poster_filename": "godzilla-x-kong-the-new-empire.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-03-27"
+  },
+  {
+    "id": "kaiju-no-8-mission-recon.jpg-1326106",
+    "title": "Kaiju No. 8: Mission Recon",
+    "tmdb_id": 1326106,
+    "poster_filename": "kaiju-no-8-mission-recon.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-03-28"
+  },
+  {
+    "id": "aztec-batman-clash-of-empires.jpg-987400",
+    "title": "Aztec Batman: Clash of Empires",
+    "tmdb_id": 987400,
+    "poster_filename": "aztec-batman-clash-of-empires.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-09-18"
+  },
+  {
+    "id": "the-helsinki-effect.jpg-1411805",
+    "title": "The Helsinki Effect",
+    "tmdb_id": 1411805,
+    "poster_filename": "the-helsinki-effect.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-02-21"
+  },
+  {
+    "id": "mickey-17.jpg-696506",
+    "title": "Mickey 17",
+    "tmdb_id": 696506,
+    "poster_filename": "mickey-17.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-02-28"
+  },
+  {
+    "id": "kraven-the-hunter.jpg-539972",
+    "title": "Kraven the Hunter",
+    "tmdb_id": 539972,
+    "poster_filename": "kraven-the-hunter.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-12-11"
+  },
+  {
+    "id": "anemone.jpg-1364608",
+    "title": "Anemone",
+    "tmdb_id": 1364608,
+    "poster_filename": "anemone.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-02"
+  },
+  {
+    "id": "a-man-called-otto.jpg-937278",
+    "title": "A Man Called Otto",
+    "tmdb_id": 937278,
+    "poster_filename": "a-man-called-otto.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2022-12-28"
+  },
+  {
+    "id": "bob-trevino-likes-it.jpg-1169789",
+    "title": "Bob Trevino Likes It",
+    "tmdb_id": 1169789,
+    "poster_filename": "bob-trevino-likes-it.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-03-20"
+  },
+  {
+    "id": "sidelined-the-qb-and-me.jpg-957119",
+    "title": "Sidelined: The QB and Me",
+    "tmdb_id": 957119,
+    "poster_filename": "sidelined-the-qb-and-me.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-02-06"
+  },
+  {
+    "id": "icefall.jpg-1242501",
+    "title": "Icefall",
+    "tmdb_id": 1242501,
+    "poster_filename": "icefall.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-16"
+  },
+  {
+    "id": "anora.jpg-1064213",
+    "title": "Anora",
+    "tmdb_id": 1064213,
+    "poster_filename": "anora.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-10-14"
+  },
+  {
+    "id": "selena-y-los-dinos-a-familys-legacy.jpg-1400784",
+    "title": "Selena y Los Dinos: A Family's Legacy",
+    "tmdb_id": 1400784,
+    "poster_filename": "selena-y-los-dinos-a-familys-legacy.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-01-26"
+  },
+  {
+    "id": "dune-part-two.jpg-693134",
+    "title": "Dune: Part Two",
+    "tmdb_id": 693134,
+    "poster_filename": "dune-part-two.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-02-27"
+  },
+  {
+    "id": "counterattack.jpg-1356039",
+    "title": "Counterattack",
+    "tmdb_id": 1356039,
+    "poster_filename": "counterattack.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-02-27"
+  },
+  {
+    "id": "fran-the-man.jpg-1268552",
+    "title": "Fran the Man",
+    "tmdb_id": 1268552,
+    "poster_filename": "fran-the-man.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-04-11"
+  },
+  {
+    "id": "renovation-romance.jpg-1380983",
+    "title": "Renovation Romance",
+    "tmdb_id": 1380983,
+    "poster_filename": "renovation-romance.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-11-01"
+  },
+  {
+    "id": "barbie.jpg-346698",
+    "title": "Barbie",
+    "tmdb_id": 346698,
+    "poster_filename": "barbie.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2023-07-19"
+  },
+  {
+    "id": "kung-fu-panda-4.jpg-1011985",
+    "title": "Kung Fu Panda 4",
+    "tmdb_id": 1011985,
+    "poster_filename": "kung-fu-panda-4.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-03-02"
+  },
+  {
+    "id": "kantara.jpg-858485",
+    "title": "Kantara",
+    "tmdb_id": 858485,
+    "poster_filename": "kantara.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2022-09-30"
+  },
+  {
+    "id": "rrr.jpg-579974",
+    "title": "RRR",
+    "tmdb_id": 579974,
+    "poster_filename": "rrr.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2022-03-24"
+  },
+  {
+    "id": "john-wick-chapter-4.jpg-603692",
+    "title": "John Wick: Chapter 4",
+    "tmdb_id": 603692,
+    "poster_filename": "john-wick-chapter-4.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2023-03-22"
+  },
+  {
+    "id": "vultures.jpg-1002158",
+    "title": "Vultures",
+    "tmdb_id": 1002158,
+    "poster_filename": "vultures.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-07-02"
+  },
+  {
+    "id": "gatao-big-brothers.jpg-1468057",
+    "title": "GATAO: Big Brothers",
+    "tmdb_id": 1468057,
+    "poster_filename": "gatao-big-brothers.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-08-21"
+  },
+  {
+    "id": "bad-boys-ride-or-die.jpg-573435",
+    "title": "Bad Boys: Ride or Die",
+    "tmdb_id": 573435,
+    "poster_filename": "bad-boys-ride-or-die.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-06-05"
+  },
+  {
+    "id": "die-my-love.jpg-1033148",
+    "title": "Die My Love",
+    "tmdb_id": 1033148,
+    "poster_filename": "die-my-love.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-06"
+  },
+  {
+    "id": "the-witch-part-2-the-other-one.jpg-615173",
+    "title": "The Witch: Part 2. The Other One",
+    "tmdb_id": 615173,
+    "poster_filename": "the-witch-part-2-the-other-one.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2022-06-15"
+  },
+  {
+    "id": "eddington.jpg-648878",
+    "title": "Eddington",
+    "tmdb_id": 648878,
+    "poster_filename": "eddington.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-07-16"
+  },
+  {
+    "id": "jurassic-world-dominion.jpg-507086",
+    "title": "Jurassic World Dominion",
+    "tmdb_id": 507086,
+    "poster_filename": "jurassic-world-dominion.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2022-06-01"
+  },
+  {
+    "id": "furiosa-a-mad-max-saga.jpg-786892",
+    "title": "Furiosa: A Mad Max Saga",
+    "tmdb_id": 786892,
+    "poster_filename": "furiosa-a-mad-max-saga.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-05-22"
+  },
+  {
+    "id": "snow-white.jpg-447273",
+    "title": "Snow White",
+    "tmdb_id": 447273,
+    "poster_filename": "snow-white.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-03-19"
+  },
+  {
+    "id": "creation-of-the-gods-ii-demon-force.jpg-1155281",
+    "title": "Creation of the Gods II: Demon Force",
+    "tmdb_id": 1155281,
+    "poster_filename": "creation-of-the-gods-ii-demon-force.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-01-29"
+  },
+  {
+    "id": "long-distance.jpg-605722",
+    "title": "Long Distance",
+    "tmdb_id": 605722,
+    "poster_filename": "long-distance.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-07-12"
+  },
+  {
+    "id": "my-hero-academia-youre-next.jpg-1159311",
+    "title": "My Hero Academia: You're Next",
+    "tmdb_id": 1159311,
+    "poster_filename": "my-hero-academia-youre-next.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-08-02"
+  },
+  {
+    "id": "straw.jpg-1426776",
+    "title": "STRAW",
+    "tmdb_id": 1426776,
+    "poster_filename": "straw.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-06-05"
+  },
+  {
+    "id": "the-mission.jpg-1117644",
+    "title": "The Mission",
+    "tmdb_id": 1117644,
+    "poster_filename": "the-mission.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2023-10-13"
+  },
+  {
+    "id": "bhairavam.jpg-1388451",
+    "title": "Bhairavam",
+    "tmdb_id": 1388451,
+    "poster_filename": "bhairavam.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-05-30"
+  },
+  {
+    "id": "spinal-tap-ii-the-end-continues.jpg-975225",
+    "title": "Spinal Tap II: The End Continues",
+    "tmdb_id": 975225,
+    "poster_filename": "spinal-tap-ii-the-end-continues.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-09-12"
+  },
+  {
+    "id": "my-fault-london.jpg-1294203",
+    "title": "My Fault: London",
+    "tmdb_id": 1294203,
+    "poster_filename": "my-fault-london.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-02-12"
+  },
+  {
+    "id": "heartbeast.jpg-726888",
+    "title": "Heartbeast",
+    "tmdb_id": 726888,
+    "poster_filename": "heartbeast.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2022-11-04"
+  },
+  {
+    "id": "the-pursuit-of-lust.jpg-1422211",
+    "title": "The Pursuit of Lust",
+    "tmdb_id": 1422211,
+    "poster_filename": "the-pursuit-of-lust.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-01-23"
+  },
+  {
+    "id": "assassin.jpg-1552819",
+    "title": "Assassin",
+    "tmdb_id": 1552819,
+    "poster_filename": "assassin.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-09-26"
+  },
+  {
+    "id": "ask-me-what-you-want.jpg-1252309",
+    "title": "Ask Me What You Want",
+    "tmdb_id": 1252309,
+    "poster_filename": "ask-me-what-you-want.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-11-29"
+  },
+  {
+    "id": "legends-of-the-condor-heroes-the-gallants.jpg-1185528",
+    "title": "Legends of the Condor Heroes: The Gallants",
+    "tmdb_id": 1185528,
+    "poster_filename": "legends-of-the-condor-heroes-the-gallants.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-01-29"
+  },
+  {
+    "id": "bullet-train.jpg-718930",
+    "title": "Bullet Train",
+    "tmdb_id": 718930,
+    "poster_filename": "bullet-train.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2022-08-03"
+  },
+  {
+    "id": "materialists.jpg-1136867",
+    "title": "Materialists",
+    "tmdb_id": 1136867,
+    "poster_filename": "materialists.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-06-12"
+  },
+  {
+    "id": "stockholm-bloodbath.jpg-1051486",
+    "title": "Stockholm Bloodbath",
+    "tmdb_id": 1051486,
+    "poster_filename": "stockholm-bloodbath.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-01-19"
+  },
+  {
+    "id": "obsesyon.jpg-1337411",
+    "title": "Obsesyon",
+    "tmdb_id": 1337411,
+    "poster_filename": "obsesyon.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-07-04"
+  },
+  {
+    "id": "warfare.jpg-1241436",
+    "title": "Warfare",
+    "tmdb_id": 1241436,
+    "poster_filename": "warfare.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-04-09"
+  },
+  {
+    "id": "the-woman-in-cabin-10.jpg-1290879",
+    "title": "The Woman in Cabin 10",
+    "tmdb_id": 1290879,
+    "poster_filename": "the-woman-in-cabin-10.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-09"
+  },
+  {
+    "id": "my-annoying-brother.jpg-1306919",
+    "title": "My Annoying Brother",
+    "tmdb_id": 1306919,
+    "poster_filename": "my-annoying-brother.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-10-24"
+  },
+  {
+    "id": "beauty-and-the-beast.jpg-321612",
+    "title": "Beauty and the Beast",
+    "tmdb_id": 321612,
+    "poster_filename": "beauty-and-the-beast.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2017-03-16"
+  },
+  {
+    "id": "guardians-of-the-galaxy-vol-3.jpg-447365",
+    "title": "Guardians of the Galaxy Vol. 3",
+    "tmdb_id": 447365,
+    "poster_filename": "guardians-of-the-galaxy-vol-3.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2023-05-03"
+  },
+  {
+    "id": "dead-shot.jpg-507250",
+    "title": "Dead Shot",
+    "tmdb_id": 507250,
+    "poster_filename": "dead-shot.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2023-08-18"
+  },
+  {
+    "id": "doctor-strange-in-the-multiverse-of-madness.jpg-453395",
+    "title": "Doctor Strange in the Multiverse of Madness",
+    "tmdb_id": 453395,
+    "poster_filename": "doctor-strange-in-the-multiverse-of-madness.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2022-05-04"
+  },
+  {
+    "id": "elemental.jpg-976573",
+    "title": "Elemental",
+    "tmdb_id": 976573,
+    "poster_filename": "elemental.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2023-06-14"
+  },
+  {
+    "id": "flight-risk.jpg-1126166",
+    "title": "Flight Risk",
+    "tmdb_id": 1126166,
+    "poster_filename": "flight-risk.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-01-22"
+  },
+  {
+    "id": "mission-impossible-dead-reckoning-part-one.jpg-575264",
+    "title": "Mission: Impossible - Dead Reckoning Part One",
+    "tmdb_id": 575264,
+    "poster_filename": "mission-impossible-dead-reckoning-part-one.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2023-07-08"
+  },
+  {
+    "id": "the-rats-a-witcher-tale.jpg-1571470",
+    "title": "The Rats: A Witcher Tale",
+    "tmdb_id": 1571470,
+    "poster_filename": "the-rats-a-witcher-tale.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-29"
+  },
+  {
+    "id": "blade-runner-2049.jpg-335984",
+    "title": "Blade Runner 2049",
+    "tmdb_id": 335984,
+    "poster_filename": "blade-runner-2049.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2017-10-04"
+  },
+  {
+    "id": "in-the-lost-lands.jpg-324544",
+    "title": "In the Lost Lands",
+    "tmdb_id": 324544,
+    "poster_filename": "in-the-lost-lands.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-02-27"
+  },
+  {
+    "id": "the-day-the-earth-blew-up-a-looney-tunes-movie.jpg-870360",
+    "title": "The Day the Earth Blew Up: A Looney Tunes Movie",
+    "tmdb_id": 870360,
+    "poster_filename": "the-day-the-earth-blew-up-a-looney-tunes-movie.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-08-01"
+  },
+  {
+    "id": "kelas-bintang-mangga-muda.jpg-1135855",
+    "title": "Kelas Bintang - Mangga Muda",
+    "tmdb_id": 1135855,
+    "poster_filename": "kelas-bintang-mangga-muda.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2023-05-10"
+  },
+  {
+    "id": "dead-again.jpg-1466120",
+    "title": "Dead Again",
+    "tmdb_id": 1466120,
+    "poster_filename": "dead-again.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-05-08"
+  },
+  {
+    "id": "the-brutalist.jpg-549509",
+    "title": "The Brutalist",
+    "tmdb_id": 549509,
+    "poster_filename": "the-brutalist.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-12-20"
+  },
+  {
+    "id": "solo-leveling-reawakening.jpg-1357633",
+    "title": "Solo Leveling -ReAwakening-",
+    "tmdb_id": 1357633,
+    "poster_filename": "solo-leveling-reawakening.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-11-26"
+  },
+  {
+    "id": "bride-hard.jpg-1124619",
+    "title": "Bride Hard",
+    "tmdb_id": 1124619,
+    "poster_filename": "bride-hard.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-06-19"
+  },
+  {
+    "id": "deadly-shores.jpg-547265",
+    "title": "Deadly Shores",
+    "tmdb_id": 547265,
+    "poster_filename": "deadly-shores.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2018-08-24"
+  },
+  {
+    "id": "the-yellow-tie.jpg-1245119",
+    "title": "The Yellow Tie",
+    "tmdb_id": 1245119,
+    "poster_filename": "the-yellow-tie.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-11-14"
+  },
+  {
+    "id": "saltburn.jpg-930564",
+    "title": "Saltburn",
+    "tmdb_id": 930564,
+    "poster_filename": "saltburn.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2023-11-16"
+  },
+  {
+    "id": "reading-lolita-in-tehran.jpg-1096846",
+    "title": "Reading Lolita in Tehran",
+    "tmdb_id": 1096846,
+    "poster_filename": "reading-lolita-in-tehran.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-11-21"
+  },
+  {
+    "id": "wake-up-dead-man-a-knives-out-mystery.jpg-812583",
+    "title": "Wake Up Dead Man: A Knives Out Mystery",
+    "tmdb_id": 812583,
+    "poster_filename": "wake-up-dead-man-a-knives-out-mystery.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-11-26"
+  },
+  {
+    "id": "the-temptation.jpg-1049171",
+    "title": "The Temptation",
+    "tmdb_id": 1049171,
+    "poster_filename": "the-temptation.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2022-12-15"
+  },
+  {
+    "id": "morbius.jpg-526896",
+    "title": "Morbius",
+    "tmdb_id": 526896,
+    "poster_filename": "morbius.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2022-03-30"
+  },
+  {
+    "id": "homeroom.jpg-776523",
+    "title": "Homeroom",
+    "tmdb_id": 776523,
+    "poster_filename": "homeroom.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2021-01-29"
+  },
+  {
+    "id": "homo-argentum.jpg-1471345",
+    "title": "Homo Argentum",
+    "tmdb_id": 1471345,
+    "poster_filename": "homo-argentum.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-08-14"
+  },
+  {
+    "id": "wonder-woman.jpg-297762",
+    "title": "Wonder Woman",
+    "tmdb_id": 297762,
+    "poster_filename": "wonder-woman.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2017-05-30"
+  },
+  {
+    "id": "the-idea-of-you.jpg-843527",
+    "title": "The Idea of You",
+    "tmdb_id": 843527,
+    "poster_filename": "the-idea-of-you.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-05-02"
+  },
+  {
+    "id": "william-tell.jpg-1195631",
+    "title": "William Tell",
+    "tmdb_id": 1195631,
+    "poster_filename": "william-tell.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-01-17"
+  },
+  {
+    "id": "conclave.jpg-974576",
+    "title": "Conclave",
+    "tmdb_id": 974576,
+    "poster_filename": "conclave.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-10-25"
+  },
+  {
+    "id": "the-stolen.jpg-484238",
+    "title": "The Stolen",
+    "tmdb_id": 484238,
+    "poster_filename": "the-stolen.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2017-10-29"
+  },
+  {
+    "id": "2nd-chance.jpg-901511",
+    "title": "2nd Chance",
+    "tmdb_id": 901511,
+    "poster_filename": "2nd-chance.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2022-12-02"
+  },
+  {
+    "id": "the-pickup.jpg-1106289",
+    "title": "The Pickup",
+    "tmdb_id": 1106289,
+    "poster_filename": "the-pickup.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-07-27"
+  },
+  {
+    "id": "my-mothers-wound.jpg-386591",
+    "title": "My Mother's Wound",
+    "tmdb_id": 386591,
+    "poster_filename": "my-mothers-wound.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2016-03-03"
+  },
+  {
+    "id": "arthur-rambo.jpg-660334",
+    "title": "Arthur Rambo",
+    "tmdb_id": 660334,
+    "poster_filename": "arthur-rambo.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2022-02-02"
+  },
+  {
+    "id": "red-white-royal-blue.jpg-930094",
+    "title": "Red, White & Royal Blue",
+    "tmdb_id": 930094,
+    "poster_filename": "red-white-royal-blue.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2023-07-27"
+  },
+  {
+    "id": "killing-faith.jpg-1200320",
+    "title": "Killing Faith",
+    "tmdb_id": 1200320,
+    "poster_filename": "killing-faith.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-03"
+  },
+  {
+    "id": "mastiii-4.jpg-1228827",
+    "title": "Mastiii 4",
+    "tmdb_id": 1228827,
+    "poster_filename": "mastiii-4.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-11-21"
+  },
+  {
+    "id": "havoc.jpg-668489",
+    "title": "Havoc",
+    "tmdb_id": 668489,
+    "poster_filename": "havoc.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-04-25"
+  },
+  {
+    "id": "caught-stealing.jpg-1245993",
+    "title": "Caught Stealing",
+    "tmdb_id": 1245993,
+    "poster_filename": "caught-stealing.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-08-26"
+  },
+  {
+    "id": "violent-ends.jpg-1211776",
+    "title": "Violent Ends",
+    "tmdb_id": 1211776,
+    "poster_filename": "violent-ends.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-10-31"
+  },
+  {
+    "id": "a-line-of-fire.jpg-1367575",
+    "title": "A Line of Fire",
+    "tmdb_id": 1367575,
+    "poster_filename": "a-line-of-fire.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-04-05"
+  },
+  {
+    "id": "the-tomorrow-war.jpg-588228",
+    "title": "The Tomorrow War",
+    "tmdb_id": 588228,
+    "poster_filename": "the-tomorrow-war.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2021-09-03"
+  },
+  {
+    "id": "before-what-comes-after.jpg-1271981",
+    "title": "Before What Comes After",
+    "tmdb_id": 1271981,
+    "poster_filename": "before-what-comes-after.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-02-01"
+  },
+  {
+    "id": "gunslingers.jpg-1293286",
+    "title": "Gunslingers",
+    "tmdb_id": 1293286,
+    "poster_filename": "gunslingers.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-04-11"
+  },
+  {
+    "id": "lefter-the-story-of-the-ordinarius.jpg-1386792",
+    "title": "Lefter: The Story of the Ordinarius",
+    "tmdb_id": 1386792,
+    "poster_filename": "lefter-the-story-of-the-ordinarius.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-11-13"
+  },
+  {
+    "id": "damsel.jpg-763215",
+    "title": "Damsel",
+    "tmdb_id": 763215,
+    "poster_filename": "damsel.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-03-07"
+  },
+  {
+    "id": "puss-in-boots-the-last-wish.jpg-315162",
+    "title": "Puss in Boots: The Last Wish",
+    "tmdb_id": 315162,
+    "poster_filename": "puss-in-boots-the-last-wish.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2022-12-07"
+  },
+  {
+    "id": "intrusion.jpg-785752",
+    "title": "Intrusion",
+    "tmdb_id": 785752,
+    "poster_filename": "intrusion.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2021-09-22"
+  },
+  {
+    "id": "kingdom-of-the-planet-of-the-apes.jpg-653346",
+    "title": "Kingdom of the Planet of the Apes",
+    "tmdb_id": 653346,
+    "poster_filename": "kingdom-of-the-planet-of-the-apes.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2024-05-08"
+  },
+  {
+    "id": "roaring-20s.jpg-821492",
+    "title": "Roaring 20's",
+    "tmdb_id": 821492,
+    "poster_filename": "roaring-20s.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2021-08-28"
+  },
+  {
+    "id": "white-men-cant-jump.jpg-920125",
+    "title": "White Men Can't Jump",
+    "tmdb_id": 920125,
+    "poster_filename": "white-men-cant-jump.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2023-05-11"
+  },
+  {
+    "id": "high-rollers.jpg-1149167",
+    "title": "High Rollers",
+    "tmdb_id": 1149167,
+    "poster_filename": "high-rollers.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-03-14"
+  },
+  {
+    "id": "the-testament-of-ann-lee.jpg-1401281",
+    "title": "The Testament of Ann Lee",
+    "tmdb_id": 1401281,
+    "poster_filename": "the-testament-of-ann-lee.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2025-12-25"
+  },
+  {
+    "id": "the-voyeurs.jpg-645710",
+    "title": "The Voyeurs",
+    "tmdb_id": 645710,
+    "poster_filename": "the-voyeurs.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2021-08-25"
+  },
+  {
+    "id": "dodo.jpg-927774",
+    "title": "Dodo",
+    "tmdb_id": 927774,
+    "poster_filename": "dodo.jpg",
+    "listType": "top",
+    "services": [],
+    "release_date": "2022-08-10"
+  }
+]
