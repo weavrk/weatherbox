@@ -4,7 +4,7 @@ import '../styles/design-system.css';
 
 export function DesignSystemPanel() {
   const [isOpen, setIsOpen] = useState(false);
-  const { tokens, updateTokens, applyTokens, exportTokens } = useDesignSystem();
+  const { tokens, updateTokens, renameToken, applyTokens, exportTokens } = useDesignSystem();
   const [localTokens, setLocalTokens] = useState(tokens);
   const [showDestructiveConfirm, setShowDestructiveConfirm] = useState(false);
   const [showExportMessage, setShowExportMessage] = useState(false);
@@ -13,13 +13,21 @@ export function DesignSystemPanel() {
   const [editingValue, setEditingValue] = useState<string>('');
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
+  const [showPasswordInput, setShowPasswordInput] = useState(false);
+  const [password, setPassword] = useState<string>('');
+  const [passwordConfirmed, setPasswordConfirmed] = useState(false);
   
   // Semantic colors order - load from localStorage or use default
   const [semanticColorsOrder, setSemanticColorsOrder] = useState<string[]>(() => {
     const saved = localStorage.getItem('semanticColorsOrder');
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        // Remove deprecated keys from order
+        const keysToRemove = ['background-primary', 'background-secondary', 'background-tertiary', 'untitled', 'untitled-1'];
+        const filtered = parsed.filter((key: string) => !keysToRemove.includes(key));
+        // Only return if there are items, otherwise return null to use default
+        return filtered.length > 0 ? filtered : null;
       } catch (e) {
         return null;
       }
@@ -47,26 +55,112 @@ export function DesignSystemPanel() {
     updateTokens(updated);
   };
 
-  const handleApply = () => {
-    // Save semantic colors order
-    if (semanticColorsOrder) {
-      localStorage.setItem('semanticColorsOrder', JSON.stringify(semanticColorsOrder));
+  const handlePasswordSubmit = (e?: React.FormEvent) => {
+    if (e) {
+      e.preventDefault();
     }
-    applyTokens();
-    setShowExportMessage(true);
-    // Auto-hide message after 5 seconds
-    setTimeout(() => setShowExportMessage(false), 5000);
+    if (password === 'p') {
+      setPasswordConfirmed(true);
+      setPassword('');
+      // Auto-apply after confirmation
+      setTimeout(() => {
+        handleApply();
+      }, 500);
+    } else {
+      setPassword('');
+      alert('Incorrect password');
+    }
   };
 
-  // Get all primitive color names
+  const handleApplyClick = () => {
+    if (!passwordConfirmed) {
+      setShowPasswordInput(true);
+    } else {
+      handleApply();
+    }
+  };
+
+  const handleApply = async () => {
+    // Clean up deprecated keys from semantic colors order
+    const deprecatedKeys = ['background-primary', 'background-secondary', 'background-tertiary', 'untitled', 'untitled-1'];
+    const cleanedOrder = semanticColorsOrder 
+      ? semanticColorsOrder.filter(key => !deprecatedKeys.includes(key))
+      : null;
+    
+    // Save semantic colors order
+    if (cleanedOrder && cleanedOrder.length > 0) {
+      localStorage.setItem('semanticColorsOrder', JSON.stringify(cleanedOrder));
+      setSemanticColorsOrder(cleanedOrder);
+    } else if (semanticColorsOrder) {
+      // Clear if all were deprecated
+      localStorage.removeItem('semanticColorsOrder');
+      setSemanticColorsOrder(null);
+    }
+    
+    // Apply tokens (this updates localStorage and DOM)
+    applyTokens();
+    
+    // Clean up deprecated keys from tokens before saving
+    const cleanedTokens = { ...localTokens } as any;
+    deprecatedKeys.forEach(key => {
+      if (key in cleanedTokens) {
+        delete cleanedTokens[key];
+      }
+    });
+    
+    // Save to file and commit to git
+    try {
+      const response = await fetch('/api/save_design_tokens.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ tokens: cleanedTokens }),
+      });
+      
+      if (response.ok) {
+        const result = await response.json();
+        setShowExportMessage(true);
+        // Reset password state
+        setShowPasswordInput(false);
+        setPasswordConfirmed(false);
+        // Auto-hide message after 5 seconds
+        setTimeout(() => setShowExportMessage(false), 5000);
+      } else {
+        console.error('Failed to save design tokens:', await response.text());
+        // Still show success message for user, but log error
+        setShowExportMessage(true);
+        setShowPasswordInput(false);
+        setPasswordConfirmed(false);
+        setTimeout(() => setShowExportMessage(false), 5000);
+      }
+    } catch (error) {
+      console.error('Error saving design tokens:', error);
+      // Still show success message for user, but log error
+      setShowExportMessage(true);
+      setShowPasswordInput(false);
+      setPasswordConfirmed(false);
+      setTimeout(() => setShowExportMessage(false), 5000);
+    }
+  };
+
+  // Get all primitive color names dynamically from tokens
+  // Primitives are colors that have hex values or match primitive patterns (gray-*, cyan-*, etc.)
   const getPrimitiveNames = (): string[] => {
-    return [
-      'gray-100', 'gray-200', 'gray-300', 'gray-400', 'gray-500',
-      'gray-600', 'gray-700', 'gray-800', 'gray-900',
-      'cyan-light', 'cyan-dark',
-      'magenta-light', 'magenta-dark',
-      'yellow-light', 'yellow-dark'
-    ];
+    return Object.keys(localTokens).filter(key => {
+      const value = localTokens[key as keyof typeof localTokens];
+      // If the value is a hex color, it's a primitive
+      if (typeof value === 'string' && value.startsWith('#')) {
+        return true;
+      }
+      // If the key matches primitive patterns, it's a primitive
+      if (key.startsWith('gray-') || key.startsWith('cyan-') || 
+          key.startsWith('magenta-') || key.startsWith('yellow-')) {
+        return true;
+      }
+      // Otherwise, it's a semantic color (references another color)
+      return false;
+    });
   };
 
   // Get the actual color value for display
@@ -84,8 +178,15 @@ export function DesignSystemPanel() {
 
 
   const primitiveNames = getPrimitiveNames();
-  const grayScale = ['gray-100', 'gray-200', 'gray-300', 'gray-400', 'gray-500', 'gray-600', 'gray-700', 'gray-800', 'gray-900'];
-  const cmykColors = ['cyan-light', 'cyan-dark', 'magenta-light', 'magenta-dark', 'yellow-light', 'yellow-dark'];
+  // Dynamically categorize primitives
+  const grayScale = primitiveNames.filter(name => name.startsWith('gray-'));
+  const cmykColors = primitiveNames.filter(name => 
+    name.startsWith('cyan-') || name.startsWith('magenta-') || name.startsWith('yellow-')
+  );
+  const otherPrimitives = primitiveNames.filter(name => 
+    !name.startsWith('gray-') && !name.startsWith('cyan-') && 
+    !name.startsWith('magenta-') && !name.startsWith('yellow-')
+  );
   
   // Default semantic colors order
   const defaultSemanticColors = [
@@ -96,23 +197,32 @@ export function DesignSystemPanel() {
     'accent',
     'accent-2',
     'accent-3',
-    'button-primary',
-    'background-primary',
-    'background-secondary',
-    'background-tertiary'
+    'button-primary'
   ];
   
   // Use saved order or default
   const orderedSemanticColors = semanticColorsOrder || defaultSemanticColors;
   
-  // Filter to only include keys that exist in tokens
+  // Identify all semantic colors dynamically (all keys that aren't primitives)
+  // Also filter out deprecated keys
+  const deprecatedKeys = ['background-primary', 'background-secondary', 'background-tertiary', 'untitled', 'untitled-1'];
+  const allSemanticColorKeys = Object.keys(localTokens).filter(key => {
+    // Skip deprecated keys
+    if (deprecatedKeys.includes(key)) {
+      return false;
+    }
+    // A key is a semantic color if it's not a primitive
+    return !primitiveNames.includes(key);
+  });
+  
+  // Filter to only include keys that exist in tokens and are in the order
   const semanticColors = orderedSemanticColors
-    .filter(key => key in localTokens)
+    .filter(key => key in localTokens && allSemanticColorKeys.includes(key))
     .map(key => ({ key, label: key }));
   
-  // Add any new keys that aren't in the order
-  defaultSemanticColors.forEach(key => {
-    if (key in localTokens && !orderedSemanticColors.includes(key)) {
+  // Add any semantic color keys that aren't in the order (newly created or renamed)
+  allSemanticColorKeys.forEach(key => {
+    if (!orderedSemanticColors.includes(key)) {
       semanticColors.push({ key, label: key });
     }
   });
@@ -132,18 +242,33 @@ export function DesignSystemPanel() {
         return;
       }
       
-      // Rename the key in tokens
+      // Update local tokens first to reflect the rename
       const updated = { ...localTokens };
       const value = updated[oldKey as keyof typeof updated];
       delete updated[oldKey as keyof typeof updated];
       (updated as any)[newKey] = value;
       
+      // Update all semantic colors that reference the old key
+      Object.keys(updated).forEach(key => {
+        const tokenValue = updated[key as keyof typeof updated];
+        if (typeof tokenValue === 'string' && tokenValue === oldKey && !tokenValue.startsWith('#')) {
+          (updated as any)[key] = newKey;
+        }
+      });
+      
+      // Update local tokens
+      setLocalTokens(updated);
+      
+      // Use the renameToken function which handles all references
+      // This updates pendingTokens, applies to DOM, and updates all semantic color references
+      renameToken(oldKey, newKey);
+      
+      // Also update tokens in context to keep them in sync
+      updateTokens(updated);
+      
       // Update order array
       const newOrder = orderedSemanticColors.map(k => k === oldKey ? newKey : k);
       setSemanticColorsOrder(newOrder);
-      
-      setLocalTokens(updated);
-      updateTokens(updated);
     }
     setEditingName(null);
     setEditingValue('');
@@ -200,11 +325,11 @@ export function DesignSystemPanel() {
   };
 
   const handleAddNew = () => {
-    // Generate a unique key
-    let newKey = 'untitled';
+    // Generate a unique key (avoid deprecated names)
+    let newKey = 'new-color';
     let counter = 1;
     while (newKey in localTokens || orderedSemanticColors.includes(newKey)) {
-      newKey = `untitled-${counter}`;
+      newKey = `new-color-${counter}`;
       counter++;
     }
     
@@ -313,8 +438,8 @@ export function DesignSystemPanel() {
                           className="color-swatch"
                         />
                         <div className="color-info">
-                          <input
-                            type="text"
+                        <input
+                          type="text"
                             value={(localTokens as any)[grayName]}
                             onChange={(e) => handleColorChange(grayName, e.target.value)}
                             className="color-hex"
@@ -354,7 +479,7 @@ export function DesignSystemPanel() {
                               </svg>
                             )}
                           </button>
-                        </div>
+                    </div>
                         <input
                           type="color"
                           value={(localTokens as any)[cmykName]}
@@ -362,8 +487,8 @@ export function DesignSystemPanel() {
                           className="color-swatch"
                         />
                         <div className="color-info">
-                          <input
-                            type="text"
+                        <input
+                          type="text"
                             value={(localTokens as any)[cmykName]}
                             onChange={(e) => handleColorChange(cmykName, e.target.value)}
                             className="color-hex"
@@ -443,8 +568,8 @@ export function DesignSystemPanel() {
                           <div className="semantic-color-info" style={{ flex: 1, padding: 0, width: '100%' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
                               {isEditing ? (
-                                <input
-                                  type="text"
+                        <input
+                          type="text"
                                   value={editingValue}
                                   onChange={(e) => setEditingValue(e.target.value)}
                                   onBlur={() => handleFinishEdit(key)}
@@ -627,7 +752,7 @@ export function DesignSystemPanel() {
                               No
                             </button>
                           </div>
-                        </div>
+                      </div>
                       )}
                       <p className="button-demo-description">Button with built-in "Are you sure?" confirmation. Used for destructive actions like deleting profiles.</p>
                     </div>
@@ -652,31 +777,109 @@ export function DesignSystemPanel() {
                     fontSize: '0.9rem',
                     color: 'var(--text-primary)'
                   }}>
-                    <strong>Changes applied!</strong> To make these changes permanent for all users, 
-                    <button 
-                      onClick={exportTokens}
-                      style={{
-                        marginLeft: '8px',
-                        color: 'var(--accent)',
-                        background: 'none',
-                        border: 'none',
-                        textDecoration: 'underline',
-                        cursor: 'pointer',
-                        fontFamily: 'inherit',
-                        fontSize: 'inherit'
-                      }}
-                    >
-                      export the JSON file
-                    </button>
-                    {' '}and replace <code style={{ fontSize: '0.85em' }}>public/design-tokens.json</code>
+                    <strong>Changes applied!</strong> Design tokens have been saved to <code style={{ fontSize: '0.85em' }}>public/design-tokens.json</code> and committed to git. All users will see these changes after the next deployment.
                   </div>
                 )}
-                <button
-                  className="create-button-full"
-                  onClick={handleApply}
-                >
-                  Apply Changes
-                </button>
+                {!showPasswordInput && !passwordConfirmed ? (
+                  <button
+                    className="create-button-full"
+                    onClick={handleApplyClick}
+                  >
+                    Apply Changes
+                  </button>
+                ) : passwordConfirmed ? (
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 'var(--spacing-sm)',
+                    padding: 'var(--spacing-md)',
+                    backgroundColor: 'var(--color-background-components, var(--bg-card))',
+                    borderRadius: 'var(--border-radius)',
+                    color: 'var(--text-primary)',
+                    fontSize: '0.9rem'
+                  }}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ color: 'var(--color-accent)' }}>
+                      <path d="M20 6L9 17l-5-5"/>
+                    </svg>
+                    <span>Password confirmed. Applying changes...</span>
+                  </div>
+                ) : (
+                  <form
+                    onSubmit={handlePasswordSubmit}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 'var(--spacing-sm)',
+                      width: '100%'
+                    }}
+                  >
+                    <input
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Escape') {
+                          setShowPasswordInput(false);
+                          setPassword('');
+                        }
+                      }}
+                      placeholder="Enter password"
+                      autoFocus
+                      style={{
+                        flex: '0 1 auto',
+                        minWidth: 0,
+                        maxWidth: '200px',
+                        padding: 'var(--spacing-md)',
+                        backgroundColor: 'var(--bg-secondary)',
+                        border: '1px solid var(--bg-card)',
+                        borderRadius: 'var(--border-radius)',
+                        color: 'var(--text-primary)',
+                        fontFamily: 'var(--font-family)',
+                        fontSize: '1rem'
+                      }}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowPasswordInput(false);
+                        setPassword('');
+                      }}
+                      style={{
+                        padding: 'var(--spacing-md) var(--spacing-lg)',
+                        backgroundColor: 'transparent',
+                        border: '1px solid var(--bg-card)',
+                        borderRadius: 'var(--border-radius)',
+                        color: 'var(--text-secondary)',
+                        fontFamily: 'var(--font-family)',
+                        fontSize: '1rem',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.color = 'var(--text-primary)';
+                        e.currentTarget.style.borderColor = 'var(--accent)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.color = 'var(--text-secondary)';
+                        e.currentTarget.style.borderColor = 'var(--bg-card)';
+                      }}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      className="create-button-full"
+                      style={{
+                        width: 'auto',
+                        minWidth: '100px',
+                        padding: 'var(--spacing-md) var(--spacing-lg)'
+                      }}
+                    >
+                      Enter
+                    </button>
+                  </form>
+                )}
               </div>
             </div>
           </div>

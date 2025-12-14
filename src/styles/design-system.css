@@ -45,7 +45,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: var(--bg-secondary);
+  background: var(--color-background-shells, var(--bg-secondary));
   z-index: 2001;
   box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.5);
   animation: slideUp 0.3s ease-out;
@@ -127,7 +127,7 @@
 .design-system-actions-bottom-sheet {
   position: sticky;
   bottom: 0;
-  background-color: var(--bg-secondary);
+  background-color: var(--color-background-footer, var(--bg-secondary));
   padding: var(--spacing-lg);
   border: none;
   display: flex;
@@ -149,12 +149,18 @@
   margin: 0;
 }
 
-/* Color Grid - 2 Column Layout */
+/* Color Grid - Responsive Layout */
 .color-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--spacing-md);
   margin-top: var(--spacing-md);
+}
+
+@media (min-width: 480px) {
+  .color-grid {
+    grid-template-columns: repeat(auto-fit, minmax(calc((100% - 5 * var(--spacing-md)) / 6), 1fr));
+  }
 }
 
 .color-swatch-card {
@@ -221,12 +227,18 @@
   color: var(--text-primary);
 }
 
-/* Semantic Colors List */
+/* Semantic Colors List - Responsive Grid Layout */
 .semantic-colors-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: var(--spacing-md);
   margin-top: var(--spacing-md);
+}
+
+@media (min-width: 480px) {
+  .semantic-colors-list {
+    grid-template-columns: repeat(auto-fit, minmax(calc((100% - 3 * var(--spacing-md)) / 4), 1fr));
+  }
 }
 
 .semantic-color-item {

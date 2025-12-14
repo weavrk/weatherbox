@@ -22,8 +22,10 @@
   "accent-2": "magenta-light",
   "accent-3": "yellow-light",
   "button-primary": "gray-300",
-  "background-primary": "gray-100",
-  "background-secondary": "gray-100",
-  "background-tertiary": "gray-900"
+  "background-body": "gray-100",
+  "background-shells": "gray-200",
+  "background-components": "gray-300",
+  "background-footer": "gray-200",
+  "background-white": "gray-900"
 }
 

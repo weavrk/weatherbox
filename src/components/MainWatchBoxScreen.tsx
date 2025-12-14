@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { CopyPlus, Funnel, Tv, Search, ChevronDown, Sparkles } from 'lucide-react';
+import { CopyPlus, Funnel, Tv, Search, ChevronDown, Sparkles, Check, X } from 'lucide-react';
 import { useUser } from '../contexts/UserContext';
 import { Header } from './Header';
 import { SectionList } from './SectionList';
@@ -16,12 +16,14 @@ export function MainWatchBoxScreen() {
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [editingUser, setEditingUser] = useState<UserSummary | null>(null);
   const [mobileFilterType, setMobileFilterType] = useState<'all' | 'shows' | 'movies'>('all');
-  const [showCategoriesDropdown, setShowCategoriesDropdown] = useState(false);
-  const [sparkleActive, setSparkleActive] = useState(false);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [sparkleActive, setSparkleActive] = useState(true);
+  const [showFilterBottomSheet, setShowFilterBottomSheet] = useState(false);
   const [filterButtonActive, setFilterButtonActive] = useState(false);
   const [avatarColor, setAvatarColor] = useState<string>('#4A90E2');
   const avatarImageRef = useRef<HTMLImageElement | null>(null);
-  const categoriesDropdownRef = useRef<HTMLDivElement>(null);
+  
+  const categories = ['Action', 'Comedy', 'Drama', 'Horror', 'Sci-Fi'];
 
   useEffect(() => {
     if (currentUser) {
@@ -46,21 +48,26 @@ export function MainWatchBoxScreen() {
     }
   };
 
+  // Update filter button active state based on filters selected in the bottom sheet
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (categoriesDropdownRef.current && !categoriesDropdownRef.current.contains(event.target as Node)) {
-        setShowCategoriesDropdown(false);
-      }
-    };
+    const hasActiveFilters = selectedCategories.length > 0;
+    setFilterButtonActive(hasActiveFilters);
+  }, [selectedCategories]);
 
-    if (showCategoriesDropdown) {
-      document.addEventListener('mousedown', handleClickOutside);
+  const handleCategoryToggle = (category: string) => {
+    // Toggle individual category
+    if (selectedCategories.includes(category)) {
+      setSelectedCategories(selectedCategories.filter(c => c !== category));
+    } else {
+      setSelectedCategories([...selectedCategories, category]);
     }
+  };
 
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [showCategoriesDropdown]);
+  const handleClearAllFilters = () => {
+    setSelectedCategories([]);
+    // Note: sparkleActive and mobileFilterType are quick filters, not bottom sheet filters
+    // Only clear bottom sheet filters (categories)
+  };
 
   const handleEditProfile = async () => {
     if (!currentUser) return;
@@ -177,73 +184,53 @@ export function MainWatchBoxScreen() {
       />
       
       {/* Mobile Filter Bar */}
-      {activeTab === 'explore' && (
-        <div className="mobile-filter-bar">
-          <div className="mobile-filters">
-            <button 
-              className={`filter-chip filter-icon-button ${sparkleActive ? 'active' : ''}`}
-              onClick={() => setSparkleActive(!sparkleActive)}
-              aria-label="Sparkle"
-            >
-              <Sparkles className="filter-icon" size={16} />
-            </button>
-            <button
-              className={`filter-chip ${mobileFilterType === 'movies' ? 'active' : ''}`}
-              onClick={() => {
-                if (mobileFilterType === 'movies') {
-                  // If movies is active, turn it off
-                  setMobileFilterType('all');
-                } else {
-                  // If movies is off, turn it on and turn shows off
-                  setMobileFilterType('movies');
-                }
-              }}
-            >
-              Movies
-            </button>
-            <button
-              className={`filter-chip ${mobileFilterType === 'shows' ? 'active' : ''}`}
-              onClick={() => {
-                if (mobileFilterType === 'shows') {
-                  // If shows is active, turn it off
-                  setMobileFilterType('all');
-                } else {
-                  // If shows is off, turn it on and turn movies off
-                  setMobileFilterType('shows');
-                }
-              }}
-            >
-              Shows
-            </button>
-            <div className="filter-dropdown-container" ref={categoriesDropdownRef}>
-              <button
-                className={`filter-chip filter-dropdown ${showCategoriesDropdown ? 'active' : ''}`}
-                onClick={() => setShowCategoriesDropdown(!showCategoriesDropdown)}
-              >
-                Categories
-                <ChevronDown className="dropdown-icon" size={14} />
-              </button>
-              {showCategoriesDropdown && (
-                <div className="filter-dropdown-menu">
-                  <button className="dropdown-item">All Categories</button>
-                  <button className="dropdown-item">Action</button>
-                  <button className="dropdown-item">Comedy</button>
-                  <button className="dropdown-item">Drama</button>
-                  <button className="dropdown-item">Horror</button>
-                  <button className="dropdown-item">Sci-Fi</button>
-                </div>
-              )}
-            </div>
-          </div>
+      <div className="mobile-filter-bar">
+        <div className="mobile-filters">
           <button 
-            className={`mobile-filter-button ${filterButtonActive ? 'active' : ''}`}
-            onClick={() => setFilterButtonActive(!filterButtonActive)}
-            aria-label="Filter"
+            className={`filter-chip filter-icon-button ${sparkleActive ? 'active' : ''}`}
+            onClick={() => setSparkleActive(!sparkleActive)}
+            aria-label="Recommended"
           >
-            <Funnel className="filter-icon" size={16} />
+            <Sparkles className="filter-icon" size={16} />
+            <span>Recommended</span>
+          </button>
+          <button
+            className={`filter-chip ${mobileFilterType === 'movies' ? 'active' : ''}`}
+            onClick={() => {
+              if (mobileFilterType === 'movies') {
+                // If movies is active, turn it off
+                setMobileFilterType('all');
+              } else {
+                // If movies is off, turn it on and turn shows off
+                setMobileFilterType('movies');
+              }
+            }}
+          >
+            Movies
+          </button>
+          <button
+            className={`filter-chip ${mobileFilterType === 'shows' ? 'active' : ''}`}
+            onClick={() => {
+              if (mobileFilterType === 'shows') {
+                // If shows is active, turn it off
+                setMobileFilterType('all');
+              } else {
+                // If shows is off, turn it on and turn movies off
+                setMobileFilterType('shows');
+              }
+            }}
+          >
+            Shows
           </button>
         </div>
-      )}
+        <button 
+          className={`mobile-filter-button ${filterButtonActive ? 'active' : ''}`}
+          onClick={() => setShowFilterBottomSheet(true)}
+          aria-label="Filter"
+        >
+          <Funnel className="filter-icon" size={16} />
+        </button>
+      </div>
       
       <main className="content">
         <div className="tabs-container">
@@ -261,67 +248,98 @@ export function MainWatchBoxScreen() {
               Explore
             </button>
           </div>
-          {activeTab === 'explore' && (
-            <div className="desktop-filters">
-              <button 
-                className={`filter-chip filter-icon-button ${sparkleActive ? 'active' : ''}`}
-                onClick={() => setSparkleActive(!sparkleActive)}
-                aria-label="Sparkle"
-              >
-                <Sparkles className="filter-icon" size={16} />
-              </button>
-              <button
-                className={`filter-chip ${mobileFilterType === 'movies' ? 'active' : ''}`}
-                onClick={() => {
-                  if (mobileFilterType === 'movies') {
-                    setMobileFilterType('all');
-                  } else {
-                    setMobileFilterType('movies');
-                  }
-                }}
-              >
-                Movies
-              </button>
-              <button
-                className={`filter-chip ${mobileFilterType === 'shows' ? 'active' : ''}`}
-                onClick={() => {
-                  if (mobileFilterType === 'shows') {
-                    setMobileFilterType('all');
-                  } else {
-                    setMobileFilterType('shows');
-                  }
-                }}
-              >
-                Shows
-              </button>
-              <div className="filter-dropdown-container" ref={categoriesDropdownRef}>
-                <button
-                  className={`filter-chip filter-dropdown ${showCategoriesDropdown ? 'active' : ''}`}
-                  onClick={() => setShowCategoriesDropdown(!showCategoriesDropdown)}
-                >
-                  Categories
-                  <ChevronDown className="dropdown-icon" size={14} />
-                </button>
-                {showCategoriesDropdown && (
-                  <div className="filter-dropdown-menu">
-                    <button className="dropdown-item">All Categories</button>
-                    <button className="dropdown-item">Action</button>
-                    <button className="dropdown-item">Comedy</button>
-                    <button className="dropdown-item">Drama</button>
-                    <button className="dropdown-item">Horror</button>
-                    <button className="dropdown-item">Sci-Fi</button>
-                  </div>
-                )}
-              </div>
+          <div className="desktop-filters">
+            <button 
+              className={`filter-chip filter-icon-button ${sparkleActive ? 'active' : ''}`}
+              onClick={() => setSparkleActive(!sparkleActive)}
+              aria-label="Recommended"
+            >
+              <Sparkles className="filter-icon" size={16} />
+              <span>Recommended</span>
+            </button>
+            <button
+              className={`filter-chip ${mobileFilterType === 'movies' ? 'active' : ''}`}
+              onClick={() => {
+                if (mobileFilterType === 'movies') {
+                  // If movies is active, turn it off (shows stays off)
+                  setMobileFilterType('all');
+                } else {
+                  // If movies is off, turn it on and turn shows off
+                  setMobileFilterType('movies');
+                }
+              }}
+            >
+              Movies
+            </button>
+            <button
+              className={`filter-chip ${mobileFilterType === 'shows' ? 'active' : ''}`}
+              onClick={() => {
+                if (mobileFilterType === 'shows') {
+                  // If shows is active, turn it off (movies stays off)
+                  setMobileFilterType('all');
+                } else {
+                  // If shows is off, turn it on and turn movies off
+                  setMobileFilterType('shows');
+                }
+              }}
+            >
+              Shows
+            </button>
+            <div className="filter-button-wrapper">
               <button 
                 className={`mobile-filter-button ${filterButtonActive ? 'active' : ''}`}
-                onClick={() => setFilterButtonActive(!filterButtonActive)}
+                onClick={() => setShowFilterBottomSheet(true)}
                 aria-label="Filter"
               >
                 <Funnel className="filter-icon" size={16} />
               </button>
+              {/* Desktop: Dropdown positioned relative to button */}
+              {showFilterBottomSheet && (
+                <>
+                  <div className="filter-dropdown-overlay" onClick={() => setShowFilterBottomSheet(false)}></div>
+                  <div className="filter-dropdown-menu-desktop" onClick={(e) => e.stopPropagation()}>
+                    <div className="filter-bottom-sheet-header">
+                      <h2>Filters</h2>
+                      <div className="filter-bottom-sheet-header-actions">
+                        <button
+                          className="filter-bottom-sheet-clear"
+                          onClick={handleClearAllFilters}
+                        >
+                          Clear all
+                        </button>
+                        <button
+                          className="filter-bottom-sheet-close"
+                          onClick={() => setShowFilterBottomSheet(false)}
+                          aria-label="Close"
+                        >
+                          <X size={20} />
+                        </button>
+                      </div>
+                    </div>
+                    <div className="filter-bottom-sheet-content">
+                      <div className="filter-section">
+                        <h3 className="filter-section-title">Categories</h3>
+                        <div className="filter-chips-container">
+                          {categories.map((category) => {
+                            const isSelected = selectedCategories.includes(category);
+                            return (
+                              <button
+                                key={category}
+                                className={`filter-chip-chip ${isSelected ? 'active' : ''}`}
+                                onClick={() => handleCategoryToggle(category)}
+                              >
+                                {category}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
-          )}
+          </div>
         </div>
         
         {activeTab === 'watchlist' ? (
@@ -347,6 +365,54 @@ export function MainWatchBoxScreen() {
         )}
       </main>
       
+      {/* Filter Bottom Sheet / Dropdown */}
+      {showFilterBottomSheet && (
+        <>
+          {/* Mobile: Bottom Sheet */}
+          <div className="filter-bottom-sheet-overlay" onClick={() => setShowFilterBottomSheet(false)}>
+            <div className="filter-bottom-sheet" onClick={(e) => e.stopPropagation()}>
+              <div className="filter-bottom-sheet-header">
+                <h2>Filters</h2>
+                <div className="filter-bottom-sheet-header-actions">
+                  <button
+                    className="filter-bottom-sheet-clear"
+                    onClick={handleClearAllFilters}
+                  >
+                    Clear All Filters
+                  </button>
+                  <button
+                    className="filter-bottom-sheet-close"
+                    onClick={() => setShowFilterBottomSheet(false)}
+                    aria-label="Close"
+                  >
+                    <X size={20} />
+                  </button>
+                </div>
+              </div>
+              <div className="filter-bottom-sheet-content">
+                <div className="filter-section">
+                  <h3 className="filter-section-title">Categories</h3>
+                  <div className="filter-chips-container">
+                    {categories.map((category) => {
+                      const isSelected = selectedCategories.includes(category);
+                      return (
+                        <button
+                          key={category}
+                          className={`filter-chip-chip ${isSelected ? 'active' : ''}`}
+                          onClick={() => handleCategoryToggle(category)}
+                        >
+                          {category}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
       {/* Mobile Bottom Navigation */}
       <nav className="bottom-nav">
         <button
