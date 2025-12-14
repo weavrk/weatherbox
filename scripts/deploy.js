@@ -223,6 +223,31 @@ async function deploy() {
           console.log('   Uploaded data/avatars/ files');
         }
         
+        // Upload data/streaming JSON files (explore content)
+        const moviesJson = path.join(ROOT_DIR, 'data', 'streaming-movies-results.json');
+        const showsJson = path.join(ROOT_DIR, 'data', 'streaming-shows-results.json');
+        const dataRemotePath = baseRemotePath + '/data';
+        await client.ensureDir(dataRemotePath);
+        
+        if (fs.existsSync(moviesJson)) {
+          await client.uploadFrom(moviesJson, dataRemotePath + '/streaming-movies-results.json');
+          console.log('   Uploaded data/streaming-movies-results.json');
+        }
+        
+        if (fs.existsSync(showsJson)) {
+          await client.uploadFrom(showsJson, dataRemotePath + '/streaming-shows-results.json');
+          console.log('   Uploaded data/streaming-shows-results.json');
+        }
+        
+        // Upload data/posters folder (poster images)
+        const postersDir = path.join(ROOT_DIR, 'data', 'posters');
+        if (fs.existsSync(postersDir)) {
+          const postersRemotePath = baseRemotePath + '/data/posters';
+          await client.ensureDir(postersRemotePath);
+          await client.uploadFromDir(postersDir, postersRemotePath);
+          console.log('   Uploaded data/posters/ files');
+        }
+        
         client.close();
         console.log('✅ FTP upload complete\n');
       } catch (error) {
