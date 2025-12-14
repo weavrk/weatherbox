@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { CirclePlus, CheckCircle2, X, Star, Clock, Play, Users, Film, Tv, Globe, Loader2, ArrowLeft } from 'lucide-react';
+import { CirclePlus, CheckCircle2, X, Star, Clock, Play, Users, Film, Tv, Globe, Loader2, ArrowLeft, ListOrdered, Trash2 } from 'lucide-react';
 import type { WatchBoxItem } from '../types';
 import { getPosterUrl, getItemDetails } from '../services/api';
 
@@ -9,6 +9,27 @@ interface TitleCardProps {
   onDelete?: (id: string) => void;
   onMove?: (id: string, newListType: 'top' | 'watch') => void;
   onAddToWatchlist?: (item: WatchBoxItem) => void;
+}
+
+// Reusable Card Action Button Component
+interface CardActionButtonProps {
+  icon: React.ReactNode;
+  onClick: (e: React.MouseEvent) => void;
+  ariaLabel: string;
+  className?: string;
+  position?: 'left' | 'right';
+}
+
+function CardActionButton({ icon, onClick, ariaLabel, className = '', position = 'right' }: CardActionButtonProps) {
+  return (
+    <button
+      className={`card-action-button ${className} ${position}`}
+      onClick={onClick}
+      aria-label={ariaLabel}
+    >
+      {icon}
+    </button>
+  );
 }
 
 interface CastMemberPage {
@@ -63,6 +84,13 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist }: TitleCar
     setCurrentItem(item);
   }, [item]);
 
+  // Reset scroll to top when navigating to a new page
+  useEffect(() => {
+    if (detailsOpen && modalRef.current) {
+      modalRef.current.scrollTop = 0;
+    }
+  }, [detailsOpen, currentPage, currentItem, castMemberPage]);
+
   const fetchCastMemberFilmography = async (castId: number): Promise<CastMemberPage['filmography']> => {
     try {
       const response = await fetch(`/api/get_person_filmography.php?person_id=${castId}`);
@@ -108,6 +136,11 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist }: TitleCar
     setDetailsOpen(true);
     setDetailsError(null);
     
+    // Reset scroll to top
+    if (modalRef.current) {
+      modalRef.current.scrollTop = 0;
+    }
+    
     const filmography = await fetchCastMemberFilmography(castMember.id);
     
     setCastMemberPage({
@@ -139,6 +172,11 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist }: TitleCar
     setDetailsError(null);
     setIsAdded(false); // Reset added state for new item
     
+    // Reset scroll to top
+    if (modalRef.current) {
+      modalRef.current.scrollTop = 0;
+    }
+    
     // Check if we already have extended data
     const hasExtendedData = itemToShow.genres || itemToShow.overview || itemToShow.cast || itemToShow.crew || 
       itemToShow.videos || itemToShow.recommendations || itemToShow.similar || itemToShow.keywords;
@@ -165,8 +203,8 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist }: TitleCar
   };
 
   const handleCardClick = async (e: React.MouseEvent) => {
-    // Don't open modal if clicking on the add button
-    if ((e.target as HTMLElement).closest('.add-to-watchlist-button')) {
+    // Don't open modal if clicking on action buttons
+    if ((e.target as HTMLElement).closest('.add-to-watchlist-button, .card-action-button')) {
       return;
     }
     
@@ -187,6 +225,11 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist }: TitleCar
       // Pop from stack and go back to previous page
       const previousPage = navigationStack[navigationStack.length - 1];
       setNavigationStack(prev => prev.slice(0, -1));
+      
+      // Reset scroll to top
+      if (modalRef.current) {
+        modalRef.current.scrollTop = 0;
+      }
       
       if ('type' in previousPage && previousPage.type === 'cast') {
         // Restore cast member page
@@ -235,6 +278,14 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist }: TitleCar
       const newListType = item.listType === 'top' ? 'watch' : 'top';
       onMove(item.id, newListType);
       handleCloseModal(e);
+    }
+  };
+
+  const handleMoveToQueue = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (onMove && item.listType !== 'top') {
+      onMove(item.id, 'top');
     }
   };
 
@@ -302,16 +353,37 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist }: TitleCar
           className="poster-image"
           loading="lazy"
         />
-        {/* Add to watchlist button - upper right */}
-        {onAddToWatchlist && (
-          <button 
-            className={`add-to-watchlist-button ${isAdded ? 'added' : ''}`}
-            onClick={handleAddToWatchlist}
-            aria-label={isAdded ? "Added to watchlist" : "Add to watchlist"}
-          >
-            {isAdded ? <CheckCircle2 /> : <CirclePlus />}
-          </button>
-        )}
+        {/* Action buttons - upper right */}
+        <div className="card-actions-container">
+          {/* Watchlist card actions: Move to Queue (left) and Delete (right) */}
+          {/* Only show on actual watchlist cards, not explore cards */}
+          {onMove && onDelete && item.listType === 'watch' && !onAddToWatchlist && (
+            <>
+              <CardActionButton
+                icon={<ListOrdered size={16} />}
+                onClick={handleMoveToQueue}
+                ariaLabel="Move to Queue"
+                position="left"
+              />
+              <CardActionButton
+                icon={<Trash2 size={16} />}
+                onClick={handleDelete}
+                ariaLabel="Remove from watchlist"
+                position="right"
+              />
+            </>
+          )}
+          {/* Explore card action: Add to watchlist */}
+          {onAddToWatchlist && (
+            <button 
+              className={`add-to-watchlist-button ${isAdded ? 'added' : ''}`}
+              onClick={handleAddToWatchlist}
+              aria-label={isAdded ? "Added to watchlist" : "Add to watchlist"}
+            >
+              {isAdded ? <CheckCircle2 /> : <CirclePlus />}
+            </button>
+          )}
+        </div>
       </div>
       <div className="title-info">
         <span className="title-text">{currentItem.title}</span>
@@ -375,16 +447,16 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist }: TitleCar
                   >
                     Move
                   </button>
-                )}
-                <button 
+          )}
+          <button 
                   className="details-modal-close"
                   onClick={handleCloseModal}
                   aria-label="Close"
                 >
                   <X size={24} />
-                </button>
-              </div>
-            </div>
+          </button>
+        </div>
+      </div>
 
             {currentPage === 'cast' && castMemberPage ? (
               <div className="cast-member-page">

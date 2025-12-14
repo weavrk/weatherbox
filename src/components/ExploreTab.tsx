@@ -161,11 +161,13 @@ export function ExploreTab({ onAddToWatchlist }: ExploreTabProps) {
         </div>
       )}
       <div className="explore-grid">
-        {displayedContent.map((item) => {
+        {displayedContent.map((item, index) => {
           const watchBoxItem = convertToWatchBoxItem(item);
+          // Create unique key using tmdb_id, isMovie, and index to avoid duplicates
+          const uniqueKey = `explore-${item.tmdb_id}-${item.isMovie ? 'movie' : 'show'}-${index}`;
           return (
             <TitleCard
-              key={item.id}
+              key={uniqueKey}
               item={watchBoxItem}
               onDelete={() => {}}
               onMove={() => {}}
