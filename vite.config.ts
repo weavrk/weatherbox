@@ -298,6 +298,9 @@ function mockApiPlugin() {
 export default defineConfig(({ mode }) => ({
   plugins: [react(), mockApiPlugin()],
   base: mode === 'production' ? '/hrefs/watchbox/' : '/',
+  server: {
+    port: 8000,
+  },
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
