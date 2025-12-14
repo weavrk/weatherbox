@@ -27,7 +27,7 @@ export function MainWatchBoxScreen() {
   
   // Load explore content to get available genres
   useEffect(() => {
-    getExploreContent().then(content => {
+    getExploreContent().then(({ content }) => {
       setExploreContent(content);
     }).catch(err => {
       console.error('Failed to load explore content for genres:', err);

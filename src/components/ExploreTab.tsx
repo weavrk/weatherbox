@@ -18,15 +18,17 @@ export function ExploreTab({ }: ExploreTabProps) {
   const [loadingMore, setLoadingMore] = useState(false);
   const [loadedCount, setLoadedCount] = useState(ITEMS_PER_LOAD);
   const [hasMore, setHasMore] = useState(true);
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
   const observerTarget = useRef<HTMLDivElement>(null);
 
   const loadInitialContent = async () => {
     setLoading(true);
     try {
-      const content = await getExploreContent();
+      const { content, lastUpdated } = await getExploreContent();
       setAllContent(content);
       setHasMore(content.length > ITEMS_PER_LOAD);
       setDisplayedContent(content.slice(0, ITEMS_PER_LOAD));
+      setLastUpdated(lastUpdated);
     } catch (error) {
       console.error('Failed to load explore content:', error);
     } finally {
@@ -113,8 +115,50 @@ export function ExploreTab({ }: ExploreTabProps) {
     return <div className="loading">Loading explore content...</div>;
   }
 
+  const formatLastUpdated = (date: Date | null): string => {
+    if (!date) return '';
+    
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+    
+    // Format relative time
+    let relativeTime = '';
+    if (diffMins < 1) {
+      relativeTime = 'Just now';
+    } else if (diffMins < 60) {
+      relativeTime = `${diffMins} minute${diffMins !== 1 ? 's' : ''} ago`;
+    } else if (diffHours < 24) {
+      relativeTime = `${diffHours} hour${diffHours !== 1 ? 's' : ''} ago`;
+    } else if (diffDays < 7) {
+      relativeTime = `${diffDays} day${diffDays !== 1 ? 's' : ''} ago`;
+    } else {
+      relativeTime = `${diffDays} day${diffDays !== 1 ? 's' : ''} ago`;
+    }
+    
+    // Format date/time: 12/13/25 @ 11:04pm
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    const year = date.getFullYear().toString().slice(-2);
+    const hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const ampm = hours >= 12 ? 'pm' : 'am';
+    const displayHours = hours % 12 || 12;
+    
+    const dateTime = `${month}/${day}/${year} @ ${displayHours}:${minutes}${ampm}`;
+    
+    return `${relativeTime}, ${dateTime}`;
+  };
+
   return (
     <div className="explore-tab">
+      {lastUpdated && (
+        <div className="explore-last-updated">
+          Updated {formatLastUpdated(lastUpdated)}
+        </div>
+      )}
       <div className="explore-grid">
         {displayedContent.map((item) => {
           const watchBoxItem = convertToWatchBoxItem(item);

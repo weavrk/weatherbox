@@ -970,7 +970,7 @@ img {
 .content {
   flex: 1;
   padding: 24px;
-  padding-top: 24px;
+  padding-top: 16px;
 }
 
 .section-list {
@@ -1006,6 +1006,17 @@ img {
 }
 
 /* Explore Tab */
+
+.explore-tab {
+  position: relative;
+}
+
+.explore-last-updated {
+  font-size: 10px;
+  color: var(--color-secondary, var(--text-secondary));
+  padding: 0 var(--spacing-sm);
+  margin-bottom: 16px;
+}
 
 .explore-grid {
   display: grid;
@@ -3097,7 +3108,7 @@ img {
   
   .content {
     padding-bottom: 80px; /* Space for bottom nav */
-    padding-top: 24px;
+    padding-top: 16px;
   }
   
   .fab {

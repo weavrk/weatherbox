@@ -279,6 +279,36 @@ function mockApiPlugin() {
           return
         }
         
+        // Get content timestamp
+        if (pathname === '/get_content_timestamp.php' && req.method === 'GET') {
+          const moviesJson = path.join(__dirname, 'data', 'streaming-movies-results.json')
+          const showsJson = path.join(__dirname, 'data', 'streaming-shows-results.json')
+          
+          const timestamps: number[] = []
+          
+          if (fs.existsSync(moviesJson)) {
+            const stats = fs.statSync(moviesJson)
+            timestamps.push(Math.floor(stats.mtime.getTime() / 1000)) // Convert to Unix timestamp
+          }
+          
+          if (fs.existsSync(showsJson)) {
+            const stats = fs.statSync(showsJson)
+            timestamps.push(Math.floor(stats.mtime.getTime() / 1000)) // Convert to Unix timestamp
+          }
+          
+          if (timestamps.length > 0) {
+            const latestTimestamp = Math.max(...timestamps)
+            res.setHeader('Content-Type', 'application/json')
+            res.end(JSON.stringify({ timestamp: latestTimestamp }))
+            return
+          } else {
+            res.statusCode = 404
+            res.setHeader('Content-Type', 'application/json')
+            res.end(JSON.stringify({ error: 'Content files not found' }))
+            return
+          }
+        }
+        
         next()
         } catch (error) {
           console.error('Error in API middleware:', error)

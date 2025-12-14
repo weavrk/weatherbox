@@ -325,8 +325,9 @@ function hasExtendedData(content: ExploreItem[]): boolean {
 /**
  * Fetch top movies and shows for explore tab
  * Optionally triggers background regeneration if extended data is missing
+ * Returns content and last updated timestamp
  */
-export async function getExploreContent(triggerBackgroundRefresh = true): Promise<ExploreItem[]> {
+export async function getExploreContent(triggerBackgroundRefresh = true): Promise<{ content: ExploreItem[]; lastUpdated: Date | null }> {
   try {
     // Fetch both movies and shows
     const [moviesResponse, showsResponse] = await Promise.all([
@@ -338,6 +339,54 @@ export async function getExploreContent(triggerBackgroundRefresh = true): Promis
       moviesResponse.json(),
       showsResponse.json()
     ]);
+
+    // Get last modified timestamps
+    // Try API endpoint first (works in production), then fall back to headers
+    let lastUpdated: Date | null = null;
+    
+    try {
+      // Try to get timestamp from API endpoint
+      const timestampResponse = await fetch('/api/get_content_timestamp.php');
+      if (timestampResponse.ok) {
+        const data = await timestampResponse.json();
+        if (data.timestamp) {
+          lastUpdated = new Date(data.timestamp * 1000); // Convert from Unix timestamp
+        }
+      } else {
+        // If API fails, try headers
+        const moviesLastModified = moviesResponse.headers.get('Last-Modified');
+        const showsLastModified = showsResponse.headers.get('Last-Modified');
+
+        const timestamps: Date[] = [];
+        if (moviesLastModified) {
+          timestamps.push(new Date(moviesLastModified));
+        }
+        if (showsLastModified) {
+          timestamps.push(new Date(showsLastModified));
+        }
+
+        if (timestamps.length > 0) {
+          lastUpdated = new Date(Math.max(...timestamps.map(d => d.getTime())));
+        }
+      }
+    } catch (e) {
+      // If fetch fails entirely, try headers as fallback
+      console.warn('Failed to fetch timestamp from API, trying headers:', e);
+      const moviesLastModified = moviesResponse.headers.get('Last-Modified');
+      const showsLastModified = showsResponse.headers.get('Last-Modified');
+
+      const timestamps: Date[] = [];
+      if (moviesLastModified) {
+        timestamps.push(new Date(moviesLastModified));
+      }
+      if (showsLastModified) {
+        timestamps.push(new Date(showsLastModified));
+      }
+
+      if (timestamps.length > 0) {
+        lastUpdated = new Date(Math.max(...timestamps.map(d => d.getTime())));
+      }
+    }
 
     // Combine all content (already sorted by priority in JSON files)
     // Up to 400 movies and 400 shows (800 total)
@@ -353,10 +402,10 @@ export async function getExploreContent(triggerBackgroundRefresh = true): Promis
       });
     }
     
-    return allContent;
+    return { content: allContent, lastUpdated };
   } catch (error) {
     console.error('Failed to fetch explore content:', error);
-    return [];
+    return { content: [], lastUpdated: null };
   }
 }
 
