@@ -196,6 +196,40 @@ export function MainWatchBoxScreen() {
     alert('Add flow coming soon!');
   };
 
+  const handleAddToWatchlist = async (item: WatchBoxItem) => {
+    if (!currentUser) return;
+    
+    // Check if item already exists
+    const existingItem = items.find(i => i.tmdb_id === item.tmdb_id && i.isMovie === item.isMovie);
+    if (existingItem) {
+      // If it exists, just move it to watchlist if it's not already there
+      if (existingItem.listType !== 'watch') {
+        await handleMove(existingItem.id, 'watch');
+      }
+      return;
+    }
+    
+    // Create new item with watchlist type
+    const newItem: WatchBoxItem = {
+      ...item,
+      id: `${item.tmdb_id}-${Date.now()}`,
+      listType: 'watch'
+    };
+    
+    const updatedItems = [...items, newItem];
+    setItems(updatedItems);
+    
+    // Save to backend
+    await saveUser({
+      user_id: currentUser.user_id,
+      name: currentUser.name,
+      avatar_filename: currentUser.avatar_filename,
+      items: updatedItems,
+      streaming_services: currentUser.streaming_services,
+      birthday: currentUser.birthday
+    });
+  };
+
   if (!currentUser) {
     return <div>Loading...</div>;
   }
@@ -414,7 +448,7 @@ export function MainWatchBoxScreen() {
             </button>
           </>
         ) : (
-          <ExploreTab currentUser={currentUser} onAddItem={handleAddClick} />
+          <ExploreTab currentUser={currentUser} onAddItem={handleAddClick} onAddToWatchlist={handleAddToWatchlist} />
         )}
       </main>
       

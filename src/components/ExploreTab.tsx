@@ -7,11 +7,12 @@ import { TitleCard } from './TitleCard';
 interface ExploreTabProps {
   currentUser: User;
   onAddItem: () => void;
+  onAddToWatchlist: (item: WatchBoxItem) => Promise<void>;
 }
 
 const ITEMS_PER_LOAD = 20;
 
-export function ExploreTab({ }: ExploreTabProps) {
+export function ExploreTab({ onAddToWatchlist }: ExploreTabProps) {
   const [allContent, setAllContent] = useState<ExploreItem[]>([]);
   const [displayedContent, setDisplayedContent] = useState<ExploreItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -168,6 +169,7 @@ export function ExploreTab({ }: ExploreTabProps) {
               item={watchBoxItem}
               onDelete={() => {}}
               onMove={() => {}}
+              onAddToWatchlist={onAddToWatchlist}
             />
           );
         })}

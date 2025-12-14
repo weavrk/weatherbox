@@ -2,6 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import fs from 'fs'
 import path from 'path'
+import { spawn } from 'child_process'
+import https from 'https'
 
 // Vite plugin to mock API endpoints and serve data directory during development
 function mockApiPlugin() {
@@ -59,6 +61,11 @@ function mockApiPlugin() {
       const handleApi = (req: any, res: any, next: any) => {
         try {
           let requestPath = req.url || ''
+          
+          // Skip Vite internal requests
+          if (requestPath.startsWith('/@') || requestPath.startsWith('/node_modules/') || requestPath.startsWith('/src/')) {
+            return next()
+          }
           
           // Remove base path if present
           if (requestPath.startsWith('/hrefs/watchbox/api')) {
@@ -307,6 +314,214 @@ function mockApiPlugin() {
             res.end(JSON.stringify({ error: 'Content files not found' }))
             return
           }
+        }
+        
+        // Handle get_person_filmography.php - call TMDB API directly from Node.js
+        if (pathname === '/get_person_filmography.php' && req.method === 'GET') {
+          const url = new URL(req.url || '', `http://${req.headers.host}`)
+          const personId = url.searchParams.get('person_id')
+          
+          if (!personId) {
+            res.statusCode = 400
+            res.setHeader('Content-Type', 'application/json')
+            res.setHeader('Access-Control-Allow-Origin', '*')
+            res.end(JSON.stringify({ success: false, error: 'Person ID is required' }))
+            return
+          }
+          
+          // TMDB API configuration (from PHP file)
+          const TMDB_ACCESS_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NGEzNjhkMDJlN2Y2NTI0MmU2M2YxMGFhMTMwZTkxZiIsIm5iZiI6MTY1Nzg0MDg4OS44NTY5OTk5LCJzdWIiOiI2MmQwYTRmOTYyZmNkMzAwNTU0NWFjZWEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.TxRfKQMNiojwSNluc8kpo0SxCev8mwIC_RDQXmvjRAg'
+          const TMDB_BASE_URL = 'https://api.themoviedb.org/3'
+          
+          // Fetch person details with combined credits using Node.js https
+          const tmdbUrl = `${TMDB_BASE_URL}/person/${personId}?language=en-US&append_to_response=combined_credits`
+          const urlObj = new URL(tmdbUrl)
+          
+          const options = {
+            hostname: urlObj.hostname,
+            path: urlObj.pathname + urlObj.search,
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${TMDB_ACCESS_TOKEN}`,
+              'Content-Type': 'application/json'
+            }
+          }
+          
+          const tmdbReq = https.request(options, (tmdbRes) => {
+            let data = ''
+            
+            // Handle non-200 responses
+            if (tmdbRes.statusCode && tmdbRes.statusCode !== 200) {
+              res.statusCode = tmdbRes.statusCode
+              res.setHeader('Content-Type', 'application/json')
+              res.setHeader('Access-Control-Allow-Origin', '*')
+              res.end(JSON.stringify({ success: false, error: `TMDB API returned ${tmdbRes.statusCode}` }))
+              return
+            }
+            
+            tmdbRes.on('data', (chunk) => {
+              data += chunk
+            })
+            
+            tmdbRes.on('end', () => {
+              try {
+                const personDetails = JSON.parse(data)
+                
+                if (personDetails.status_code) {
+                  res.statusCode = 500
+                  res.setHeader('Content-Type', 'application/json')
+                  res.setHeader('Access-Control-Allow-Origin', '*')
+                  res.end(JSON.stringify({ success: false, error: personDetails.status_message || 'API error' }))
+                  return
+                }
+                
+                // Extract filmography
+                const combinedCredits: any[] = []
+                
+                if (personDetails.combined_credits?.cast && Array.isArray(personDetails.combined_credits.cast)) {
+                  for (const credit of personDetails.combined_credits.cast) {
+                    if (!credit.title && !credit.name) continue
+                    
+                    const isMovie = !!credit.title
+                    const title = isMovie ? credit.title : (credit.name || 'Unknown')
+                    
+                    combinedCredits.push({
+                      id: credit.id || 0,
+                      title: title,
+                      poster_path: credit.poster_path || null,
+                      release_date: credit.release_date || null,
+                      first_air_date: credit.first_air_date || null,
+                      isMovie: isMovie,
+                      popularity: credit.popularity || 0
+                    })
+                  }
+                }
+                
+                // Sort by popularity
+                combinedCredits.sort((a, b) => (b.popularity || 0) - (a.popularity || 0))
+                
+                // Limit to top 50
+                const filmography = combinedCredits.slice(0, 50)
+                
+                res.setHeader('Content-Type', 'application/json')
+                res.setHeader('Access-Control-Allow-Origin', '*')
+                res.end(JSON.stringify({
+                  success: true,
+                  filmography: filmography,
+                  debug: {
+                    person_id: personId,
+                    filmography_count: filmography.length,
+                    has_combined_credits: !!personDetails.combined_credits,
+                    cast_count: personDetails.combined_credits?.cast?.length || 0
+                  }
+                }))
+              } catch (parseErr) {
+                console.error('Error parsing TMDB response:', parseErr)
+                res.statusCode = 500
+                res.setHeader('Content-Type', 'application/json')
+                res.setHeader('Access-Control-Allow-Origin', '*')
+                res.end(JSON.stringify({ success: false, error: 'Failed to parse API response' }))
+              }
+            })
+          })
+          
+          tmdbReq.on('error', (err) => {
+            console.error('Error fetching person filmography:', err)
+            res.statusCode = 500
+            res.setHeader('Content-Type', 'application/json')
+            res.setHeader('Access-Control-Allow-Origin', '*')
+            res.end(JSON.stringify({ success: false, error: 'Failed to fetch filmography', details: err.message }))
+          })
+          
+          tmdbReq.end()
+          return
+        }
+        
+        // Execute PHP files using PHP CLI (only for /api/*.php requests that aren't handled above)
+        if (pathname.startsWith('/') && pathname.endsWith('.php') && !pathname.startsWith('/@')) {
+          const phpFile = path.join(__dirname, 'api', path.basename(pathname))
+          
+          if (!fs.existsSync(phpFile)) {
+            res.statusCode = 404
+            res.setHeader('Content-Type', 'application/json')
+            res.end(JSON.stringify({ error: 'PHP file not found' }))
+            return
+          }
+          
+          // Get query string from original URL
+          const fullUrl = req.url || ''
+          const queryString = fullUrl.includes('?') ? fullUrl.split('?')[1] : ''
+          
+          // Set up environment for PHP
+          const env = { ...process.env }
+          env.REQUEST_METHOD = req.method || 'GET'
+          env.QUERY_STRING = queryString
+          env.SCRIPT_NAME = `/api${pathname}`
+          env.PATH_INFO = ''
+          env.SERVER_NAME = 'localhost'
+          env.SERVER_PORT = '8000'
+          env.HTTP_HOST = 'localhost:8000'
+          
+          // Execute PHP file
+          const php = spawn('php', ['-f', phpFile], { env })
+          
+          let output = ''
+          let errorOutput = ''
+          
+          php.stdout.on('data', (data: Buffer) => {
+            output += data.toString()
+          })
+          
+          php.stderr.on('data', (data: Buffer) => {
+            errorOutput += data.toString()
+          })
+          
+          php.on('close', (code: number) => {
+            if (code !== 0) {
+              console.error('PHP execution error:', errorOutput)
+              res.statusCode = 500
+              res.setHeader('Content-Type', 'application/json')
+              res.end(JSON.stringify({ error: 'PHP execution failed', details: errorOutput }))
+              return
+            }
+            
+            // PHP output might have headers, extract JSON (look for first { or [)
+            const jsonStart = output.search(/[\{\[]/)
+            if (jsonStart !== -1) {
+              const jsonContent = output.substring(jsonStart)
+              // Try to find the end of JSON (last matching } or ])
+              let braceCount = 0
+              let bracketCount = 0
+              let jsonEnd = jsonStart
+              for (let i = jsonStart; i < output.length; i++) {
+                if (output[i] === '{') braceCount++
+                if (output[i] === '}') braceCount--
+                if (output[i] === '[') bracketCount++
+                if (output[i] === ']') bracketCount--
+                if (braceCount === 0 && bracketCount === 0 && i > jsonStart) {
+                  jsonEnd = i + 1
+                  break
+                }
+              }
+              res.setHeader('Content-Type', 'application/json')
+              res.setHeader('Access-Control-Allow-Origin', '*')
+              res.end(output.substring(jsonStart, jsonEnd))
+            } else {
+              // If no JSON found, send raw output
+              res.setHeader('Content-Type', 'application/json')
+              res.setHeader('Access-Control-Allow-Origin', '*')
+              res.end(output.trim())
+            }
+          })
+          
+          php.on('error', (err: Error) => {
+            console.error('PHP spawn error:', err)
+            res.statusCode = 500
+            res.setHeader('Content-Type', 'application/json')
+            res.end(JSON.stringify({ error: 'Failed to execute PHP. Make sure PHP is installed and in PATH.', details: err.message }))
+          })
+          
+          return
         }
         
         next()
