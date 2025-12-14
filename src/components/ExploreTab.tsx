@@ -88,6 +88,7 @@ export function ExploreTab({ }: ExploreTabProps) {
       poster_filename: item.poster_filename,
       listType: 'watch',
       services: item.services,
+      isMovie: item.isMovie, // Include isMovie field
       // Include extended TMDB data
       genres: item.genres,
       overview: item.overview,

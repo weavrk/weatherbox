@@ -1,6 +1,26 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import type { User } from '../types';
+import type { User, WatchBoxItem } from '../types';
 import { getUser } from '../services/api';
+
+/**
+ * Normalize WatchBoxItem to ensure isMovie field is present
+ * Handles backward compatibility for items that might not have isMovie
+ */
+function normalizeWatchBoxItem(item: any): WatchBoxItem {
+  // If isMovie is already present, use it
+  if (typeof item.isMovie === 'boolean') {
+    return item as WatchBoxItem;
+  }
+  
+  // Otherwise, infer from other fields
+  // TV shows have number_of_seasons or number_of_episodes
+  const isMovie = !item.number_of_seasons && !item.number_of_episodes;
+  
+  return {
+    ...item,
+    isMovie,
+  } as WatchBoxItem;
+}
 
 interface UserContextType {
   currentUser: User | null;
@@ -29,7 +49,12 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
   const loadUser = async (userId: string) => {
     const user = await getUser(userId);
-    setCurrentUser(user);
+    // Normalize items to ensure isMovie field is present (backward compatibility)
+    const normalizedUser: User = {
+      ...user,
+      items: user.items.map(normalizeWatchBoxItem),
+    };
+    setCurrentUser(normalizedUser);
     localStorage.setItem(STORAGE_KEY, userId);
   };
 

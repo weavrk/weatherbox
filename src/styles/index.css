@@ -1582,10 +1582,17 @@ img {
   touch-action: auto;
 }
 
-.details-modal-close {
+.details-modal-header-actions {
   position: absolute;
   top: 12px;
   right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+}
+
+.details-modal-close {
   background: rgba(0, 0, 0, 0.5);
   border: none;
   border-radius: 50%;
@@ -1596,12 +1603,39 @@ img {
   justify-content: center;
   color: var(--text-primary);
   cursor: pointer;
-  z-index: 10;
   transition: background 0.2s;
 }
 
 .details-modal-close:hover {
   background: var(--accent);
+}
+
+.details-modal-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.details-modal-action-btn {
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.details-modal-action-btn:hover {
+  background: var(--accent);
+}
+
+.details-modal-delete-btn:hover {
+  background: var(--accent-secondary);
+  color: var(--text-primary);
 }
 
 .details-modal-header {

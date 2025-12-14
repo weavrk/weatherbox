@@ -78,6 +78,7 @@ export interface WatchBoxItem {
   poster_filename: string;
   listType: 'top' | 'watch';
   services: string[];
+  isMovie: boolean; // Whether this is a movie (true) or TV show (false)
   // Extended TMDB data (optional for backward compatibility)
   genres?: Genre[];
   overview?: string;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { CircleEllipsis, X, Star, Clock, Play, Users, Film, Tv, Globe, Loader2 } from 'lucide-react';
+import { CircleEllipsis, X, Star, Clock, Play, Users, Film, Tv, Globe, Loader2, Trash2, ArrowUpDown } from 'lucide-react';
 import type { WatchBoxItem } from '../types';
 import { getPosterUrl, getItemDetails } from '../services/api';
 
@@ -10,7 +10,7 @@ interface TitleCardProps {
   onMove?: (id: string, newListType: 'top' | 'watch') => void;
 }
 
-export function TitleCard({ item }: TitleCardProps) {
+export function TitleCard({ item, onDelete, onMove }: TitleCardProps) {
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [extendedData, setExtendedData] = useState<Partial<WatchBoxItem> | null>(null);
   const [loadingDetails, setLoadingDetails] = useState(false);
@@ -35,10 +35,8 @@ export function TitleCard({ item }: TitleCardProps) {
       setExtendedData(null);
       
       try {
-        // Determine if it's a movie or TV show based on item properties
-        // TV shows have number_of_seasons or number_of_episodes
-        const isMovie = !item.number_of_seasons && !item.number_of_episodes;
-        const result = await getItemDetails(item.tmdb_id, isMovie);
+        // Use the isMovie field directly from the item
+        const result = await getItemDetails(item.tmdb_id, item.isMovie);
         if (result.success && result.data) {
           setExtendedData(result.data);
         } else {
@@ -50,10 +48,9 @@ export function TitleCard({ item }: TitleCardProps) {
       } finally {
         setLoadingDetails(false);
       }
-    } else {
-      // We already have extended data, use it
-      setExtendedData(null);
     }
+    // If we already have extended data, displayData will use it automatically
+    // No need to set extendedData to null - just let displayData handle the fallback
   };
 
   const handleCloseModal = (e?: React.MouseEvent) => {
@@ -66,6 +63,25 @@ export function TitleCard({ item }: TitleCardProps) {
     setExtendedData(null);
     setLoadingDetails(false);
     setDetailsError(null);
+  };
+
+  const handleDelete = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (onDelete && window.confirm(`Are you sure you want to remove "${item.title}" from your list?`)) {
+      onDelete(item.id);
+      handleCloseModal();
+    }
+  };
+
+  const handleMove = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (onMove) {
+      const newListType = item.listType === 'top' ? 'watch' : 'top';
+      onMove(item.id, newListType);
+      handleCloseModal();
+    }
   };
 
   // Close modal on escape key
@@ -163,13 +179,41 @@ export function TitleCard({ item }: TitleCardProps) {
             className="details-modal" 
             onClick={(e) => e.stopPropagation()}
           >
-            <button 
-              className="details-modal-close"
-              onClick={handleCloseModal}
-              aria-label="Close"
-            >
-              <X size={24} />
-            </button>
+            <div className="details-modal-header-actions">
+              <button 
+                className="details-modal-close"
+                onClick={handleCloseModal}
+                aria-label="Close"
+              >
+                <X size={24} />
+              </button>
+              
+              {/* Action buttons - only show if callbacks are provided */}
+              {(onDelete || onMove) && (
+                <div className="details-modal-actions">
+                  {onMove && (
+                    <button
+                      className="details-modal-action-btn"
+                      onClick={handleMove}
+                      aria-label={`Move to ${item.listType === 'top' ? 'watchlist' : 'top list'}`}
+                      title={`Move to ${item.listType === 'top' ? 'watchlist' : 'top list'}`}
+                    >
+                      <ArrowUpDown size={20} />
+                    </button>
+                  )}
+                  {onDelete && (
+                    <button
+                      className="details-modal-action-btn details-modal-delete-btn"
+                      onClick={handleDelete}
+                      aria-label="Delete"
+                      title="Remove from list"
+                    >
+                      <Trash2 size={20} />
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
 
             <div className="details-modal-header">
               <img
