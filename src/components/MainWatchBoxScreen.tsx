@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { CopyPlus, Funnel, Tv, Search, ChevronDown, Sparkles, Check, X } from 'lucide-react';
+import { CopyPlus, Funnel, Tv, Search, Sparkles, X } from 'lucide-react';
 import { useUser } from '../contexts/UserContext';
 import { Header } from './Header';
 import { SectionList } from './SectionList';

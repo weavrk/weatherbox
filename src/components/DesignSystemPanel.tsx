@@ -4,7 +4,7 @@ import '../styles/design-system.css';
 
 export function DesignSystemPanel() {
   const [isOpen, setIsOpen] = useState(false);
-  const { tokens, updateTokens, renameToken, applyTokens, exportTokens } = useDesignSystem();
+  const { tokens, updateTokens, renameToken, applyTokens } = useDesignSystem();
   const [localTokens, setLocalTokens] = useState(tokens);
   const [showDestructiveConfirm, setShowDestructiveConfirm] = useState(false);
   const [showExportMessage, setShowExportMessage] = useState(false);
@@ -94,7 +94,7 @@ export function DesignSystemPanel() {
     } else if (semanticColorsOrder) {
       // Clear if all were deprecated
       localStorage.removeItem('semanticColorsOrder');
-      setSemanticColorsOrder(null);
+      setSemanticColorsOrder(null as any);
     }
     
     // Apply tokens (this updates localStorage and DOM)
@@ -119,7 +119,7 @@ export function DesignSystemPanel() {
       });
       
       if (response.ok) {
-        const result = await response.json();
+        await response.json();
         setShowExportMessage(true);
         // Reset password state
         setShowPasswordInput(false);
@@ -182,10 +182,6 @@ export function DesignSystemPanel() {
   const grayScale = primitiveNames.filter(name => name.startsWith('gray-'));
   const cmykColors = primitiveNames.filter(name => 
     name.startsWith('cyan-') || name.startsWith('magenta-') || name.startsWith('yellow-')
-  );
-  const otherPrimitives = primitiveNames.filter(name => 
-    !name.startsWith('gray-') && !name.startsWith('cyan-') && 
-    !name.startsWith('magenta-') && !name.startsWith('yellow-')
   );
   
   // Default semantic colors order
