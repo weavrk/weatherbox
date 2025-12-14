@@ -2670,6 +2670,16 @@ img {
   display: flex;
   align-items: center;
   gap: 4px;
+  outline: none;
+}
+
+.filter-chip:focus,
+.filter-chip:focus-visible {
+  outline: none;
+}
+
+.filter-chip:active {
+  transform: scale(0.98);
 }
 
 .filter-chip .filter-icon {
@@ -2685,22 +2695,10 @@ img {
   }
 }
 
-.filter-chip:hover {
-  background-color: var(--accent);
-  border-color: var(--accent);
-  color: var(--color-tertiary, var(--text-secondary));
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.filter-chip:hover .filter-icon {
-  color: var(--color-tertiary, var(--text-secondary));
-}
-
 .filter-chip.active {
   background-color: var(--accent);
   border-color: var(--accent);
   color: var(--color-tertiary, var(--text-secondary));
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .filter-chip.active .filter-icon {
@@ -2724,15 +2722,6 @@ img {
     color: var(--color-primary, var(--text-primary));
   }
   
-  .filter-chip.filter-icon-button:hover {
-    background-color: var(--color-accent, var(--accent)) !important;
-    border-color: var(--color-accent, var(--accent)) !important;
-  }
-  
-  .filter-chip.filter-icon-button:hover .filter-icon,
-  .filter-chip.filter-icon-button:hover span {
-    color: var(--color-tertiary, var(--text-secondary)) !important;
-  }
   
   .filter-chip.filter-icon-button.active {
     background-color: var(--color-accent, var(--accent)) !important;
@@ -2823,22 +2812,10 @@ img {
   color: inherit;
 }
 
-.mobile-filter-button:hover {
-  background-color: var(--accent);
-  border-color: var(--accent);
-  color: var(--color-tertiary, var(--text-secondary));
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.mobile-filter-button:hover .filter-icon {
-  color: var(--color-tertiary, var(--text-secondary));
-}
-
 .mobile-filter-button.active {
   background-color: var(--accent);
   border-color: var(--accent);
   color: var(--color-tertiary, var(--text-secondary));
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .mobile-filter-button.active .filter-icon {
@@ -3064,18 +3041,11 @@ img {
   white-space: nowrap;
 }
 
-.filter-chip-chip:hover {
-  background-color: var(--accent);
-  border-color: var(--accent);
-  color: var(--color-tertiary, var(--text-secondary));
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-}
 
 .filter-chip-chip.active {
   background-color: var(--color-accent, var(--accent));
   border-color: var(--color-accent, var(--accent));
   color: var(--color-tertiary, var(--text-secondary));
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes fadeIn {

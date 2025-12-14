@@ -16,7 +16,8 @@ export function MainWatchBoxScreen() {
   const [activeTab, setActiveTab] = useState<'watchlist' | 'explore'>('watchlist');
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [editingUser, setEditingUser] = useState<UserSummary | null>(null);
-  const [mobileFilterType, setMobileFilterType] = useState<'all' | 'shows' | 'movies'>('all');
+  const [moviesActive, setMoviesActive] = useState(false);
+  const [showsActive, setShowsActive] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [sparkleActive, setSparkleActive] = useState(true);
   const [showFilterBottomSheet, setShowFilterBottomSheet] = useState(false);
@@ -91,8 +92,30 @@ export function MainWatchBoxScreen() {
 
   const handleClearAllFilters = () => {
     setSelectedCategories([]);
-    // Note: sparkleActive and mobileFilterType are quick filters, not bottom sheet filters
+    // Note: sparkleActive, moviesActive, and showsActive are quick filters, not bottom sheet filters
     // Only clear bottom sheet filters (categories)
+  };
+
+  const handleMoviesToggle = () => {
+    if (moviesActive) {
+      // If Movies is active, just turn it off (both can be off)
+      setMoviesActive(false);
+    } else {
+      // If Movies is being turned on, turn Shows off
+      setMoviesActive(true);
+      setShowsActive(false);
+    }
+  };
+
+  const handleShowsToggle = () => {
+    if (showsActive) {
+      // If Shows is active, just turn it off (both can be off)
+      setShowsActive(false);
+    } else {
+      // If Shows is being turned on, turn Movies off
+      setShowsActive(true);
+      setMoviesActive(false);
+    }
   };
 
   const handleEditProfile = async () => {
@@ -214,37 +237,39 @@ export function MainWatchBoxScreen() {
         <div className="mobile-filters">
           <button 
             className={`filter-chip filter-icon-button ${sparkleActive ? 'active' : ''}`}
-            onClick={() => setSparkleActive(!sparkleActive)}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setSparkleActive(!sparkleActive);
+              e.currentTarget.blur();
+            }}
+            onMouseDown={(e) => e.preventDefault()}
             aria-label="Recommended"
           >
             <Sparkles className="filter-icon" size={16} />
             <span>Recommended</span>
           </button>
           <button
-            className={`filter-chip ${mobileFilterType === 'movies' ? 'active' : ''}`}
-            onClick={() => {
-              if (mobileFilterType === 'movies') {
-                // If movies is active, turn it off
-                setMobileFilterType('all');
-              } else {
-                // If movies is off, turn it on and turn shows off
-                setMobileFilterType('movies');
-              }
+            className={`filter-chip ${moviesActive ? 'active' : ''}`}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              handleMoviesToggle();
+              e.currentTarget.blur();
             }}
+            onMouseDown={(e) => e.preventDefault()}
           >
             Movies
           </button>
           <button
-            className={`filter-chip ${mobileFilterType === 'shows' ? 'active' : ''}`}
-            onClick={() => {
-              if (mobileFilterType === 'shows') {
-                // If shows is active, turn it off
-                setMobileFilterType('all');
-              } else {
-                // If shows is off, turn it on and turn movies off
-                setMobileFilterType('shows');
-              }
+            className={`filter-chip ${showsActive ? 'active' : ''}`}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              handleShowsToggle();
+              e.currentTarget.blur();
             }}
+            onMouseDown={(e) => e.preventDefault()}
           >
             Shows
           </button>
@@ -277,37 +302,39 @@ export function MainWatchBoxScreen() {
           <div className="desktop-filters">
             <button 
               className={`filter-chip filter-icon-button ${sparkleActive ? 'active' : ''}`}
-              onClick={() => setSparkleActive(!sparkleActive)}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setSparkleActive(!sparkleActive);
+                e.currentTarget.blur();
+              }}
+              onMouseDown={(e) => e.preventDefault()}
               aria-label="Recommended"
             >
               <Sparkles className="filter-icon" size={16} />
               <span>Recommended</span>
             </button>
             <button
-              className={`filter-chip ${mobileFilterType === 'movies' ? 'active' : ''}`}
-              onClick={() => {
-                if (mobileFilterType === 'movies') {
-                  // If movies is active, turn it off (shows stays off)
-                  setMobileFilterType('all');
-                } else {
-                  // If movies is off, turn it on and turn shows off
-                  setMobileFilterType('movies');
-                }
+              className={`filter-chip ${moviesActive ? 'active' : ''}`}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleMoviesToggle();
+                e.currentTarget.blur();
               }}
+              onMouseDown={(e) => e.preventDefault()}
             >
               Movies
             </button>
             <button
-              className={`filter-chip ${mobileFilterType === 'shows' ? 'active' : ''}`}
-              onClick={() => {
-                if (mobileFilterType === 'shows') {
-                  // If shows is active, turn it off (movies stays off)
-                  setMobileFilterType('all');
-                } else {
-                  // If shows is off, turn it on and turn movies off
-                  setMobileFilterType('shows');
-                }
+              className={`filter-chip ${showsActive ? 'active' : ''}`}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleShowsToggle();
+                e.currentTarget.blur();
               }}
+              onMouseDown={(e) => e.preventDefault()}
             >
               Shows
             </button>
