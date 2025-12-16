@@ -223,9 +223,10 @@ async function deploy() {
           console.log('   Uploaded data/avatars/ files');
         }
         
-        // Upload data/streaming JSON files (explore content)
+        // Upload data/streaming JSON files (explore content + defaults)
         const moviesJson = path.join(ROOT_DIR, 'data', 'streaming-movies-results.json');
         const showsJson = path.join(ROOT_DIR, 'data', 'streaming-shows-results.json');
+        const defaultServicesJson = path.join(ROOT_DIR, 'data', 'default_streaming_services.json');
         const dataRemotePath = baseRemotePath + '/data';
         await client.ensureDir(dataRemotePath);
         
@@ -237,6 +238,20 @@ async function deploy() {
         if (fs.existsSync(showsJson)) {
           await client.uploadFrom(showsJson, dataRemotePath + '/streaming-shows-results.json');
           console.log('   Uploaded data/streaming-shows-results.json');
+        }
+        
+        if (fs.existsSync(defaultServicesJson)) {
+          await client.uploadFrom(defaultServicesJson, dataRemotePath + '/default_streaming_services.json');
+          console.log('   Uploaded data/default_streaming_services.json');
+        }
+        
+        // Upload data/streaming folder (streaming service logos)
+        const streamingDir = path.join(ROOT_DIR, 'data', 'streaming');
+        if (fs.existsSync(streamingDir)) {
+          const streamingRemotePath = baseRemotePath + '/data/streaming';
+          await client.ensureDir(streamingRemotePath);
+          await client.uploadFromDir(streamingDir, streamingRemotePath);
+          console.log('   Uploaded data/streaming/ files');
         }
         
         // Upload data/posters folder (poster images)
