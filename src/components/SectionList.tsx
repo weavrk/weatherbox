@@ -6,6 +6,7 @@ interface SectionListProps {
   items: WatchBoxItem[];
   onDelete: (id: string) => void;
   onMove: (id: string, newListType: 'top' | 'watch') => void;
+  onAddToWatchlist?: (item: WatchBoxItem) => Promise<void>;
 }
 
 const EmptyStateIllustration = () => (
@@ -18,7 +19,7 @@ const EmptyStateIllustration = () => (
   </svg>
 );
 
-export function SectionList({ title, items, onDelete, onMove }: SectionListProps) {
+export function SectionList({ title, items, onDelete, onMove, onAddToWatchlist }: SectionListProps) {
   return (
     <div className="section-list">
       <h2 className="section-title">{title}</h2>
@@ -38,6 +39,8 @@ export function SectionList({ title, items, onDelete, onMove }: SectionListProps
               item={item}
               onDelete={onDelete}
               onMove={onMove}
+              onAddToWatchlist={onAddToWatchlist}
+              variant="manage"
             />
           ))
         )}

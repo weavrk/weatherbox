@@ -9,6 +9,13 @@ interface TitleCardProps {
   onDelete?: (id: string) => void;
   onMove?: (id: string, newListType: 'top' | 'watch') => void;
   onAddToWatchlist?: (item: WatchBoxItem) => void;
+  /**
+   * Visual/behavior variant for the small grid card:
+   * - "add": shows + add button
+   * - "manage": shows Move to Queue + Delete
+   * Defaults to "add" for explore cards.
+   */
+  variant?: 'add' | 'manage';
 }
 
 // Reusable Card Action Button Component
@@ -52,6 +59,111 @@ function DetailsModalActionButton({ label, onClick, ariaLabel, className = '' }:
   );
 }
 
+type TitleCardVariant = 'add' | 'manage';
+
+interface ReusableTitleCardProps {
+  title: string;
+  posterSrc?: string;
+  /**
+   * Optional fallback poster URL for when the main poster fails to load.
+   */
+  fallbackPosterSrc?: string;
+  /**
+   * When true and no posterSrc, show a Film icon placeholder.
+   */
+  showPlaceholderOnMissingPoster?: boolean;
+  variant: TitleCardVariant;
+  isAdded?: boolean;
+  onCardClick?: (e: React.MouseEvent) => void;
+  onAddClick?: (e: React.MouseEvent) => void;
+  onMoveToQueueClick?: (e: React.MouseEvent) => void;
+  onDeleteClick?: (e: React.MouseEvent) => void;
+}
+
+/**
+ * Reusable small grid card used for:
+ * - Main watchlist / explore grids
+ * - Cast member filmography grid
+ *
+ * It only knows about visuals + basic actions; higher level components
+ * decide what the handlers do.
+ */
+function ReusableTitleCard({
+  title,
+  posterSrc,
+  fallbackPosterSrc,
+  showPlaceholderOnMissingPoster = false,
+  variant,
+  isAdded,
+  onCardClick,
+  onAddClick,
+  onMoveToQueueClick,
+  onDeleteClick,
+}: ReusableTitleCardProps) {
+  const showManageActions = variant === 'manage' && onMoveToQueueClick && onDeleteClick;
+  const showAddAction = variant === 'add' && !!onAddClick;
+
+  return (
+    <div className="title-card" onClick={onCardClick}>
+      <div className="poster-container">
+        {posterSrc ? (
+          <img
+            src={posterSrc}
+            alt={title}
+            className="poster-image"
+            loading="lazy"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              if (fallbackPosterSrc && target.src !== fallbackPosterSrc) {
+                target.src = fallbackPosterSrc;
+              }
+            }}
+          />
+        ) : showPlaceholderOnMissingPoster ? (
+          <div className="poster-placeholder">
+            <Film size={32} />
+          </div>
+        ) : null}
+
+        {/* Action buttons - upper right */}
+        <div className="card-actions-container">
+          {/* Watchlist card actions: Move to Queue (left) and Delete (right) */}
+          {showManageActions && (
+            <>
+              <CardActionButton
+                icon={<ListOrdered size={16} />}
+                onClick={onMoveToQueueClick}
+                ariaLabel="Move to Queue"
+                position="left"
+              />
+              <CardActionButton
+                icon={<Trash2 size={16} />}
+                onClick={onDeleteClick}
+                ariaLabel="Remove from watchlist"
+                position="right"
+              />
+            </>
+          )}
+
+          {/* Explore / filmography card action: Add to watchlist */}
+          {showAddAction && (
+            <button
+              className={`add-to-watchlist-button ${isAdded ? 'added' : ''}`}
+              onClick={onAddClick}
+              aria-label={isAdded ? 'Added to watchlist' : 'Add to watchlist'}
+            >
+              {isAdded ? <CheckCircle2 /> : <CirclePlus />}
+            </button>
+          )}
+        </div>
+      </div>
+      <div className="title-info">
+        <span className="title-text">{title}</span>
+      </div>
+    </div>
+  );
+}
+
 interface CastMemberPage {
   type: 'cast';
   castMember: {
@@ -70,7 +182,7 @@ interface CastMemberPage {
   }>;
 }
 
-export function TitleCard({ item, onDelete, onMove, onAddToWatchlist }: TitleCardProps) {
+export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, variant = 'add' }: TitleCardProps) {
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [navigationStack, setNavigationStack] = useState<Array<WatchBoxItem | CastMemberPage>>([]);
   const [currentItem, setCurrentItem] = useState<WatchBoxItem>(item);
@@ -363,51 +475,33 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist }: TitleCar
     return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
   };
 
+  const cardVariant: TitleCardVariant = variant;
 
   return (
-    <div className="title-card" onClick={handleCardClick}>
-      <div className="poster-container">
-        <img
-          src={getPosterUrl(currentItem.poster_filename || currentItem.poster_id || '1.svg')}
-          alt={currentItem.title}
-          className="poster-image"
-          loading="lazy"
-        />
-        {/* Action buttons - upper right */}
-        <div className="card-actions-container">
-          {/* Watchlist card actions: Move to Queue (left) and Delete (right) */}
-          {/* Only show on actual watchlist cards, not explore cards */}
-          {onMove && onDelete && item.listType === 'watch' && !onAddToWatchlist && (
-            <>
-              <CardActionButton
-                icon={<ListOrdered size={16} />}
-                onClick={handleMoveToQueue}
-                ariaLabel="Move to Queue"
-                position="left"
-              />
-              <CardActionButton
-                icon={<Trash2 size={16} />}
-                onClick={handleDelete}
-                ariaLabel="Remove from watchlist"
-                position="right"
-              />
-            </>
-          )}
-          {/* Explore card action: Add to watchlist */}
-          {onAddToWatchlist && (
-            <button 
-              className={`add-to-watchlist-button ${isAdded ? 'added' : ''}`}
-              onClick={handleAddToWatchlist}
-              aria-label={isAdded ? "Added to watchlist" : "Add to watchlist"}
-            >
-              {isAdded ? <CheckCircle2 /> : <CirclePlus />}
-            </button>
-          )}
-        </div>
-      </div>
-      <div className="title-info">
-        <span className="title-text">{currentItem.title}</span>
-      </div>
+    <>
+      <ReusableTitleCard
+        title={currentItem.title}
+        posterSrc={getPosterUrl(currentItem.poster_filename || currentItem.poster_id || '1.svg')}
+        fallbackPosterSrc={getPosterUrl('1.svg')}
+        variant={cardVariant}
+        isAdded={isAdded}
+        onCardClick={handleCardClick}
+        onAddClick={
+          cardVariant === 'add' && onAddToWatchlist && !isAdded
+            ? handleAddToWatchlist
+            : undefined
+        }
+        onMoveToQueueClick={
+          cardVariant === 'manage' && onMove && item.listType === 'watch'
+            ? handleMoveToQueue
+            : undefined
+        }
+        onDeleteClick={
+          cardVariant === 'manage' && onDelete && item.listType === 'watch'
+            ? handleDelete
+            : undefined
+        }
+      />
 
       {/* Details Modal - Rendered via Portal at document root */}
       {detailsOpen && createPortal(
@@ -434,7 +528,7 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist }: TitleCar
                 <ArrowLeft size={24} />
               </button>
               <div className="details-modal-header-right">
-                {currentPage === 'item' && onAddToWatchlist && (
+                {currentPage === 'item' && cardVariant === 'add' && onAddToWatchlist && (
                   <DetailsModalActionButton
                     label="+ Add"
                     onClick={(e) => {
@@ -448,7 +542,7 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist }: TitleCar
                     ariaLabel="Add to watchlist"
                   />
                 )}
-                {currentPage === 'item' && onMove && !onAddToWatchlist && (
+                {currentPage === 'item' && cardVariant === 'manage' && onMove && (
                   <DetailsModalActionButton
                     label={item.listType === 'top' ? 'Move to Watchlist' : 'Move to Queue'}
                     onClick={handleMove}
@@ -487,55 +581,33 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist }: TitleCar
                         services: [],
                         isMovie: Boolean(film.isMovie)
                       };
-                      
+                      const posterUrl = film.poster_path
+                        ? `https://image.tmdb.org/t/p/w500${film.poster_path}`
+                        : undefined;
+
                       return (
-                        <div 
-                          key={film.id} 
-                          className="title-card"
-                          onClick={async (e) => {
+                        <ReusableTitleCard
+                          key={film.id}
+                          title={film.title}
+                          posterSrc={posterUrl}
+                          fallbackPosterSrc={getPosterUrl('1.svg')}
+                          showPlaceholderOnMissingPoster={!posterUrl}
+                          variant="add"
+                          onCardClick={async (e) => {
                             e.preventDefault();
                             e.stopPropagation();
                             await openDetailsModal(filmItem, true); // Add to navigation stack
                           }}
-                        >
-                          <div className="poster-container">
-                            {film.poster_path ? (
-                              <img 
-                                src={`https://image.tmdb.org/t/p/w500${film.poster_path}`}
-                                alt={film.title}
-                                className="poster-image"
-                                onError={(e) => {
-                                  const target = e.target as HTMLImageElement;
-                                  if (target.src !== getPosterUrl('1.svg')) {
-                                    target.src = getPosterUrl('1.svg');
-                                  }
-                                }}
-                              />
-                            ) : (
-                              <div className="poster-placeholder">
-                                <Film size={32} />
-                              </div>
-                            )}
-                            {onAddToWatchlist && (
-                              <button
-                                className="add-to-watchlist-button"
-                                onClick={async (e) => {
+                          onAddClick={
+                            onAddToWatchlist
+                              ? async (e) => {
                                   e.preventDefault();
                                   e.stopPropagation();
-                                  if (onAddToWatchlist) {
-                                    onAddToWatchlist(filmItem);
-                                  }
-                                }}
-                                aria-label="Add to watchlist"
-                              >
-                                <CirclePlus size={16} />
-                              </button>
-                            )}
-                          </div>
-                          <div className="title-info">
-                            <span className="title-text">{film.title}</span>
-                          </div>
-                        </div>
+                                  onAddToWatchlist(filmItem);
+                                }
+                              : undefined
+                          }
+                        />
                       );
                     })}
                   </div>
@@ -858,7 +930,7 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist }: TitleCar
         </div>,
         document.body
       )}
-    </div>
+    </>
   );
 }
 

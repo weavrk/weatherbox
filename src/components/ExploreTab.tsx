@@ -158,7 +158,7 @@ export function ExploreTab({ onAddToWatchlist }: ExploreTabProps) {
       {lastUpdated && (
         <div className="explore-last-updated">
           Updated {formatLastUpdated(lastUpdated)}
-        </div>
+      </div>
       )}
       <div className="explore-grid">
         {displayedContent.map((item, index) => {

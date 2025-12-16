@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
 import type { User, WatchBoxItem } from '../types';
 import { getUser } from '../services/api';
 
@@ -36,16 +36,7 @@ const STORAGE_KEY = 'watchbox_current_user_id';
 export function UserProvider({ children }: { children: ReactNode }) {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
 
-  // Load user from localStorage on mount
-  useEffect(() => {
-    const savedUserId = localStorage.getItem(STORAGE_KEY);
-    if (savedUserId) {
-      loadUser(savedUserId).catch(() => {
-        // If loading fails, clear the saved user
-        localStorage.removeItem(STORAGE_KEY);
-      });
-    }
-  }, []);
+  // Removed auto-load from localStorage - users should always land on ProfileSelectionScreen first
 
   const loadUser = async (userId: string) => {
     const user = await getUser(userId);

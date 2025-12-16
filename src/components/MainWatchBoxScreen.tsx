@@ -5,7 +5,7 @@ import { Header } from './Header';
 import { SectionList } from './SectionList';
 import { ExploreTab } from './ExploreTab';
 import { EditProfileModal } from './EditProfileModal';
-import { saveUser, getUser, getAvatarUrl, getExploreContent } from '../services/api';
+import { saveUser, getUser, getAvatarUrl, getExploreContent, deleteUser } from '../services/api';
 import { extractDominantColor } from '../utils/colorExtraction';
 import type { WatchBoxItem, UserSummary } from '../types';
 import type { ExploreItem } from '../services/api';
@@ -16,6 +16,8 @@ export function MainWatchBoxScreen() {
   const [activeTab, setActiveTab] = useState<'watchlist' | 'explore'>('watchlist');
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [editingUser, setEditingUser] = useState<UserSummary | null>(null);
+  const [cameFromAccountMenu, setCameFromAccountMenu] = useState(false);
+  const requestAccountMenuRef = useRef<(() => void) | null>(null);
   const [moviesActive, setMoviesActive] = useState(false);
   const [showsActive, setShowsActive] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -118,7 +120,7 @@ export function MainWatchBoxScreen() {
     }
   };
 
-  const handleEditProfile = async () => {
+  const handleEditProfile = async (fromAccountMenu: boolean = false) => {
     if (!currentUser) return;
     try {
       const userData = await getUser(currentUser.user_id);
@@ -129,6 +131,7 @@ export function MainWatchBoxScreen() {
         streaming_services: userData.streaming_services,
         birthday: userData.birthday
       });
+      setCameFromAccountMenu(fromAccountMenu);
       setShowEditProfile(true);
     } catch (error) {
       console.error('Failed to load user data:', error);
@@ -196,6 +199,17 @@ export function MainWatchBoxScreen() {
     alert('Add flow coming soon!');
   };
 
+  const handleDeleteAccount = async () => {
+    if (!currentUser) return;
+    try {
+      await deleteUser(currentUser.user_id);
+      logout();
+    } catch (error) {
+      console.error('Failed to delete account:', error);
+      alert('Failed to delete account. Please try again.');
+    }
+  };
+
   const handleAddToWatchlist = async (item: WatchBoxItem) => {
     if (!currentUser) return;
     
@@ -235,22 +249,52 @@ export function MainWatchBoxScreen() {
   }
 
   // Show edit profile modal as full page (like create profile)
+  // Don't show main header when edit profile is open
   if (showEditProfile && editingUser) {
     return (
-      <EditProfileModal
-        user={editingUser}
-        onClose={() => {
-          setShowEditProfile(false);
-          setEditingUser(null);
-        }}
+      <>
+        {/* Render Header invisibly so account menu can work */}
+        <div style={{ position: 'absolute', opacity: 0, pointerEvents: 'none', zIndex: -1 }}>
+          <Header
+            avatarFilename={currentUser.avatar_filename}
+            userName={currentUser.name}
+            onSwitchAccount={logout}
+            onEditProfile={() => handleEditProfile(true)}
+            onDeleteAccount={handleDeleteAccount}
+            onRequestAccountMenu={(callback) => {
+              requestAccountMenuRef.current = callback;
+            }}
+          />
+        </div>
+        <EditProfileModal
+          user={editingUser}
+          onBackToAccount={cameFromAccountMenu ? () => {
+            // Show account menu immediately (it will appear on top due to z-index 2000)
+            if (requestAccountMenuRef.current) {
+              requestAccountMenuRef.current();
+            }
+            // Close edit profile after account menu is shown
+            setTimeout(() => {
+              setShowEditProfile(false);
+              setEditingUser(null);
+              setCameFromAccountMenu(false);
+            }, 100);
+          } : undefined}
+          onClose={() => {
+            setShowEditProfile(false);
+            setEditingUser(null);
+            setCameFromAccountMenu(false);
+          }}
         onSave={handleSaveProfile}
         onDelete={async () => {
           // Handle delete - switch to profile selection
           setShowEditProfile(false);
           setEditingUser(null);
+          setCameFromAccountMenu(false);
           logout();
         }}
-      />
+        />
+      </>
     );
   }
 
@@ -259,12 +303,19 @@ export function MainWatchBoxScreen() {
 
   return (
     <div className="main-screen gradient-background">
-      <Header
-        avatarFilename={currentUser.avatar_filename}
-        userName={currentUser.name}
-        onSwitchAccount={logout}
-        onEditProfile={handleEditProfile}
-      />
+      {/* Only show header when account menu and edit profile are not showing */}
+      {!showEditProfile && (
+        <Header
+          avatarFilename={currentUser.avatar_filename}
+          userName={currentUser.name}
+          onSwitchAccount={logout}
+          onEditProfile={() => handleEditProfile(true)}
+          onDeleteAccount={handleDeleteAccount}
+          onRequestAccountMenu={(callback) => {
+            requestAccountMenuRef.current = callback;
+          }}
+        />
+      )}
       
       {/* Mobile Filter Bar */}
       <div className="mobile-filter-bar">
@@ -436,12 +487,14 @@ export function MainWatchBoxScreen() {
               items={queueItems}
               onDelete={handleDelete}
               onMove={handleMove}
+              onAddToWatchlist={handleAddToWatchlist}
             />
             <SectionList
               title="Watchlist"
               items={watchlistItems}
               onDelete={handleDelete}
               onMove={handleMove}
+              onAddToWatchlist={handleAddToWatchlist}
             />
             <button className="fab" onClick={handleAddClick} aria-label="Add item">
               <CopyPlus className="fab-icon" />
@@ -518,7 +571,12 @@ export function MainWatchBoxScreen() {
         </button>
         <button
           className="bottom-nav-item"
-          onClick={handleEditProfile}
+          onClick={() => {
+            // Open account menu first (same as header avatar)
+            if (requestAccountMenuRef.current) {
+              requestAccountMenuRef.current();
+            }
+          }}
         >
           <div 
             className="bottom-nav-avatar-container"

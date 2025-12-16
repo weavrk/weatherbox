@@ -315,7 +315,32 @@ function mockApiPlugin() {
             return
           }
         }
-        
+
+        // Get default streaming services (dev mock - avoid PHP dependency)
+        if (pathname === '/get_default_streaming_services.php' && req.method === 'GET') {
+          try {
+            const servicesFile = path.join(__dirname, 'data', 'default_streaming_services.json')
+            if (!fs.existsSync(servicesFile)) {
+              res.statusCode = 404
+              res.setHeader('Content-Type', 'application/json')
+              res.end(JSON.stringify({ error: 'Default services file not found' }))
+              return
+            }
+
+            const content = fs.readFileSync(servicesFile, 'utf-8')
+            const services = JSON.parse(content)
+
+            res.setHeader('Content-Type', 'application/json')
+            res.end(JSON.stringify(services))
+          } catch (error) {
+            console.error('Error loading default streaming services in dev:', error)
+            res.statusCode = 500
+            res.setHeader('Content-Type', 'application/json')
+            res.end(JSON.stringify({ error: 'Failed to load default streaming services' }))
+          }
+          return
+        }
+
         // Handle get_person_filmography.php - call TMDB API directly from Node.js
         if (pathname === '/get_person_filmography.php' && req.method === 'GET') {
           const url = new URL(req.url || '', `http://${req.headers.host}`)

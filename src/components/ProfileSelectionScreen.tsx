@@ -92,7 +92,7 @@ export function ProfileSelectionScreen() {
           } else {
             // 480px-959px: 3 columns (2 rows - cleaner layout)
             gridTemplateColumns = 'repeat(3, auto)';
-            gridTemplateRows = 'repeat(2, auto)';
+          gridTemplateRows = 'repeat(2, auto)';
           }
         } else if (userCount === 6) {
           if (isMobile) {
@@ -110,7 +110,7 @@ export function ProfileSelectionScreen() {
           } else {
             // 480px-959px: 3 columns
             gridTemplateColumns = 'repeat(3, auto)';
-            gridTemplateRows = 'repeat(2, auto)';
+          gridTemplateRows = 'repeat(2, auto)';
           }
         } else if (userCount >= 7) {
           if (isMobile) {
@@ -129,15 +129,15 @@ export function ProfileSelectionScreen() {
             // 960px-1279px: Use 4 columns (or smart layout if more than 4 would be better)
             // For 7-8: use 4 columns, for 9+: calculate optimal but cap at 4
             const cols = userCount <= 8 ? 4 : Math.min(4, Math.ceil(Math.sqrt(userCount)));
-            const rows = Math.ceil(userCount / cols);
+          const rows = Math.ceil(userCount / cols);
             gridTemplateColumns = `repeat(${cols}, auto)`;
             gridTemplateRows = `repeat(${rows}, auto)`;
           } else {
             // 480px-959px: 3 columns
             const rows = Math.ceil(userCount / 3);
             gridTemplateColumns = 'repeat(3, auto)';
-            gridTemplateRows = `repeat(${rows}, auto)`;
-          }
+          gridTemplateRows = `repeat(${rows}, auto)`;
+        }
         }
         
         // Set layout class for CSS targeting
@@ -337,7 +337,7 @@ export function ProfileSelectionScreen() {
       <div className="profile-container">
         <div className="brand-header">
           <Logo className="brand-logo-large" />
-          <h1 className="app-title-large">WatchBox</h1>
+        <h1 className="app-title-large">WatchBox</h1>
         </div>
         <div className={`profiles-wrapper ${editMode ? 'edit-mode' : ''}`}>
           <div className="profiles-grid" ref={gridRef}>
@@ -389,16 +389,16 @@ export function ProfileSelectionScreen() {
               </button>
             ))}
           </div>
-          <div className="profiles-actions" ref={actionsGridRef}>
-            <button
-              className="profile-card create-profile"
-              onClick={() => setShowCreateModal(true)}
-            >
-              <div className="profile-avatar add-avatar">
-                <span className="plus-icon">+</span>
-              </div>
+            <div className="profiles-actions" ref={actionsGridRef}>
+              <button
+                className="profile-card create-profile"
+                onClick={() => setShowCreateModal(true)}
+              >
+                <div className="profile-avatar add-avatar">
+                  <span className="plus-icon">+</span>
+                </div>
               <span className="profile-name">Add</span>
-            </button>
+              </button>
             {!editMode && (
               <button
                 className="profile-card edit-profiles"
@@ -410,7 +410,7 @@ export function ProfileSelectionScreen() {
                 <span className="profile-name">Edit</span>
               </button>
             )}
-          </div>
+            </div>
         </div>
       </div>
     </div>

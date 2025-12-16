@@ -4,17 +4,18 @@ import App from './App'
 import './styles/index.css'
 import './styles/design-system.css'
 
-// Register service worker for PWA
-if ('serviceWorker' in navigator) {
+// Register service worker for PWA in production only
+if (import.meta.env.MODE === 'production' && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register(`${import.meta.env.BASE_URL}service-worker.js`)
-      .then(registration => {
-        console.log('Service Worker registered:', registration);
+    navigator.serviceWorker
+      .register(`${import.meta.env.BASE_URL}service-worker.js`)
+      .then((registration) => {
+        console.log('Service Worker registered:', registration)
       })
-      .catch(error => {
-        console.log('Service Worker registration failed:', error);
-      });
-  });
+      .catch((error) => {
+        console.log('Service Worker registration failed:', error)
+      })
+  })
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

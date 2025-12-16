@@ -120,12 +120,12 @@ export function DesignSystemPanel() {
       
       if (response.ok) {
         await response.json();
-        setShowExportMessage(true);
+    setShowExportMessage(true);
         // Reset password state
         setShowPasswordInput(false);
         setPasswordConfirmed(false);
-        // Auto-hide message after 5 seconds
-        setTimeout(() => setShowExportMessage(false), 5000);
+    // Auto-hide message after 5 seconds
+    setTimeout(() => setShowExportMessage(false), 5000);
       } else {
         console.error('Failed to save design tokens:', await response.text());
         // Still show success message for user, but log error
@@ -434,8 +434,8 @@ export function DesignSystemPanel() {
                           className="color-swatch"
                         />
                         <div className="color-info">
-                        <input
-                          type="text"
+                          <input
+                            type="text"
                             value={(localTokens as any)[grayName]}
                             onChange={(e) => handleColorChange(grayName, e.target.value)}
                             className="color-hex"
@@ -475,7 +475,7 @@ export function DesignSystemPanel() {
                               </svg>
                             )}
                           </button>
-                    </div>
+                        </div>
                         <input
                           type="color"
                           value={(localTokens as any)[cmykName]}
@@ -483,8 +483,8 @@ export function DesignSystemPanel() {
                           className="color-swatch"
                         />
                         <div className="color-info">
-                        <input
-                          type="text"
+                          <input
+                            type="text"
                             value={(localTokens as any)[cmykName]}
                             onChange={(e) => handleColorChange(cmykName, e.target.value)}
                             className="color-hex"
@@ -564,8 +564,8 @@ export function DesignSystemPanel() {
                           <div className="semantic-color-info" style={{ flex: 1, padding: 0, width: '100%' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
                               {isEditing ? (
-                        <input
-                          type="text"
+                                <input
+                                  type="text"
                                   value={editingValue}
                                   onChange={(e) => setEditingValue(e.target.value)}
                                   onBlur={() => handleFinishEdit(key)}
@@ -748,7 +748,7 @@ export function DesignSystemPanel() {
                               No
                             </button>
                           </div>
-                      </div>
+                        </div>
                       )}
                       <p className="button-demo-description">Button with built-in "Are you sure?" confirmation. Used for destructive actions like deleting profiles.</p>
                     </div>
@@ -835,7 +835,7 @@ export function DesignSystemPanel() {
                         fontSize: '1rem'
                       }}
                     />
-                    <button
+                    <button 
                       type="button"
                       onClick={() => {
                         setShowPasswordInput(false);
@@ -863,17 +863,17 @@ export function DesignSystemPanel() {
                     >
                       Cancel
                     </button>
-                    <button
+                <button
                       type="submit"
-                      className="create-button-full"
+                  className="create-button-full"
                       style={{
                         width: 'auto',
                         minWidth: '100px',
                         padding: 'var(--spacing-md) var(--spacing-lg)'
                       }}
-                    >
+                >
                       Enter
-                    </button>
+                </button>
                   </form>
                 )}
               </div>

@@ -9,16 +9,17 @@ interface EditProfileModalProps {
   user: UserSummary;
   onClose: () => void;
   onSave: (userId: string, name: string, avatarFilename: string, streamingServices: StreamingService[], birthday: string) => void;
-  onDelete: (userId: string) => void;
+  // onDelete is currently unused in this modal but kept for future enhancement (delete profile from here)
+  onDelete?: (userId: string) => void;
+  onBackToAccount?: () => void;
 }
 
-export function EditProfileModal({ user, onClose, onSave, onDelete }: EditProfileModalProps) {
+export function EditProfileModal({ user, onClose, onSave, onBackToAccount }: EditProfileModalProps) {
   const [name, setName] = useState(user.name);
   const [selectedAvatar, setSelectedAvatar] = useState<string>(user.avatar_filename);
   const [selectedServices, setSelectedServices] = useState<StreamingService[]>(user.streaming_services || []);
   const [availableAvatars, setAvailableAvatars] = useState<string[]>([]);
   const [defaultServices, setDefaultServices] = useState<StreamingService[]>([]);
-  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [showRemoveConfirm, setShowRemoveConfirm] = useState<string | null>(null);
   const [showAddServiceModal, setShowAddServiceModal] = useState(false);
   const [avatarColors, setAvatarColors] = useState<Record<string, string>>({});
@@ -122,24 +123,16 @@ export function EditProfileModal({ user, onClose, onSave, onDelete }: EditProfil
     }
   };
 
-  const handleDelete = () => {
-    if (showDeleteConfirm) {
-      onDelete(user.user_id);
-    } else {
-      setShowDeleteConfirm(true);
-    }
-  };
-
-  const handleCancelDelete = () => {
-    setShowDeleteConfirm(false);
-  };
-
   return (
     <div className="create-profile-page">
       <div className="create-profile-content">
         <div className="create-profile-header">
-          <button className="back-button" onClick={onClose} aria-label="Back">
-            <ArrowLeft size={24} />
+          <button 
+            className="back-button-large" 
+            onClick={onBackToAccount || onClose} 
+            aria-label="Back"
+          >
+            <ArrowLeft size={28} />
           </button>
           <h2>Edit Profile</h2>
         </div>
@@ -333,35 +326,6 @@ export function EditProfileModal({ user, onClose, onSave, onDelete }: EditProfil
           >
             Save
           </button>
-          {!showDeleteConfirm ? (
-            <button 
-              type="button" 
-              onClick={handleDelete} 
-              className="ds-button-destructive"
-            >
-              Delete Profile
-            </button>
-          ) : (
-            <div className="ds-destructive-confirm">
-              <span className="ds-destructive-confirm-text">Are you sure?</span>
-              <div className="ds-destructive-confirm-buttons">
-                <button 
-                  type="button" 
-                  onClick={handleDelete} 
-                  className="ds-button-confirm-destructive"
-                >
-                  Yes
-                </button>
-                <button 
-                  type="button" 
-                  onClick={handleCancelDelete} 
-                  className="ds-button-cancel-destructive"
-                >
-                  No
-                </button>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </div>

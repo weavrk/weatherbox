@@ -420,6 +420,8 @@ img {
   padding: 0;
   transition: transform 0.2s;
   width: var(--avatar-size, 120px);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .profile-card:hover {
@@ -1619,12 +1621,13 @@ img {
   z-index: 10000;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
   animation: fadeIn 0.2s;
 }
 
 .details-modal {
   background: var(--bg-secondary);
-  border-radius: 16px 16px 0 0;
+  border-radius: 0;
   width: 100%;
   height: 100vh;
   max-height: 100vh;
@@ -1633,7 +1636,8 @@ img {
   box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.3);
   z-index: 10001;
   /* Prevent clicks from closing when clicking inside modal */
-  touch-action: auto;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
   animation: slideUp 0.3s ease-out;
 }
 
@@ -1655,7 +1659,7 @@ img {
 .details-modal-header-right {
   display: flex;
   align-items: center;
-  gap: 0;
+  gap: 16px;
 }
 
 .details-modal-back {
@@ -1687,7 +1691,6 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 8px;
 }
 
 .details-modal-action-button:hover {
@@ -2246,7 +2249,7 @@ img {
 /* Create Profile Page */
 .create-profile-page {
   min-height: 100vh;
-  padding: var(--spacing-lg);
+  padding: 0;
   padding-bottom: 0;
   display: flex;
   flex-direction: column;
@@ -2262,13 +2265,18 @@ img {
   top: 0;
   background-color: var(--bg-primary);
   z-index: 100;
-  padding-top: var(--spacing-lg);
-  padding-bottom: var(--spacing-md);
-  margin-top: calc(-1 * var(--spacing-lg));
-  margin-left: calc(-1 * var(--spacing-lg));
-  margin-right: calc(-1 * var(--spacing-lg));
-  padding-left: var(--spacing-lg);
-  padding-right: var(--spacing-lg);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-bottom: 1px solid var(--bg-card);
+  margin-top: 0;
+  width: 100%;
+}
+
+.create-profile-header h2 {
+  font-family: var(--font-family);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
 }
 
 .back-button {
@@ -2287,6 +2295,22 @@ img {
   color: var(--accent);
 }
 
+.back-button-large {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.back-button-large:hover {
+  color: var(--accent);
+}
+
 .create-profile-content {
   max-width: 800px;
   margin: 0 auto;
@@ -2301,6 +2325,8 @@ img {
   flex: 1;
   overflow-y: auto;
   padding-bottom: var(--spacing-lg);
+  padding-left: var(--spacing-lg);
+  padding-right: var(--spacing-lg);
   min-height: 0;
 }
 
@@ -2327,6 +2353,51 @@ img {
     0 -24px 64px rgba(0, 0, 0, 0.35),
     0 -12px 24px rgba(0, 0, 0, 0.25),
     0 -6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile: Footer is full width, content matches structure */
+@media (max-width: 768px) {
+  .create-profile-content {
+    max-width: 100%;
+    padding: 0;
+  }
+  
+  .create-profile-header {
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+  
+  .create-profile-scrollable {
+    padding-left: var(--spacing-lg);
+    padding-right: var(--spacing-lg);
+  }
+  
+  .mobile-account-menu > * {
+    max-width: 100%;
+  }
+  
+  .mobile-account-header {
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+  
+  .mobile-account-list {
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+}
+
+/* On desktop, button width matches content above (800px max) for all bottom sheets */
+@media (min-width: 769px) {
+  .profile-actions-bottom-sheet,
+  .design-system-actions-bottom-sheet {
+    align-items: center;
+  }
+  
+  .profile-actions-bottom-sheet .ds-button-primary,
+  .profile-actions-bottom-sheet .ds-button-destructive,
+  .design-system-actions-bottom-sheet .ds-button-primary,
+  .design-system-actions-bottom-sheet .ds-button-destructive {
+    max-width: 800px;
+    width: 100%;
+  }
 }
 
 .create-profile-form-full {
@@ -2475,6 +2546,67 @@ img {
   grid-template-columns: repeat(4, 1fr);
   gap: var(--spacing-md);
   justify-content: center;
+}
+
+/* Responsive avatar grid - gradually scales from 4 to 8 columns with smaller increments */
+@media (min-width: 400px) {
+  .avatar-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 480px) {
+  .avatar-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 600px) {
+  .avatar-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 720px) {
+  .avatar-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (min-width: 840px) {
+  .avatar-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .avatar-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media (min-width: 1080px) {
+  .avatar-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .avatar-grid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
+@media (min-width: 1320px) {
+  .avatar-grid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
+@media (min-width: 1440px) {
+  .avatar-grid {
+    grid-template-columns: repeat(8, 1fr);
+  }
 }
 
 .avatar-option {
@@ -2823,7 +2955,7 @@ img {
   }
   
   .avatar-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(8, 1fr);
   }
   
   .cards-grid {
@@ -2938,7 +3070,7 @@ img {
   }
   
   .avatar-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(8, 1fr);
   }
   
   .profile-container {
@@ -3033,6 +3165,298 @@ img {
   font-size: 0.7rem;
   font-weight: 500;
   line-height: 1;
+}
+
+/* Mobile Account Page (My Account) */
+.mobile-account-menu {
+  position: fixed;
+  inset: 0;
+  background-color: var(--bg-primary);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.mobile-account-menu > * {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.mobile-account-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  padding-left: var(--spacing-lg);
+  border-bottom: 1px solid var(--bg-card);
+  width: 100%;
+}
+
+.mobile-account-header h2 {
+  font-family: var(--font-family);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.mobile-account-list {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-md) var(--spacing-lg);
+  gap: 4px;
+}
+
+.mobile-account-item {
+  width: 100%;
+  text-align: left;
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  background-color: var(--bg-card);
+  border: none;
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.mobile-account-item.with-icon {
+  background-color: transparent;
+  border: 1px solid var(--bg-card);
+  padding: var(--spacing-md) var(--spacing-lg);
+  gap: var(--spacing-md);
+  justify-content: flex-start;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.mobile-account-item.with-icon:hover {
+  background-color: transparent;
+  border-color: var(--text-primary);
+}
+
+.mobile-account-item.with-icon svg {
+  flex-shrink: 0;
+}
+
+.mobile-account-item.with-icon span {
+  flex: 1;
+}
+
+.mobile-account-item:not(.destructive):not(.with-icon):hover {
+  background-color: #333333;
+}
+
+.mobile-account-item.destructive {
+  color: #ff4d4f;
+}
+
+.mobile-account-item.destructive:hover {
+  background-color: #3a1d1f;
+}
+
+.mobile-account-delete-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  width: 100%;
+}
+
+.mobile-account-item-delete {
+  background: transparent;
+  border: none;
+  color: #ff4d4f;
+  font-family: var(--font-family);
+  font-size: 1.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: var(--spacing-md) var(--spacing-xl);
+  transition: opacity 0.2s;
+  text-align: center;
+}
+
+.mobile-account-item-delete:hover {
+  opacity: 0.8;
+}
+
+/* Desktop styling for account menu items */
+@media (min-width: 769px) {
+  .mobile-account-delete-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-lg);
+  }
+
+  .mobile-account-item-delete {
+    background: transparent;
+    border: none;
+    color: #ff4d4f;
+    font-family: var(--font-family);
+    font-size: 1.25rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding: var(--spacing-md) var(--spacing-xl);
+    transition: opacity 0.2s;
+    text-align: center;
+  }
+
+  .mobile-account-item-delete:hover {
+    opacity: 0.8;
+  }
+}
+
+/* Delete Confirmation Modal */
+.delete-confirm-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+}
+
+.delete-confirm-modal {
+  background-color: var(--bg-card);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-xl);
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.delete-confirm-modal h3 {
+  font-family: var(--font-family);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.delete-confirm-modal p {
+  font-family: var(--font-family);
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xl);
+  line-height: 1.5;
+}
+
+.delete-confirm-buttons {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: flex-end;
+}
+
+.delete-confirm-cancel,
+.delete-confirm-delete {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius);
+  font-family: var(--font-family);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.delete-confirm-cancel {
+  background-color: transparent;
+  color: var(--text-primary);
+}
+
+.delete-confirm-cancel:hover {
+  background-color: var(--bg-primary);
+}
+
+.delete-confirm-delete {
+  background-color: #ff4d4f;
+  color: var(--text-primary);
+}
+
+.delete-confirm-delete:hover {
+  background-color: #ff3333;
+}
+
+
+/* Delete Confirmation Modal */
+.delete-confirm-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+}
+
+.delete-confirm-modal {
+  background-color: var(--bg-card);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-xl);
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.delete-confirm-modal h3 {
+  font-family: var(--font-family);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.delete-confirm-modal p {
+  font-family: var(--font-family);
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xl);
+  line-height: 1.5;
+}
+
+.delete-confirm-buttons {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: flex-end;
+}
+
+.delete-confirm-cancel,
+.delete-confirm-delete {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius);
+  font-family: var(--font-family);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.delete-confirm-cancel {
+  background-color: transparent;
+  color: var(--text-primary);
+}
+
+.delete-confirm-cancel:hover {
+  background-color: var(--bg-primary);
+}
+
+.delete-confirm-delete {
+  background-color: #ff4d4f;
+  color: var(--text-primary);
+}
+
+.delete-confirm-delete:hover {
+  background-color: #ff3333;
 }
 
 /* Mobile Filter Bar */
