@@ -84,11 +84,20 @@ export function ExploreTab({ onAddToWatchlist }: ExploreTabProps) {
   }, [hasMore, loadingMore, loadedCount, allContent.length]);
 
   const convertToWatchBoxItem = (item: ExploreItem): WatchBoxItem => {
+    // Ensure poster_path is preserved correctly (not the string "null")
+    const posterPath = item.poster_path && 
+                       item.poster_path !== 'null' && 
+                       item.poster_path !== null &&
+                       typeof item.poster_path === 'string' &&
+                       item.poster_path.startsWith('/')
+      ? item.poster_path
+      : null;
+    
     return {
       id: item.id,
       title: item.title,
       tmdb_id: item.tmdb_id,
-      poster_filename: item.poster_filename,
+      poster_path: posterPath,
       listType: 'watch',
       services: item.services,
       isMovie: item.isMovie, // Include isMovie field

@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useMemo } from 'react';
-import { CopyPlus, Funnel, Tv, Search, Sparkles, X } from 'lucide-react';
+import { CopyPlus, Funnel, Tv, Search, X } from 'lucide-react';
 import { useUser } from '../contexts/UserContext';
 import { Header } from './Header';
 import { SectionList } from './SectionList';
@@ -21,7 +21,6 @@ export function MainWatchBoxScreen() {
   const [moviesActive, setMoviesActive] = useState(false);
   const [showsActive, setShowsActive] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [sparkleActive, setSparkleActive] = useState(true);
   const [showFilterBottomSheet, setShowFilterBottomSheet] = useState(false);
   const [filterButtonActive, setFilterButtonActive] = useState(false);
   const [avatarColor, setAvatarColor] = useState<string>('#4A90E2');
@@ -94,7 +93,7 @@ export function MainWatchBoxScreen() {
 
   const handleClearAllFilters = () => {
     setSelectedCategories([]);
-    // Note: sparkleActive, moviesActive, and showsActive are quick filters, not bottom sheet filters
+    // Note: moviesActive and showsActive are quick filters, not bottom sheet filters
     // Only clear bottom sheet filters (categories)
   };
 
@@ -320,20 +319,6 @@ export function MainWatchBoxScreen() {
       {/* Mobile Filter Bar */}
       <div className="mobile-filter-bar">
         <div className="mobile-filters">
-          <button 
-            className={`filter-chip filter-icon-button ${sparkleActive ? 'active' : ''}`}
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              setSparkleActive(!sparkleActive);
-              e.currentTarget.blur();
-            }}
-            onMouseDown={(e) => e.preventDefault()}
-            aria-label="Recommended"
-          >
-            <Sparkles className="filter-icon" size={16} />
-            <span>Recommended</span>
-          </button>
           <button
             className={`filter-chip ${moviesActive ? 'active' : ''}`}
             onClick={(e) => {
@@ -385,20 +370,6 @@ export function MainWatchBoxScreen() {
             </button>
           </div>
           <div className="desktop-filters">
-            <button 
-              className={`filter-chip filter-icon-button ${sparkleActive ? 'active' : ''}`}
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setSparkleActive(!sparkleActive);
-                e.currentTarget.blur();
-              }}
-              onMouseDown={(e) => e.preventDefault()}
-              aria-label="Recommended"
-            >
-              <Sparkles className="filter-icon" size={16} />
-              <span>Recommended</span>
-            </button>
             <button
               className={`filter-chip ${moviesActive ? 'active' : ''}`}
               onClick={(e) => {

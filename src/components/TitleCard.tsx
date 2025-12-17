@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { CirclePlus, CheckCircle2, X, Star, Clock, Play, Users, Film, Tv, Globe, Loader2, ArrowLeft, ListOrdered, Trash2 } from 'lucide-react';
+import { CirclePlus, CheckCircle2, X, Star, Clock, Play, Users, Film, Tv, Globe, Loader2, ArrowLeft, ListOrdered, Trash2, Monitor } from 'lucide-react';
 import type { WatchBoxItem } from '../types';
 import { getPosterUrl, getItemDetails } from '../services/api';
 
@@ -84,6 +84,7 @@ interface ReusableTitleCardProps {
  * Reusable small grid card used for:
  * - Main watchlist / explore grids
  * - Cast member filmography grid
+ * - Similar items section
  *
  * It only knows about visuals + basic actions; higher level components
  * decide what the handlers do.
@@ -100,29 +101,48 @@ function ReusableTitleCard({
   onMoveToQueueClick,
   onDeleteClick,
 }: ReusableTitleCardProps) {
+  const [imageError, setImageError] = useState(false);
   const showManageActions = variant === 'manage' && onMoveToQueueClick && onDeleteClick;
   const showAddAction = variant === 'add' && !!onAddClick;
+
+  // Reset error state when posterSrc changes
+  useEffect(() => {
+    setImageError(false);
+  }, [posterSrc]);
+
+  // Determine what to show
+  // Show placeholder if: explicitly requested AND (no poster source OR image failed to load)
+  const shouldShowPlaceholder = showPlaceholderOnMissingPoster && (!posterSrc || imageError);
+  
+  // Determine which image source to use
+  const currentImageSrc = imageError && fallbackPosterSrc 
+    ? fallbackPosterSrc 
+    : posterSrc;
+  
+  // Debug logging
+  if (!currentImageSrc && !shouldShowPlaceholder) {
+    console.warn(`[ReusableTitleCard] No image source for "${title}", showPlaceholderOnMissingPoster:`, showPlaceholderOnMissingPoster);
+  }
 
   return (
     <div className="title-card" onClick={onCardClick}>
       <div className="poster-container">
-        {posterSrc ? (
-          <img
-            src={posterSrc}
+        {shouldShowPlaceholder ? (
+          <div className="poster-placeholder">
+            <Film size={40} />
+            <div className="question-mark">?</div>
+          </div>
+        ) : currentImageSrc ? (
+        <img
+            src={currentImageSrc}
             alt={title}
-            className="poster-image"
-            loading="lazy"
-            onError={(e) => {
-              const target = e.target as HTMLImageElement;
-              if (fallbackPosterSrc && target.src !== fallbackPosterSrc) {
-                target.src = fallbackPosterSrc;
-              }
+          className="poster-image"
+          loading="lazy"
+            onError={() => {
+              // Image failed to load, show placeholder
+              setImageError(true);
             }}
           />
-        ) : showPlaceholderOnMissingPoster ? (
-          <div className="poster-placeholder">
-            <Film size={32} />
-          </div>
         ) : null}
 
         {/* Action buttons - upper right */}
@@ -189,6 +209,7 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, variant = 
   const [currentPage, setCurrentPage] = useState<'item' | 'cast'>('item');
   const [castMemberPage, setCastMemberPage] = useState<CastMemberPage | null>(null);
   const [extendedData, setExtendedData] = useState<Partial<WatchBoxItem> | null>(null);
+  const [imageBaseUrl, setImageBaseUrl] = useState<string>('https://image.tmdb.org/t/p/original');
   const [loadingDetails, setLoadingDetails] = useState(false);
   const [loadingCastPage, setLoadingCastPage] = useState(false);
   const [detailsError, setDetailsError] = useState<string | null>(null);
@@ -214,6 +235,10 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, variant = 
   // Update currentItem when item prop changes
   useEffect(() => {
     setCurrentItem(item);
+    // Debug: log poster_path to see if it's present
+    if (!item.poster_path) {
+      console.warn(`[TitleCard] Missing poster_path for "${item.title}" (tmdb_id: ${item.tmdb_id})`);
+    }
   }, [item]);
 
   // Reset scroll to top when navigating to a new page
@@ -322,6 +347,16 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, variant = 
         const result = await getItemDetails(itemToShow.tmdb_id, itemToShow.isMovie);
         if (result.success && result.data) {
           setExtendedData(result.data);
+          if (result.imageBaseUrl) {
+            setImageBaseUrl(result.imageBaseUrl);
+          }
+          // Update currentItem with poster_path from extended data if available
+          if (result.data?.poster_path && !itemToShow.poster_path) {
+            setCurrentItem(prev => ({
+              ...prev,
+              poster_path: result.data?.poster_path
+            }));
+          }
         } else {
           setDetailsError(result.error || 'Failed to load details');
         }
@@ -460,6 +495,7 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, variant = 
     similar: extendedData?.similar || item.similar,
     translations: extendedData?.translations || item.translations,
     networks: extendedData?.networks || item.networks,
+    providers: extendedData?.providers || item.providers,
     number_of_seasons: extendedData?.number_of_seasons !== undefined ? extendedData.number_of_seasons : item.number_of_seasons,
     number_of_episodes: extendedData?.number_of_episodes !== undefined ? extendedData.number_of_episodes : item.number_of_episodes,
   };
@@ -477,12 +513,17 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, variant = 
 
   const cardVariant: TitleCardVariant = variant;
 
+  const posterUrl = getPosterUrl(currentItem.poster_path);
+  
+  // Debug: log poster URL generation
+  console.log(`[TitleCard] "${currentItem.title}": poster_path="${currentItem.poster_path}", posterUrl="${posterUrl}", showPlaceholder=${!currentItem.poster_path}`);
+  
   return (
     <>
       <ReusableTitleCard
         title={currentItem.title}
-        posterSrc={getPosterUrl(currentItem.poster_filename || currentItem.poster_id || '1.svg')}
-        fallbackPosterSrc={getPosterUrl('1.svg')}
+        posterSrc={posterUrl || undefined}
+        showPlaceholderOnMissingPoster={!currentItem.poster_path}
         variant={cardVariant}
         isAdded={isAdded}
         onCardClick={handleCardClick}
@@ -547,8 +588,8 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, variant = 
                     label={item.listType === 'top' ? 'Move to Watchlist' : 'Move to Queue'}
                     onClick={handleMove}
                     ariaLabel="Move"
-                  />
-                )}
+            />
+          )}
           <button 
                   className="details-modal-close"
                   onClick={handleCloseModal}
@@ -576,22 +617,18 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, variant = 
                         id: `film-${film.id}`,
                         title: film.title,
                         tmdb_id: film.id,
-                        poster_filename: film.poster_path ? `https://image.tmdb.org/t/p/w500${film.poster_path}` : '',
+                        poster_path: film.poster_path || undefined,
                         listType: 'watch',
                         services: [],
                         isMovie: Boolean(film.isMovie)
                       };
-                      const posterUrl = film.poster_path
-                        ? `https://image.tmdb.org/t/p/w500${film.poster_path}`
-                        : undefined;
 
                       return (
                         <ReusableTitleCard
                           key={film.id}
                           title={film.title}
-                          posterSrc={posterUrl}
-                          fallbackPosterSrc={getPosterUrl('1.svg')}
-                          showPlaceholderOnMissingPoster={!posterUrl}
+                          posterSrc={getPosterUrl(film.poster_path) || undefined}
+                          showPlaceholderOnMissingPoster={!film.poster_path}
                           variant="add"
                           onCardClick={async (e) => {
                             e.preventDefault();
@@ -622,18 +659,23 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, variant = 
             <div className="details-modal-header">
               <div className="details-modal-header-main">
                 <div className="details-modal-poster-container">
-                  <img
-                    src={getPosterUrl(currentItem.poster_filename || currentItem.poster_id || '1.svg')}
-                    alt={currentItem.title}
-                    className="details-modal-poster"
-                    onError={(e) => {
-                      // Fallback to default poster if image fails to load
-                      const target = e.target as HTMLImageElement;
-                      if (target.src !== getPosterUrl('1.svg')) {
-                        target.src = getPosterUrl('1.svg');
-                      }
-                    }}
-                  />
+                  {getPosterUrl(displayData.poster_path) ? (
+                    <img
+                      src={getPosterUrl(displayData.poster_path)!}
+                      alt={currentItem.title}
+                      className="details-modal-poster"
+                      onError={(e) => {
+                        // Hide image on error, placeholder will show
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                      }}
+                    />
+                  ) : (
+                    <div className="poster-placeholder">
+                      <Film size={48} />
+                      <div className="question-mark">?</div>
+                    </div>
+                  )}
                 </div>
                 <div className="details-modal-title-section">
                   <h2 className="details-modal-title">{currentItem.title}</h2>
@@ -741,6 +783,32 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, variant = 
                 </div>
               )}
 
+              {/* Available On (Streaming Providers) */}
+              {displayData.providers && displayData.providers.length > 0 && (
+                <div className="details-section">
+                  <h3 className="details-section-title">
+                    <Monitor size={18} className="section-icon" />
+                    Available On
+                  </h3>
+                  <div className="details-providers">
+                    {displayData.providers.map(provider => (
+                      <div key={provider.provider_id} className="provider-item">
+                        {provider.logo_path && (
+                          <img
+                            src={`${imageBaseUrl}${provider.logo_path}`}
+                            alt={provider.provider_name}
+                            className="provider-logo"
+                          />
+                        )}
+                        {!provider.logo_path && (
+                          <span className="provider-name-fallback">{provider.provider_name}</span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* Trailers */}
               {displayData.videos && displayData.videos.length > 0 && (
                 <div className="details-section">
@@ -811,57 +879,78 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, variant = 
                 </div>
               )}
 
-              {/* Similar */}
-              {displayData.similar && displayData.similar.length > 0 && (
-                <div className="details-section">
-                  <h3 className="details-section-title">Similar</h3>
-                  <div className="details-related-grid">
-                    {displayData.similar.slice(0, 8).map(sim => {
-                      // Convert similar item to WatchBoxItem for modal
-                      const similarItem: WatchBoxItem = {
-                        id: `similar-${sim.id}`,
-                        title: sim.title,
-                        tmdb_id: sim.id,
-                        poster_filename: sim.poster_path ? `https://image.tmdb.org/t/p/w500${sim.poster_path}` : '',
-                        listType: 'watch',
-                        services: [],
-                        isMovie: currentItem.isMovie, // Use same type as current item
-                        vote_average: sim.vote_average
-                      };
-                      
-                      return (
-                        <div 
-                          key={sim.id} 
-                          className="related-item-card"
-                          onClick={async (e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            await openDetailsModal(similarItem, true); // Add to navigation stack
-                          }}
-                        >
-                          {sim.poster_path ? (
-                            <img 
-                              src={`https://image.tmdb.org/t/p/w185${sim.poster_path}`}
-                              alt={sim.title}
-                              className="related-poster"
-                            />
-                          ) : (
-                            <div className="related-poster-placeholder">
-                              <Film size={24} />
-                            </div>
-                          )}
-                          <span className="related-title">{sim.title}</span>
-                          {sim.vote_average !== undefined && (
-                            <span className="related-rating">
-                              <Star size={12} /> {sim.vote_average.toFixed(1)}
-                            </span>
-                          )}
-                        </div>
-                      );
-                    })}
+              {/* Similar & Recommendations */}
+              {(() => {
+                // Combine similar and recommendations, deduplicate by ID, filter out items without posters
+                const allRelated: Array<{ id: number; title: string; poster_path?: string; vote_average?: number }> = [];
+                const seenIds = new Set<number>();
+                
+                // Add similar items first (prioritize them)
+                if (displayData.similar) {
+                  displayData.similar.forEach(item => {
+                    if (item.poster_path && !seenIds.has(item.id)) {
+                      allRelated.push(item);
+                      seenIds.add(item.id);
+                    }
+                  });
+                }
+                
+                // Add recommendations (will skip duplicates)
+                if (displayData.recommendations) {
+                  displayData.recommendations.forEach(item => {
+                    if (item.poster_path && !seenIds.has(item.id)) {
+                      allRelated.push(item);
+                      seenIds.add(item.id);
+                    }
+                  });
+                }
+                
+                // Take first 12 items (increased since we're combining two sources)
+                const relatedWithPosters = allRelated.slice(0, 12);
+                
+                return relatedWithPosters.length > 0 ? (
+                  <div className="details-section">
+                    <h3 className="details-section-title">Similar Recommendations</h3>
+                    <div className="explore-grid">
+                      {relatedWithPosters.map(item => {
+                        // Convert related item to WatchBoxItem for modal
+                        const relatedItem: WatchBoxItem = {
+                          id: `related-${item.id}`,
+                          title: item.title,
+                          tmdb_id: item.id,
+                          poster_path: item.poster_path || undefined,
+                          listType: 'watch',
+                          services: [],
+                          isMovie: currentItem.isMovie, // Use same type as current item
+                          vote_average: item.vote_average
+                        };
+                        
+                        return (
+                          <ReusableTitleCard
+                            key={item.id}
+                            title={item.title}
+                            posterSrc={getPosterUrl(item.poster_path) || undefined}
+                            showPlaceholderOnMissingPoster={!item.poster_path}
+                            variant="add"
+                            onCardClick={async (e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              await openDetailsModal(relatedItem, true); // Add to navigation stack
+                            }}
+                            onAddClick={onAddToWatchlist ? async (e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              if (onAddToWatchlist) {
+                                onAddToWatchlist(relatedItem);
+                              }
+                            } : undefined}
+                          />
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
-              )}
+                ) : null;
+              })()}
 
               {/* Keywords */}
               {displayData.keywords && displayData.keywords.length > 0 && (

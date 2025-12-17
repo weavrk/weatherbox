@@ -78,20 +78,19 @@ export async function deleteUser(userId: string): Promise<{ success: boolean }> 
 }
 
 /**
- * Get poster URL by poster filename
- * Supports both new format (filename) and old format (poster_id) for backward compatibility
+ * Get poster URL from TMDB poster_path
+ * Returns TMDB CDN URL or fallback placeholder
  */
-export function getPosterUrl(posterFilename: string | number): string {
-  // Handle backward compatibility: if number is passed, treat as old poster_id
-  if (typeof posterFilename === 'number') {
-    const posterId = posterFilename;
-    if (posterId <= 12) {
-      return `/data/posters/${posterId}.svg`;
-    }
-    return `/data/posters/${posterId}.jpg`;
+export function getPosterUrl(posterPath?: string | null): string | null {
+  if (!posterPath) {
+    return null; // Return null to indicate no poster, component should show placeholder
   }
-  // New format: use filename directly
-  return `/data/posters/${posterFilename}`;
+  // If it's already a full URL, return as-is (for backward compatibility during migration)
+  if (posterPath.startsWith('http://') || posterPath.startsWith('https://')) {
+    return posterPath;
+  }
+  // Build TMDB CDN URL (w500 is a good balance of quality and size)
+  return `https://image.tmdb.org/t/p/w500${posterPath}`;
 }
 
 /**
@@ -282,7 +281,7 @@ export interface ExploreItem {
   id: string;
   title: string;
   tmdb_id: number;
-  poster_filename: string;
+  poster_path?: string;
   services: string[];
   first_air_date?: string;
   release_date?: string;
@@ -329,16 +328,18 @@ function hasExtendedData(content: ExploreItem[]): boolean {
  */
 export async function getExploreContent(triggerBackgroundRefresh = true): Promise<{ content: ExploreItem[]; lastUpdated: Date | null }> {
   try {
-    // Fetch both movies and shows
+    // Fetch both movies and shows (with cache-busting to ensure fresh data)
+    const cacheBuster = `?t=${Date.now()}`;
     const [moviesResponse, showsResponse] = await Promise.all([
-      fetch('/data/streaming-movies-results.json'),
-      fetch('/data/streaming-shows-results.json')
+      fetch(`/data/streaming-movies-results.json${cacheBuster}`),
+      fetch(`/data/streaming-shows-results.json${cacheBuster}`)
     ]);
 
     const [movies, shows] = await Promise.all([
       moviesResponse.json(),
       showsResponse.json()
     ]);
+    
 
     // Get last modified timestamps
     // Try API endpoint first (works in production), then fall back to headers
@@ -388,21 +389,59 @@ export async function getExploreContent(triggerBackgroundRefresh = true): Promis
       }
     }
 
-    // Combine all content (already sorted by priority in JSON files)
-    // Up to 400 movies and 400 shows (800 total)
-    // Non-anime, non-G-rated, non-horror content appears first
+    // Combine all content
     const allContent = [...movies, ...shows];
+    
+    
+    // Migrate poster_filename to poster_path (backward compatibility)
+    // Old JSON files have poster_filename (local filename), new ones have poster_path (TMDB path)
+    // For items with tmdb_id but no poster_path, we'll fetch it on-demand when displayed
+    const migratedContent = allContent.map((item: any) => {
+      // If already has poster_path (and it's not null or the string "null"), use it (preserve it!)
+      if (item.poster_path && 
+          item.poster_path !== null && 
+          item.poster_path !== 'null' && 
+          item.poster_path !== '' &&
+          typeof item.poster_path === 'string' &&
+          item.poster_path.startsWith('/')) {
+        // Ensure poster_path is preserved
+        return {
+          ...item,
+          poster_path: item.poster_path, // Explicitly preserve
+        };
+      }
+      // If has old poster_filename but no valid poster_path, keep tmdb_id for on-demand fetching
+      // The poster_path will be fetched when the item is displayed (in TitleCard)
+      if (item.poster_filename) {
+        return {
+          ...item,
+          poster_path: null, // Will be fetched on-demand
+          // Keep tmdb_id so we can fetch poster_path later
+          // Remove old field
+          poster_filename: undefined,
+          poster_id: undefined,
+        };
+      }
+      // No poster at all - set to null (not the string "null")
+      return {
+        ...item,
+        poster_path: null,
+        poster_filename: undefined,
+        poster_id: undefined,
+      };
+    });
+    
     
     // If content is missing extended data and background refresh is enabled,
     // trigger regeneration in the background (non-blocking)
-    if (triggerBackgroundRefresh && !hasExtendedData(allContent)) {
+    if (triggerBackgroundRefresh && !hasExtendedData(migratedContent)) {
       // Trigger regeneration in background - don't wait for it
       regenerateExploreContent('all').catch(err => {
         console.error('Background content regeneration failed:', err);
       });
     }
     
-    return { content: allContent, lastUpdated };
+    return { content: migratedContent, lastUpdated };
   } catch (error) {
     console.error('Failed to fetch explore content:', error);
     return { content: [], lastUpdated: null };
@@ -436,10 +475,32 @@ export async function regenerateExploreContent(type: 'movies' | 'shows' | 'all' 
 }
 
 /**
+ * Fetch just the poster_path from TMDB (lightweight call)
+ */
+export async function fetchPosterPath(tmdbId: number, isMovie: boolean): Promise<string | null> {
+  try {
+    const response = await fetch(`/api/get_item_details.php?tmdb_id=${tmdbId}&is_movie=${isMovie ? 'true' : 'false'}`);
+    
+    if (!response.ok) {
+      return null;
+    }
+    
+    const result = await response.json();
+    if (result.success && result.data?.poster_path) {
+      return result.data.poster_path;
+    }
+    return null;
+  } catch (error) {
+    console.error('Failed to fetch poster_path:', error);
+    return null;
+  }
+}
+
+/**
  * Get extended TMDB details for a single movie or TV show
  * Fetches on-demand when user clicks the details button
  */
-export async function getItemDetails(tmdbId: number, isMovie: boolean): Promise<{ success: boolean; data?: Partial<import('../types').WatchBoxItem>; error?: string }> {
+export async function getItemDetails(tmdbId: number, isMovie: boolean): Promise<{ success: boolean; data?: Partial<import('../types').WatchBoxItem>; imageBaseUrl?: string; error?: string }> {
   try {
     const response = await fetch(`/api/get_item_details.php?tmdb_id=${tmdbId}&is_movie=${isMovie ? 'true' : 'false'}`);
     
@@ -454,7 +515,11 @@ export async function getItemDetails(tmdbId: number, isMovie: boolean): Promise<
       return { success: false, error: result.error || 'Failed to fetch details' };
     }
     
-    return { success: true, data: result.data };
+    return { 
+      success: true, 
+      data: result.data,
+      imageBaseUrl: result.tmdb_image_base_url || 'https://image.tmdb.org/t/p/original'
+    };
   } catch (error) {
     console.error('Failed to fetch item details:', error);
     return { success: false, error: 'Network error' };

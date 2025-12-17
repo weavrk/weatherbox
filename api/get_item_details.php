@@ -76,12 +76,103 @@ function getShowDetails($tmdbId) {
 }
 
 /**
+ * Get watch providers for a movie
+ */
+function getMovieProviders($tmdbId) {
+    $url = TMDB_BASE_URL . '/movie/' . $tmdbId . '/watch/providers?language=en-US&watch_region=US';
+    
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Authorization: Bearer ' . TMDB_ACCESS_TOKEN,
+        'Content-Type: application/json'
+    ]);
+    
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+    
+    if ($httpCode !== 200) {
+        return [];
+    }
+    
+    $data = json_decode($response, true);
+    // Get flatrate (subscription) providers from US region
+    $providers = $data['results']['US']['flatrate'] ?? [];
+    
+    $mappedProviders = array_map(function($provider) {
+        return [
+            'provider_id' => $provider['provider_id'],
+            'provider_name' => $provider['provider_name'],
+            'logo_path' => $provider['logo_path'] ?? null,
+            'display_priority' => $provider['display_priority'] ?? 999
+        ];
+    }, $providers);
+    
+    // Sort by display_priority (lower is better)
+    usort($mappedProviders, function($a, $b) {
+        return $a['display_priority'] - $b['display_priority'];
+    });
+    
+    return $mappedProviders;
+}
+
+/**
+ * Get watch providers for a TV show
+ */
+function getShowProviders($tmdbId) {
+    $url = TMDB_BASE_URL . '/tv/' . $tmdbId . '/watch/providers?language=en-US&watch_region=US';
+    
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Authorization: Bearer ' . TMDB_ACCESS_TOKEN,
+        'Content-Type: application/json'
+    ]);
+    
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+    
+    if ($httpCode !== 200) {
+        return [];
+    }
+    
+    $data = json_decode($response, true);
+    // Get flatrate (subscription) providers from US region
+    $providers = $data['results']['US']['flatrate'] ?? [];
+    
+    $mappedProviders = array_map(function($provider) {
+        return [
+            'provider_id' => $provider['provider_id'],
+            'provider_name' => $provider['provider_name'],
+            'logo_path' => $provider['logo_path'] ?? null,
+            'display_priority' => $provider['display_priority'] ?? 999
+        ];
+    }, $providers);
+    
+    // Sort by display_priority (lower is better)
+    usort($mappedProviders, function($a, $b) {
+        return $a['display_priority'] - $b['display_priority'];
+    });
+    
+    return $mappedProviders;
+}
+
+/**
  * Extract extended data from movie details
  */
 function extractMovieExtendedData($movieDetails) {
     if (!$movieDetails) return [];
     
     $extendedData = [];
+    
+    // Poster path
+    if (isset($movieDetails['poster_path'])) {
+        $extendedData['poster_path'] = $movieDetails['poster_path'];
+    }
     
     // Genres
     if (isset($movieDetails['genres']) && !empty($movieDetails['genres'])) {
@@ -209,6 +300,11 @@ function extractShowExtendedData($showDetails) {
     if (!$showDetails) return [];
     
     $extendedData = [];
+    
+    // Poster path
+    if (isset($showDetails['poster_path'])) {
+        $extendedData['poster_path'] = $showDetails['poster_path'];
+    }
     
     // Genres
     if (isset($showDetails['genres']) && !empty($showDetails['genres'])) {
@@ -358,6 +454,11 @@ if ($isMovie) {
         exit;
     }
     $extendedData = extractMovieExtendedData($details);
+    // Get watch providers
+    $providers = getMovieProviders($tmdbId);
+    if (!empty($providers)) {
+        $extendedData['providers'] = $providers;
+    }
 } else {
     $details = getShowDetails($tmdbId);
     if (!$details) {
@@ -366,10 +467,16 @@ if ($isMovie) {
         exit;
     }
     $extendedData = extractShowExtendedData($details);
+    // Get watch providers
+    $providers = getShowProviders($tmdbId);
+    if (!empty($providers)) {
+        $extendedData['providers'] = $providers;
+    }
 }
 
 echo json_encode([
     'success' => true,
-    'data' => $extendedData
+    'data' => $extendedData,
+    'tmdb_image_base_url' => 'https://image.tmdb.org/t/p/original'
 ]);
 

@@ -53,6 +53,14 @@ export interface Network {
   origin_country?: string;
 }
 
+// TMDB Watch Provider (streaming services)
+export interface Provider {
+  provider_id: number;
+  provider_name: string;
+  logo_path?: string;
+  display_priority?: number;
+}
+
 // TMDB Translation
 export interface Translation {
   iso_639_1: string; // Language code (e.g., "en", "es", "fr")
@@ -74,8 +82,7 @@ export interface WatchBoxItem {
   id: string;
   title: string;
   tmdb_id: number;
-  poster_id?: number; // Deprecated, kept for backward compatibility
-  poster_filename: string;
+  poster_path?: string; // TMDB poster path (e.g., "/abc123.jpg")
   listType: 'top' | 'watch';
   services: string[];
   isMovie: boolean; // Whether this is a movie (true) or TV show (false)
@@ -96,6 +103,7 @@ export interface WatchBoxItem {
   networks?: Network[]; // TV shows: original broadcast networks
   number_of_seasons?: number; // TV shows only
   number_of_episodes?: number; // TV shows only
+  providers?: Provider[]; // Streaming providers (where to watch)
 }
 
 export interface User {

@@ -843,22 +843,14 @@ function processMovies() {
         $services = getMovieProviders($tmdbId);
         usleep(250000); // 250ms delay
         
-        $posterFilename = generatePosterFilename($movie['title']);
-        
-        if (isset($movie['poster_path'])) {
-            if (downloadPosterIfNeeded($movie['poster_path'], $posterFilename, $movie['release_date'] ?? null, $posterCount)) {
-                $posterCount++;
-            }
-        }
-        
         // Extract extended TMDB data
         $extendedData = extractMovieExtendedData($movieDetails);
         
         $result = [
-            'id' => str_replace('.jpg', '', $posterFilename) . '-' . $tmdbId,
+            'id' => 'movie-' . $tmdbId,
             'title' => $movie['title'],
             'tmdb_id' => $tmdbId,
-            'poster_filename' => $posterFilename,
+            'poster_path' => $movie['poster_path'] ?? null,
             'listType' => 'top',
             'services' => $services,
             'release_date' => $movie['release_date'] ?? null,
@@ -926,22 +918,14 @@ function processShows() {
         $services = getShowProviders($tmdbId);
         usleep(250000); // 250ms delay
         
-        $posterFilename = generatePosterFilename($show['name']);
-        
-        if (isset($show['poster_path'])) {
-            if (downloadPosterIfNeeded($show['poster_path'], $posterFilename, $show['first_air_date'] ?? null, $posterCount)) {
-                $posterCount++;
-            }
-        }
-        
         // Extract extended TMDB data
         $extendedData = extractShowExtendedData($showDetails);
         
         $result = [
-            'id' => str_replace('.jpg', '', $posterFilename) . '-' . $tmdbId,
+            'id' => 'show-' . $tmdbId,
             'title' => $show['name'],
             'tmdb_id' => $tmdbId,
-            'poster_filename' => $posterFilename,
+            'poster_path' => $show['poster_path'] ?? null,
             'listType' => 'top',
             'services' => $services,
             'first_air_date' => $show['first_air_date'] ?? null,

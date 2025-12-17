@@ -1,0 +1,64 @@
+{
+  "user_id": "kat",
+  "name": "kat",
+  "avatar_filename": "avatar-34.svg",
+  "items": [
+    {
+      "id": "1054867-1765740488848",
+      "title": "One Battle After Another",
+      "tmdb_id": 1054867,
+      "listType": "watch",
+      "services": [],
+      "isMovie": true,
+      "poster_path": "/m1jFoahEbeQXtx4zArT2FKdbNIj.jpg"
+    },
+    {
+      "id": "1242898-1765740506916",
+      "title": "Predator: Badlands",
+      "tmdb_id": 1242898,
+      "listType": "watch",
+      "services": [],
+      "isMovie": true,
+      "poster_path": "/pHpq9yNUIo6aDoCXEBzjSolywgz.jpg"
+    }
+  ],
+  "streaming_services": [
+    {
+      "name": "Amazon Prime",
+      "logo": "amazon-prime.webp",
+      "tmdb_provider_id": 9
+    },
+    {
+      "name": "Apple TV",
+      "logo": "apple-tv.webp",
+      "tmdb_provider_id": 350
+    },
+    {
+      "name": "Disney Plus",
+      "logo": "disney-plue.webp",
+      "tmdb_provider_id": 337
+    },
+    {
+      "name": "Hulu",
+      "logo": "hulu.webp",
+      "tmdb_provider_id": 15
+    },
+    {
+      "name": "Netflix",
+      "logo": "netflix.webp",
+      "tmdb_provider_id": 8
+    },
+    {
+      "name": "Paramount",
+      "logo": "paramount.webp",
+      "tmdb_provider_id": 531
+    },
+    {
+      "name": "Peacock",
+      "logo": "peacock.webp",
+      "tmdb_provider_id": 387
+    }
+  ],
+  "birthday": "02/20/1982",
+  "updated_at": "2025-12-14T19:28:26.918Z"
+}

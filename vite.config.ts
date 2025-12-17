@@ -58,7 +58,7 @@ function mockApiPlugin() {
       server.middlewares.use(serveDataFiles)
       
       // Mock API endpoints - handle both /api and /hrefs/watchbox/api
-      const handleApi = (req: any, res: any, next: any) => {
+      const handleApi = async (req: any, res: any, next: any) => {
         try {
           let requestPath = req.url || ''
           
@@ -88,9 +88,12 @@ function mockApiPlugin() {
             return
           }
           
-          // Parse the pathname - strip /api prefix to get just /list_users.php
-          const urlPath = requestPath.replace('/api', '')
-          const pathname = urlPath.split('?')[0] // Remove query string
+          // Parse the pathname and strip /api prefix for matching
+          const fullPathname = requestPath.split('?')[0] // Remove query string
+          const pathname = fullPathname.startsWith('/api/') 
+            ? fullPathname.replace('/api/', '/') 
+            : fullPathname.replace('/api', '')
+          console.log('[API Handler] fullPathname:', fullPathname, 'pathname:', pathname)
           
           // List avatars
           if (pathname === '/list_avatars.php' && req.method === 'GET') {
@@ -341,8 +344,91 @@ function mockApiPlugin() {
           return
         }
 
+        // Handle get_item_details.php with Node.js (no PHP needed)
+        if (pathname === '/api/get_item_details.php') {
+          const queryParams = new URLSearchParams(fullUrl.split('?')[1] || '')
+          const tmdbId = queryParams.get('tmdb_id')
+          const isMovie = queryParams.get('is_movie') === 'true'
+          
+          if (!tmdbId) {
+            res.statusCode = 400
+            res.setHeader('Content-Type', 'application/json')
+            res.setHeader('Access-Control-Allow-Origin', '*')
+            res.end(JSON.stringify({ success: false, error: 'Missing tmdb_id parameter' }))
+            return
+          }
+          
+          try {
+            const tmdbApiKey = process.env.VITE_TMDB_API_KEY || '15d2ea6d0dc1d476efbca3eba2b9bbfb'
+            const endpoint = isMovie ? 'movie' : 'tv'
+            const url = `https://api.themoviedb.org/3/${endpoint}/${tmdbId}?api_key=${tmdbApiKey}&append_to_response=credits,videos,keywords,recommendations,similar,translations`
+            
+            const tmdbData = await new Promise((resolve, reject) => {
+              httpsGet(url, (data) => {
+                resolve(data)
+              }).catch(reject)
+            })
+            
+            // Extract the data we need
+            const extendedData = {
+              poster_path: tmdbData.poster_path || null,
+              backdrop_path: tmdbData.backdrop_path || null,
+              genres: tmdbData.genres || [],
+              overview: tmdbData.overview || '',
+              vote_average: tmdbData.vote_average || 0,
+              vote_count: tmdbData.vote_count || 0,
+              runtime: tmdbData.runtime || tmdbData.episode_run_time?.[0] || null,
+              release_date: tmdbData.release_date || tmdbData.first_air_date || '',
+              cast: tmdbData.credits?.cast?.slice(0, 20).map(member => ({
+                id: member.id,
+                name: member.name,
+                character: member.character,
+                profile_path: member.profile_path
+              })) || [],
+              crew: tmdbData.credits?.crew || [],
+              videos: tmdbData.videos?.results || [],
+              keywords: tmdbData.keywords?.keywords || tmdbData.keywords?.results || [],
+              recommendations: tmdbData.recommendations?.results?.slice(0, 20).map(item => ({
+                id: item.id,
+                title: item.title || item.name,
+                poster_path: item.poster_path,
+                vote_average: item.vote_average,
+                isMovie: !!item.title
+              })) || [],
+              similar: tmdbData.similar?.results?.slice(0, 20).map(item => ({
+                id: item.id,
+                title: item.title || item.name,
+                poster_path: item.poster_path,
+                vote_average: item.vote_average,
+                isMovie: !!item.title
+              })) || [],
+              translations: tmdbData.translations?.translations || [],
+              networks: tmdbData.networks || [],
+              number_of_seasons: tmdbData.number_of_seasons,
+              number_of_episodes: tmdbData.number_of_episodes
+            }
+            
+            res.statusCode = 200
+            res.setHeader('Content-Type', 'application/json')
+            res.setHeader('Access-Control-Allow-Origin', '*')
+            res.end(JSON.stringify({ 
+              success: true, 
+              data: extendedData,
+              tmdb_image_base_url: 'https://image.tmdb.org/t/p/original'
+            }))
+            return
+          } catch (error) {
+            console.error('TMDB API error:', error)
+            res.statusCode = 500
+            res.setHeader('Content-Type', 'application/json')
+            res.setHeader('Access-Control-Allow-Origin', '*')
+            res.end(JSON.stringify({ success: false, error: 'Failed to fetch from TMDB' }))
+            return
+          }
+        }
+        
         // Handle get_person_filmography.php - call TMDB API directly from Node.js
-        if (pathname === '/get_person_filmography.php' && req.method === 'GET') {
+        if (pathname === '/api/get_person_filmography.php') {
           const url = new URL(req.url || '', `http://${req.headers.host}`)
           const personId = url.searchParams.get('person_id')
           
@@ -463,32 +549,48 @@ function mockApiPlugin() {
         }
         
         // Execute PHP files using PHP CLI (only for /api/*.php requests that aren't handled above)
-        if (pathname.startsWith('/') && pathname.endsWith('.php') && !pathname.startsWith('/@')) {
-          const phpFile = path.join(__dirname, 'api', path.basename(pathname))
-          
-          if (!fs.existsSync(phpFile)) {
-            res.statusCode = 404
-            res.setHeader('Content-Type', 'application/json')
-            res.end(JSON.stringify({ error: 'PHP file not found' }))
-            return
-          }
-          
-          // Get query string from original URL
-          const fullUrl = req.url || ''
-          const queryString = fullUrl.includes('?') ? fullUrl.split('?')[1] : ''
-          
-          // Set up environment for PHP
-          const env = { ...process.env }
-          env.REQUEST_METHOD = req.method || 'GET'
-          env.QUERY_STRING = queryString
-          env.SCRIPT_NAME = `/api${pathname}`
-          env.PATH_INFO = ''
-          env.SERVER_NAME = 'localhost'
-          env.SERVER_PORT = '8000'
-          env.HTTP_HOST = 'localhost:8000'
-          
-          // Execute PHP file
-          const php = spawn('php', ['-f', phpFile], { env })
+        // Skip files already handled by Node.js
+        const isHandledFile = pathname === '/api/get_item_details.php' || 
+                              pathname === '/api/get_person_filmography.php';
+        
+        if (pathname.startsWith('/') && pathname.endsWith('.php') && !pathname.startsWith('/@') && !isHandledFile) {
+          try {
+            const phpFile = path.join(__dirname, 'api', path.basename(pathname))
+            
+            if (!fs.existsSync(phpFile)) {
+              res.statusCode = 404
+              res.setHeader('Content-Type', 'application/json')
+              res.end(JSON.stringify({ error: 'PHP file not found' }))
+              return
+            }
+            
+            // Get query string from original URL
+            const fullUrl = req.url || ''
+            const queryString = fullUrl.includes('?') ? fullUrl.split('?')[1] : ''
+            
+            // Set up environment for PHP
+            const env = { ...process.env }
+            env.REQUEST_METHOD = req.method || 'GET'
+            env.QUERY_STRING = queryString
+            env.SCRIPT_NAME = `/api${pathname}`
+            env.PATH_INFO = ''
+            env.SERVER_NAME = 'localhost'
+            env.SERVER_PORT = '8000'
+            env.HTTP_HOST = 'localhost:8000'
+            
+            // Execute PHP file - wrap in try-catch to prevent crashes
+            let php;
+            try {
+              php = spawn('php', ['-f', phpFile], { env })
+            } catch (spawnErr: any) {
+              console.error('Failed to spawn PHP process:', spawnErr)
+              if (!res.headersSent) {
+                res.statusCode = 500
+                res.setHeader('Content-Type', 'application/json')
+                res.end(JSON.stringify({ error: 'PHP not available. Using mock API instead.', details: spawnErr.message }))
+              }
+              return
+            }
           
           let output = ''
           let errorOutput = ''
@@ -502,6 +604,9 @@ function mockApiPlugin() {
           })
           
           php.on('close', (code: number) => {
+            // Prevent double response
+            if (res.headersSent) return;
+            
             if (code !== 0) {
               console.error('PHP execution error:', errorOutput)
               res.statusCode = 500
@@ -541,20 +646,39 @@ function mockApiPlugin() {
           
           php.on('error', (err: Error) => {
             console.error('PHP spawn error:', err)
-            res.statusCode = 500
-            res.setHeader('Content-Type', 'application/json')
-            res.end(JSON.stringify({ error: 'Failed to execute PHP. Make sure PHP is installed and in PATH.', details: err.message }))
+            // Don't crash the server - just return an error response
+            if (!res.headersSent) {
+              res.statusCode = 500
+              res.setHeader('Content-Type', 'application/json')
+              res.end(JSON.stringify({ error: 'Failed to execute PHP. Make sure PHP is installed and in PATH.', details: err.message }))
+            }
           })
           
           return
+          } catch (phpErr: any) {
+            console.error('Error in PHP handler:', phpErr)
+            if (!res.headersSent) {
+              res.statusCode = 500
+              res.setHeader('Content-Type', 'application/json')
+              res.end(JSON.stringify({ error: 'PHP handler error', details: phpErr.message }))
+            }
+            return
+          }
         }
         
         next()
-        } catch (error) {
+        } catch (error: any) {
           console.error('Error in API middleware:', error)
-          res.statusCode = 500
-          res.setHeader('Content-Type', 'application/json')
-          res.end(JSON.stringify({ error: 'Internal server error' }))
+          // Prevent server crash - always call next() or send response
+          if (!res.headersSent) {
+            res.statusCode = 500
+            res.setHeader('Content-Type', 'application/json')
+            res.end(JSON.stringify({ error: 'Internal server error', details: error?.message || 'Unknown error' }))
+          } else {
+            // If headers already sent, just log and continue
+            console.error('Headers already sent, cannot send error response')
+            next()
+          }
         }
       }
       

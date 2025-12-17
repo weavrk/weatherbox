@@ -811,27 +811,15 @@ async function processMovies() {
     const services = await getMovieProviders(tmdbId);
     await delay(250);
     
-    // Generate poster filename
-    const posterFilename = generatePosterFilename(movie.title, tmdbId);
-    
-    // Download poster if needed
-    if (movie.poster_path) {
-      const downloaded = await downloadPosterIfNeeded(movie.poster_path, posterFilename, movie.release_date, posterCount);
-      if (downloaded) {
-        posterCount++;
-      }
-      await delay(250);
-    }
-    
     // Extract extended TMDB data
     const extendedData = extractMovieExtendedData(movieDetails);
     
     // Create result object with priority flag
     const result = {
-      id: `${posterFilename.replace('.jpg', '')}-${tmdbId}`,
+      id: `movie-${tmdbId}`,
       title: movie.title,
       tmdb_id: tmdbId,
-      poster_filename: posterFilename,
+      poster_path: movie.poster_path || null,
       listType: 'top',
       services: services,
       release_date: movie.release_date || null,
@@ -900,27 +888,15 @@ async function processShows() {
     const services = await getShowProviders(tmdbId);
     await delay(250);
     
-    // Generate poster filename
-    const posterFilename = generatePosterFilename(show.name, tmdbId);
-    
-    // Download poster if needed
-    if (show.poster_path) {
-      const downloaded = await downloadPosterIfNeeded(show.poster_path, posterFilename, show.first_air_date, posterCount);
-      if (downloaded) {
-        posterCount++;
-      }
-      await delay(250);
-    }
-    
     // Extract extended TMDB data
     const extendedData = extractShowExtendedData(showDetails);
     
     // Create result object with priority flag
     const result = {
-      id: `${posterFilename.replace('.jpg', '')}-${tmdbId}`,
+      id: `show-${tmdbId}`,
       title: show.name,
       tmdb_id: tmdbId,
-      poster_filename: posterFilename,
+      poster_path: show.poster_path || null,
       listType: 'top',
       services: services,
       first_air_date: show.first_air_date || null,
