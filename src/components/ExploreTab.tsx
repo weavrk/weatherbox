@@ -91,7 +91,7 @@ export function ExploreTab({ onAddToWatchlist }: ExploreTabProps) {
                        typeof item.poster_path === 'string' &&
                        item.poster_path.startsWith('/')
       ? item.poster_path
-      : null;
+      : undefined;
     
     return {
       id: item.id,
