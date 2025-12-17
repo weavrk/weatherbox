@@ -21,6 +21,9 @@ if (!is_dir($usersDir)) {
 $users = [];
 $files = glob($usersDir . '*.json');
 
+// Use associative array to de-duplicate by user_id in case of stray/duplicate files
+$usersById = [];
+
 foreach ($files as $file) {
     $content = file_get_contents($file);
     if ($content === false) {
@@ -29,6 +32,8 @@ foreach ($files as $file) {
     
     $userData = json_decode($content, true);
     if ($userData && isset($userData['user_id'])) {
+        $userId = $userData['user_id'];
+        
         // Support both old (avatar_poster_id) and new (avatar_filename) format
         $avatarFilename = isset($userData['avatar_filename']) 
             ? $userData['avatar_filename'] 
@@ -48,9 +53,12 @@ foreach ($files as $file) {
             $userSummary['birthday'] = $userData['birthday'];
         }
         
-        $users[] = $userSummary;
+        // Overwrite any existing entry with the same user_id, so the latest file wins
+        $usersById[$userId] = $userSummary;
     }
 }
+
+$users = array_values($usersById);
 
 echo json_encode($users);
 
