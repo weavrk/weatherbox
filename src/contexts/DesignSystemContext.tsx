@@ -89,7 +89,8 @@ export function DesignSystemProvider({ children }: { children: ReactNode }) {
     const loadTokens = async () => {
       try {
         // First, try to load from the JSON file (source of truth for all users)
-        const response = await fetch('/design-tokens.json');
+        // Use BASE_URL so it works correctly under /hrefs/watchbox/ in production
+        const response = await fetch(`${import.meta.env.BASE_URL}design-tokens.json`);
         let loadedTokens = defaultTokens;
         
         if (response.ok) {

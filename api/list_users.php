@@ -18,11 +18,9 @@ if (!is_dir($usersDir)) {
     exit;
 }
 
-$users = [];
+// Collect all user summaries, then de-duplicate by display name (case-insensitive)
 $files = glob($usersDir . '*.json');
-
-// Use associative array to de-duplicate by user_id in case of stray/duplicate files
-$usersById = [];
+$usersByName = [];
 
 foreach ($files as $file) {
     $content = file_get_contents($file);
@@ -31,8 +29,10 @@ foreach ($files as $file) {
     }
     
     $userData = json_decode($content, true);
-    if ($userData && isset($userData['user_id'])) {
+    if ($userData && isset($userData['user_id']) && isset($userData['name'])) {
         $userId = $userData['user_id'];
+        $name = $userData['name'];
+        $nameKey = strtolower(trim($name));
         
         // Support both old (avatar_poster_id) and new (avatar_filename) format
         $avatarFilename = isset($userData['avatar_filename']) 
@@ -52,13 +52,21 @@ foreach ($files as $file) {
         if (isset($userData['birthday'])) {
             $userSummary['birthday'] = $userData['birthday'];
         }
-        
-        // Overwrite any existing entry with the same user_id, so the latest file wins
-        $usersById[$userId] = $userSummary;
+
+        // Prefer the latest updated_at if present, otherwise last one wins
+        $updatedAt = isset($userData['updated_at']) ? strtotime($userData['updated_at']) : filemtime($file);
+        if (!isset($usersByName[$nameKey]) || $updatedAt >= $usersByName[$nameKey]['_updated_at']) {
+            $usersByName[$nameKey] = [
+                'summary' => $userSummary,
+                '_updated_at' => $updatedAt
+            ];
+        }
     }
 }
 
-$users = array_values($usersById);
+$users = array_map(function ($entry) {
+    return $entry['summary'];
+}, array_values($usersByName));
 
 echo json_encode($users);
 
