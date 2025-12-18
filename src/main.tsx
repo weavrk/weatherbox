@@ -10,10 +10,14 @@ if (import.meta.env.MODE === 'production' && 'serviceWorker' in navigator) {
     navigator.serviceWorker
       .register(`${import.meta.env.BASE_URL}service-worker.js`)
       .then((registration) => {
-        console.log('Service Worker registered:', registration)
+        // Only log in development to reduce console noise in production
+        if (import.meta.env.DEV) {
+          console.log('Service Worker registered:', registration)
+        }
       })
       .catch((error) => {
-        console.log('Service Worker registration failed:', error)
+        // Always log errors
+        console.error('Service Worker registration failed:', error)
       })
   })
 }
