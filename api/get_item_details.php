@@ -121,18 +121,22 @@ function getMovieProviders($tmdbId) {
         
         // Get flatrate (subscription) providers from US region - with proper null checking
         $providers = [];
+        $watchLink = null;
         if (isset($data['results']) && is_array($data['results']) && 
-            isset($data['results']['US']) && is_array($data['results']['US']) &&
-            isset($data['results']['US']['flatrate']) && is_array($data['results']['US']['flatrate'])) {
-            $providers = $data['results']['US']['flatrate'];
+            isset($data['results']['US']) && is_array($data['results']['US'])) {
+            $watchLink = $data['results']['US']['link'] ?? null;
+            if (isset($data['results']['US']['flatrate']) && is_array($data['results']['US']['flatrate'])) {
+                $providers = $data['results']['US']['flatrate'];
+            }
         }
         
-        $mappedProviders = array_map(function($provider) {
+        $mappedProviders = array_map(function($provider) use ($watchLink) {
             return [
                 'provider_id' => $provider['provider_id'] ?? 0,
                 'provider_name' => $provider['provider_name'] ?? '',
                 'logo_path' => $provider['logo_path'] ?? null,
-                'display_priority' => $provider['display_priority'] ?? 999
+                'display_priority' => $provider['display_priority'] ?? 999,
+                'watch_link' => $watchLink
             ];
         }, $providers);
         
@@ -194,18 +198,22 @@ function getShowProviders($tmdbId) {
         
         // Get flatrate (subscription) providers from US region - with proper null checking
         $providers = [];
+        $watchLink = null;
         if (isset($data['results']) && is_array($data['results']) && 
-            isset($data['results']['US']) && is_array($data['results']['US']) &&
-            isset($data['results']['US']['flatrate']) && is_array($data['results']['US']['flatrate'])) {
-            $providers = $data['results']['US']['flatrate'];
+            isset($data['results']['US']) && is_array($data['results']['US'])) {
+            $watchLink = $data['results']['US']['link'] ?? null;
+            if (isset($data['results']['US']['flatrate']) && is_array($data['results']['US']['flatrate'])) {
+                $providers = $data['results']['US']['flatrate'];
+            }
         }
         
-        $mappedProviders = array_map(function($provider) {
+        $mappedProviders = array_map(function($provider) use ($watchLink) {
             return [
                 'provider_id' => $provider['provider_id'] ?? 0,
                 'provider_name' => $provider['provider_name'] ?? '',
                 'logo_path' => $provider['logo_path'] ?? null,
-                'display_priority' => $provider['display_priority'] ?? 999
+                'display_priority' => $provider['display_priority'] ?? 999,
+                'watch_link' => $watchLink
             ];
         }, $providers);
         
@@ -521,29 +529,14 @@ if ($isMovie) {
     
     // Get watch providers (non-critical, continue even if it fails)
     $providers = getMovieProviders($tmdbId);
-    $extendedData['providers'] = is_array($providers) ? $providers : [];
     
-    // Debug logging - also log to response for debugging
-    if (empty($providers)) {
-        error_log("get_item_details: No providers returned for movie $tmdbId");
-        // Add debug info to response (remove in production)
-        $extendedData['_debug_providers'] = [
-            'function_called' => 'getMovieProviders',
-            'tmdb_id' => $tmdbId,
-            'returned_count' => 0,
-            'returned_type' => gettype($providers),
-            'is_array' => is_array($providers)
-        ];
-    } else {
+    // Set providers if we got any, otherwise set empty array
+    if (is_array($providers) && !empty($providers)) {
+        $extendedData['providers'] = $providers;
         error_log("get_item_details: Found " . count($providers) . " providers for movie $tmdbId");
-        $extendedData['_debug_providers'] = [
-            'function_called' => 'getMovieProviders',
-            'tmdb_id' => $tmdbId,
-            'returned_count' => count($providers),
-            'providers' => array_map(function($p) {
-                return $p['provider_name'];
-            }, $providers)
-        ];
+    } else {
+        $extendedData['providers'] = [];
+        error_log("get_item_details: No providers returned for movie $tmdbId");
     }
 } else {
     $details = getShowDetails($tmdbId);
@@ -560,34 +553,26 @@ if ($isMovie) {
     
     // Get watch providers (non-critical, continue even if it fails)
     $providers = getShowProviders($tmdbId);
-    $extendedData['providers'] = is_array($providers) ? $providers : [];
     
-    // Debug logging - also log to response for debugging
-    if (empty($providers)) {
-        error_log("get_item_details: No providers returned for show $tmdbId");
-        // Add debug info to response (remove in production)
-        $extendedData['_debug_providers'] = [
-            'function_called' => 'getShowProviders',
-            'tmdb_id' => $tmdbId,
-            'returned_count' => 0,
-            'returned_type' => gettype($providers),
-            'is_array' => is_array($providers)
-        ];
-    } else {
+    // Set providers if we got any, otherwise set empty array
+    if (is_array($providers) && !empty($providers)) {
+        $extendedData['providers'] = $providers;
         error_log("get_item_details: Found " . count($providers) . " providers for show $tmdbId");
-        $extendedData['_debug_providers'] = [
-            'function_called' => 'getShowProviders',
-            'tmdb_id' => $tmdbId,
-            'returned_count' => count($providers),
-            'providers' => array_map(function($p) {
-                return $p['provider_name'];
-            }, $providers)
-        ];
+    } else {
+        $extendedData['providers'] = [];
+        error_log("get_item_details: No providers returned for show $tmdbId");
     }
 }
 
-echo json_encode([
+// Ensure providers is always an array
+if (!isset($extendedData['providers']) || !is_array($extendedData['providers'])) {
+    $extendedData['providers'] = [];
+}
+
+$response = [
     'success' => true,
     'data' => $extendedData,
     'tmdb_image_base_url' => 'https://image.tmdb.org/t/p/original'
-]);
+];
+
+echo json_encode($response, JSON_PRETTY_PRINT);

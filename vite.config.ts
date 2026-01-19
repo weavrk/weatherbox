@@ -530,16 +530,145 @@ function mockApiPlugin() {
                     name: trans.name,
                     english_name: trans.english_name
                   }))
-            }
-            
-            res.statusCode = 200
-            res.setHeader('Content-Type', 'application/json')
-            res.setHeader('Access-Control-Allow-Origin', '*')
-            res.end(JSON.stringify({ 
-              success: true, 
-              data: extendedData,
-              tmdb_image_base_url: 'https://image.tmdb.org/t/p/original'
-            }))
+                }
+                
+                // Fetch watch providers
+                const providersUrl = `${TMDB_BASE_URL}/${endpoint}/${tmdbId}/watch/providers?language=en-US&watch_region=US`
+                const providersUrlObj = new URL(providersUrl)
+                const providersOptions = {
+                  hostname: providersUrlObj.hostname,
+                  path: providersUrlObj.pathname + providersUrlObj.search,
+                  method: 'GET',
+                  headers: {
+                    'Authorization': `Bearer ${TMDB_ACCESS_TOKEN}`,
+                    'Content-Type': 'application/json'
+                  },
+                  timeout: 5000
+                }
+                
+                // Fetch providers in parallel (don't block response)
+                const providersReq = https.request(providersOptions, (providersRes) => {
+                  let providersData = ''
+                  
+                  if (providersRes.statusCode && providersRes.statusCode !== 200) {
+                    extendedData.providers = []
+                    res.statusCode = 200
+                    res.setHeader('Content-Type', 'application/json')
+                    res.setHeader('Access-Control-Allow-Origin', '*')
+                    res.end(JSON.stringify({ 
+                      success: true, 
+                      data: extendedData,
+                      tmdb_image_base_url: 'https://image.tmdb.org/t/p/original'
+                    }))
+                    return
+                  }
+                  
+                  providersRes.on('data', (chunk) => {
+                    providersData += chunk
+                  })
+                  
+                  providersRes.on('end', () => {
+                    try {
+                      const providersJson = JSON.parse(providersData)
+                      
+                      const results = providersJson.results || {}
+                      const usProviders = results.US || {}
+                      const watchLink = usProviders.link || null
+                      
+                      const flatrateProviders = usProviders.flatrate || []
+                      const buyProviders = usProviders.buy || []
+                      const rentProviders = usProviders.rent || []
+                      
+                      // Use flatrate (streaming) first, but fall back to buy/rent if no flatrate
+                      let allProviders = flatrateProviders
+                      if (flatrateProviders.length === 0 && (buyProviders.length > 0 || rentProviders.length > 0)) {
+                        // Combine buy and rent, prefer buy, and deduplicate by provider_id
+                        const providerMap = new Map<number, any>()
+                        // Add buy providers first (they take priority)
+                        buyProviders.forEach((p: any) => {
+                          if (!providerMap.has(p.provider_id)) {
+                            providerMap.set(p.provider_id, p)
+                          }
+                        })
+                        // Add rent providers only if not already in map
+                        rentProviders.forEach((p: any) => {
+                          if (!providerMap.has(p.provider_id)) {
+                            providerMap.set(p.provider_id, p)
+                          }
+                        })
+                        allProviders = Array.from(providerMap.values())
+                      }
+                      
+                      // Deduplicate by provider_id and sort by display_priority
+                      const uniqueProviders = new Map<number, any>()
+                      allProviders.forEach((p: any) => {
+                        if (!uniqueProviders.has(p.provider_id)) {
+                          uniqueProviders.set(p.provider_id, p)
+                        }
+                      })
+                      
+                      extendedData.providers = Array.from(uniqueProviders.values())
+                        .map((p: any) => ({
+                          provider_id: p.provider_id,
+                          provider_name: p.provider_name,
+                          logo_path: p.logo_path || null,
+                          display_priority: p.display_priority || 999,
+                          watch_link: watchLink
+                        }))
+                        .sort((a: any, b: any) => a.display_priority - b.display_priority)
+                      
+                      
+                      // Send response with providers
+                      res.statusCode = 200
+                      res.setHeader('Content-Type', 'application/json')
+                      res.setHeader('Access-Control-Allow-Origin', '*')
+                      res.end(JSON.stringify({ 
+                        success: true, 
+                        data: extendedData,
+                        tmdb_image_base_url: 'https://image.tmdb.org/t/p/original'
+                      }))
+                    } catch (err) {
+                      // If providers fail, send empty array
+                      extendedData.providers = []
+                      res.statusCode = 200
+                      res.setHeader('Content-Type', 'application/json')
+                      res.setHeader('Access-Control-Allow-Origin', '*')
+                      res.end(JSON.stringify({ 
+                        success: true, 
+                        data: extendedData,
+                        tmdb_image_base_url: 'https://image.tmdb.org/t/p/original'
+                      }))
+                    }
+                  })
+                })
+                
+                providersReq.on('error', () => {
+                  // If providers request fails, send response without them
+                  extendedData.providers = []
+                  res.statusCode = 200
+                  res.setHeader('Content-Type', 'application/json')
+                  res.setHeader('Access-Control-Allow-Origin', '*')
+                  res.end(JSON.stringify({ 
+                    success: true, 
+                    data: extendedData,
+                    tmdb_image_base_url: 'https://image.tmdb.org/t/p/original'
+                  }))
+                })
+                
+                providersReq.setTimeout(5000, () => {
+                  providersReq.destroy()
+                  extendedData.providers = []
+                  res.statusCode = 200
+                  res.setHeader('Content-Type', 'application/json')
+                  res.setHeader('Access-Control-Allow-Origin', '*')
+                  res.end(JSON.stringify({ 
+                    success: true, 
+                    data: extendedData,
+                    tmdb_image_base_url: 'https://image.tmdb.org/t/p/original'
+                  }))
+                })
+                
+                providersReq.end()
               } catch (parseErr) {
                 console.error('Error parsing TMDB response:', parseErr)
                 res.statusCode = 500

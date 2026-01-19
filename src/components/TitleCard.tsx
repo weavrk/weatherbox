@@ -339,16 +339,7 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, variant = 
       try {
         // Use the isMovie field directly from the item
         const result = await getItemDetails(itemToShow.tmdb_id, itemToShow.isMovie);
-        console.log('[TitleCard] Raw API result:', result);
-        console.log('[TitleCard] Result success:', result.success);
-        console.log('[TitleCard] Result data exists:', !!result.data);
-        
         if (result.success && result.data) {
-          console.log('[TitleCard] Data keys:', Object.keys(result.data || {}));
-          console.log('[TitleCard] Providers in response:', result.data.providers);
-          console.log('[TitleCard] Providers type:', typeof result.data.providers);
-          console.log('[TitleCard] Providers is array:', Array.isArray(result.data.providers));
-          console.log('[TitleCard] Debug providers:', (result.data as any)._debug_providers);
           
           // Merge with existing data if we already had some extended data
           if (hasExtendedData) {
@@ -372,10 +363,9 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, variant = 
               poster_path: result.data?.poster_path
             }));
           }
-        } else {
-          console.log('[TitleCard] API call failed:', result);
-          setDetailsError(result.error || 'Failed to load details');
-        }
+          } else {
+            setDetailsError(result.error || 'Failed to load details');
+          }
       } catch (error) {
         setDetailsError('Network error loading details');
         console.error('Error fetching item details:', error);
@@ -516,21 +506,6 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, variant = 
     number_of_episodes: extendedData?.number_of_episodes !== undefined ? extendedData.number_of_episodes : item.number_of_episodes,
   };
   
-  // Debug providers
-  if (detailsOpen) {
-    console.log('[TitleCard] displayData providers check:', {
-      hasProviders: !!displayData.providers,
-      providersLength: displayData.providers?.length,
-      providers: displayData.providers,
-      extendedDataProviders: extendedData?.providers,
-      extendedDataType: typeof extendedData?.providers,
-      extendedDataIsArray: Array.isArray(extendedData?.providers),
-      itemProviders: item.providers,
-      extendedDataKeys: Object.keys(extendedData || {}),
-      displayDataKeys: Object.keys(displayData),
-      extendedDataFull: extendedData
-    });
-  }
   
   // Check if we have any extended data to display
   const hasExtendedData = displayData.genres || displayData.overview || displayData.cast || displayData.crew || 
@@ -816,46 +791,67 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, variant = 
               )}
 
               {/* Available On (Streaming Providers) */}
-              {(() => {
-                const providers = displayData.providers;
-                const hasProviders = Array.isArray(providers) && providers.length > 0;
-                
-                // Debug log
-                if (detailsOpen && !hasProviders) {
-                  console.log('[TitleCard] Providers section not showing:', {
-                    providers,
-                    isArray: Array.isArray(providers),
-                    length: providers?.length,
-                    extendedDataProviders: extendedData?.providers,
-                    itemProviders: item.providers
-                  });
-                }
-                
-                return hasProviders && (
-                  <div className="details-section">
-                    <h3 className="details-section-title">
-                      <Monitor size={18} className="section-icon" />
-                      Available On
-                    </h3>
-                    <div className="details-providers">
-                      {providers.map(provider => (
-                        <div key={provider.provider_id} className="provider-item">
-                          {provider.logo_path && (
-                            <img
-                              src={`${imageBaseUrl}${provider.logo_path}`}
-                              alt={provider.provider_name}
-                              className="provider-logo"
-                            />
-                          )}
-                          {!provider.logo_path && (
-                            <span className="provider-name-fallback">{provider.provider_name}</span>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })()}
+              <div className="details-section">
+                <h3 className="details-section-title">
+                  <Monitor size={18} className="section-icon" />
+                  Available On
+                </h3>
+                {(() => {
+                  const providers = displayData.providers;
+                  const hasProviders = Array.isArray(providers) && providers.length > 0;
+                  
+                  if (hasProviders) {
+                    return (
+                      <div className="details-providers">
+                        {providers.map((provider, index) => {
+                          const providerUrl = provider.watch_link || `https://www.google.com/search?q=${encodeURIComponent(`${displayData.title || currentItem.title} ${provider.provider_name} streaming`)}`;
+                          
+                          return (
+                            <a
+                              key={`provider-${provider.provider_id}-${index}`}
+                              href={providerUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="provider-item"
+                            >
+                              {provider.logo_path && imageBaseUrl ? (
+                                <img
+                                  src={`${imageBaseUrl}${provider.logo_path}`}
+                                  alt={provider.provider_name}
+                                  className="provider-logo"
+                                  onError={(e) => {
+                                    e.currentTarget.style.display = 'none';
+                                  }}
+                                />
+                              ) : (
+                                <span className="provider-name-fallback">{provider.provider_name || 'Unknown Provider'}</span>
+                              )}
+                            </a>
+                          );
+                        })}
+                      </div>
+                    );
+                  } else {
+                    // No providers found - show Google search link
+                    const searchQuery = `${displayData.title || currentItem.title} streaming`;
+                    const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
+                    
+                    return (
+                      <div className="details-providers-fallback">
+                        <span>Can't find on TMDB, check </span>
+                        <a 
+                          href={googleSearchUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="google-search-link"
+                        >
+                          Google
+                        </a>
+                      </div>
+                    );
+                  }
+                })()}
+              </div>
 
               {/* Trailers */}
               {displayData.videos && displayData.videos.length > 0 && (() => {

@@ -59,6 +59,7 @@ export interface Provider {
   provider_name: string;
   logo_path?: string;
   display_priority?: number;
+  watch_link?: string;
 }
 
 // TMDB Translation
