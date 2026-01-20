@@ -6,16 +6,22 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-CRON_ENTRY="0 0 * * 6 $PROJECT_ROOT/scripts/regenerate-content-cron.sh >> $PROJECT_ROOT/logs/cron.log 2>&1"
+# Escape spaces in path for crontab
+PROJECT_ROOT_ESCAPED=$(echo "$PROJECT_ROOT" | sed 's/ /\\ /g')
+
+# Create crontab entries with environment variables
+CRON_ENTRIES="SHELL=/bin/bash
+PATH=/usr/local/bin:/usr/bin:/bin:/opt/homebrew/bin
+0 2 * * * $PROJECT_ROOT_ESCAPED/scripts/regenerate-content-cron.sh >> $PROJECT_ROOT_ESCAPED/logs/cron.log 2>&1"
 
 echo "WatchBox Cron Job Installer"
 echo "=========================="
 echo ""
 echo "This will add the following cron job to your crontab:"
 echo ""
-echo "  $CRON_ENTRY"
+echo "$CRON_ENTRIES"
 echo ""
-echo "Schedule: Every Saturday at 12:00 AM (midnight)"
+echo "Schedule: Every day at 2:00 AM"
 echo ""
 
 # Check if cron entry already exists
@@ -28,12 +34,15 @@ if crontab -l 2>/dev/null | grep -q "regenerate-content-cron.sh"; then
         echo "Installation cancelled."
         exit 0
     fi
-    # Remove existing entry
-    crontab -l 2>/dev/null | grep -v "regenerate-content-cron.sh" | crontab -
+    # Remove existing entries (both the job and environment variables if they exist)
+    crontab -l 2>/dev/null | grep -v "regenerate-content-cron.sh" | grep -v "^SHELL=" | grep -v "^PATH=" | crontab -
 fi
 
-# Add the new cron entry
-(crontab -l 2>/dev/null; echo "$CRON_ENTRY") | crontab -
+# Get existing crontab (excluding our entries)
+EXISTING_CRONTAB=$(crontab -l 2>/dev/null | grep -v "regenerate-content-cron.sh" | grep -v "^SHELL=" | grep -v "^PATH=" || true)
+
+# Add the new cron entries
+(echo "$EXISTING_CRONTAB"; echo "$CRON_ENTRIES") | crontab -
 
 if [ $? -eq 0 ]; then
     echo "✅ Cron job installed successfully!"
@@ -41,7 +50,7 @@ if [ $? -eq 0 ]; then
     echo "To verify, run: crontab -l"
     echo "To remove, run: crontab -e (then delete the line)"
     echo ""
-    echo "The cron job will run every Saturday at midnight."
+    echo "The cron job will run every day at 2:00 AM."
 else
     echo "❌ Failed to install cron job."
     exit 1

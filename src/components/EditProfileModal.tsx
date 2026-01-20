@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowLeft, X, Plus } from 'lucide-react';
-import { getAvatarUrl, getAvailableAvatars, getDefaultStreamingServices, getServiceLogoUrl, clearAvatarCache } from '../services/api';
+import { ArrowLeft } from 'lucide-react';
+import { getAvatarUrl, getAvailableAvatars, clearAvatarCache } from '../services/api';
 import type { UserSummary, StreamingService } from '../types';
 import { extractDominantColor } from '../utils/colorExtraction';
-import { AddServiceModal } from './AddServiceModal';
 
 interface EditProfileModalProps {
   user: UserSummary;
@@ -17,11 +16,7 @@ interface EditProfileModalProps {
 export function EditProfileModal({ user, onClose, onSave, onBackToAccount }: EditProfileModalProps) {
   const [name, setName] = useState(user.name);
   const [selectedAvatar, setSelectedAvatar] = useState<string>(user.avatar_filename);
-  const [selectedServices, setSelectedServices] = useState<StreamingService[]>(user.streaming_services || []);
   const [availableAvatars, setAvailableAvatars] = useState<string[]>([]);
-  const [defaultServices, setDefaultServices] = useState<StreamingService[]>([]);
-  const [showRemoveConfirm, setShowRemoveConfirm] = useState<string | null>(null);
-  const [showAddServiceModal, setShowAddServiceModal] = useState(false);
   const [avatarColors, setAvatarColors] = useState<Record<string, string>>({});
   const [month, setMonth] = useState('');
   const [day, setDay] = useState('');
@@ -37,25 +32,25 @@ export function EditProfileModal({ user, onClose, onSave, onBackToAccount }: Edi
     getAvailableAvatars().then(avatars => {
       setAvailableAvatars(avatars);
     });
-    
-    // Load default streaming services
-    getDefaultStreamingServices().then(services => {
-      setDefaultServices(services);
-    });
   }, []);
 
   useEffect(() => {
     setName(user.name);
     setSelectedAvatar(user.avatar_filename);
-    setSelectedServices(user.streaming_services || []);
     
-    // Parse birthday if it exists
+    // Parse birthday if it exists - handle both "MM/DD/YYYY" and "M/D/YYYY" formats
     if (user.birthday) {
       const parts = user.birthday.split('/');
       if (parts.length === 3) {
-        setMonth(parts[0]);
-        setDay(parts[1]);
-        setYear(parts[2]);
+        // Preserve leading zeros if they exist, but don't require them
+        setMonth(parts[0].trim());
+        setDay(parts[1].trim());
+        setYear(parts[2].trim());
+      } else {
+        // Invalid format, clear fields
+        setMonth('');
+        setDay('');
+        setYear('');
       }
     } else {
       setMonth('');
@@ -68,39 +63,6 @@ export function EditProfileModal({ user, onClose, onSave, onBackToAccount }: Edi
     // Always re-extract color to pick up changes in updated SVGs
     const color = extractDominantColor(img, avatarFilename);
     setAvatarColors(prev => ({ ...prev, [avatarFilename]: color }));
-  };
-
-  const handleServiceToggle = (service: StreamingService) => {
-    const isSelected = selectedServices.some(s => s.name === service.name);
-    
-    if (isSelected) {
-      setSelectedServices(prev => prev.filter(s => s.name !== service.name));
-    } else {
-      setSelectedServices(prev => [...prev, service]);
-    }
-  };
-
-  const handleRemoveService = (serviceName: string) => {
-    setShowRemoveConfirm(serviceName);
-  };
-
-  const confirmRemoveService = () => {
-    if (showRemoveConfirm) {
-      setSelectedServices(prev => prev.filter(s => s.name !== showRemoveConfirm));
-      setShowRemoveConfirm(null);
-    }
-  };
-
-  const cancelRemoveService = () => {
-    setShowRemoveConfirm(null);
-  };
-
-  const handleAddServiceClick = () => {
-    setShowAddServiceModal(true);
-  };
-
-  const handleServiceAdded = (service: StreamingService) => {
-    setSelectedServices(prev => [...prev, service]);
   };
 
   const formatBirthday = (): string => {
@@ -119,7 +81,7 @@ export function EditProfileModal({ user, onClose, onSave, onBackToAccount }: Edi
     }
     if (name.trim() && selectedAvatar) {
       const birthday = formatBirthday();
-      onSave(user.user_id, name.trim(), selectedAvatar, selectedServices, birthday);
+      onSave(user.user_id, name.trim(), selectedAvatar, user.streaming_services || [], birthday);
     }
   };
 
@@ -185,95 +147,6 @@ export function EditProfileModal({ user, onClose, onSave, onBackToAccount }: Edi
                 ))}
               </div>
             </div>
-            <div className="form-group">
-              <label>Streaming Service Subscriptions</label>
-              <div className="services-grid">
-                {/* Show user's selected services */}
-                {selectedServices.map((service) => {
-                  const isRemoving = showRemoveConfirm === service.name;
-                  // Use TMDB logo URL if available, otherwise use local
-                  const logoUrl = (service as any).logo_url || getServiceLogoUrl(service.logo);
-                  return (
-                    <div key={service.name} className="service-option selected">
-                      <img
-                        src={logoUrl}
-                        alt={service.name}
-                        className="service-icon-large"
-                      />
-                      <button
-                        type="button"
-                        className="service-remove-button"
-                        onClick={() => handleRemoveService(service.name)}
-                        aria-label={`Remove ${service.name}`}
-                      >
-                        <X size={12} />
-                      </button>
-                      <span className="service-label">{service.name}</span>
-                      
-                      {isRemoving && (
-                        <div className="remove-confirm-overlay">
-                          <p>Remove?</p>
-                          <div className="remove-confirm-buttons">
-                            <button 
-                              type="button"
-                              onClick={confirmRemoveService}
-                              className="btn-confirm-remove"
-                            >
-                              Yes
-                            </button>
-                            <button 
-                              type="button"
-                              onClick={cancelRemoveService}
-                              className="btn-cancel-remove"
-                            >
-                              No
-                            </button>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-                
-                {/* Show default services that aren't selected */}
-                {defaultServices
-                  .filter(defService => !selectedServices.some(s => s.name === defService.name))
-                  .map((service) => (
-                    <button
-                      key={service.name}
-                      type="button"
-                      className="service-option"
-                      onClick={() => handleServiceToggle(service)}
-                    >
-                      <img
-                        src={getServiceLogoUrl(service.logo)}
-                        alt={service.name}
-                        className="service-icon-large"
-                      />
-                      <span className="service-label">{service.name}</span>
-                    </button>
-                  ))}
-                
-                {/* Add Service button */}
-                <button
-                  type="button"
-                  className="service-option service-add"
-                  onClick={handleAddServiceClick}
-                >
-                  <div className="service-add-icon">
-                    <Plus size={32} />
-                  </div>
-                  <span className="service-label">Add</span>
-                </button>
-              </div>
-            </div>
-            
-            {showAddServiceModal && (
-              <AddServiceModal
-                onClose={() => setShowAddServiceModal(false)}
-                onAdd={handleServiceAdded}
-              />
-            )}
             <div className="form-group">
               <label>Birthday</label>
               <div className="birthday-fields">

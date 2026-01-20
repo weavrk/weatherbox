@@ -7,19 +7,2000 @@
       "id": "1054867-1765740488848",
       "title": "One Battle After Another",
       "tmdb_id": 1054867,
-      "listType": "watch",
+      "listType": "top",
       "services": [],
       "isMovie": true,
       "poster_path": "/m1jFoahEbeQXtx4zArT2FKdbNIj.jpg"
     },
     {
-      "id": "1242898-1765740506916",
-      "title": "Predator: Badlands",
-      "tmdb_id": 1242898,
+      "id": "798645-1768853224836",
+      "title": "The Running Man",
+      "tmdb_id": 798645,
+      "poster_path": "/dKL78O9zxczVgjtNcQ9UkbYLzqX.jpg",
       "listType": "watch",
       "services": [],
       "isMovie": true,
-      "poster_path": "/pHpq9yNUIo6aDoCXEBzjSolywgz.jpg"
+      "genres": [
+        {
+          "id": 28,
+          "name": "Action"
+        },
+        {
+          "id": 53,
+          "name": "Thriller"
+        },
+        {
+          "id": 878,
+          "name": "Science Fiction"
+        }
+      ],
+      "overview": "Desperate to save his sick daughter, working-class Ben Richards is convinced by The Running Man's charming but ruthless producer to enter the deadly competition game as a last resort. But Ben's defiance, instincts, and grit turn him into an unexpected fan favorite — and a threat to the entire system. As ratings skyrocket, so does the danger, and Ben must outwit not just the Hunters, but a nation addicted to watching him fall.",
+      "vote_average": 6.842,
+      "vote_count": 546,
+      "runtime": 133,
+      "cast": [
+        {
+          "id": 83271,
+          "name": "Glen Powell",
+          "character": "Ben Richards",
+          "profile_path": "/fUnIaJkdgvQTztyR1nLeUceSzly.jpg"
+        },
+        {
+          "id": 16851,
+          "name": "Josh Brolin",
+          "character": "Dan Killian",
+          "profile_path": "/sX2etBbIkxRaCsATyw5ZpOVMPTD.jpg"
+        },
+        {
+          "id": 91671,
+          "name": "Colman Domingo",
+          "character": "Bobby Thompson",
+          "profile_path": "/2tu6T9ugnf82qIMGVKWSb0dvvq5.jpg"
+        },
+        {
+          "id": 72095,
+          "name": "Lee Pace",
+          "character": "Evan McCone",
+          "profile_path": "/9fhFAGZxnQZlqDdf3cyzkGi3Bag.jpg"
+        },
+        {
+          "id": 39995,
+          "name": "Michael Cera",
+          "character": "Elton Parrakis",
+          "profile_path": "/lFKyW2C7xj7X4nWpOEbVIDGOKrH.jpg"
+        },
+        {
+          "id": 1331023,
+          "name": "Emilia Jones",
+          "character": "Amelia Williams",
+          "profile_path": "/vQHfiR6bSKf7bJcYyDvfUSXlB9Q.jpg"
+        },
+        {
+          "id": 3905,
+          "name": "William H. Macy",
+          "character": "Molie Jernigan",
+          "profile_path": "/hdVEGSrP8qWlJnt0v5vSVcGOjy7.jpg"
+        },
+        {
+          "id": 1339627,
+          "name": "Daniel Ezra",
+          "character": "Bradley Throckmorton",
+          "profile_path": "/43AIgx8PEABQKkK08OCJ9239OK6.jpg"
+        },
+        {
+          "id": 2455272,
+          "name": "Jayme Lawson",
+          "character": "Sheila Richards",
+          "profile_path": "/ntwbhdUeW8K5KYJENqyiSZcsIj9.jpg"
+        },
+        {
+          "id": 2252989,
+          "name": "Katy O'Brian",
+          "character": "Jenni Laughlin",
+          "profile_path": "/lEz7WmJPrBGSsIkEiAA10t5nDDM.jpg"
+        },
+        {
+          "id": 2807375,
+          "name": "Martin Herlihy",
+          "character": "Tim Jansky",
+          "profile_path": "/3SxAueQPPc27P7zJoUmj0QMYdOK.jpg"
+        },
+        {
+          "id": 52601,
+          "name": "Sean Hayes",
+          "character": "Gary Greenbacks",
+          "profile_path": "/31TI5l5QvcZHN4fh0NpejZyJtP.jpg"
+        },
+        {
+          "id": 22821,
+          "name": "David Zayas",
+          "character": "Richard Manuel",
+          "profile_path": "/w1E8n9gl2HcZEhfBOXdVzMvIlzg.jpg"
+        },
+        {
+          "id": 1327613,
+          "name": "Karl Glusman",
+          "character": "Frank",
+          "profile_path": "/mTpLq73gepoX1fCLCtTunCxWYp5.jpg"
+        },
+        {
+          "id": 176254,
+          "name": "Sandra Dickinson",
+          "character": "Victoria Parrakis",
+          "profile_path": "/fZYuygLSA8HMEbDHgH2txtaEeWa.jpg"
+        }
+      ],
+      "crew": [
+        {
+          "id": 11092,
+          "name": "Simon Kinberg",
+          "job": "Producer",
+          "profile_path": "/uEGvyKEVEotzWNeU0g2bN6b6s9q.jpg"
+        },
+        {
+          "id": 11112,
+          "name": "Nira Park",
+          "job": "Producer",
+          "profile_path": null
+        },
+        {
+          "id": 11090,
+          "name": "Edgar Wright",
+          "job": "Producer",
+          "profile_path": "/3BqgbeAkNnDcIVtrDvG6LJnEkZK.jpg"
+        },
+        {
+          "id": 12992,
+          "name": "George Linder",
+          "job": "Executive Producer",
+          "profile_path": null
+        },
+        {
+          "id": 11090,
+          "name": "Edgar Wright",
+          "job": "Director",
+          "profile_path": "/3BqgbeAkNnDcIVtrDvG6LJnEkZK.jpg"
+        },
+        {
+          "id": 58744,
+          "name": "Michael Bacall",
+          "job": "Screenplay",
+          "profile_path": "/500hUpJJcIRknF6d3rBzzwJiKuU.jpg"
+        },
+        {
+          "id": 11090,
+          "name": "Edgar Wright",
+          "job": "Screenplay",
+          "profile_path": "/3BqgbeAkNnDcIVtrDvG6LJnEkZK.jpg"
+        },
+        {
+          "id": 1457890,
+          "name": "Audrey Chon",
+          "job": "Executive Producer",
+          "profile_path": "/71pSx7fvLH2DJ6G9d06d2hFJFLt.jpg"
+        },
+        {
+          "id": 1211152,
+          "name": "James Biddle",
+          "job": "Executive Producer",
+          "profile_path": null
+        },
+        {
+          "id": 1455392,
+          "name": "Rachael Prior",
+          "job": "Executive Producer",
+          "profile_path": "/gb6re6s0L7xh0ksyUVrmJVl6Sul.jpg"
+        }
+      ],
+      "keywords": [
+        {
+          "id": 818,
+          "name": "based on novel or book"
+        },
+        {
+          "id": 10123,
+          "name": "dark comedy"
+        },
+        {
+          "id": 10349,
+          "name": "survival"
+        },
+        {
+          "id": 10562,
+          "name": "on the run"
+        },
+        {
+          "id": 195279,
+          "name": "television network"
+        },
+        {
+          "id": 244256,
+          "name": "near future"
+        },
+        {
+          "id": 244530,
+          "name": "malicious"
+        },
+        {
+          "id": 323809,
+          "name": "depressing"
+        },
+        {
+          "id": 325834,
+          "name": "mean spirited"
+        },
+        {
+          "id": 350338,
+          "name": "dystopian future"
+        },
+        {
+          "id": 357496,
+          "name": "dystopian sci-fi"
+        }
+      ],
+      "videos": [
+        {
+          "id": "692600d016e39e99c1a753cf",
+          "key": "LdDjHCZnFMA",
+          "name": "How Far Would You Go",
+          "site": "YouTube",
+          "type": "Teaser",
+          "official": true,
+          "published_at": "2025-11-25T12:00:52.000Z"
+        },
+        {
+          "id": "692491365a9a37d3f514da87",
+          "key": "OiA1zi1K--M",
+          "name": "Treadmill",
+          "site": "YouTube",
+          "type": "Teaser",
+          "official": true,
+          "published_at": "2025-11-24T12:00:51.000Z"
+        },
+        {
+          "id": "69223712ee65fcffa60ba376",
+          "key": "mf5hiluwsxU",
+          "name": "Power",
+          "site": "YouTube",
+          "type": "Teaser",
+          "official": true,
+          "published_at": "2025-11-22T12:01:40.000Z"
+        },
+        {
+          "id": "6920c8d7a132dbca102e321a",
+          "key": "O3ql3NMqBE0",
+          "name": "Hits The Spot",
+          "site": "YouTube",
+          "type": "Teaser",
+          "official": true,
+          "published_at": "2025-11-21T17:00:40.000Z"
+        },
+        {
+          "id": "6920c926acfadfdd29adc46d",
+          "key": "j8UdAJvrzhQ",
+          "name": "Power 4DX",
+          "site": "YouTube",
+          "type": "Teaser",
+          "official": true,
+          "published_at": "2025-11-21T12:01:35.000Z"
+        }
+      ],
+      "recommendations": [
+        {
+          "id": 1202479,
+          "title": "Opus",
+          "poster_path": "/m0du9dsiOVeb0SgfqR8ZAEPRxww.jpg",
+          "vote_average": 5.689,
+          "isMovie": true
+        },
+        {
+          "id": 314387,
+          "title": "Scooby-Doo! Mecha Mutt Menace",
+          "poster_path": "/6qLU4vChPzCFEkQnrZDlAYLX9BC.jpg",
+          "vote_average": 8.5,
+          "isMovie": true
+        },
+        {
+          "id": 1078760,
+          "title": "1",
+          "poster_path": "/tBtqPlPcPPMbJB6hat5lyVaXVVd.jpg",
+          "vote_average": 6.6,
+          "isMovie": true
+        },
+        {
+          "id": 331691,
+          "title": "The Peasants",
+          "poster_path": "/hVW7J5X75sWIYjW8EsxhydkIoq8.jpg",
+          "vote_average": 5,
+          "isMovie": true
+        },
+        {
+          "id": 1085046,
+          "title": "Shimmy: The First Monkey King",
+          "poster_path": "/bkaymv2mzOw8QdCZ9YllRYbXBb8.jpg",
+          "vote_average": 5.9,
+          "isMovie": true
+        },
+        {
+          "id": 405029,
+          "title": "3D Saamri",
+          "poster_path": "/h11Nl2Jn99NNNDdvGdXq7g5ZpL4.jpg",
+          "vote_average": 5,
+          "isMovie": true
+        },
+        {
+          "id": 33135,
+          "title": "Fun",
+          "poster_path": "/vXsCYOI6v3baMTzLlMho78FO6Hn.jpg",
+          "vote_average": 5.5,
+          "isMovie": true
+        },
+        {
+          "id": 1431747,
+          "title": "Jun Hau Timi",
+          "poster_path": "/aX9M8SgYizrkgNLwY3iCyqndUC0.jpg",
+          "vote_average": 9.8,
+          "isMovie": true
+        },
+        {
+          "id": 371304,
+          "title": "Nastya",
+          "poster_path": "/fj6BATdqvzd13Q9eWNytWFNGFRF.jpg",
+          "vote_average": 4.8,
+          "isMovie": true
+        },
+        {
+          "id": 1077600,
+          "title": "Baby Assassins: 2 Babies",
+          "poster_path": "/y7plbod3RgDntiJZ8Yesk4Wj6Na.jpg",
+          "vote_average": 6.6,
+          "isMovie": true
+        }
+      ],
+      "similar": [
+        {
+          "id": 641501,
+          "title": "How I Became a Superhero",
+          "poster_path": "/d0wn9YtEnmbucx8ZUsT918ctoiK.jpg",
+          "vote_average": 6.088,
+          "isMovie": true
+        },
+        {
+          "id": 641613,
+          "title": "I Fall in Love With You Through a Robot",
+          "poster_path": "/7RIhHPTzNIVW32aPzf9UuAoqDl3.jpg",
+          "vote_average": 0,
+          "isMovie": true
+        },
+        {
+          "id": 775,
+          "title": "A Trip to the Moon",
+          "poster_path": "/9o0v5LLFk51nyTBHZSre6OB37n2.jpg",
+          "vote_average": 7.899,
+          "isMovie": true
+        },
+        {
+          "id": 805,
+          "title": "Rosemary's Baby",
+          "poster_path": "/uYgvlHceRFjAFbsNeMInYcLZLUb.jpg",
+          "vote_average": 7.826,
+          "isMovie": true
+        },
+        {
+          "id": 807,
+          "title": "Se7en",
+          "poster_path": "/191nKfP0ehp3uIvWqgPbFmI4lv9.jpg",
+          "vote_average": 8.378,
+          "isMovie": true
+        },
+        {
+          "id": 841,
+          "title": "Dune",
+          "poster_path": "/4kJmUCE7mkVJjXa7A0g2rY4IGTm.jpg",
+          "vote_average": 6.179,
+          "isMovie": true
+        },
+        {
+          "id": 844,
+          "title": "2046",
+          "poster_path": "/jIN65qw0Giplo4CshzMrxz204Wn.jpg",
+          "vote_average": 7.237,
+          "isMovie": true
+        },
+        {
+          "id": 845,
+          "title": "Strangers on a Train",
+          "poster_path": "/ihC083U7ef56Ui4x0P0dobojrZ1.jpg",
+          "vote_average": 7.667,
+          "isMovie": true
+        },
+        {
+          "id": 855,
+          "title": "Black Hawk Down",
+          "poster_path": "/7fU5dSqKRL4XHeEUz62rCKBfYok.jpg",
+          "vote_average": 7.387,
+          "isMovie": true
+        },
+        {
+          "id": 861,
+          "title": "Total Recall",
+          "poster_path": "/wVbeL6fkbTKSmNfalj4VoAUUqJv.jpg",
+          "vote_average": 7.311,
+          "isMovie": true
+        }
+      ],
+      "translations": [
+        {
+          "iso_639_1": "en",
+          "iso_3166_1": "US",
+          "name": "English",
+          "english_name": "English"
+        },
+        {
+          "iso_639_1": "fr",
+          "iso_3166_1": "FR",
+          "name": "Français",
+          "english_name": "French"
+        },
+        {
+          "iso_639_1": "ko",
+          "iso_3166_1": "KR",
+          "name": "한국어/조선말",
+          "english_name": "Korean"
+        },
+        {
+          "iso_639_1": "es",
+          "iso_3166_1": "ES",
+          "name": "Español",
+          "english_name": "Spanish"
+        },
+        {
+          "iso_639_1": "pt",
+          "iso_3166_1": "BR",
+          "name": "Português",
+          "english_name": "Portuguese"
+        },
+        {
+          "iso_639_1": "de",
+          "iso_3166_1": "DE",
+          "name": "Deutsch",
+          "english_name": "German"
+        },
+        {
+          "iso_639_1": "lv",
+          "iso_3166_1": "LV",
+          "name": "Latviešu",
+          "english_name": "Latvian"
+        },
+        {
+          "iso_639_1": "ru",
+          "iso_3166_1": "RU",
+          "name": "Pусский",
+          "english_name": "Russian"
+        },
+        {
+          "iso_639_1": "uk",
+          "iso_3166_1": "UA",
+          "name": "Український",
+          "english_name": "Ukrainian"
+        },
+        {
+          "iso_639_1": "sv",
+          "iso_3166_1": "SE",
+          "name": "svenska",
+          "english_name": "Swedish"
+        },
+        {
+          "iso_639_1": "es",
+          "iso_3166_1": "MX",
+          "name": "Español",
+          "english_name": "Spanish"
+        },
+        {
+          "iso_639_1": "th",
+          "iso_3166_1": "TH",
+          "name": "ภาษาไทย",
+          "english_name": "Thai"
+        },
+        {
+          "iso_639_1": "it",
+          "iso_3166_1": "IT",
+          "name": "Italiano",
+          "english_name": "Italian"
+        },
+        {
+          "iso_639_1": "hr",
+          "iso_3166_1": "HR",
+          "name": "Hrvatski",
+          "english_name": "Croatian"
+        },
+        {
+          "iso_639_1": "cs",
+          "iso_3166_1": "CZ",
+          "name": "Český",
+          "english_name": "Czech"
+        },
+        {
+          "iso_639_1": "ja",
+          "iso_3166_1": "JP",
+          "name": "日本語",
+          "english_name": "Japanese"
+        },
+        {
+          "iso_639_1": "he",
+          "iso_3166_1": "IL",
+          "name": "עִבְרִית",
+          "english_name": "Hebrew"
+        },
+        {
+          "iso_639_1": "zh",
+          "iso_3166_1": "HK",
+          "name": "普通话",
+          "english_name": "Mandarin"
+        },
+        {
+          "iso_639_1": "zh",
+          "iso_3166_1": "TW",
+          "name": "普通话",
+          "english_name": "Mandarin"
+        },
+        {
+          "iso_639_1": "fa",
+          "iso_3166_1": "IR",
+          "name": "فارسی",
+          "english_name": "Persian"
+        }
+      ]
+    },
+    {
+      "id": "83533-1768853260778",
+      "title": "Avatar: Fire and Ash",
+      "tmdb_id": 83533,
+      "poster_path": "/gDVgC9jd917NdAcqBdRRDUYi4Tq.jpg",
+      "listType": "watch",
+      "services": [
+        "fubotv"
+      ],
+      "isMovie": true,
+      "genres": [
+        {
+          "id": 878,
+          "name": "Science Fiction"
+        },
+        {
+          "id": 12,
+          "name": "Adventure"
+        },
+        {
+          "id": 14,
+          "name": "Fantasy"
+        }
+      ],
+      "overview": "In the wake of the devastating war against the RDA and the loss of their eldest son, Jake Sully and Neytiri face a new threat on Pandora: the Ash People, a violent and power-hungry Na'vi tribe led by the ruthless Varang. Jake's family must fight for their survival and the future of Pandora in a conflict that pushes them to their emotional and physical limits.",
+      "vote_average": 6.8,
+      "vote_count": 20,
+      "runtime": 195,
+      "cast": [
+        {
+          "id": 65731,
+          "name": "Sam Worthington",
+          "character": "Jake Sully",
+          "profile_path": "/mflBcox36s9ZPbsZPVOuhf6axaJ.jpg"
+        },
+        {
+          "id": 8691,
+          "name": "Zoe Saldaña",
+          "character": "Neytiri",
+          "profile_path": "/vQBwmsSOAd0JDaEcZ5p43J9xzsY.jpg"
+        },
+        {
+          "id": 10205,
+          "name": "Sigourney Weaver",
+          "character": "Kiri",
+          "profile_path": "/wTSnfktNBLd6kwQxgvkqYw6vEon.jpg"
+        },
+        {
+          "id": 32747,
+          "name": "Stephen Lang",
+          "character": "Quaritch",
+          "profile_path": "/hdRiM73H2mpJws559TWHCAia7qJ.jpg"
+        },
+        {
+          "id": 566331,
+          "name": "Oona Chaplin",
+          "character": "Varang",
+          "profile_path": "/tT7QQOrumeGRquaLmWNZk2DyL3Z.jpg"
+        },
+        {
+          "id": 204,
+          "name": "Kate Winslet",
+          "character": "Ronal",
+          "profile_path": "/e3tdop3WhseRnn8KwMVLAV25Ybv.jpg"
+        },
+        {
+          "id": 7248,
+          "name": "Cliff Curtis",
+          "character": "Tonowari",
+          "profile_path": "/3D6qz8vL6DWHAO3HeXeaSuwxq3s.jpg"
+        },
+        {
+          "id": 59231,
+          "name": "Joel David Moore",
+          "character": "Norm",
+          "profile_path": "/mMVhVglj6BZFuvqAXnEibce08k7.jpg"
+        },
+        {
+          "id": 30485,
+          "name": "CCH Pounder",
+          "character": "Mo'at",
+          "profile_path": "/mr6BLDN75T8DJl9dNK3hN4YwqJa.jpg"
+        },
+        {
+          "id": 36190,
+          "name": "Edie Falco",
+          "character": "General Ardmore",
+          "profile_path": "/jS2Hnr5OmntpX0J7EpH70zAG0mz.jpg"
+        },
+        {
+          "id": 129527,
+          "name": "Brendan Cowell",
+          "character": "Scoresby",
+          "profile_path": "/9Bjc4wYjqAJXMwmy6rKsYq2PeWV.jpg"
+        },
+        {
+          "id": 55936,
+          "name": "Jemaine Clement",
+          "character": "Dr. Garvin",
+          "profile_path": "/6eiNbeurpHb2fxIeT0RrJ0wRI25.jpg"
+        },
+        {
+          "id": 1771,
+          "name": "Giovanni Ribisi",
+          "character": "Selfridge",
+          "profile_path": "/8EAiS9D3YtGOrwNM0OrwmDpWK7s.jpg"
+        },
+        {
+          "id": 11207,
+          "name": "David Thewlis",
+          "character": "Peylak",
+          "profile_path": "/sNuYyT8ocLlQr3TdAW9CoKVbCU8.jpg"
+        },
+        {
+          "id": 1663672,
+          "name": "Britain Dalton",
+          "character": "Lo'ak",
+          "profile_path": "/asX3eJr9oHNs1ZgRYGwsZRAntqS.jpg"
+        }
+      ],
+      "crew": [
+        {
+          "id": 2710,
+          "name": "James Cameron",
+          "job": "Screenplay",
+          "profile_path": "/9NAZnTjBQ9WcXAQEzZpKy4vdQto.jpg"
+        },
+        {
+          "id": 2710,
+          "name": "James Cameron",
+          "job": "Director",
+          "profile_path": "/9NAZnTjBQ9WcXAQEzZpKy4vdQto.jpg"
+        },
+        {
+          "id": 67802,
+          "name": "Rick Jaffa",
+          "job": "Screenplay",
+          "profile_path": "/hjxAQXUppDd2StwzJ4ACYGrP5Vg.jpg"
+        },
+        {
+          "id": 67803,
+          "name": "Amanda Silver",
+          "job": "Screenplay",
+          "profile_path": "/j26E4ifZClUceVocOmDG9sWm7uP.jpg"
+        },
+        {
+          "id": 8529,
+          "name": "Jon Landau",
+          "job": "Producer",
+          "profile_path": "/9KKHK9oiK87aqahsLazQr4Lvyq4.jpg"
+        },
+        {
+          "id": 42265,
+          "name": "Peter M. Tobyansen",
+          "job": "Executive Producer",
+          "profile_path": null
+        },
+        {
+          "id": 2710,
+          "name": "James Cameron",
+          "job": "Producer",
+          "profile_path": "/9NAZnTjBQ9WcXAQEzZpKy4vdQto.jpg"
+        },
+        {
+          "id": 1042213,
+          "name": "Richard Baneham",
+          "job": "Executive Producer",
+          "profile_path": null
+        },
+        {
+          "id": 21567,
+          "name": "Rae Sanchini",
+          "job": "Executive Producer",
+          "profile_path": null
+        },
+        {
+          "id": 3718,
+          "name": "David Valdes",
+          "job": "Executive Producer",
+          "profile_path": "/4gbCUGBWd4WeRsu9DeknpJUMlvz.jpg"
+        }
+      ],
+      "keywords": [
+        {
+          "id": 9663,
+          "name": "sequel"
+        },
+        {
+          "id": 18035,
+          "name": "family"
+        },
+        {
+          "id": 325761,
+          "name": "admiring"
+        },
+        {
+          "id": 325765,
+          "name": "amused"
+        }
+      ],
+      "videos": [
+        {
+          "id": "69412f644204bb00b1467ef3",
+          "key": "8adoeixGU7w",
+          "name": "Neytiri",
+          "site": "YouTube",
+          "type": "Teaser",
+          "official": true,
+          "published_at": "2025-12-16T04:00:15.000Z"
+        },
+        {
+          "id": "693fd932cdc7e4e611aed2c7",
+          "key": "gGtWQVjwm70",
+          "name": "Locked And Loaded",
+          "site": "YouTube",
+          "type": "Teaser",
+          "official": true,
+          "published_at": "2025-12-15T04:00:43.000Z"
+        },
+        {
+          "id": "693fd8c35340d31628999947",
+          "key": "xM0QPBbh3pY",
+          "name": "Groundbreaking",
+          "site": "YouTube",
+          "type": "Teaser",
+          "official": true,
+          "published_at": "2025-12-14T08:01:14.000Z"
+        },
+        {
+          "id": "693d9f26d971560a2e5dfcec",
+          "key": "WjQ8giVSyEc",
+          "name": "Mangkwan Inferno",
+          "site": "YouTube",
+          "type": "Teaser",
+          "official": true,
+          "published_at": "2025-12-13T04:00:37.000Z"
+        },
+        {
+          "id": "693d9f4e7567f14c0199e98d",
+          "key": "sV4PHkbm4BQ",
+          "name": "From The Ashes",
+          "site": "YouTube",
+          "type": "Teaser",
+          "official": true,
+          "published_at": "2025-12-12T06:00:27.000Z"
+        }
+      ],
+      "recommendations": [],
+      "similar": [
+        {
+          "id": 809,
+          "title": "Shrek 2",
+          "poster_path": "/2yYP0PQjG8zVqturh1BAqu2Tixl.jpg",
+          "vote_average": 7.302,
+          "isMovie": true
+        },
+        {
+          "id": 810,
+          "title": "Shrek the Third",
+          "poster_path": "/n4SexGGQzI26E269tfpa80MZaGV.jpg",
+          "vote_average": 6.3,
+          "isMovie": true
+        },
+        {
+          "id": 840,
+          "title": "Close Encounters of the Third Kind",
+          "poster_path": "/gCWPB8cF82tqzrS9tvzcO6q6nyz.jpg",
+          "vote_average": 7.35,
+          "isMovie": true
+        },
+        {
+          "id": 1226863,
+          "title": "The Super Mario Galaxy Movie",
+          "poster_path": "/gZ3Tecr4QnM4RUIT7CVW3Q0s6tE.jpg",
+          "vote_average": 0,
+          "isMovie": true
+        },
+        {
+          "id": 558,
+          "title": "Spider-Man 2",
+          "poster_path": "/aGuvNAaaZuWXYQQ6N2v7DeuP6mB.jpg",
+          "vote_average": 7.297,
+          "isMovie": true
+        },
+        {
+          "id": 559,
+          "title": "Spider-Man 3",
+          "poster_path": "/qFmwhVUoUSXjkKRmca5yGDEXBIj.jpg",
+          "vote_average": 6.448,
+          "isMovie": true
+        },
+        {
+          "id": 563,
+          "title": "Starship Troopers",
+          "poster_path": "/cxCmv23O7p3hyHwqoktHYkZcGsY.jpg",
+          "vote_average": 7.086,
+          "isMovie": true
+        },
+        {
+          "id": 580,
+          "title": "Jaws: The Revenge",
+          "poster_path": "/ebYw9tR0iqBzDGA6HVBhtd2xJM3.jpg",
+          "vote_average": 4.078,
+          "isMovie": true
+        },
+        {
+          "id": 620,
+          "title": "Ghostbusters",
+          "poster_path": "/7E8nLijS9AwwUEPu2oFYOVKhdFA.jpg",
+          "vote_average": 7.494,
+          "isMovie": true
+        },
+        {
+          "id": 630,
+          "title": "The Wizard of Oz",
+          "poster_path": "/5iZCwQfRI3bay1PiH24jlw9ec92.jpg",
+          "vote_average": 7.591,
+          "isMovie": true
+        }
+      ],
+      "translations": [
+        {
+          "iso_639_1": "en",
+          "iso_3166_1": "US",
+          "name": "English",
+          "english_name": "English"
+        },
+        {
+          "iso_639_1": "bg",
+          "iso_3166_1": "BG",
+          "name": "български език",
+          "english_name": "Bulgarian"
+        },
+        {
+          "iso_639_1": "de",
+          "iso_3166_1": "DE",
+          "name": "Deutsch",
+          "english_name": "German"
+        },
+        {
+          "iso_639_1": "fr",
+          "iso_3166_1": "FR",
+          "name": "Français",
+          "english_name": "French"
+        },
+        {
+          "iso_639_1": "zh",
+          "iso_3166_1": "CN",
+          "name": "普通话",
+          "english_name": "Mandarin"
+        },
+        {
+          "iso_639_1": "es",
+          "iso_3166_1": "ES",
+          "name": "Español",
+          "english_name": "Spanish"
+        },
+        {
+          "iso_639_1": "cs",
+          "iso_3166_1": "CZ",
+          "name": "Český",
+          "english_name": "Czech"
+        },
+        {
+          "iso_639_1": "ko",
+          "iso_3166_1": "KR",
+          "name": "한국어/조선말",
+          "english_name": "Korean"
+        },
+        {
+          "iso_639_1": "it",
+          "iso_3166_1": "IT",
+          "name": "Italiano",
+          "english_name": "Italian"
+        },
+        {
+          "iso_639_1": "uk",
+          "iso_3166_1": "UA",
+          "name": "Український",
+          "english_name": "Ukrainian"
+        },
+        {
+          "iso_639_1": "he",
+          "iso_3166_1": "IL",
+          "name": "עִבְרִית",
+          "english_name": "Hebrew"
+        },
+        {
+          "iso_639_1": "ru",
+          "iso_3166_1": "RU",
+          "name": "Pусский",
+          "english_name": "Russian"
+        },
+        {
+          "iso_639_1": "vi",
+          "iso_3166_1": "VN",
+          "name": "Tiếng Việt",
+          "english_name": "Vietnamese"
+        },
+        {
+          "iso_639_1": "pl",
+          "iso_3166_1": "PL",
+          "name": "Polski",
+          "english_name": "Polish"
+        },
+        {
+          "iso_639_1": "pt",
+          "iso_3166_1": "BR",
+          "name": "Português",
+          "english_name": "Portuguese"
+        },
+        {
+          "iso_639_1": "ka",
+          "iso_3166_1": "GE",
+          "name": "ქართული",
+          "english_name": "Georgian"
+        },
+        {
+          "iso_639_1": "ro",
+          "iso_3166_1": "RO",
+          "name": "Română",
+          "english_name": "Romanian"
+        },
+        {
+          "iso_639_1": "tr",
+          "iso_3166_1": "TR",
+          "name": "Türkçe",
+          "english_name": "Turkish"
+        },
+        {
+          "iso_639_1": "es",
+          "iso_3166_1": "MX",
+          "name": "Español",
+          "english_name": "Spanish"
+        },
+        {
+          "iso_639_1": "th",
+          "iso_3166_1": "TH",
+          "name": "ภาษาไทย",
+          "english_name": "Thai"
+        }
+      ]
+    },
+    {
+      "id": "1306368-1768868257973",
+      "title": "The Rip",
+      "tmdb_id": 1306368,
+      "poster_path": "/p4bW2sJKAwcHuLpfoZK7Zo63osA.jpg",
+      "listType": "watch",
+      "services": [
+        "netflix",
+        "netflixstandardwithads"
+      ],
+      "isMovie": true,
+      "genres": [
+        {
+          "id": 28,
+          "name": "Action"
+        },
+        {
+          "id": 53,
+          "name": "Thriller"
+        },
+        {
+          "id": 80,
+          "name": "Crime"
+        },
+        {
+          "id": 18,
+          "name": "Drama"
+        },
+        {
+          "id": 9648,
+          "name": "Mystery"
+        }
+      ],
+      "overview": "Trust frays when a team of Miami cops discovers millions in cash inside a run-down stash house, calling everyone — and everything — into question.",
+      "vote_average": 7.177,
+      "vote_count": 406,
+      "runtime": 113,
+      "cast": [
+        {
+          "id": 1892,
+          "name": "Matt Damon",
+          "character": "Lieutenant Dane Dumars",
+          "profile_path": "/At3JgvaNeEN4Z4ESKlhhes85Xo3.jpg"
+        },
+        {
+          "id": 880,
+          "name": "Ben Affleck",
+          "character": "Detective Sergeant J.D. Byrne",
+          "profile_path": "/aTcqu8cI4wMohU17xTdqmXKTGrw.jpg"
+        },
+        {
+          "id": 215055,
+          "name": "Steven Yeun",
+          "character": "Detective Mike Ro",
+          "profile_path": "/fOMFO2Xx4duzpNgS9Q5ytO44yGb.jpg"
+        },
+        {
+          "id": 964679,
+          "name": "Teyana Taylor",
+          "character": "Detective Numa Baptistie",
+          "profile_path": "/foj8l6GGlZxZXcW6pU5wnNxDjSx.jpg"
+        },
+        {
+          "id": 5887,
+          "name": "Catalina Sandino Moreno",
+          "character": "Detective Lolo Salazar",
+          "profile_path": "/78V4H40NXJ6dzqFZaEe1fBelw56.jpg"
+        },
+        {
+          "id": 2542319,
+          "name": "Sasha Calle",
+          "character": "Desiree \"Desi\" Lopez Molina",
+          "profile_path": "/yLZY25AQOC2xKzsWqteyJTcWPK3.jpg"
+        },
+        {
+          "id": 3497,
+          "name": "Kyle Chandler",
+          "character": "DEA Agent Mateo \"Matty\" Nix",
+          "profile_path": "/66n7XNj1dyYkzCBWR3Lq8Vz4PJ1.jpg"
+        },
+        {
+          "id": 78110,
+          "name": "Scott Adkins",
+          "character": "FBI Agent Del Byrne",
+          "profile_path": "/9NRr2a1riIn5CWn5McZLJlk4vxR.jpg"
+        },
+        {
+          "id": 2271371,
+          "name": "Daisuke Tsuji",
+          "character": "FBI Agent Logan Casiano",
+          "profile_path": "/nhJfIy1TH4knV2J8ILDWztz75aI.jpg"
+        },
+        {
+          "id": 21316,
+          "name": "Nestor Carbonell",
+          "character": "Major Thom Vallejo",
+          "profile_path": "/4Xn03t2qDEMR2ecM7BtLwpvs3J0.jpg"
+        },
+        {
+          "id": 52850,
+          "name": "Lina Esco",
+          "character": "Captain Jackie Velez",
+          "profile_path": "/wznqU0k7art3jux3umSwMMbrLWv.jpg"
+        },
+        {
+          "id": 1472892,
+          "name": "Alex Hernandez",
+          "character": "Hialeah Patrolman Warwick",
+          "profile_path": null
+        },
+        {
+          "id": 1383989,
+          "name": "Cliff Chamberlain",
+          "character": "Hialeah Patrolman Junger",
+          "profile_path": "/2yTzF2kdRSVmnEAwQtT442BNJje.jpg"
+        },
+        {
+          "id": 20191,
+          "name": "Jose Pablo Cantillo",
+          "character": "DEA Agent Dayo Reyes",
+          "profile_path": "/qtNesvN1bAQ779gJBt3LYDsm8f7.jpg"
+        },
+        {
+          "id": 1893964,
+          "name": "Marco Morales",
+          "character": "Cartel Lookout",
+          "profile_path": "/dbiTftvSZUxmxQrKncqFiICG6ai.jpg"
+        }
+      ],
+      "crew": [
+        {
+          "id": 880,
+          "name": "Ben Affleck",
+          "job": "Producer",
+          "profile_path": "/aTcqu8cI4wMohU17xTdqmXKTGrw.jpg"
+        },
+        {
+          "id": 40223,
+          "name": "Joe Carnahan",
+          "job": "Director",
+          "profile_path": "/e6cnnUqh6mGIjnRFI4xFc30AqVr.jpg"
+        },
+        {
+          "id": 1892,
+          "name": "Matt Damon",
+          "job": "Producer",
+          "profile_path": "/At3JgvaNeEN4Z4ESKlhhes85Xo3.jpg"
+        },
+        {
+          "id": 4807995,
+          "name": "Luciana Damon",
+          "job": "Producer",
+          "profile_path": null
+        },
+        {
+          "id": 2385493,
+          "name": "Dani Bernfeld",
+          "job": "Producer",
+          "profile_path": null
+        },
+        {
+          "id": 95849,
+          "name": "Kevin Halloran",
+          "job": "Executive Producer",
+          "profile_path": null
+        },
+        {
+          "id": 1519661,
+          "name": "Michael Joe",
+          "job": "Executive Producer",
+          "profile_path": null
+        },
+        {
+          "id": 40223,
+          "name": "Joe Carnahan",
+          "job": "Screenplay",
+          "profile_path": "/e6cnnUqh6mGIjnRFI4xFc30AqVr.jpg"
+        }
+      ],
+      "keywords": [
+        {
+          "id": 416,
+          "name": "miami, florida"
+        },
+        {
+          "id": 6149,
+          "name": "police"
+        },
+        {
+          "id": 14782,
+          "name": "trust"
+        },
+        {
+          "id": 208156,
+          "name": "frantic"
+        },
+        {
+          "id": 208646,
+          "name": "hidden money"
+        },
+        {
+          "id": 311055,
+          "name": "lala gomà"
+        },
+        {
+          "id": 325766,
+          "name": "antagonistic"
+        },
+        {
+          "id": 325772,
+          "name": "assertive"
+        },
+        {
+          "id": 325782,
+          "name": "cheerful"
+        }
+      ],
+      "videos": [
+        {
+          "id": "695c0a0f98dc6b688476a056",
+          "key": "yeR5bcbRPak",
+          "name": "Official Trailer",
+          "site": "YouTube",
+          "type": "Trailer",
+          "official": true,
+          "published_at": "2026-01-05T13:00:01.000Z"
+        },
+        {
+          "id": "694d9f63d7f07c5af5154a8a",
+          "key": "v4grNkPSOWk",
+          "name": "Sneak Peek",
+          "site": "YouTube",
+          "type": "Teaser",
+          "official": true,
+          "published_at": "2025-12-25T14:00:00.000Z"
+        },
+        {
+          "id": "68c16d2960c9900124948514",
+          "key": "ARU2WHyOPxE",
+          "name": "Official Teaser",
+          "site": "YouTube",
+          "type": "Teaser",
+          "official": true,
+          "published_at": "2025-09-10T12:00:04.000Z"
+        }
+      ],
+      "recommendations": [
+        {
+          "id": 1031396,
+          "title": "Naruto 20th Anniversary - Road of Naruto",
+          "poster_path": "/fQdbaCovWOokxrE2qO6LiHZUB7H.jpg",
+          "vote_average": 7.6,
+          "isMovie": true
+        },
+        {
+          "id": 699249,
+          "title": "Naruto OVA 6: The Cross Roads",
+          "poster_path": "/gKAMgd2DXDlBrpTlvKqRSk15Api.jpg",
+          "vote_average": 6.6,
+          "isMovie": true
+        },
+        {
+          "id": 279229,
+          "title": "Sapphire Blue",
+          "poster_path": "/kxRqokSkj6HWuwVCbnddPFg73CM.jpg",
+          "vote_average": 7.105,
+          "isMovie": true
+        },
+        {
+          "id": 1181787,
+          "title": "Un Caso Excepcional",
+          "poster_path": "/wNKZe4InOKSpXjsDeHWeknNS0pr.jpg",
+          "vote_average": 9.2,
+          "isMovie": true
+        },
+        {
+          "id": 699254,
+          "title": "Naruto OVA 10: Uchiha Madara vs Senju Hashirama",
+          "poster_path": "/3AwkYyiwl02CMELo2oj88x2bEtu.jpg",
+          "vote_average": 6.5,
+          "isMovie": true
+        },
+        {
+          "id": 856245,
+          "title": "To Kill the Beast",
+          "poster_path": "/hAdkgE8lHelIQWpgrHk4wjEnbxQ.jpg",
+          "vote_average": 6.05,
+          "isMovie": true
+        },
+        {
+          "id": 763215,
+          "title": "Damsel",
+          "poster_path": "/AgHbB9DCE9aE57zkHjSmseszh6e.jpg",
+          "vote_average": 6.99,
+          "isMovie": true
+        },
+        {
+          "id": 1430856,
+          "title": "Mustard Fields",
+          "poster_path": "/dk7z5gKTBP2Hs08wQuazeS9qO12.jpg",
+          "vote_average": 10,
+          "isMovie": true
+        },
+        {
+          "id": 681,
+          "title": "Diamonds Are Forever",
+          "poster_path": "/uajiHcFX5sOhYB2tBuWkmizbtuU.jpg",
+          "vote_average": 6.409,
+          "isMovie": true
+        },
+        {
+          "id": 698940,
+          "title": "Naruto OVA 8: Naruto x UT",
+          "poster_path": "/5ds86rcR01tHvgsNimlQoIFFlqB.jpg",
+          "vote_average": 7.5,
+          "isMovie": true
+        }
+      ],
+      "similar": [
+        {
+          "id": 18060,
+          "title": "Beast Stalker",
+          "poster_path": "/hlaIVAyQc2Wo5AIpprYIkpbirAT.jpg",
+          "vote_average": 6.73,
+          "isMovie": true
+        },
+        {
+          "id": 1454746,
+          "title": "The Beethoven Method",
+          "poster_path": "/qUESkUv6kFUyOjRrC1vTOzhb8Ou.jpg",
+          "vote_average": 10,
+          "isMovie": true
+        },
+        {
+          "id": 16246,
+          "title": "Gone in 60 Seconds",
+          "poster_path": "/4Fvmm9XhV5BUCfBjlX3S3DRPrmf.jpg",
+          "vote_average": 6.2,
+          "isMovie": true
+        },
+        {
+          "id": 16276,
+          "title": "The Tiger Brigades",
+          "poster_path": "/2l1t2c2WySP5pxK5dTNr0HWAtor.jpg",
+          "vote_average": 5.637,
+          "isMovie": true
+        },
+        {
+          "id": 16912,
+          "title": "The Colditz Story",
+          "poster_path": "/yLeEVpgapcRBzUdeZdSWAe3fYLg.jpg",
+          "vote_average": 6.8,
+          "isMovie": true
+        },
+        {
+          "id": 17618,
+          "title": "Laid to Rest",
+          "poster_path": "/7bmcFvPGG3csVoefHKyiH1L5hh2.jpg",
+          "vote_average": 5.382,
+          "isMovie": true
+        },
+        {
+          "id": 15983,
+          "title": "Invasion U.S.A.",
+          "poster_path": "/mE5dSRTKW1dzV7D0pgP8sMxyIa9.jpg",
+          "vote_average": 5.734,
+          "isMovie": true
+        },
+        {
+          "id": 16007,
+          "title": "Death Note",
+          "poster_path": "/xiJPZntaz1BMooXfiwi2iZAMbhY.jpg",
+          "vote_average": 7.069,
+          "isMovie": true
+        },
+        {
+          "id": 16161,
+          "title": "Baby Boy",
+          "poster_path": "/2zhkM2rxCPVLxuZRYejcTiOhzfU.jpg",
+          "vote_average": 7.1,
+          "isMovie": true
+        },
+        {
+          "id": 16191,
+          "title": "Highway to Hell",
+          "poster_path": "/lGSHsgA65wZW485bL1g2q2fF4JI.jpg",
+          "vote_average": 5.8,
+          "isMovie": true
+        }
+      ],
+      "translations": [
+        {
+          "iso_639_1": "en",
+          "iso_3166_1": "US",
+          "name": "English",
+          "english_name": "English"
+        },
+        {
+          "iso_639_1": "fr",
+          "iso_3166_1": "FR",
+          "name": "Français",
+          "english_name": "French"
+        },
+        {
+          "iso_639_1": "ko",
+          "iso_3166_1": "KR",
+          "name": "한국어/조선말",
+          "english_name": "Korean"
+        },
+        {
+          "iso_639_1": "uk",
+          "iso_3166_1": "UA",
+          "name": "Український",
+          "english_name": "Ukrainian"
+        },
+        {
+          "iso_639_1": "es",
+          "iso_3166_1": "ES",
+          "name": "Español",
+          "english_name": "Spanish"
+        },
+        {
+          "iso_639_1": "es",
+          "iso_3166_1": "MX",
+          "name": "Español",
+          "english_name": "Spanish"
+        },
+        {
+          "iso_639_1": "tr",
+          "iso_3166_1": "TR",
+          "name": "Türkçe",
+          "english_name": "Turkish"
+        },
+        {
+          "iso_639_1": "th",
+          "iso_3166_1": "TH",
+          "name": "ภาษาไทย",
+          "english_name": "Thai"
+        },
+        {
+          "iso_639_1": "sv",
+          "iso_3166_1": "SE",
+          "name": "svenska",
+          "english_name": "Swedish"
+        },
+        {
+          "iso_639_1": "ru",
+          "iso_3166_1": "RU",
+          "name": "Pусский",
+          "english_name": "Russian"
+        },
+        {
+          "iso_639_1": "hu",
+          "iso_3166_1": "HU",
+          "name": "Magyar",
+          "english_name": "Hungarian"
+        },
+        {
+          "iso_639_1": "pt",
+          "iso_3166_1": "PT",
+          "name": "Português",
+          "english_name": "Portuguese"
+        },
+        {
+          "iso_639_1": "de",
+          "iso_3166_1": "DE",
+          "name": "Deutsch",
+          "english_name": "German"
+        },
+        {
+          "iso_639_1": "pt",
+          "iso_3166_1": "BR",
+          "name": "Português",
+          "english_name": "Portuguese"
+        },
+        {
+          "iso_639_1": "ka",
+          "iso_3166_1": "GE",
+          "name": "ქართული",
+          "english_name": "Georgian"
+        },
+        {
+          "iso_639_1": "sk",
+          "iso_3166_1": "SK",
+          "name": "Slovenčina",
+          "english_name": "Slovak"
+        },
+        {
+          "iso_639_1": "zh",
+          "iso_3166_1": "CN",
+          "name": "普通话",
+          "english_name": "Mandarin"
+        },
+        {
+          "iso_639_1": "it",
+          "iso_3166_1": "IT",
+          "name": "Italiano",
+          "english_name": "Italian"
+        },
+        {
+          "iso_639_1": "pl",
+          "iso_3166_1": "PL",
+          "name": "Polski",
+          "english_name": "Polish"
+        },
+        {
+          "iso_639_1": "bg",
+          "iso_3166_1": "BG",
+          "name": "български език",
+          "english_name": "Bulgarian"
+        }
+      ]
+    },
+    {
+      "id": "1242898-1768870103095",
+      "title": "Predator: Badlands",
+      "tmdb_id": 1242898,
+      "poster_path": "/pHpq9yNUIo6aDoCXEBzjSolywgz.jpg",
+      "listType": "watch",
+      "services": [],
+      "isMovie": true,
+      "genres": [
+        {
+          "id": 28,
+          "name": "Action"
+        },
+        {
+          "id": 878,
+          "name": "Science Fiction"
+        },
+        {
+          "id": 12,
+          "name": "Adventure"
+        }
+      ],
+      "overview": "Cast out from his clan, a young Predator finds an unlikely ally in a damaged android and embarks on a treacherous journey in search of the ultimate adversary.",
+      "vote_average": 7.796,
+      "vote_count": 1527,
+      "runtime": 107,
+      "cast": [
+        {
+          "id": 18050,
+          "name": "Elle Fanning",
+          "character": "Thia / Tessa",
+          "profile_path": "/e8CUyxQSE99y5IOfzSLtHC0B0Ch.jpg"
+        },
+        {
+          "id": 3223391,
+          "name": "Dimitrius Schuster-Koloamatangi",
+          "character": "Dek / Father",
+          "profile_path": "/rmIZTT1AZK3C9fYhEOtGKtSrF8E.jpg"
+        },
+        {
+          "id": 1891826,
+          "name": "Ravi Narayan",
+          "character": "Bud",
+          "profile_path": "/iM9dr3AjXTt7IGpRzZlQVG7hINa.jpg"
+        },
+        {
+          "id": 2253146,
+          "name": "Michael Homick",
+          "character": "Kwei (Suit)",
+          "profile_path": "/a7IFYVtmNvBMJ7c20BVMc0LX6PT.jpg"
+        },
+        {
+          "id": 1636658,
+          "name": "Stefan Grube",
+          "character": "Kwei (voice)",
+          "profile_path": "/7SJ13Np7xL20YJjPiUbM7PshdYA.jpg"
+        },
+        {
+          "id": 1440649,
+          "name": "Reuben De Jong",
+          "character": "Father (Suit)",
+          "profile_path": "/opjLobu1AKKspKfYzY6AXrjUglt.jpg"
+        },
+        {
+          "id": 1856011,
+          "name": "Cameron Brown",
+          "character": "Drone Synth",
+          "profile_path": "/jLEKQbppMDHeiFX23bxrcmT5dmh.jpg"
+        },
+        {
+          "id": 1257565,
+          "name": "Alison Wright",
+          "character": "MU/TH/UR (voice)",
+          "profile_path": "/yVdCk5eWk5syRrBdxjrnJ1O2Rpg.jpg"
+        },
+        {
+          "id": 1179419,
+          "name": "Matt Duffer",
+          "character": "Kwei's Ship Computer (voice)",
+          "profile_path": "/kXO5CnSxC0znMAICGxnPeuGP73U.jpg"
+        },
+        {
+          "id": 1179422,
+          "name": "Ross Duffer",
+          "character": "Kwei's Ship Computer (voice)",
+          "profile_path": null
+        }
+      ],
+      "crew": [
+        {
+          "id": 568322,
+          "name": "Dan Trachtenberg",
+          "job": "Director",
+          "profile_path": "/crABZLMi5SAz7rKm0wV6JUOeKs5.jpg"
+        },
+        {
+          "id": 1061155,
+          "name": "Patrick Aison",
+          "job": "Screenplay",
+          "profile_path": null
+        },
+        {
+          "id": 1093,
+          "name": "Lawrence Gordon",
+          "job": "Executive Producer",
+          "profile_path": "/jOZiaeFrl837bTO7wMdCNIaQSL.jpg"
+        },
+        {
+          "id": 2043,
+          "name": "John Davis",
+          "job": "Producer",
+          "profile_path": "/kpXOBMUBZe8XpHYk7s0721kjjIk.jpg"
+        },
+        {
+          "id": 60711,
+          "name": "Brent O'Connor",
+          "job": "Producer",
+          "profile_path": null
+        },
+        {
+          "id": 102630,
+          "name": "Marc Toberoff",
+          "job": "Producer",
+          "profile_path": "/tNgHmElWNYdstPhKqh6P78rDurZ.jpg"
+        },
+        {
+          "id": 568322,
+          "name": "Dan Trachtenberg",
+          "job": "Producer",
+          "profile_path": "/crABZLMi5SAz7rKm0wV6JUOeKs5.jpg"
+        },
+        {
+          "id": 1725893,
+          "name": "Ben Rosenblatt",
+          "job": "Producer",
+          "profile_path": null
+        },
+        {
+          "id": 1092,
+          "name": "Jim Thomas",
+          "job": "Executive Producer",
+          "profile_path": null
+        },
+        {
+          "id": 1094,
+          "name": "John Thomas",
+          "job": "Executive Producer",
+          "profile_path": null
+        }
+      ],
+      "keywords": [
+        {
+          "id": 10349,
+          "name": "survival"
+        },
+        {
+          "id": 10216,
+          "name": "outcast"
+        },
+        {
+          "id": 10158,
+          "name": "alien planet"
+        },
+        {
+          "id": 302711,
+          "name": "team up"
+        },
+        {
+          "id": 325761,
+          "name": "admiring"
+        },
+        {
+          "id": 325765,
+          "name": "amused"
+        },
+        {
+          "id": 325773,
+          "name": "audacious"
+        }
+      ],
+      "videos": [
+        {
+          "id": "69540d271f7f558045e41e8e",
+          "key": "TmD4c4vVclo",
+          "name": "On Digital January 6 and Blu-ray February 17",
+          "site": "YouTube",
+          "type": "Teaser",
+          "official": true,
+          "published_at": "2025-12-30T15:01:03.000Z"
+        },
+        {
+          "id": "692f5270d172f9b4f03eabe4",
+          "key": "SscfOy1i2IU",
+          "name": "Threat",
+          "site": "YouTube",
+          "type": "Teaser",
+          "official": true,
+          "published_at": "2025-12-02T12:00:27.000Z"
+        },
+        {
+          "id": "69248bd97d35337625b58df8",
+          "key": "0PayKPq0Rsc",
+          "name": "Mother Review",
+          "site": "YouTube",
+          "type": "Teaser",
+          "official": true,
+          "published_at": "2025-11-22T04:00:01.000Z"
+        },
+        {
+          "id": "69206a34426237e8d5c2d444",
+          "key": "lx_Tt9408o8",
+          "name": "A Deadly Haul",
+          "site": "YouTube",
+          "type": "Teaser",
+          "official": true,
+          "published_at": "2025-11-21T09:18:50.000Z"
+        },
+        {
+          "id": "691f2ae065fbc1253fc2ceb6",
+          "key": "J02hWG1sKog",
+          "name": "Bud",
+          "site": "YouTube",
+          "type": "Teaser",
+          "official": true,
+          "published_at": "2025-11-20T13:35:07.000Z"
+        }
+      ],
+      "recommendations": [
+        {
+          "id": 198556,
+          "title": "Main Krishna Hoon",
+          "poster_path": "/4fddOiJPp4Mf0jFXcp2WE8qvNW2.jpg",
+          "vote_average": 6.1,
+          "isMovie": true
+        },
+        {
+          "id": 106845,
+          "title": "Re-Kill",
+          "poster_path": "/wpofLYUv0aJmDNxyUZux0wTFXJH.jpg",
+          "vote_average": 5.983,
+          "isMovie": true
+        },
+        {
+          "id": 676685,
+          "title": "Panda Bear in Africa",
+          "poster_path": "/wxpu7svVqA0ALYpofQBPujGelN3.jpg",
+          "vote_average": 7.1,
+          "isMovie": true
+        },
+        {
+          "id": 896,
+          "title": "The World of Apu",
+          "poster_path": "/6Tz1Q69o2n3Zwb0ZffzPL0nFt2T.jpg",
+          "vote_average": 8.084,
+          "isMovie": true
+        },
+        {
+          "id": 19249,
+          "title": "Holiday on the Buses",
+          "poster_path": "/3ewJwuY28E4RzCRf2lklwvzPrsK.jpg",
+          "vote_average": 7.4,
+          "isMovie": true
+        },
+        {
+          "id": 1086548,
+          "title": "Vera and the Pleasure of Others",
+          "poster_path": "/e0ESGyso9K95glbbnTRenFfCC7l.jpg",
+          "vote_average": 6.375,
+          "isMovie": true
+        },
+        {
+          "id": 38384,
+          "title": "On the Beat",
+          "poster_path": "/dLv9QzzQZabT4enXjWEjF8TW1DD.jpg",
+          "vote_average": 7.7,
+          "isMovie": true
+        },
+        {
+          "id": 109277,
+          "title": "Death Angel - Sonic German Beatdown - Live in Germany",
+          "poster_path": "/p4mYjweSF3uw0QMiGG6DpGuTmyf.jpg",
+          "vote_average": 6.2,
+          "isMovie": true
+        },
+        {
+          "id": 21991,
+          "title": "State and Main",
+          "poster_path": "/348hvpWeSGdAQlCrGvKbpC0FpQN.jpg",
+          "vote_average": 6.247,
+          "isMovie": true
+        },
+        {
+          "id": 408574,
+          "title": "Chihayafuru: Part II",
+          "poster_path": "/fH9ze51RlYmbdMjO8csrfCb32TW.jpg",
+          "vote_average": 7.7,
+          "isMovie": true
+        }
+      ],
+      "similar": [
+        {
+          "id": 1066710,
+          "title": "Age of Silence",
+          "poster_path": "/bivfYgh2rdE1WNfdWmUjgdHnOVz.jpg",
+          "vote_average": 0,
+          "isMovie": true
+        },
+        {
+          "id": 16306,
+          "title": "Fantastic Planet",
+          "poster_path": "/prq0j1S0K07UjwLZLF6oMGflRUI.jpg",
+          "vote_average": 7.632,
+          "isMovie": true
+        },
+        {
+          "id": 286217,
+          "title": "The Martian",
+          "poster_path": "/3ndAx3weG6KDkJIRMCi5vXX6Dyb.jpg",
+          "vote_average": 7.692,
+          "isMovie": true
+        },
+        {
+          "id": 16866,
+          "title": "Planet 51",
+          "poster_path": "/x7Itcg3ZdExKwdKguy73WPEqosW.jpg",
+          "vote_average": 5.885,
+          "isMovie": true
+        },
+        {
+          "id": 16067,
+          "title": "Final Days of Planet Earth",
+          "poster_path": "/dW8lvvTmxZ5CTZKRwtqTrO1K1sA.jpg",
+          "vote_average": 4.7,
+          "isMovie": true
+        },
+        {
+          "id": 1257009,
+          "title": "Primitive War",
+          "poster_path": "/fZnY97zAyATRH50Q1I92fQy1hUg.jpg",
+          "vote_average": 6.744,
+          "isMovie": true
+        },
+        {
+          "id": 16638,
+          "title": "El Cid",
+          "poster_path": "/a6DY3LDlXFUDuXm47zXTOfiisxP.jpg",
+          "vote_average": 6.836,
+          "isMovie": true
+        },
+        {
+          "id": 1067595,
+          "title": "Ultraman Regulos: First Mission",
+          "poster_path": "/gIDXARsekR3PdtA4x0h0u8Tn7KG.jpg",
+          "vote_average": 0,
+          "isMovie": true
+        },
+        {
+          "id": 15074,
+          "title": "Extreme Ops",
+          "poster_path": "/984tq1bRL2uzR0wHrNzZVYTR0Al.jpg",
+          "vote_average": 4.7,
+          "isMovie": true
+        },
+        {
+          "id": 15379,
+          "title": "Missing in Action",
+          "poster_path": "/nBrDcnNQca88ed1gRwZ1Q5cjNxE.jpg",
+          "vote_average": 5.832,
+          "isMovie": true
+        }
+      ],
+      "translations": [
+        {
+          "iso_639_1": "en",
+          "iso_3166_1": "US",
+          "name": "English",
+          "english_name": "English"
+        },
+        {
+          "iso_639_1": "pt",
+          "iso_3166_1": "BR",
+          "name": "Português",
+          "english_name": "Portuguese"
+        },
+        {
+          "iso_639_1": "ko",
+          "iso_3166_1": "KR",
+          "name": "한국어/조선말",
+          "english_name": "Korean"
+        },
+        {
+          "iso_639_1": "fr",
+          "iso_3166_1": "FR",
+          "name": "Français",
+          "english_name": "French"
+        },
+        {
+          "iso_639_1": "es",
+          "iso_3166_1": "ES",
+          "name": "Español",
+          "english_name": "Spanish"
+        },
+        {
+          "iso_639_1": "vi",
+          "iso_3166_1": "VN",
+          "name": "Tiếng Việt",
+          "english_name": "Vietnamese"
+        },
+        {
+          "iso_639_1": "ru",
+          "iso_3166_1": "RU",
+          "name": "Pусский",
+          "english_name": "Russian"
+        },
+        {
+          "iso_639_1": "sk",
+          "iso_3166_1": "SK",
+          "name": "Slovenčina",
+          "english_name": "Slovak"
+        },
+        {
+          "iso_639_1": "pl",
+          "iso_3166_1": "PL",
+          "name": "Polski",
+          "english_name": "Polish"
+        },
+        {
+          "iso_639_1": "de",
+          "iso_3166_1": "DE",
+          "name": "Deutsch",
+          "english_name": "German"
+        },
+        {
+          "iso_639_1": "zh",
+          "iso_3166_1": "CN",
+          "name": "普通话",
+          "english_name": "Mandarin"
+        },
+        {
+          "iso_639_1": "th",
+          "iso_3166_1": "TH",
+          "name": "ภาษาไทย",
+          "english_name": "Thai"
+        },
+        {
+          "iso_639_1": "it",
+          "iso_3166_1": "IT",
+          "name": "Italiano",
+          "english_name": "Italian"
+        },
+        {
+          "iso_639_1": "bg",
+          "iso_3166_1": "BG",
+          "name": "български език",
+          "english_name": "Bulgarian"
+        },
+        {
+          "iso_639_1": "zh",
+          "iso_3166_1": "HK",
+          "name": "普通话",
+          "english_name": "Mandarin"
+        },
+        {
+          "iso_639_1": "ar",
+          "iso_3166_1": "SA",
+          "name": "العربية",
+          "english_name": "Arabic"
+        },
+        {
+          "iso_639_1": "id",
+          "iso_3166_1": "ID",
+          "name": "Bahasa indonesia",
+          "english_name": "Indonesian"
+        },
+        {
+          "iso_639_1": "he",
+          "iso_3166_1": "IL",
+          "name": "עִבְרִית",
+          "english_name": "Hebrew"
+        },
+        {
+          "iso_639_1": "es",
+          "iso_3166_1": "MX",
+          "name": "Español",
+          "english_name": "Spanish"
+        },
+        {
+          "iso_639_1": "ja",
+          "iso_3166_1": "JP",
+          "name": "日本語",
+          "english_name": "Japanese"
+        }
+      ]
     }
   ],
   "streaming_services": [
@@ -60,5 +2041,5 @@
     }
   ],
   "birthday": "02/20/1982",
-  "updated_at": "2025-12-14T19:28:26.918Z"
+  "updated_at": "2026-01-20T00:48:28.752Z"
 }

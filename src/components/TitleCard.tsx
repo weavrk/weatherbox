@@ -1,14 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { CirclePlus, CheckCircle2, X, Star, Clock, Play, Users, Film, Tv, Globe, Loader2, ArrowLeft, ListOrdered, Trash2, Monitor } from 'lucide-react';
+import { X, Star, Clock, Play, Users, Film, Tv, Globe, Loader2, ArrowLeft, ListOrdered, Trash2 } from 'lucide-react';
 import type { WatchBoxItem } from '../types';
 import { getPosterUrl, getItemDetails } from '../services/api';
+import { AddToWatchlistButton } from './AddToWatchlistButton';
 
 interface TitleCardProps {
   item: WatchBoxItem;
   onDelete?: (id: string) => void;
   onMove?: (id: string, newListType: 'top' | 'watch') => void;
   onAddToWatchlist?: (item: WatchBoxItem) => void;
+  onRemoveFromWatchlist?: (item: WatchBoxItem) => void;
+  /**
+   * Called when a poster_path is fetched for an item that didn't have one.
+   * This allows the parent to save the updated item to the backend.
+   */
+  onPosterFetched?: (itemId: string, posterPath: string) => void;
   /**
    * Visual/behavior variant for the small grid card:
    * - "add": shows + add button
@@ -16,6 +23,10 @@ interface TitleCardProps {
    * Defaults to "add" for explore cards.
    */
   variant?: 'add' | 'manage';
+  /**
+   * Whether this item has been added to watchlist (computed by parent)
+   */
+  isItemAdded?: boolean;
 }
 
 // Reusable Card Action Button Component
@@ -76,6 +87,7 @@ interface ReusableTitleCardProps {
   isAdded?: boolean;
   onCardClick?: (e: React.MouseEvent) => void;
   onAddClick?: (e: React.MouseEvent) => void;
+  onRemoveClick?: (e: React.MouseEvent) => void;
   onMoveToQueueClick?: (e: React.MouseEvent) => void;
   onDeleteClick?: (e: React.MouseEvent) => void;
 }
@@ -98,6 +110,7 @@ function ReusableTitleCard({
   isAdded,
   onCardClick,
   onAddClick,
+  onRemoveClick,
   onMoveToQueueClick,
   onDeleteClick,
 }: ReusableTitleCardProps) {
@@ -109,6 +122,13 @@ function ReusableTitleCard({
   useEffect(() => {
     setImageError(false);
   }, [posterSrc]);
+
+  // Handle add button click
+  const handleAddClick = (e: React.MouseEvent) => {
+    if (!isAdded && onAddClick) {
+      onAddClick(e);
+    }
+  };
 
   // Determine what to show
   // Show placeholder if: explicitly requested AND (no poster source OR image failed to load)
@@ -162,13 +182,11 @@ function ReusableTitleCard({
 
           {/* Explore / filmography card action: Add to watchlist */}
           {showAddAction && (
-            <button
-              className={`add-to-watchlist-button ${isAdded ? 'added' : ''}`}
-              onClick={onAddClick}
-              aria-label={isAdded ? 'Added to watchlist' : 'Add to watchlist'}
-            >
-              {isAdded ? <CheckCircle2 /> : <CirclePlus />}
-            </button>
+            <AddToWatchlistButton
+              isAdded={isAdded || false}
+              onAdd={handleAddClick}
+              onRemove={onRemoveClick}
+            />
           )}
         </div>
       </div>
@@ -197,18 +215,17 @@ interface CastMemberPage {
   }>;
 }
 
-export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, variant = 'add' }: TitleCardProps) {
+export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, onRemoveFromWatchlist, onPosterFetched, variant = 'add', isItemAdded = false }: TitleCardProps) {
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [navigationStack, setNavigationStack] = useState<Array<WatchBoxItem | CastMemberPage>>([]);
   const [currentItem, setCurrentItem] = useState<WatchBoxItem>(item);
   const [currentPage, setCurrentPage] = useState<'item' | 'cast'>('item');
   const [castMemberPage, setCastMemberPage] = useState<CastMemberPage | null>(null);
   const [extendedData, setExtendedData] = useState<Partial<WatchBoxItem> | null>(null);
-  const [imageBaseUrl, setImageBaseUrl] = useState<string>('https://image.tmdb.org/t/p/original');
   const [loadingDetails, setLoadingDetails] = useState(false);
   const [loadingCastPage, setLoadingCastPage] = useState(false);
   const [detailsError, setDetailsError] = useState<string | null>(null);
-  const [isAdded, setIsAdded] = useState(false);
+  const isAdded = isItemAdded;
   const [trailerModalOpen, setTrailerModalOpen] = useState(false);
   const [selectedTrailer, setSelectedTrailer] = useState<string | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -318,7 +335,6 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, variant = 
     setDetailsOpen(true);
     setExtendedData(null);
     setDetailsError(null);
-    setIsAdded(false); // Reset added state for new item
     
     // Reset scroll to top
     if (modalRef.current) {
@@ -353,15 +369,17 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, variant = 
             setExtendedData(result.data);
           }
           
-          if (result.imageBaseUrl) {
-            setImageBaseUrl(result.imageBaseUrl);
-          }
           // Update currentItem with poster_path from extended data if available
           if (result.data?.poster_path && !itemToShow.poster_path) {
+            const newPosterPath = result.data.poster_path;
             setCurrentItem(prev => ({
               ...prev,
-              poster_path: result.data?.poster_path
+              poster_path: newPosterPath
             }));
+            // Notify parent that poster was fetched so it can be saved
+            if (onPosterFetched && itemToShow.id) {
+              onPosterFetched(itemToShow.id, newPosterPath);
+            }
           }
           } else {
             setDetailsError(result.error || 'Failed to load details');
@@ -389,7 +407,14 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, variant = 
     e.stopPropagation();
     if (onAddToWatchlist && !isAdded) {
       onAddToWatchlist(item);
-      setIsAdded(true);
+    }
+  };
+
+  const handleRemoveFromWatchlist = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (onRemoveFromWatchlist && isAdded) {
+      onRemoveFromWatchlist(item);
     }
   };
 
@@ -488,6 +513,8 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, variant = 
     ...currentItem,
     ...(extendedData || {}),
     // Prefer extended data over item data, but keep item data as fallback
+    // poster_path: prefer from extendedData, then currentItem (which may have been updated), then item
+    poster_path: extendedData?.poster_path || currentItem.poster_path || item.poster_path,
     genres: extendedData?.genres || item.genres,
     overview: extendedData?.overview || item.overview,
     vote_average: extendedData?.vote_average !== undefined ? extendedData.vote_average : item.vote_average,
@@ -532,8 +559,13 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, variant = 
         isAdded={isAdded}
         onCardClick={handleCardClick}
         onAddClick={
-          cardVariant === 'add' && onAddToWatchlist && !isAdded
+          cardVariant === 'add' && onAddToWatchlist
             ? handleAddToWatchlist
+            : undefined
+        }
+        onRemoveClick={
+          cardVariant === 'add' && onRemoveFromWatchlist
+            ? handleRemoveFromWatchlist
             : undefined
         }
         onMoveToQueueClick={
@@ -579,9 +611,8 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, variant = 
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      if (!isAdded) {
+                      if (!isAdded && onAddToWatchlist) {
                         onAddToWatchlist(currentItem);
-                        setIsAdded(true);
                       }
                     }}
                     ariaLabel="Add to watchlist"
@@ -789,69 +820,6 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, variant = 
                   </div>
                 </div>
               )}
-
-              {/* Available On (Streaming Providers) */}
-              <div className="details-section">
-                <h3 className="details-section-title">
-                  <Monitor size={18} className="section-icon" />
-                  Available On
-                </h3>
-                {(() => {
-                  const providers = displayData.providers;
-                  const hasProviders = Array.isArray(providers) && providers.length > 0;
-                  
-                  if (hasProviders) {
-                    return (
-                      <div className="details-providers">
-                        {providers.map((provider, index) => {
-                          const providerUrl = provider.watch_link || `https://www.google.com/search?q=${encodeURIComponent(`${displayData.title || currentItem.title} ${provider.provider_name} streaming`)}`;
-                          
-                          return (
-                            <a
-                              key={`provider-${provider.provider_id}-${index}`}
-                              href={providerUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="provider-item"
-                            >
-                              {provider.logo_path && imageBaseUrl ? (
-                                <img
-                                  src={`${imageBaseUrl}${provider.logo_path}`}
-                                  alt={provider.provider_name}
-                                  className="provider-logo"
-                                  onError={(e) => {
-                                    e.currentTarget.style.display = 'none';
-                                  }}
-                                />
-                              ) : (
-                                <span className="provider-name-fallback">{provider.provider_name || 'Unknown Provider'}</span>
-                              )}
-                            </a>
-                          );
-                        })}
-                      </div>
-                    );
-                  } else {
-                    // No providers found - show Google search link
-                    const searchQuery = `${displayData.title || currentItem.title} streaming`;
-                    const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
-                    
-                    return (
-                      <div className="details-providers-fallback">
-                        <span>Can't find on TMDB, check </span>
-                        <a 
-                          href={googleSearchUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="google-search-link"
-                        >
-                          Google
-                        </a>
-                      </div>
-                    );
-                  }
-                })()}
-              </div>
 
               {/* Trailers */}
               {displayData.videos && displayData.videos.length > 0 && (() => {

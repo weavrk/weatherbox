@@ -8,11 +8,13 @@ interface ExploreTabProps {
   currentUser: User;
   onAddItem: () => void;
   onAddToWatchlist: (item: WatchBoxItem) => Promise<void>;
+  onRemoveFromWatchlist: (item: WatchBoxItem) => Promise<void>;
+  userItems: WatchBoxItem[];
 }
 
 const ITEMS_PER_LOAD = 20;
 
-export function ExploreTab({ onAddToWatchlist }: ExploreTabProps) {
+export function ExploreTab({ onAddToWatchlist, onRemoveFromWatchlist, userItems }: ExploreTabProps) {
   const [allContent, setAllContent] = useState<ExploreItem[]>([]);
   const [displayedContent, setDisplayedContent] = useState<ExploreItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -174,6 +176,10 @@ export function ExploreTab({ onAddToWatchlist }: ExploreTabProps) {
           const watchBoxItem = convertToWatchBoxItem(item);
           // Create unique key using tmdb_id, isMovie, and index to avoid duplicates
           const uniqueKey = `explore-${item.tmdb_id}-${item.isMovie ? 'movie' : 'show'}-${index}`;
+          // Check if this item is already in the user's watchlist
+          const isItemAdded = userItems.some(
+            userItem => userItem.tmdb_id === item.tmdb_id && userItem.isMovie === item.isMovie
+          );
           return (
             <TitleCard
               key={uniqueKey}
@@ -181,6 +187,8 @@ export function ExploreTab({ onAddToWatchlist }: ExploreTabProps) {
               onDelete={() => {}}
               onMove={() => {}}
               onAddToWatchlist={onAddToWatchlist}
+              onRemoveFromWatchlist={onRemoveFromWatchlist}
+              isItemAdded={isItemAdded}
             />
           );
         })}

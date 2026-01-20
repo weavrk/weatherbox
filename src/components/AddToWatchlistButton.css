@@ -1,0 +1,64 @@
+/* Base button styles */
+.add-to-watchlist-button {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: rgba(0, 0, 0, 0.85);
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  padding: 0;
+  z-index: 1000;
+  transition: background 0.2s ease;
+}
+
+.add-to-watchlist-button:hover:not(.is-added) {
+  background: var(--accent);
+}
+
+/* Already added state - blue background with white checkmark */
+.add-to-watchlist-button.is-added {
+  background: var(--accent) !important;
+  color: white !important;
+  cursor: pointer;
+}
+
+.add-to-watchlist-button.is-added .icon-wrapper svg {
+  color: white !important;
+}
+
+/* Icon wrapper */
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Animation when clicking to add */
+.add-to-watchlist-button.is-animating .icon-wrapper {
+  animation: spinAndFade 0.5s ease-in-out;
+}
+
+@keyframes spinAndFade {
+  0% {
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: rotate(180deg);
+    opacity: 0.3;
+  }
+  100% {
+    transform: rotate(360deg);
+    opacity: 1;
+  }
+}

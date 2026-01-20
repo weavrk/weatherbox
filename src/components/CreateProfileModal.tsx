@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Check } from 'lucide-react';
-import { getAvatarUrl, getAvailableAvatars, getAvailableStreamingServices, getServiceIcon, getServiceLabel, getServiceKey, clearAvatarCache } from '../services/api';
+import { getAvatarUrl, getAvailableAvatars, clearAvatarCache } from '../services/api';
 import { extractDominantColor } from '../utils/colorExtraction';
 
 interface CreateProfileModalProps {
@@ -11,9 +10,7 @@ interface CreateProfileModalProps {
 export function CreateProfileModal({ onClose, onCreate }: CreateProfileModalProps) {
   const [name, setName] = useState('');
   const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
-  const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [availableAvatars, setAvailableAvatars] = useState<string[]>([]);
-  const [availableServices, setAvailableServices] = useState<string[]>([]);
   const [avatarColors, setAvatarColors] = useState<Record<string, string>>({});
   const [month, setMonth] = useState('');
   const [day, setDay] = useState('');
@@ -33,11 +30,6 @@ export function CreateProfileModal({ onClose, onCreate }: CreateProfileModalProp
         setSelectedAvatar(avatars[0]);
       }
     });
-    
-    // Load streaming services on mount
-    getAvailableStreamingServices().then(services => {
-      setAvailableServices(services);
-    });
   }, []);
 
   useEffect(() => {
@@ -51,14 +43,6 @@ export function CreateProfileModal({ onClose, onCreate }: CreateProfileModalProp
     // Always re-extract color to pick up changes in updated SVGs
     const color = extractDominantColor(img, avatarFilename);
     setAvatarColors(prev => ({ ...prev, [avatarFilename]: color }));
-  };
-
-  const handleServiceToggle = (service: string) => {
-    setSelectedServices(prev => 
-      prev.includes(service) 
-        ? prev.filter(s => s !== service)
-        : [...prev, service]
-    );
   };
 
   const formatBirthday = (): string => {
@@ -75,7 +59,7 @@ export function CreateProfileModal({ onClose, onCreate }: CreateProfileModalProp
     e.preventDefault();
     if (name.trim() && selectedAvatar) {
       const birthday = formatBirthday();
-      onCreate(name.trim(), selectedAvatar, selectedServices, birthday);
+      onCreate(name.trim(), selectedAvatar, [], birthday);
     }
   };
 
@@ -134,35 +118,6 @@ export function CreateProfileModal({ onClose, onCreate }: CreateProfileModalProp
                   />
                 </button>
               ))}
-            </div>
-          </div>
-          <div className="form-group">
-            <label>Streaming Service Subscriptions</label>
-            <div className="services-grid">
-              {availableServices.map((serviceFilename) => {
-                const serviceKey = getServiceKey(serviceFilename);
-                const serviceLabel = getServiceLabel(serviceFilename);
-                return (
-                  <button
-                    key={serviceKey}
-                    type="button"
-                    className={`service-option ${selectedServices.includes(serviceKey) ? 'selected' : ''}`}
-                    onClick={() => handleServiceToggle(serviceKey)}
-                  >
-                    <img
-                      src={getServiceIcon(serviceFilename)}
-                      alt={serviceLabel}
-                      className="service-icon-large"
-                    />
-                    {selectedServices.includes(serviceKey) && (
-                      <div className="service-checkmark">
-                        <Check size={20} />
-                      </div>
-                    )}
-                    <span className="service-label">{serviceLabel}</span>
-                  </button>
-                );
-              })}
             </div>
           </div>
           <div className="form-group">

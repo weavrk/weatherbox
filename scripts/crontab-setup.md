@@ -1,13 +1,12 @@
 # Cron Job Setup for WatchBox Content Regeneration
 
-This document explains how to set up the weekly cron job to automatically regenerate explore content.
+This document explains how to set up the daily cron job to automatically regenerate explore content.
 
 ## Schedule
 
-- **Frequency**: Weekly
-- **Day**: Saturday
-- **Time**: 12:00 AM (midnight)
-- **Cron Expression**: `0 0 * * 6`
+- **Frequency**: Daily
+- **Time**: 2:00 AM
+- **Cron Expression**: `0 2 * * *`
 
 ## Setup Instructions
 
@@ -20,7 +19,7 @@ This document explains how to set up the weekly cron job to automatically regene
 
 2. **Add the following line:**
    ```bash
-   0 0 * * 6 /Users/katherineweaver/Dropbox/Files/Work/06_Programming/x.Side\ Projects/watchbox/scripts/regenerate-content-cron.sh >> /Users/katherineweaver/Dropbox/Files/Work/06_Programming/x.Side\ Projects/watchbox/logs/cron.log 2>&1
+   0 2 * * * /Users/katherineweaver/Dropbox/Files/Work/06_Programming/x.Side\ Projects/watchbox/scripts/regenerate-content-cron.sh >> /Users/katherineweaver/Dropbox/Files/Work/06_Programming/x.Side\ Projects/watchbox/logs/cron.log 2>&1
    ```
 
 3. **Save and exit** (in vim: press `Esc`, type `:wq`, press Enter)
@@ -171,10 +170,10 @@ crontab -e
 
 **Common schedules:**
 - Daily at midnight: `0 0 * * *`
+- Daily at 2 AM: `0 2 * * *` (current)
 - Weekly on Sunday: `0 0 * * 0`
-- Weekly on Saturday: `0 0 * * 6` (current)
+- Weekly on Saturday: `0 0 * * 6`
 - Every 12 hours: `0 */12 * * *`
-- Every day at 2 AM: `0 2 * * *`
 
 ## Notes
 

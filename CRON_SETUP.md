@@ -1,4 +1,4 @@
-# Weekly Content Regeneration Cron Job
+# Daily Content Regeneration Cron Job
 
 ## Quick Setup
 
@@ -8,7 +8,7 @@ Run the installer script:
 ./scripts/install-cron.sh
 ```
 
-This will automatically add the cron job to run **every Saturday at 12:00 AM (midnight)**.
+This will automatically add the cron job to run **every day at 2:00 AM**.
 
 ## What It Does
 
@@ -36,7 +36,7 @@ crontab -e
 Add this line:
 
 ```
-0 0 * * 6 /Users/katherineweaver/Dropbox/Files/Work/06_Programming/x.Side\ Projects/watchbox/scripts/regenerate-content-cron.sh >> /Users/katherineweaver/Dropbox/Files/Work/06_Programming/x.Side\ Projects/watchbox/logs/cron.log 2>&1
+0 2 * * * /Users/katherineweaver/Dropbox/Files/Work/06_Programming/x.Side\ Projects/watchbox/scripts/regenerate-content-cron.sh >> /Users/katherineweaver/Dropbox/Files/Work/06_Programming/x.Side\ Projects/watchbox/logs/cron.log 2>&1
 ```
 
 ## Verify Installation
@@ -63,10 +63,9 @@ ls -lt logs/content-regeneration-*.log | head -1
 
 ## Schedule
 
-- **Frequency**: Weekly
-- **Day**: Saturday
-- **Time**: 12:00 AM (midnight)
-- **Cron Expression**: `0 0 * * 6`
+- **Frequency**: Daily
+- **Time**: 2:00 AM
+- **Cron Expression**: `0 2 * * *`
 
 ## Logs
 

@@ -1,10 +1,13 @@
 #!/bin/bash
 
 # WatchBox Content Regeneration Cron Job
-# Runs weekly to update explore content for both local and production environments
+# Runs daily to update explore content for both local and production environments
 #
 # Usage: ./scripts/regenerate-content-cron.sh
 # This script is designed to be run via cron job
+
+# Set up PATH for cron (cron runs with minimal environment)
+export PATH="/usr/local/bin:/usr/bin:/bin:/opt/homebrew/bin:$PATH"
 
 # Get the directory where this script is located
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -41,11 +44,21 @@ cd "$PROJECT_ROOT" || {
 log ""
 log "--- LOCAL ENVIRONMENT ---"
 
-# Check if Node.js is available
-if ! command -v node &> /dev/null; then
+# Find node executable (try common locations)
+NODE_CMD=""
+if command -v node &> /dev/null; then
+    NODE_CMD="node"
+elif [ -f "/opt/homebrew/bin/node" ]; then
+    NODE_CMD="/opt/homebrew/bin/node"
+elif [ -f "/usr/local/bin/node" ]; then
+    NODE_CMD="/usr/local/bin/node"
+fi
+
+if [ -z "$NODE_CMD" ]; then
     log_error "Node.js is not installed or not in PATH"
 else
-    log "Node.js version: $(node --version)"
+    log "Node.js found: $NODE_CMD"
+    log "Node.js version: $($NODE_CMD --version)"
     
     # Check if npm dependencies are installed
     if [ ! -d "$PROJECT_ROOT/node_modules" ]; then
@@ -60,7 +73,7 @@ else
     
     # Run local generation script
     log "Running local content generation..."
-    node "$SCRIPT_DIR/generate-explore-content.js" >> "$LOG_FILE" 2>&1
+    $NODE_CMD "$SCRIPT_DIR/generate-explore-content.js" >> "$LOG_FILE" 2>&1
     
     if [ $? -eq 0 ]; then
         log "✅ Local content regeneration completed successfully"

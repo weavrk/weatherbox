@@ -11,7 +11,7 @@ import type { WatchBoxItem, UserSummary } from '../types';
 import type { ExploreItem } from '../services/api';
 
 export function MainWatchBoxScreen() {
-  const { currentUser, logout, loadUser } = useUser();
+  const { currentUser, setCurrentUser, logout, loadUser } = useUser();
   const [items, setItems] = useState<WatchBoxItem[]>([]);
   const [activeTab, setActiveTab] = useState<'watchlist' | 'explore'>('watchlist');
   const [showEditProfile, setShowEditProfile] = useState(false);
@@ -243,6 +243,61 @@ export function MainWatchBoxScreen() {
     });
   };
 
+  const handleRemoveFromWatchlist = async (item: WatchBoxItem) => {
+    if (!currentUser) return;
+    
+    // Find the existing item
+    const existingItem = items.find(i => i.tmdb_id === item.tmdb_id && i.isMovie === item.isMovie);
+    if (!existingItem) return;
+    
+    // Remove the item
+    const updatedItems = items.filter(i => i.id !== existingItem.id);
+    setItems(updatedItems);
+    
+    // Save to backend
+    await saveUser({
+      user_id: currentUser.user_id,
+      name: currentUser.name,
+      avatar_filename: currentUser.avatar_filename,
+      items: updatedItems,
+      streaming_services: currentUser.streaming_services,
+      birthday: currentUser.birthday
+    });
+  };
+
+  const handlePosterFetched = async (itemId: string, posterPath: string) => {
+    if (!currentUser) return;
+    
+    // Update the item in local state
+    const updatedItems = items.map(item =>
+      item.id === itemId ? { ...item, poster_path: posterPath } : item
+    );
+    setItems(updatedItems);
+    
+    // Update currentUser in context so it persists
+    const updatedUser = {
+      ...currentUser,
+      items: updatedItems
+    };
+    // Update context directly (we'll also save to backend)
+    // Note: We need to update the context's currentUser, but we don't have direct access
+    // So we'll save to backend and reload, or update context via setCurrentUser if available
+    
+    // Save to backend
+    await saveUser({
+      user_id: currentUser.user_id,
+      name: currentUser.name,
+      avatar_filename: currentUser.avatar_filename,
+      items: updatedItems,
+      streaming_services: currentUser.streaming_services,
+      birthday: currentUser.birthday
+    });
+    
+    // Update context to reflect the change immediately
+    // This ensures the poster persists when switching tabs
+    setCurrentUser(updatedUser);
+  };
+
   if (!currentUser) {
     return <div>Loading...</div>;
   }
@@ -459,6 +514,7 @@ export function MainWatchBoxScreen() {
               onDelete={handleDelete}
               onMove={handleMove}
               onAddToWatchlist={handleAddToWatchlist}
+              onPosterFetched={handlePosterFetched}
             />
             <SectionList
               title="Watchlist"
@@ -466,13 +522,20 @@ export function MainWatchBoxScreen() {
               onDelete={handleDelete}
               onMove={handleMove}
               onAddToWatchlist={handleAddToWatchlist}
+              onPosterFetched={handlePosterFetched}
             />
             <button className="fab" onClick={handleAddClick} aria-label="Add item">
               <CopyPlus className="fab-icon" />
             </button>
           </>
         ) : (
-          <ExploreTab currentUser={currentUser} onAddItem={handleAddClick} onAddToWatchlist={handleAddToWatchlist} />
+          <ExploreTab 
+            currentUser={currentUser} 
+            onAddItem={handleAddClick} 
+            onAddToWatchlist={handleAddToWatchlist}
+            onRemoveFromWatchlist={handleRemoveFromWatchlist}
+            userItems={items}
+          />
         )}
       </main>
       

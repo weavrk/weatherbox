@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowLeft, Plus, X } from 'lucide-react';
-import { getAvatarUrl, getAvailableAvatars, getDefaultStreamingServices, getServiceLogoUrl, clearAvatarCache } from '../services/api';
+import { ArrowLeft } from 'lucide-react';
+import { getAvatarUrl, getAvailableAvatars, clearAvatarCache } from '../services/api';
 import { extractDominantColor } from '../utils/colorExtraction';
 import type { StreamingService } from '../types';
-import { AddServiceModal } from './AddServiceModal';
 
 interface CreateProfilePageProps {
   onBack: () => void;
@@ -13,15 +12,11 @@ interface CreateProfilePageProps {
 export function CreateProfilePage({ onBack, onCreate }: CreateProfilePageProps) {
   const [name, setName] = useState('');
   const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
-  const [selectedServices, setSelectedServices] = useState<StreamingService[]>([]);
   const [availableAvatars, setAvailableAvatars] = useState<string[]>([]);
-  const [defaultServices, setDefaultServices] = useState<StreamingService[]>([]);
   const [avatarColors, setAvatarColors] = useState<Record<string, string>>({});
   const [month, setMonth] = useState('');
   const [day, setDay] = useState('');
   const [year, setYear] = useState('');
-  const [showAddServiceModal, setShowAddServiceModal] = useState(false);
-  const [showRemoveConfirm, setShowRemoveConfirm] = useState<string | null>(null);
   const imageRefs = useRef<Record<string, HTMLImageElement>>({});
 
   useEffect(() => {
@@ -36,13 +31,6 @@ export function CreateProfilePage({ onBack, onCreate }: CreateProfilePageProps) 
       if (avatars.length > 0 && !selectedAvatar) {
         setSelectedAvatar(avatars[0]);
       }
-    });
-    
-    // Load default streaming services and pre-select them all
-    getDefaultStreamingServices().then(services => {
-      setDefaultServices(services);
-      // Pre-select all default services for new profiles
-      setSelectedServices(services);
     });
   }, []);
 
@@ -59,39 +47,6 @@ export function CreateProfilePage({ onBack, onCreate }: CreateProfilePageProps) 
     setAvatarColors(prev => ({ ...prev, [avatarFilename]: color }));
   };
 
-  const handleServiceToggle = (service: StreamingService) => {
-    const isSelected = selectedServices.some(s => s.name === service.name);
-    
-    if (isSelected) {
-      setSelectedServices(prev => prev.filter(s => s.name !== service.name));
-    } else {
-      setSelectedServices(prev => [...prev, service]);
-    }
-  };
-
-  const handleRemoveService = (serviceName: string) => {
-    setShowRemoveConfirm(serviceName);
-  };
-
-  const confirmRemoveService = () => {
-    if (showRemoveConfirm) {
-      setSelectedServices(prev => prev.filter(s => s.name !== showRemoveConfirm));
-      setShowRemoveConfirm(null);
-    }
-  };
-
-  const cancelRemoveService = () => {
-    setShowRemoveConfirm(null);
-  };
-
-  const handleAddServiceClick = () => {
-    setShowAddServiceModal(true);
-  };
-
-  const handleServiceAdded = (service: StreamingService) => {
-    setSelectedServices(prev => [...prev, service]);
-  };
-
   const formatBirthday = (): string => {
     if (!month && !day && !year) return '';
     
@@ -106,7 +61,7 @@ export function CreateProfilePage({ onBack, onCreate }: CreateProfilePageProps) 
     e.preventDefault();
     if (name.trim() && selectedAvatar) {
       const birthday = formatBirthday();
-      onCreate(name.trim(), selectedAvatar, selectedServices, birthday);
+      onCreate(name.trim(), selectedAvatar, [], birthday);
     }
   };
 
@@ -169,95 +124,6 @@ export function CreateProfilePage({ onBack, onCreate }: CreateProfilePageProps) 
               </div>
             </div>
             <div className="form-group">
-              <label>Streaming Service Subscriptions</label>
-              <div className="services-grid">
-                {/* Show user's selected services */}
-                {selectedServices.map((service) => {
-                  const isRemoving = showRemoveConfirm === service.name;
-                  const logoUrl = (service as any).logo_url || getServiceLogoUrl(service.logo);
-                  return (
-                    <div key={service.name} className="service-option selected">
-                      <img
-                        src={logoUrl}
-                        alt={service.name}
-                        className="service-icon-large"
-                      />
-                      <button
-                        type="button"
-                        className="service-remove-button"
-                        onClick={() => handleRemoveService(service.name)}
-                        aria-label={`Remove ${service.name}`}
-                      >
-                        <X size={12} />
-                      </button>
-                      
-                      {isRemoving && (
-                        <div className="remove-confirm-overlay">
-                          <p>Remove?</p>
-                          <div className="remove-confirm-buttons">
-                            <button 
-                              type="button"
-                              onClick={confirmRemoveService}
-                              className="btn-confirm-remove"
-                            >
-                              Yes
-                            </button>
-                            <button 
-                              type="button"
-                              onClick={cancelRemoveService}
-                              className="btn-cancel-remove"
-                            >
-                              No
-                            </button>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-                
-                {/* Show default services that aren't selected */}
-                {defaultServices
-                  .filter(defService => !selectedServices.some(s => s.name === defService.name))
-                  .map((service) => {
-                    const logoUrl = (service as any).logo_url || getServiceLogoUrl(service.logo);
-                    return (
-                      <button
-                        key={service.name}
-                        type="button"
-                        className="service-option"
-                        onClick={() => handleServiceToggle(service)}
-                      >
-                        <img
-                          src={logoUrl}
-                          alt={service.name}
-                          className="service-icon-large"
-                        />
-                      </button>
-                    );
-                  })}
-                
-                {/* Add Service button */}
-                <button
-                  type="button"
-                  className="service-option service-add"
-                  onClick={handleAddServiceClick}
-                >
-                  <div className="service-add-icon">
-                    <Plus size={32} />
-                  </div>
-                  <span className="service-label">Add</span>
-                </button>
-              </div>
-            </div>
-            
-            {showAddServiceModal && (
-              <AddServiceModal
-                onClose={() => setShowAddServiceModal(false)}
-                onAdd={handleServiceAdded}
-              />
-            )}
-            <div className="form-group">
               <label>Birthday</label>
               <div className="birthday-fields">
                 <input
@@ -309,7 +175,7 @@ export function CreateProfilePage({ onBack, onCreate }: CreateProfilePageProps) 
               e.preventDefault();
               if (name.trim() && selectedAvatar) {
                 const birthday = formatBirthday();
-                onCreate(name.trim(), selectedAvatar, selectedServices, birthday);
+                onCreate(name.trim(), selectedAvatar, [], birthday);
               }
             }}
           >
