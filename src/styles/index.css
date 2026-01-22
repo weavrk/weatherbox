@@ -3897,6 +3897,14 @@ img {
   width: 200px;
 }
 
+@media (max-width: 479px) {
+  .filter-search-input-wrapper {
+    flex: 0 0 auto;
+    width: 120px; /* Fixed smaller width on mobile */
+    max-width: 120px;
+  }
+}
+
 .filter-search-input {
   width: 100%;
   background: var(--color-background-components, var(--bg-card));
