@@ -2,7 +2,6 @@ import { useEffect, useState, useRef, useMemo } from 'react';
 import { CopyPlus, Funnel, Tv, Search, X, ArrowLeft, User, LogOut } from 'lucide-react';
 import { useUser } from '../contexts/UserContext';
 import { Header } from './Header';
-import { Logo } from './Logo';
 import { SectionList } from './SectionList';
 import { ExploreTab } from './ExploreTab';
 import { EditProfileModal } from './EditProfileModal';
