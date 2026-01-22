@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useMemo } from 'react';
-import { CopyPlus, Funnel, Tv, Search, X, ArrowLeft, User, LogOut } from 'lucide-react';
+import { CopyPlus, Funnel, Tv, Search, X, ArrowLeft, User, LogOut, Plus } from 'lucide-react';
 import { useUser } from '../contexts/UserContext';
 import { Header } from './Header';
 import { SectionList } from './SectionList';
@@ -20,6 +20,8 @@ export function MainWatchBoxScreen() {
   const requestAccountMenuRef = useRef<(() => void) | null>(null);
   const [moviesActive, setMoviesActive] = useState(false);
   const [showsActive, setShowsActive] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [showFilterBottomSheet, setShowFilterBottomSheet] = useState(false);
   const [filterButtonActive, setFilterButtonActive] = useState(false);
@@ -386,8 +388,22 @@ export function MainWatchBoxScreen() {
     );
   }
 
-  const queueItems = items.filter(item => item.listType === 'top');
-  const watchlistItems = items.filter(item => item.listType === 'watch');
+  // Filter items by Movies/Shows if filters are active
+  const filteredItems = useMemo(() => {
+    let filtered = [...items];
+    
+    // Apply Movies/Shows filter
+    if (moviesActive) {
+      filtered = filtered.filter(item => item.isMovie === true);
+    } else if (showsActive) {
+      filtered = filtered.filter(item => item.isMovie === false);
+    }
+    
+    return filtered;
+  }, [items, moviesActive, showsActive]);
+  
+  const queueItems = filteredItems.filter(item => item.listType === 'top');
+  const watchlistItems = filteredItems.filter(item => item.listType === 'watch');
 
   return (
     <div className="main-screen gradient-background">
@@ -409,7 +425,7 @@ export function MainWatchBoxScreen() {
       
       {/* Mobile Filter Bar */}
       <div className="mobile-filter-bar">
-        <div className="mobile-filters">
+        <div className="mobile-filters-left">
           <button
             className={`filter-chip ${moviesActive ? 'active' : ''}`}
             onClick={(e) => {
@@ -420,7 +436,8 @@ export function MainWatchBoxScreen() {
             }}
             onMouseDown={(e) => e.preventDefault()}
           >
-            Movies
+            <span>Movies</span>
+            {moviesActive ? <X size={16} /> : <Plus size={16} />}
           </button>
           <button
             className={`filter-chip ${showsActive ? 'active' : ''}`}
@@ -432,16 +449,49 @@ export function MainWatchBoxScreen() {
             }}
             onMouseDown={(e) => e.preventDefault()}
           >
-            Shows
+            <span>Shows</span>
+            {showsActive ? <X size={16} /> : <Plus size={16} />}
+          </button>
+          <button 
+            className={`mobile-filter-button ${filterButtonActive ? 'active' : ''}`}
+            onClick={() => setShowFilterBottomSheet(true)}
+            aria-label="Filter"
+          >
+            <Funnel className="filter-icon" size={16} />
           </button>
         </div>
-        <button 
-          className={`mobile-filter-button ${filterButtonActive ? 'active' : ''}`}
-          onClick={() => setShowFilterBottomSheet(true)}
-          aria-label="Filter"
-        >
-          <Funnel className="filter-icon" size={16} />
-        </button>
+        <div className="mobile-filters-right">
+          {searchOpen ? (
+            <div className="filter-search-input-wrapper">
+              <input
+                type="text"
+                className="filter-search-input"
+                placeholder="Search..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                autoFocus
+              />
+              <button
+                className="filter-search-close"
+                onClick={() => {
+                  setSearchOpen(false);
+                  setSearchQuery('');
+                }}
+                aria-label="Close search"
+              >
+                <X size={16} />
+              </button>
+            </div>
+          ) : (
+            <button
+              className="filter-chip filter-search-button"
+              onClick={() => setSearchOpen(true)}
+              aria-label="Search"
+            >
+              <Search size={16} />
+            </button>
+          )}
+        </div>
       </div>
       
       {/* Account Menu */}
@@ -520,6 +570,36 @@ export function MainWatchBoxScreen() {
       
       {/* Desktop Filters - Top Right */}
       <div className="desktop-filters-top-right">
+        {searchOpen ? (
+          <div className="filter-search-input-wrapper">
+            <input
+              type="text"
+              className="filter-search-input"
+              placeholder="Search..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              autoFocus
+            />
+            <button
+              className="filter-search-close"
+              onClick={() => {
+                setSearchOpen(false);
+                setSearchQuery('');
+              }}
+              aria-label="Close search"
+            >
+              <X size={16} />
+            </button>
+          </div>
+        ) : (
+          <button
+            className="filter-chip filter-search-button"
+            onClick={() => setSearchOpen(true)}
+            aria-label="Search"
+          >
+            <Search size={16} />
+          </button>
+        )}
         <button
           className={`filter-chip ${moviesActive ? 'active' : ''}`}
           onClick={(e) => {
@@ -530,7 +610,8 @@ export function MainWatchBoxScreen() {
           }}
           onMouseDown={(e) => e.preventDefault()}
         >
-          Movies
+          <span>Movies</span>
+          {moviesActive ? <X size={16} /> : <Plus size={16} />}
         </button>
         <button
           className={`filter-chip ${showsActive ? 'active' : ''}`}
@@ -542,7 +623,8 @@ export function MainWatchBoxScreen() {
           }}
           onMouseDown={(e) => e.preventDefault()}
         >
-          Shows
+          <span>Shows</span>
+          {showsActive ? <X size={16} /> : <Plus size={16} />}
         </button>
         <div className="filter-button-wrapper">
           <button 
@@ -587,7 +669,8 @@ export function MainWatchBoxScreen() {
                             className={`filter-chip-chip ${isSelected ? 'active' : ''}`}
                             onClick={() => handleCategoryToggle(genre)}
                           >
-                            {genre}
+                            <span>{genre}</span>
+                            {isSelected ? <X size={16} /> : <Plus size={16} />}
                           </button>
                         );
                       })}
@@ -676,9 +759,6 @@ export function MainWatchBoxScreen() {
               onAddToWatchlist={handleAddToWatchlist}
               onPosterFetched={handlePosterFetched}
             />
-            <button className="fab" onClick={handleAddClick} aria-label="Add item">
-              <CopyPlus className="fab-icon" />
-            </button>
           </>
         ) : (
           <ExploreTab 
@@ -687,6 +767,8 @@ export function MainWatchBoxScreen() {
             onAddToWatchlist={handleAddToWatchlist}
             onRemoveFromWatchlist={handleRemoveFromWatchlist}
             userItems={items}
+            moviesActive={moviesActive}
+            showsActive={showsActive}
           />
         )}
       </main>
@@ -789,7 +871,7 @@ export function MainWatchBoxScreen() {
               }}
             />
           </div>
-          <span className="bottom-nav-label">My Watchbox</span>
+          <span className="bottom-nav-label">{currentUser.name}</span>
         </button>
       </nav>
     </div>

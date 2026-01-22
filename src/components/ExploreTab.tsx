@@ -1,20 +1,22 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import type { User, WatchBoxItem } from '../types';
 import type { ExploreItem } from '../services/api';
 import { getExploreContent } from '../services/api';
 import { TitleCard } from './TitleCard';
 
 interface ExploreTabProps {
-  currentUser: User;
-  onAddItem: () => void;
+  currentUser?: User;
+  onAddItem?: () => void;
   onAddToWatchlist: (item: WatchBoxItem) => Promise<void>;
   onRemoveFromWatchlist: (item: WatchBoxItem) => Promise<void>;
   userItems: WatchBoxItem[];
+  moviesActive?: boolean;
+  showsActive?: boolean;
 }
 
 const ITEMS_PER_LOAD = 20;
 
-export function ExploreTab({ onAddToWatchlist, onRemoveFromWatchlist, userItems }: ExploreTabProps) {
+export function ExploreTab({ onAddToWatchlist, onRemoveFromWatchlist, userItems, moviesActive = false, showsActive = false }: ExploreTabProps) {
   const [allContent, setAllContent] = useState<ExploreItem[]>([]);
   const [displayedContent, setDisplayedContent] = useState<ExploreItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -24,13 +26,25 @@ export function ExploreTab({ onAddToWatchlist, onRemoveFromWatchlist, userItems 
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
   const observerTarget = useRef<HTMLDivElement>(null);
 
+  // Filter content based on Movies/Shows filters
+  const filteredContent = useMemo(() => {
+    let filtered = [...allContent];
+    
+    // Apply Movies/Shows filter
+    if (moviesActive) {
+      filtered = filtered.filter(item => item.isMovie === true);
+    } else if (showsActive) {
+      filtered = filtered.filter(item => item.isMovie === false);
+    }
+    
+    return filtered;
+  }, [allContent, moviesActive, showsActive]);
+
   const loadInitialContent = async () => {
     setLoading(true);
     try {
       const { content, lastUpdated } = await getExploreContent();
       setAllContent(content);
-      setHasMore(content.length > ITEMS_PER_LOAD);
-      setDisplayedContent(content.slice(0, ITEMS_PER_LOAD));
       setLastUpdated(lastUpdated);
     } catch (error) {
       console.error('Failed to load explore content:', error);
@@ -39,6 +53,14 @@ export function ExploreTab({ onAddToWatchlist, onRemoveFromWatchlist, userItems 
     }
   };
 
+  // Update displayed content when filtered content changes
+  useEffect(() => {
+    const filtered = filteredContent.slice(0, ITEMS_PER_LOAD);
+    setDisplayedContent(filtered);
+    setLoadedCount(ITEMS_PER_LOAD);
+    setHasMore(filteredContent.length > ITEMS_PER_LOAD);
+  }, [filteredContent]);
+
   const loadMore = () => {
     if (loadingMore || !hasMore) return;
     
@@ -46,12 +68,12 @@ export function ExploreTab({ onAddToWatchlist, onRemoveFromWatchlist, userItems 
     // Simulate a small delay for better UX
     setTimeout(() => {
       const nextCount = loadedCount + ITEMS_PER_LOAD;
-      const newItems = allContent.slice(loadedCount, nextCount);
+      const newItems = filteredContent.slice(loadedCount, nextCount);
       
       if (newItems.length > 0) {
         setDisplayedContent(prev => [...prev, ...newItems]);
         setLoadedCount(nextCount);
-        setHasMore(nextCount < allContent.length);
+        setHasMore(nextCount < filteredContent.length);
       } else {
         setHasMore(false);
       }
@@ -83,7 +105,7 @@ export function ExploreTab({ onAddToWatchlist, onRemoveFromWatchlist, userItems 
         observer.unobserve(currentTarget);
       }
     };
-  }, [hasMore, loadingMore, loadedCount, allContent.length]);
+  }, [hasMore, loadingMore, loadedCount, filteredContent.length]);
 
   const convertToWatchBoxItem = (item: ExploreItem): WatchBoxItem => {
     // Ensure poster_path is preserved correctly (not the string "null")
