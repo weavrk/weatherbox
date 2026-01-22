@@ -444,7 +444,7 @@ img {
   outline-offset: 4px;
 }
 
-.profile-avatar > * {
+.profile-avatar > *:not(img) {
   border-radius: 50%;
   overflow: hidden;
   width: 100%;

@@ -10,6 +10,9 @@ function mockApiPlugin() {
   return {
     name: 'mock-api',
     configureServer(server) {
+      // IMPORTANT: Register API handler FIRST, before static file serving
+      // This ensures /api/* requests are intercepted before Vite tries to serve PHP files
+      
       // Serve data/posters directory - handle both /data and /hrefs/watchbox/data
       const serveDataFiles = (req: any, res: any, next: any) => {
         try {
@@ -54,50 +57,75 @@ function mockApiPlugin() {
         }
       }
       
-      // Register middleware early (before other middleware)
-      server.middlewares.use(serveDataFiles)
-      
       // Mock API endpoints - handle both /api and /hrefs/watchbox/api
+      // MUST be registered FIRST to intercept /api requests before static file serving
       const handleApi = async (req: any, res: any, next: any) => {
         try {
           let requestPath = req.url || ''
           
-          // Skip Vite internal requests
-          if (requestPath.startsWith('/@') || requestPath.startsWith('/node_modules/') || requestPath.startsWith('/src/')) {
-            return next()
-          }
-          
-          // Remove base path if present
-          if (requestPath.startsWith('/hrefs/watchbox/api')) {
-            requestPath = requestPath.replace('/hrefs/watchbox/api', '/api')
-          }
-          
-          // Only handle /api requests
-          if (!requestPath.startsWith('/api')) {
-            return next()
-          }
-          
-          // Set CORS headers
-          res.setHeader('Access-Control-Allow-Origin', '*')
-          res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-          res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
-          
-          if (req.method === 'OPTIONS') {
-            res.statusCode = 200
-            res.end()
-            return
-          }
-          
-          // Parse the pathname and strip /api prefix for matching
-          const fullPathname = requestPath.split('?')[0] // Remove query string
-          const pathname = fullPathname.startsWith('/api/') 
-            ? fullPathname.replace('/api/', '/') 
-            : fullPathname.replace('/api', '')
-          console.log('[API Handler] fullPathname:', fullPathname, 'pathname:', pathname)
-          
-          // List avatars
-          if (pathname === '/list_avatars.php' && req.method === 'GET') {
-            const avatarsDir = path.join(__dirname, 'data', 'avatars')
+          // CRITICAL: Check for /api requests FIRST, before any other checks
+          // This ensures we intercept API requests before Vite's static file serving
+          if (requestPath.startsWith('/api/') || requestPath === '/api' || requestPath.startsWith('/hrefs/watchbox/api')) {
+            // Remove base path if present
+            if (requestPath.startsWith('/hrefs/watchbox/api')) {
+              requestPath = requestPath.replace('/hrefs/watchbox/api', '/api')
+            }
+            
+            // Parse the pathname and strip /api prefix for matching
+            const fullPathname = requestPath.split('?')[0] // Remove query string
+            const pathname = fullPathname.startsWith('/api/') 
+              ? fullPathname.replace('/api/', '/') 
+              : fullPathname.replace('/api', '')
+            console.log('[API Handler] Intercepted:', req.method, req.url, '-> fullPathname:', fullPathname, '-> pathname:', pathname)
+            
+            // Set CORS headers
+            res.setHeader('Access-Control-Allow-Origin', '*')
+            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+            res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+            
+            if (req.method === 'OPTIONS') {
+              res.statusCode = 200
+              res.end()
+              return
+            }
+            
+            // List users - Handle immediately
+            if (pathname === '/list_users.php' && req.method === 'GET') {
+              console.log('[API Handler] Handling list_users.php with mock')
+              const usersDir = path.join(__dirname, 'data', 'users')
+              if (!fs.existsSync(usersDir)) {
+                res.setHeader('Content-Type', 'application/json')
+                res.setHeader('Access-Control-Allow-Origin', '*')
+                res.end(JSON.stringify([]))
+                return
+              }
+              const files = fs.readdirSync(usersDir).filter(f => f.endsWith('.json'))
+              const users = files.map(file => {
+                try {
+                  const content = fs.readFileSync(path.join(usersDir, file), 'utf-8')
+                  const user = JSON.parse(content)
+                  const avatarFilename = user.avatar_filename || 
+                    (user.avatar_poster_id ? `avatar-${user.avatar_poster_id}.svg` : 'avatar-1.svg')
+                  return {
+                    user_id: user.user_id,
+                    name: user.name,
+                    avatar_filename: avatarFilename
+                  }
+                } catch (e) {
+                  console.error('[API Handler] Error parsing user file:', file, e)
+                  return null
+                }
+              }).filter(u => u !== null)
+              console.log('[API Handler] Returning', users.length, 'users as JSON')
+              res.setHeader('Content-Type', 'application/json')
+              res.setHeader('Access-Control-Allow-Origin', '*')
+              res.end(JSON.stringify(users))
+              return // CRITICAL: Don't call next() - we've handled this request
+            }
+            
+            // List avatars
+            if (pathname === '/list_avatars.php' && req.method === 'GET') {
+              const avatarsDir = path.join(__dirname, 'data', 'avatars')
             if (!fs.existsSync(avatarsDir)) {
               res.setHeader('Content-Type', 'application/json')
               res.end(JSON.stringify([]))
@@ -129,8 +157,8 @@ function mockApiPlugin() {
             return
           }
           
-          // List streaming services
-          if (pathname === '/list_streaming_services.php' && req.method === 'GET') {
+            // List streaming services
+            if (pathname === '/list_streaming_services.php' && req.method === 'GET') {
             const streamingDir = path.join(__dirname, 'data', 'streaming')
             if (!fs.existsSync(streamingDir)) {
               res.setHeader('Content-Type', 'application/json')
@@ -146,181 +174,162 @@ function mockApiPlugin() {
             return
           }
           
-          // List users
-          if (pathname === '/list_users.php' && req.method === 'GET') {
-          const usersDir = path.join(__dirname, 'data', 'users')
-          if (!fs.existsSync(usersDir)) {
-            res.setHeader('Content-Type', 'application/json')
-            res.end(JSON.stringify([]))
-            return
-          }
-          const files = fs.readdirSync(usersDir).filter(f => f.endsWith('.json'))
-          const users = files.map(file => {
-            try {
-              const content = fs.readFileSync(path.join(usersDir, file), 'utf-8')
-              const user = JSON.parse(content)
-              // Support both old (avatar_poster_id) and new (avatar_filename) format
-              const avatarFilename = user.avatar_filename || 
-                (user.avatar_poster_id ? `avatar-${user.avatar_poster_id}.svg` : 'avatar-1.svg')
-              return {
-                user_id: user.user_id,
-                name: user.name,
-                avatar_filename: avatarFilename
+            // Get user
+            if (pathname === '/get_user.php' && req.method === 'GET') {
+              const url = new URL(req.url || '', `http://${req.headers.host}`)
+              const userId = url.searchParams.get('user_id')
+              if (userId) {
+                const userFile = path.join(__dirname, 'data', 'users', `${userId}.json`)
+                if (fs.existsSync(userFile)) {
+                  const content = fs.readFileSync(userFile, 'utf-8')
+                  const user = JSON.parse(content)
+                  // Support backward compatibility: convert avatar_poster_id to avatar_filename if needed
+                  if (!user.avatar_filename && user.avatar_poster_id) {
+                    user.avatar_filename = `avatar-${user.avatar_poster_id}.svg`
+                  }
+                  res.setHeader('Content-Type', 'application/json')
+                  res.setHeader('Access-Control-Allow-Origin', '*')
+                  res.end(JSON.stringify(user))
+                  return
+                }
               }
-            } catch (e) {
-              return null
-            }
-          }).filter(u => u !== null)
-          res.setHeader('Content-Type', 'application/json')
-          res.end(JSON.stringify(users))
-          return
-        }
-        
-        // Get user
-        if (pathname === '/get_user.php' && req.method === 'GET') {
-          const url = new URL(req.url || '', `http://${req.headers.host}`)
-          const userId = url.searchParams.get('user_id')
-          if (userId) {
-            const userFile = path.join(__dirname, 'data', 'users', `${userId}.json`)
-            if (fs.existsSync(userFile)) {
-              const content = fs.readFileSync(userFile, 'utf-8')
-              const user = JSON.parse(content)
-              // Support backward compatibility: convert avatar_poster_id to avatar_filename if needed
-              if (!user.avatar_filename && user.avatar_poster_id) {
-                user.avatar_filename = `avatar-${user.avatar_poster_id}.svg`
-              }
+              res.statusCode = 404
               res.setHeader('Content-Type', 'application/json')
-              res.end(JSON.stringify(user))
+              res.setHeader('Access-Control-Allow-Origin', '*')
+              res.end(JSON.stringify({ error: 'User not found' }))
               return
             }
-          }
-          res.statusCode = 404
-          res.setHeader('Content-Type', 'application/json')
-          res.end(JSON.stringify({ error: 'User not found' }))
-          return
-        }
-        
-        // Create user
-        if (pathname === '/create_user.php' && req.method === 'POST') {
-          let body = ''
-          req.on('data', chunk => { body += chunk.toString() })
-          req.on('end', () => {
-            try {
-              const data = JSON.parse(body)
-              const userId = data.name.toLowerCase().replace(/[^a-z0-9]/g, '_')
-              let finalUserId = userId
-              let counter = 1
-              const usersDir = path.join(__dirname, 'data', 'users')
-              if (!fs.existsSync(usersDir)) {
-                fs.mkdirSync(usersDir, { recursive: true })
-              }
-              while (fs.existsSync(path.join(usersDir, `${finalUserId}.json`))) {
-                finalUserId = `${userId}_${counter}`
-                counter++
-              }
-              const user = {
-                user_id: finalUserId,
-                name: data.name,
-                avatar_filename: data.avatar_filename,
-                updated_at: new Date().toISOString(),
-                items: []
-              }
-              const userFile = path.join(usersDir, `${finalUserId}.json`)
-              fs.writeFileSync(userFile, JSON.stringify(user, null, 2))
-              res.statusCode = 201
-              res.setHeader('Content-Type', 'application/json')
-              res.end(JSON.stringify(user))
-            } catch (e) {
-              res.statusCode = 400
-              res.setHeader('Content-Type', 'application/json')
-              res.end(JSON.stringify({ error: 'Invalid request' }))
+            
+            // Create user
+            if (pathname === '/create_user.php' && req.method === 'POST') {
+              let body = ''
+              req.on('data', chunk => { body += chunk.toString() })
+              req.on('end', () => {
+                try {
+                  const data = JSON.parse(body)
+                  const userId = data.name.toLowerCase().replace(/[^a-z0-9]/g, '_')
+                  let finalUserId = userId
+                  let counter = 1
+                  const usersDir = path.join(__dirname, 'data', 'users')
+                  if (!fs.existsSync(usersDir)) {
+                    fs.mkdirSync(usersDir, { recursive: true })
+                  }
+                  while (fs.existsSync(path.join(usersDir, `${finalUserId}.json`))) {
+                    finalUserId = `${userId}_${counter}`
+                    counter++
+                  }
+                  const user = {
+                    user_id: finalUserId,
+                    name: data.name,
+                    avatar_filename: data.avatar_filename,
+                    updated_at: new Date().toISOString(),
+                    items: []
+                  }
+                  const userFile = path.join(usersDir, `${finalUserId}.json`)
+                  fs.writeFileSync(userFile, JSON.stringify(user, null, 2))
+                  res.statusCode = 201
+                  res.setHeader('Content-Type', 'application/json')
+                  res.setHeader('Access-Control-Allow-Origin', '*')
+                  res.end(JSON.stringify(user))
+                } catch (e) {
+                  res.statusCode = 400
+                  res.setHeader('Content-Type', 'application/json')
+                  res.setHeader('Access-Control-Allow-Origin', '*')
+                  res.end(JSON.stringify({ error: 'Invalid request' }))
+                }
+              })
+              return
             }
-          })
-          return
-        }
-        
-        // Save user
-        if (pathname === '/save_user.php' && req.method === 'POST') {
-          let body = ''
-          req.on('data', chunk => { body += chunk.toString() })
-          req.on('end', () => {
-            try {
-              const data = JSON.parse(body)
-              const userFile = path.join(__dirname, 'data', 'users', `${data.user_id}.json`)
-              const user = {
-                ...data,
-                updated_at: new Date().toISOString()
-              }
-              fs.writeFileSync(userFile, JSON.stringify(user, null, 2))
-              res.setHeader('Content-Type', 'application/json')
-              res.end(JSON.stringify({ success: true }))
-            } catch (e) {
-              res.statusCode = 400
-              res.setHeader('Content-Type', 'application/json')
-              res.end(JSON.stringify({ error: 'Invalid request' }))
+            
+            // Save user
+            if (pathname === '/save_user.php' && req.method === 'POST') {
+              let body = ''
+              req.on('data', chunk => { body += chunk.toString() })
+              req.on('end', () => {
+                try {
+                  const data = JSON.parse(body)
+                  const userFile = path.join(__dirname, 'data', 'users', `${data.user_id}.json`)
+                  const user = {
+                    ...data,
+                    updated_at: new Date().toISOString()
+                  }
+                  fs.writeFileSync(userFile, JSON.stringify(user, null, 2))
+                  res.setHeader('Content-Type', 'application/json')
+                  res.setHeader('Access-Control-Allow-Origin', '*')
+                  res.end(JSON.stringify({ success: true }))
+                } catch (e) {
+                  res.statusCode = 400
+                  res.setHeader('Content-Type', 'application/json')
+                  res.setHeader('Access-Control-Allow-Origin', '*')
+                  res.end(JSON.stringify({ error: 'Invalid request' }))
+                }
+              })
+              return
             }
-          })
-          return
-        }
-        
-        // Delete user
-        if (pathname === '/delete_user.php' && req.method === 'POST') {
-          let body = ''
-          req.on('data', chunk => { body += chunk.toString() })
-          req.on('end', () => {
-            try {
-              const data = JSON.parse(body)
-              const userFile = path.join(__dirname, 'data', 'users', `${data.user_id}.json`)
-              if (fs.existsSync(userFile)) {
-                fs.unlinkSync(userFile)
+            
+            // Delete user
+            if (pathname === '/delete_user.php' && req.method === 'POST') {
+              let body = ''
+              req.on('data', chunk => { body += chunk.toString() })
+              req.on('end', () => {
+                try {
+                  const data = JSON.parse(body)
+                  const userFile = path.join(__dirname, 'data', 'users', `${data.user_id}.json`)
+                  if (fs.existsSync(userFile)) {
+                    fs.unlinkSync(userFile)
+                    res.setHeader('Content-Type', 'application/json')
+                    res.setHeader('Access-Control-Allow-Origin', '*')
+                    res.end(JSON.stringify({ success: true }))
+                  } else {
+                    res.statusCode = 404
+                    res.setHeader('Content-Type', 'application/json')
+                    res.setHeader('Access-Control-Allow-Origin', '*')
+                    res.end(JSON.stringify({ error: 'User not found' }))
+                  }
+                } catch (e) {
+                  res.statusCode = 400
+                  res.setHeader('Content-Type', 'application/json')
+                  res.setHeader('Access-Control-Allow-Origin', '*')
+                  res.end(JSON.stringify({ error: 'Invalid request' }))
+                }
+              })
+              return
+            }
+            
+            // Get content timestamp
+            if (pathname === '/get_content_timestamp.php' && req.method === 'GET') {
+              const moviesJson = path.join(__dirname, 'data', 'streaming-movies-results.json')
+              const showsJson = path.join(__dirname, 'data', 'streaming-shows-results.json')
+              
+              const timestamps: number[] = []
+              
+              if (fs.existsSync(moviesJson)) {
+                const stats = fs.statSync(moviesJson)
+                timestamps.push(Math.floor(stats.mtime.getTime() / 1000)) // Convert to Unix timestamp
+              }
+              
+              if (fs.existsSync(showsJson)) {
+                const stats = fs.statSync(showsJson)
+                timestamps.push(Math.floor(stats.mtime.getTime() / 1000)) // Convert to Unix timestamp
+              }
+              
+              if (timestamps.length > 0) {
+                const latestTimestamp = Math.max(...timestamps)
                 res.setHeader('Content-Type', 'application/json')
-                res.end(JSON.stringify({ success: true }))
+                res.setHeader('Access-Control-Allow-Origin', '*')
+                res.end(JSON.stringify({ timestamp: latestTimestamp }))
+                return
               } else {
                 res.statusCode = 404
                 res.setHeader('Content-Type', 'application/json')
-                res.end(JSON.stringify({ error: 'User not found' }))
+                res.setHeader('Access-Control-Allow-Origin', '*')
+                res.end(JSON.stringify({ error: 'Content files not found' }))
+                return
               }
-            } catch (e) {
-              res.statusCode = 400
-              res.setHeader('Content-Type', 'application/json')
-              res.end(JSON.stringify({ error: 'Invalid request' }))
             }
-          })
-          return
-        }
-        
-        // Get content timestamp
-        if (pathname === '/get_content_timestamp.php' && req.method === 'GET') {
-          const moviesJson = path.join(__dirname, 'data', 'streaming-movies-results.json')
-          const showsJson = path.join(__dirname, 'data', 'streaming-shows-results.json')
-          
-          const timestamps: number[] = []
-          
-          if (fs.existsSync(moviesJson)) {
-            const stats = fs.statSync(moviesJson)
-            timestamps.push(Math.floor(stats.mtime.getTime() / 1000)) // Convert to Unix timestamp
-          }
-          
-          if (fs.existsSync(showsJson)) {
-            const stats = fs.statSync(showsJson)
-            timestamps.push(Math.floor(stats.mtime.getTime() / 1000)) // Convert to Unix timestamp
-          }
-          
-          if (timestamps.length > 0) {
-            const latestTimestamp = Math.max(...timestamps)
-            res.setHeader('Content-Type', 'application/json')
-            res.end(JSON.stringify({ timestamp: latestTimestamp }))
-            return
-          } else {
-            res.statusCode = 404
-            res.setHeader('Content-Type', 'application/json')
-            res.end(JSON.stringify({ error: 'Content files not found' }))
-            return
-          }
-        }
 
-        // Get default streaming services (dev mock - avoid PHP dependency)
-        if (pathname === '/get_default_streaming_services.php' && req.method === 'GET') {
+            // Get default streaming services (dev mock - avoid PHP dependency)
+            if (pathname === '/get_default_streaming_services.php' && req.method === 'GET') {
           try {
             const servicesFile = path.join(__dirname, 'data', 'default_streaming_services.json')
             if (!fs.existsSync(servicesFile)) {
@@ -344,8 +353,8 @@ function mockApiPlugin() {
           return
         }
 
-        // Handle get_item_details.php with Node.js (no PHP needed)
-        if (pathname === '/get_item_details.php') {
+            // Handle get_item_details.php with Node.js (no PHP needed)
+            if (pathname === '/get_item_details.php') {
           const fullUrl = req.url || ''
           const queryParams = new URLSearchParams(fullUrl.split('?')[1] || '')
           const tmdbId = queryParams.get('tmdb_id')
@@ -691,8 +700,8 @@ function mockApiPlugin() {
             return
         }
         
-        // Handle get_person_filmography.php - call TMDB API directly from Node.js
-        if (pathname === '/get_person_filmography.php') {
+            // Handle get_person_filmography.php - call TMDB API directly from Node.js
+            if (pathname === '/get_person_filmography.php') {
           const fullUrl = req.url || ''
           const url = new URL(fullUrl, `http://${req.headers.host}`)
           const personId = url.searchParams.get('person_id')
@@ -847,12 +856,21 @@ function mockApiPlugin() {
           return
         }
         
-        // Execute PHP files using PHP CLI (only for /api/*.php requests that aren't handled above)
-        // Skip files already handled by Node.js
-        const isHandledFile = pathname === '/get_item_details.php' || 
-                              pathname === '/get_person_filmography.php';
-        
-        if (pathname.startsWith('/') && pathname.endsWith('.php') && !pathname.startsWith('/@') && !isHandledFile) {
+            // Execute PHP files using PHP CLI (only for /api/*.php requests that aren't handled above)
+            // Skip files already handled by Node.js
+            const isHandledFile = pathname === '/get_item_details.php' || 
+                                  pathname === '/get_person_filmography.php' ||
+                                  pathname === '/list_users.php' ||
+                                  pathname === '/get_user.php' ||
+                                  pathname === '/create_user.php' ||
+                                  pathname === '/save_user.php' ||
+                                  pathname === '/delete_user.php' ||
+                                  pathname === '/list_avatars.php' ||
+                                  pathname === '/list_streaming_services.php' ||
+                                  pathname === '/get_content_timestamp.php' ||
+                                  pathname === '/get_default_streaming_services.php';
+            
+            if (pathname.startsWith('/') && pathname.endsWith('.php') && !pathname.startsWith('/@') && !isHandledFile) {
           try {
             const phpFile = path.join(__dirname, 'api', path.basename(pathname))
             
@@ -953,18 +971,28 @@ function mockApiPlugin() {
             }
           })
           
-          return
-          } catch (phpErr: any) {
-            console.error('Error in PHP handler:', phpErr)
-            if (!res.headersSent) {
-              res.statusCode = 500
-              res.setHeader('Content-Type', 'application/json')
-              res.end(JSON.stringify({ error: 'PHP handler error', details: phpErr.message }))
+              return
+            } catch (phpErr: any) {
+              console.error('Error in PHP handler:', phpErr)
+              if (!res.headersSent) {
+                res.statusCode = 500
+                res.setHeader('Content-Type', 'application/json')
+                res.setHeader('Access-Control-Allow-Origin', '*')
+                res.end(JSON.stringify({ error: 'PHP handler error', details: phpErr.message }))
+              }
+              return
             }
-            return
           }
+          
+          // If we get here, it's an API request but wasn't handled - return 404
+          res.statusCode = 404
+          res.setHeader('Content-Type', 'application/json')
+          res.setHeader('Access-Control-Allow-Origin', '*')
+          res.end(JSON.stringify({ error: 'API endpoint not found' }))
+          return
         }
         
+        // Not an API request, continue to next middleware
         next()
         } catch (error: any) {
           console.error('Error in API middleware:', error)
@@ -981,8 +1009,22 @@ function mockApiPlugin() {
         }
       }
       
-      // Register API middleware
-      server.middlewares.use(handleApi)
+      // Register API middleware FIRST - this MUST run before Vite's static file serving
+      // Use unshift to add to the beginning of the middleware stack
+      try {
+        if (server.middlewares && Array.isArray(server.middlewares.stack)) {
+          // Check if already registered
+          const alreadyRegistered = server.middlewares.stack.some((m: any) => m.handle === handleApi)
+          if (!alreadyRegistered) {
+            server.middlewares.stack.unshift({ route: '', handle: handleApi })
+          }
+        } else {
+          server.middlewares.use(handleApi)
+        }
+      } catch (e) {
+        // Fallback to normal registration
+        server.middlewares.use(handleApi)
+      }
     }
   }
 }
@@ -993,6 +1035,11 @@ export default defineConfig(({ mode }) => ({
   base: mode === 'production' ? '/hrefs/watchbox/' : '/',
   server: {
     port: 8000,
+    fs: {
+      // Don't serve PHP files or the api directory as static assets
+      deny: ['**/*.php', '**/api/**']
+    },
+    middlewareMode: false
   },
   build: {
     outDir: 'dist',
