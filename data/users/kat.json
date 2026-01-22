@@ -2001,6 +2001,522 @@
           "english_name": "Japanese"
         }
       ]
+    },
+    {
+      "id": "425274-1769043683651",
+      "title": "Now You See Me: Now You Don't",
+      "tmdb_id": 425274,
+      "poster_path": "/oD3Eey4e4Z259XLm3eD3WGcoJAh.jpg",
+      "listType": "watch",
+      "services": [],
+      "isMovie": true,
+      "genres": [
+        {
+          "id": 53,
+          "name": "Thriller"
+        },
+        {
+          "id": 80,
+          "name": "Crime"
+        },
+        {
+          "id": 9648,
+          "name": "Mystery"
+        }
+      ],
+      "overview": "The original Four Horsemen reunite with a new generation of illusionists to take on powerful diamond heiress Veronika Vanderberg, who leads a criminal empire built on money laundering and trafficking. The new and old magicians must overcome their differences to work together on their most ambitious heist yet.",
+      "vote_average": 6.576,
+      "vote_count": 907,
+      "runtime": 113,
+      "cast": [
+        {
+          "id": 44735,
+          "name": "Jesse Eisenberg",
+          "character": "J. Daniel Atlas",
+          "profile_path": "/yYhwWRcxDHTn63gSEF1vnDAD7cD.jpg"
+        },
+        {
+          "id": 3918497,
+          "name": "Dominic Sessa",
+          "character": "Bosco",
+          "profile_path": "/cTYdhJrye7oTREIkQaLAuLoJ8Rt.jpg"
+        },
+        {
+          "id": 1767250,
+          "name": "Ariana Greenblatt",
+          "character": "June",
+          "profile_path": "/lwIqQLPotJHr44lfNsEOnE6IYsf.jpg"
+        },
+        {
+          "id": 1029934,
+          "name": "Justice Smith",
+          "character": "Charlie",
+          "profile_path": "/htJrcOzYkLVcnF4ExT4O1bDN5e5.jpg"
+        },
+        {
+          "id": 10882,
+          "name": "Rosamund Pike",
+          "character": "Veronika Vanderberg",
+          "profile_path": "/8ObNklHDi2hjdz0ayzJFB9jtqzm.jpg"
+        },
+        {
+          "id": 57755,
+          "name": "Woody Harrelson",
+          "character": "Merritt McKinney",
+          "profile_path": "/igxYDQBbTEdAqaJxaW6ffqswmUU.jpg"
+        },
+        {
+          "id": 54697,
+          "name": "Dave Franco",
+          "character": "Jack Wilder",
+          "profile_path": "/2diSplvpzCE5CrIKvTaplCKvwPq.jpg"
+        },
+        {
+          "id": 52848,
+          "name": "Isla Fisher",
+          "character": "Henley Reeves",
+          "profile_path": "/zNKTzzuyMYaCGEZKhwhqV1K8ffo.jpg"
+        },
+        {
+          "id": 51988,
+          "name": "Lizzy Caplan",
+          "character": "Lula",
+          "profile_path": "/eHPzaeY6yfMuuvF8r70Z1ICtRpE.jpg"
+        },
+        {
+          "id": 192,
+          "name": "Morgan Freeman",
+          "character": "Thaddeus Bradley",
+          "profile_path": "/jPsLqiYGSofU4s6BjrxnefMfabb.jpg"
+        },
+        {
+          "id": 1181310,
+          "name": "Andrew Santino",
+          "character": "Brett Finnegan",
+          "profile_path": "/oMIPMiKGFfWURfgFpBjqoU6T8xA.jpg"
+        },
+        {
+          "id": 5384750,
+          "name": "Henry Fisher",
+          "character": "Brett's Buddy",
+          "profile_path": "/HY43s5uNFeKa5NwovY2LrCzLuR.jpg"
+        },
+        {
+          "id": 2166968,
+          "name": "Ben Seidman",
+          "character": "Max Thompson",
+          "profile_path": null
+        },
+        {
+          "id": 5019253,
+          "name": "Lyssandra Skye Arias",
+          "character": "Ace of Spades Audience Member",
+          "profile_path": null
+        },
+        {
+          "id": 4230747,
+          "name": "Angela Paula Stander",
+          "character": "$50,000 Bucks Audience Member",
+          "profile_path": "/yu92vhAt70dd5QUpFUL2nzdu1mO.jpg"
+        }
+      ],
+      "crew": [
+        {
+          "id": 91268,
+          "name": "Ruben Fleischer",
+          "job": "Director",
+          "profile_path": "/3JLxOPFTLigSy8FjFjDyMwD9GIp.jpg"
+        },
+        {
+          "id": 135,
+          "name": "Bobby Cohen",
+          "job": "Producer",
+          "profile_path": "/xzx0cU9U71j6vbThCHjw9JfjI51.jpg"
+        },
+        {
+          "id": 15345,
+          "name": "Alex Kurtzman",
+          "job": "Producer",
+          "profile_path": "/uDZxuaV19OYMhN7vuuVg1bSlqUM.jpg"
+        },
+        {
+          "id": 1273117,
+          "name": "Michael Lesslie",
+          "job": "Screenplay",
+          "profile_path": "/yWVeg77Pwol0ziN3ZK2zxqJ4nq8.jpg"
+        },
+        {
+          "id": 91269,
+          "name": "Paul Wernick",
+          "job": "Screenplay",
+          "profile_path": "/eEJBp1R3kmVKYq8IT0xUGUMUKim.jpg"
+        },
+        {
+          "id": 7932,
+          "name": "Rhett Reese",
+          "job": "Screenplay",
+          "profile_path": "/jpb5PmvaNtfTrLWbmzEr1lRcwks.jpg"
+        },
+        {
+          "id": 565491,
+          "name": "Seth Grahame-Smith",
+          "job": "Screenplay",
+          "profile_path": "/pCLgf514yTf3aDDOZ2Zb0yjwoZ5.jpg"
+        },
+        {
+          "id": 4102361,
+          "name": "Connor DiGregorio",
+          "job": "Executive Producer",
+          "profile_path": "/OzFpCFHq5ptix0XKE1K2RzhRuf.jpg"
+        }
+      ],
+      "keywords": [
+        {
+          "id": 1384,
+          "name": "diamond"
+        },
+        {
+          "id": 1385,
+          "name": "antwerp"
+        },
+        {
+          "id": 9663,
+          "name": "sequel"
+        },
+        {
+          "id": 10051,
+          "name": "heist"
+        },
+        {
+          "id": 40903,
+          "name": "diamond heist"
+        },
+        {
+          "id": 210730,
+          "name": "illusionist"
+        },
+        {
+          "id": 302711,
+          "name": "team up"
+        },
+        {
+          "id": 325811,
+          "name": "excited"
+        }
+      ],
+      "videos": [
+        {
+          "id": "691e5a0c0e90f9d26e21a306",
+          "key": "KEnmKJK386c",
+          "name": "don't miss the #1 film in the WORLD.",
+          "site": "YouTube",
+          "type": "Teaser",
+          "official": true,
+          "published_at": "2025-11-17T15:29:02.000Z"
+        },
+        {
+          "id": "691a0c6757e51d6fe73a6290",
+          "key": "68TG5EycuAQ",
+          "name": "Critics agree - Now You See Me: Now You Don’t delivers the fun.",
+          "site": "YouTube",
+          "type": "Teaser",
+          "official": true,
+          "published_at": "2025-11-14T20:00:14.000Z"
+        },
+        {
+          "id": "691a0cd3ef8e97fa7640f4ec",
+          "key": "tPBDA8H90J4",
+          "name": "There’s still a few more tricks up our sleeves.",
+          "site": "YouTube",
+          "type": "Teaser",
+          "official": true,
+          "published_at": "2025-11-14T19:12:19.000Z"
+        },
+        {
+          "id": "691a0cedcecfcf4c7e9ae75c",
+          "key": "_aafiClfl1s",
+          "name": "It’s good to be back.",
+          "site": "YouTube",
+          "type": "Teaser",
+          "official": true,
+          "published_at": "2025-11-14T17:07:01.000Z"
+        },
+        {
+          "id": "691e5d2b9afeb8d0ad058242",
+          "key": "MNlGPyL6ezQ",
+          "name": "get yourself down to the cinema today to see what you're missing out on",
+          "site": "YouTube",
+          "type": "Teaser",
+          "official": true,
+          "published_at": "2025-11-13T12:16:06.000Z"
+        }
+      ],
+      "recommendations": [
+        {
+          "id": 291805,
+          "title": "Now You See Me 2",
+          "poster_path": "/A81kDB6a1K86YLlcOtZB27jriJh.jpg",
+          "vote_average": 6.8,
+          "isMovie": true
+        },
+        {
+          "id": 568091,
+          "title": "Fractured",
+          "poster_path": "/paZNRffT3kUckuRFKbeDBuX1YcZ.jpg",
+          "vote_average": 6.75,
+          "isMovie": true
+        },
+        {
+          "id": 53182,
+          "title": "300: Rise of an Empire",
+          "poster_path": "/wYDdWN1McB1Sio4z1dPSkb40Z78.jpg",
+          "vote_average": 6.1,
+          "isMovie": true
+        },
+        {
+          "id": 58574,
+          "title": "Sherlock Holmes: A Game of Shadows",
+          "poster_path": "/vskIKrMNUAhns05dx8WYBQfcJEs.jpg",
+          "vote_average": 7.142,
+          "isMovie": true
+        },
+        {
+          "id": 527774,
+          "title": "Raya and the Last Dragon",
+          "poster_path": "/5nVhgCzxKbK47OLIKxCR1syulOn.jpg",
+          "vote_average": 7.81,
+          "isMovie": true
+        },
+        {
+          "id": 64682,
+          "title": "The Great Gatsby",
+          "poster_path": "/tyxfCBQv6Ap74jcu3xd7aBiaa29.jpg",
+          "vote_average": 7.357,
+          "isMovie": true
+        },
+        {
+          "id": 75656,
+          "title": "Now You See Me",
+          "poster_path": "/tWsNYbrqy1p1w6K9zRk0mSchztT.jpg",
+          "vote_average": 7.333,
+          "isMovie": true
+        },
+        {
+          "id": 106646,
+          "title": "The Wolf of Wall Street",
+          "poster_path": "/kW9LmvYHAaS9iA0tHmZVq8hQYoq.jpg",
+          "vote_average": 8.025,
+          "isMovie": true
+        },
+        {
+          "id": 872585,
+          "title": "Oppenheimer",
+          "poster_path": "/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",
+          "vote_average": 8.037,
+          "isMovie": true
+        },
+        {
+          "id": 597,
+          "title": "Titanic",
+          "poster_path": "/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg",
+          "vote_average": 7.903,
+          "isMovie": true
+        }
+      ],
+      "similar": [
+        {
+          "id": 642,
+          "title": "Butch Cassidy and the Sundance Kid",
+          "poster_path": "/gFmmykF1Ym3OGzENo50nZQaD1dx.jpg",
+          "vote_average": 7.61,
+          "isMovie": true
+        },
+        {
+          "id": 646,
+          "title": "Dr. No",
+          "poster_path": "/f9HsemSsBEHN5eoMble1bj6fDxs.jpg",
+          "vote_average": 6.991,
+          "isMovie": true
+        },
+        {
+          "id": 657,
+          "title": "From Russia with Love",
+          "poster_path": "/zx4V17FP8oclNvOpTgs2iCCtiYk.jpg",
+          "vote_average": 7.071,
+          "isMovie": true
+        },
+        {
+          "id": 658,
+          "title": "Goldfinger",
+          "poster_path": "/aKNFzaqQgPzsGXnsMc4kJH5hFIV.jpg",
+          "vote_average": 7.356,
+          "isMovie": true
+        },
+        {
+          "id": 691,
+          "title": "The Spy Who Loved Me",
+          "poster_path": "/cOm2ULaB4luYEjxlI53tW6jWLyJ.jpg",
+          "vote_average": 6.825,
+          "isMovie": true
+        },
+        {
+          "id": 754,
+          "title": "Face/Off",
+          "poster_path": "/69Xzn8UdPbVnmqSChKz2RTpoNfB.jpg",
+          "vote_average": 7.05,
+          "isMovie": true
+        },
+        {
+          "id": 1437714,
+          "title": "Vijaynagar'er Hirey",
+          "poster_path": "/oqAzNuR0N5zKeUseUEu0PRLori2.jpg",
+          "vote_average": 0,
+          "isMovie": true
+        },
+        {
+          "id": 43149,
+          "title": "The Son of Kong",
+          "poster_path": "/eJ2Qe3tesoKUtWNJRDpHKz1xCJc.jpg",
+          "vote_average": 5.368,
+          "isMovie": true
+        },
+        {
+          "id": 1093396,
+          "title": "Carrot Cake Murder: A Hannah Swensen Mystery",
+          "poster_path": "/yLYAq5d6pk8mXKzigfwcBn543lf.jpg",
+          "vote_average": 6.904,
+          "isMovie": true
+        },
+        {
+          "id": 10320,
+          "title": "The Ring Two",
+          "poster_path": "/bHbz7z2pecTawhkqLpuC2m0qywe.jpg",
+          "vote_average": 5.753,
+          "isMovie": true
+        }
+      ],
+      "translations": [
+        {
+          "iso_639_1": "fr",
+          "iso_3166_1": "FR",
+          "name": "Français",
+          "english_name": "French"
+        },
+        {
+          "iso_639_1": "es",
+          "iso_3166_1": "ES",
+          "name": "Español",
+          "english_name": "Spanish"
+        },
+        {
+          "iso_639_1": "bg",
+          "iso_3166_1": "BG",
+          "name": "български език",
+          "english_name": "Bulgarian"
+        },
+        {
+          "iso_639_1": "ru",
+          "iso_3166_1": "RU",
+          "name": "Pусский",
+          "english_name": "Russian"
+        },
+        {
+          "iso_639_1": "en",
+          "iso_3166_1": "US",
+          "name": "English",
+          "english_name": "English"
+        },
+        {
+          "iso_639_1": "ko",
+          "iso_3166_1": "KR",
+          "name": "한국어/조선말",
+          "english_name": "Korean"
+        },
+        {
+          "iso_639_1": "zh",
+          "iso_3166_1": "CN",
+          "name": "普通话",
+          "english_name": "Mandarin"
+        },
+        {
+          "iso_639_1": "it",
+          "iso_3166_1": "IT",
+          "name": "Italiano",
+          "english_name": "Italian"
+        },
+        {
+          "iso_639_1": "pt",
+          "iso_3166_1": "BR",
+          "name": "Português",
+          "english_name": "Portuguese"
+        },
+        {
+          "iso_639_1": "de",
+          "iso_3166_1": "DE",
+          "name": "Deutsch",
+          "english_name": "German"
+        },
+        {
+          "iso_639_1": "uk",
+          "iso_3166_1": "UA",
+          "name": "Український",
+          "english_name": "Ukrainian"
+        },
+        {
+          "iso_639_1": "ro",
+          "iso_3166_1": "RO",
+          "name": "Română",
+          "english_name": "Romanian"
+        },
+        {
+          "iso_639_1": "ka",
+          "iso_3166_1": "GE",
+          "name": "ქართული",
+          "english_name": "Georgian"
+        },
+        {
+          "iso_639_1": "vi",
+          "iso_3166_1": "VN",
+          "name": "Tiếng Việt",
+          "english_name": "Vietnamese"
+        },
+        {
+          "iso_639_1": "tr",
+          "iso_3166_1": "TR",
+          "name": "Türkçe",
+          "english_name": "Turkish"
+        },
+        {
+          "iso_639_1": "pl",
+          "iso_3166_1": "PL",
+          "name": "Polski",
+          "english_name": "Polish"
+        },
+        {
+          "iso_639_1": "zh",
+          "iso_3166_1": "TW",
+          "name": "普通话",
+          "english_name": "Mandarin"
+        },
+        {
+          "iso_639_1": "hr",
+          "iso_3166_1": "HR",
+          "name": "Hrvatski",
+          "english_name": "Croatian"
+        },
+        {
+          "iso_639_1": "zh",
+          "iso_3166_1": "HK",
+          "name": "普通话",
+          "english_name": "Mandarin"
+        },
+        {
+          "iso_639_1": "lt",
+          "iso_3166_1": "LT",
+          "name": "Lietuvių",
+          "english_name": "Lithuanian"
+        }
+      ]
     }
   ],
   "streaming_services": [
@@ -2041,5 +2557,5 @@
     }
   ],
   "birthday": "02/20/1982",
-  "updated_at": "2026-01-20T00:48:28.752Z"
+  "updated_at": "2026-01-22T01:01:23.657Z"
 }

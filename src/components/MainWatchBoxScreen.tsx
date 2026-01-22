@@ -1,7 +1,8 @@
 import { useEffect, useState, useRef, useMemo } from 'react';
-import { CopyPlus, Funnel, Tv, Search, X } from 'lucide-react';
+import { CopyPlus, Funnel, Tv, Search, X, ArrowLeft, User, LogOut } from 'lucide-react';
 import { useUser } from '../contexts/UserContext';
 import { Header } from './Header';
+import { Logo } from './Logo';
 import { SectionList } from './SectionList';
 import { ExploreTab } from './ExploreTab';
 import { EditProfileModal } from './EditProfileModal';
@@ -25,7 +26,10 @@ export function MainWatchBoxScreen() {
   const [filterButtonActive, setFilterButtonActive] = useState(false);
   const [avatarColor, setAvatarColor] = useState<string>('#4A90E2');
   const avatarImageRef = useRef<HTMLImageElement | null>(null);
+  const headerAvatarImageRef = useRef<HTMLImageElement | null>(null);
   const [exploreContent, setExploreContent] = useState<ExploreItem[]>([]);
+  const [showMobileAccount, setShowMobileAccount] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   
   // Load explore content to get available genres
   useEffect(() => {
@@ -75,6 +79,37 @@ export function MainWatchBoxScreen() {
       setAvatarColor(color);
     }
   };
+
+  const handleHeaderAvatarImageLoad = (img: HTMLImageElement) => {
+    if (currentUser && img.complete && img.naturalWidth > 0) {
+      const color = extractDominantColor(img, currentUser.avatar_filename);
+      setAvatarColor(color);
+    }
+  };
+
+  // Expose method to show account menu externally
+  useEffect(() => {
+    requestAccountMenuRef.current = () => {
+      setShowMobileAccount(true);
+    };
+  }, []);
+
+  // Reset account menu state when user changes
+  useEffect(() => {
+    setShowMobileAccount(false);
+    setShowDeleteConfirm(false);
+  }, [currentUser?.avatar_filename, currentUser?.name]);
+
+  // Reset color when avatar changes for header
+  useEffect(() => {
+    if (currentUser) {
+      setAvatarColor('#4A90E2'); // Reset to default
+      if (headerAvatarImageRef.current && headerAvatarImageRef.current.complete) {
+        const color = extractDominantColor(headerAvatarImageRef.current, currentUser.avatar_filename);
+        setAvatarColor(color);
+      }
+    }
+  }, [currentUser?.avatar_filename]);
 
   // Update filter button active state based on filters selected in the bottom sheet
   useEffect(() => {
@@ -357,18 +392,20 @@ export function MainWatchBoxScreen() {
 
   return (
     <div className="main-screen gradient-background">
-      {/* Only show header when account menu and edit profile are not showing */}
+      {/* Only show header when account menu and edit profile are not showing - hide on desktop */}
       {!showEditProfile && (
-        <Header
-          avatarFilename={currentUser.avatar_filename}
-          userName={currentUser.name}
-          onSwitchAccount={logout}
-          onEditProfile={() => handleEditProfile(true)}
-          onDeleteAccount={handleDeleteAccount}
-          onRequestAccountMenu={(callback) => {
-            requestAccountMenuRef.current = callback;
-          }}
-        />
+        <div className="header-mobile-only">
+          <Header
+            avatarFilename={currentUser.avatar_filename}
+            userName={currentUser.name}
+            onSwitchAccount={logout}
+            onEditProfile={() => handleEditProfile(true)}
+            onDeleteAccount={handleDeleteAccount}
+            onRequestAccountMenu={(callback) => {
+              requestAccountMenuRef.current = callback;
+            }}
+          />
+        </div>
       )}
       
       {/* Mobile Filter Bar */}
@@ -408,9 +445,171 @@ export function MainWatchBoxScreen() {
         </button>
       </div>
       
+      {/* Account Menu */}
+      {showMobileAccount && (
+        <>
+          <div className="mobile-account-menu">
+            <div className="mobile-account-header">
+              <button
+                className="back-button-large"
+                onClick={() => setShowMobileAccount(false)}
+                aria-label="Back"
+              >
+                <ArrowLeft size={28} />
+              </button>
+              <h2>My Account</h2>
+            </div>
+            <div className="mobile-account-list">
+              <button
+                className="mobile-account-item with-icon"
+                onClick={() => {
+                  setShowMobileAccount(false);
+                  handleEditProfile(true);
+                }}
+              >
+                <User size={20} />
+                <span>Edit Profile</span>
+              </button>
+              <button
+                className="mobile-account-item with-icon"
+                onClick={() => {
+                  setShowMobileAccount(false);
+                  logout();
+                }}
+              >
+                <LogOut size={20} />
+                <span>Switch Account</span>
+              </button>
+              <div className="mobile-account-delete-wrapper">
+                <button
+                  className="mobile-account-item-delete"
+                  onClick={() => setShowDeleteConfirm(true)}
+                >
+                  Delete Account
+                </button>
+              </div>
+            </div>
+          </div>
+          {showDeleteConfirm && (
+            <div className="delete-confirm-modal-overlay" onClick={() => setShowDeleteConfirm(false)}>
+              <div className="delete-confirm-modal" onClick={(e) => e.stopPropagation()}>
+                <h3>Delete Account?</h3>
+                <p>This action cannot be undone. All your data will be permanently deleted.</p>
+                <div className="delete-confirm-buttons">
+                  <button
+                    className="delete-confirm-cancel"
+                    onClick={() => setShowDeleteConfirm(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="delete-confirm-delete"
+                    onClick={() => {
+                      setShowDeleteConfirm(false);
+                      setShowMobileAccount(false);
+                      handleDeleteAccount();
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </>
+      )}
+      
+      {/* Desktop Filters - Top Right */}
+      <div className="desktop-filters-top-right">
+        <button
+          className={`filter-chip ${moviesActive ? 'active' : ''}`}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            handleMoviesToggle();
+            e.currentTarget.blur();
+          }}
+          onMouseDown={(e) => e.preventDefault()}
+        >
+          Movies
+        </button>
+        <button
+          className={`filter-chip ${showsActive ? 'active' : ''}`}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            handleShowsToggle();
+            e.currentTarget.blur();
+          }}
+          onMouseDown={(e) => e.preventDefault()}
+        >
+          Shows
+        </button>
+        <div className="filter-button-wrapper">
+          <button 
+            className={`mobile-filter-button ${filterButtonActive ? 'active' : ''}`}
+            onClick={() => setShowFilterBottomSheet(true)}
+            aria-label="Filter"
+          >
+            <Funnel className="filter-icon" size={16} />
+          </button>
+          {/* Desktop: Dropdown positioned relative to button */}
+          {showFilterBottomSheet && (
+            <>
+              <div className="filter-dropdown-overlay" onClick={() => setShowFilterBottomSheet(false)}></div>
+              <div className="filter-dropdown-menu-desktop" onClick={(e) => e.stopPropagation()}>
+                <div className="filter-bottom-sheet-header">
+                  <h2>Filters</h2>
+                  <div className="filter-bottom-sheet-header-actions">
+                    <button
+                      className="filter-bottom-sheet-clear"
+                      onClick={handleClearAllFilters}
+                    >
+                      Clear all
+                    </button>
+                    <button
+                      className="filter-bottom-sheet-close"
+                      onClick={() => setShowFilterBottomSheet(false)}
+                      aria-label="Close"
+                    >
+                      <X size={20} />
+                    </button>
+                  </div>
+                </div>
+                <div className="filter-bottom-sheet-content">
+                  <div className="filter-section">
+                    <h3 className="filter-section-title">Genres</h3>
+                    <div className="filter-chips-container">
+                      {availableGenres.map((genre) => {
+                        const isSelected = selectedCategories.includes(genre);
+                        return (
+                          <button
+                            key={genre}
+                            className={`filter-chip-chip ${isSelected ? 'active' : ''}`}
+                            onClick={() => handleCategoryToggle(genre)}
+                          >
+                            {genre}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+      
       <main className="content">
         <div className="tabs-container">
-          <div className="tabs-group">
+          {/* 1. WatchBox Logo */}
+          <div className="tabs-container-logo">
+            <h1 className="app-title">WatchBox</h1>
+          </div>
+          
+          {/* 2. Tabs */}
+          <div className={`tabs-group ${activeTab === 'explore' ? 'has-active-second' : ''}`}>
             <button
               className={`tab-button ${activeTab === 'watchlist' ? 'active' : ''}`}
               onClick={() => setActiveTab('watchlist')}
@@ -424,85 +623,39 @@ export function MainWatchBoxScreen() {
               Explore
             </button>
           </div>
-          <div className="desktop-filters">
+          
+          {/* 3. Profile */}
+          <div className="tabs-container-profile">
+            <span className="header-user-name">{currentUser.name}</span>
             <button
-              className={`filter-chip ${moviesActive ? 'active' : ''}`}
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                handleMoviesToggle();
-                e.currentTarget.blur();
+              className="avatar-button"
+              onClick={() => setShowMobileAccount(true)}
+              aria-label="User menu"
+              style={{
+                backgroundColor: avatarColor
               }}
-              onMouseDown={(e) => e.preventDefault()}
             >
-              Movies
+              <img
+                ref={(img) => {
+                  if (img) {
+                    headerAvatarImageRef.current = img;
+                    if (img.complete && img.naturalWidth > 0) {
+                      handleHeaderAvatarImageLoad(img);
+                    }
+                  }
+                }}
+                src={getAvatarUrl(currentUser.avatar_filename)}
+                alt="User avatar"
+                className="avatar-image"
+                onLoad={(e) => {
+                  const img = e.target as HTMLImageElement;
+                  handleHeaderAvatarImageLoad(img);
+                }}
+                onError={() => {
+                  setAvatarColor('#4A90E2');
+                }}
+              />
             </button>
-            <button
-              className={`filter-chip ${showsActive ? 'active' : ''}`}
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                handleShowsToggle();
-                e.currentTarget.blur();
-              }}
-              onMouseDown={(e) => e.preventDefault()}
-            >
-              Shows
-            </button>
-            <div className="filter-button-wrapper">
-              <button 
-                className={`mobile-filter-button ${filterButtonActive ? 'active' : ''}`}
-                onClick={() => setShowFilterBottomSheet(true)}
-                aria-label="Filter"
-              >
-                <Funnel className="filter-icon" size={16} />
-              </button>
-              {/* Desktop: Dropdown positioned relative to button */}
-              {showFilterBottomSheet && (
-                <>
-                  <div className="filter-dropdown-overlay" onClick={() => setShowFilterBottomSheet(false)}></div>
-                  <div className="filter-dropdown-menu-desktop" onClick={(e) => e.stopPropagation()}>
-                    <div className="filter-bottom-sheet-header">
-                      <h2>Filters</h2>
-                      <div className="filter-bottom-sheet-header-actions">
-                        <button
-                          className="filter-bottom-sheet-clear"
-                          onClick={handleClearAllFilters}
-                        >
-                          Clear all
-                        </button>
-                        <button
-                          className="filter-bottom-sheet-close"
-                          onClick={() => setShowFilterBottomSheet(false)}
-                          aria-label="Close"
-                        >
-                          <X size={20} />
-                        </button>
-                      </div>
-                    </div>
-                    <div className="filter-bottom-sheet-content">
-                      <div className="filter-section">
-                        <h3 className="filter-section-title">Genres</h3>
-                        <div className="filter-chips-container">
-                          {availableGenres.map((genre) => {
-                            const isSelected = selectedCategories.includes(genre);
-                            return (
-                              <button
-                                key={genre}
-                                className={`filter-chip-chip ${isSelected ? 'active' : ''}`}
-                                onClick={() => handleCategoryToggle(genre)}
-                              >
-                                {genre}
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              )}
-            </div>
           </div>
         </div>
         
