@@ -1723,8 +1723,8 @@ img {
 
 .card-action-button svg,
 .add-to-watchlist-button svg {
-  width: 16px !important;
-  height: 16px !important;
+  width: 20px !important;
+  height: 20px !important;
   opacity: 1 !important;
   visibility: visible !important;
   display: block !important;

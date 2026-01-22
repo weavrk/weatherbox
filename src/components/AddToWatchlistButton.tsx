@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CirclePlus, CheckCircle2 } from 'lucide-react';
+import { Plus, Check } from 'lucide-react';
 import './AddToWatchlistButton.css';
 
 interface AddToWatchlistButtonProps {
@@ -35,7 +35,7 @@ export function AddToWatchlistButton({ isAdded, onAdd, onRemove }: AddToWatchlis
       data-button="add-to-watchlist"
     >
       <div className="icon-wrapper">
-        {isAdded ? <CheckCircle2 size={16} /> : <CirclePlus size={16} />}
+        {isAdded ? <Check size={20} /> : <Plus size={20} />}
       </div>
     </button>
   );
