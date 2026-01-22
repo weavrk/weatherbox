@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { X, Star, Clock, Play, Users, Film, Tv, Globe, Loader2, ArrowLeft, ListOrdered, Trash2 } from 'lucide-react';
+import { X, Star, Clock, Play, Users, Film, Tv, Globe, Loader2, ArrowLeft, ListOrdered } from 'lucide-react';
 import type { WatchBoxItem } from '../types';
 import { getPosterUrl, getItemDetails } from '../services/api';
 import { AddToWatchlistButton } from './AddToWatchlistButton';
+import { RemoveFromQueueButton } from './RemoveFromQueueButton';
 
 interface TitleCardProps {
   item: WatchBoxItem;
@@ -90,6 +91,8 @@ interface ReusableTitleCardProps {
   onRemoveClick?: (e: React.MouseEvent) => void;
   onMoveToQueueClick?: (e: React.MouseEvent) => void;
   onDeleteClick?: (e: React.MouseEvent) => void;
+  onRemoveFromQueueClick?: (e: React.MouseEvent) => void;
+  isQueueItem?: boolean;
 }
 
 /**
@@ -113,10 +116,13 @@ function ReusableTitleCard({
   onRemoveClick,
   onMoveToQueueClick,
   onDeleteClick,
+  onRemoveFromQueueClick,
+  isQueueItem,
 }: ReusableTitleCardProps) {
   const [imageError, setImageError] = useState(false);
-  const showManageActions = variant === 'manage' && onMoveToQueueClick && onDeleteClick;
+  const showManageActions = variant === 'manage' && onMoveToQueueClick && onDeleteClick && !isQueueItem;
   const showAddAction = variant === 'add' && !!onAddClick;
+  const showRemoveFromQueue = variant === 'manage' && isQueueItem && !!onRemoveFromQueueClick;
 
   // Reset error state when posterSrc changes
   useEffect(() => {
@@ -166,13 +172,13 @@ function ReusableTitleCard({
           {showManageActions && (
             <>
               <CardActionButton
-                icon={<ListOrdered size={16} />}
+                icon={<ListOrdered size={20} />}
                 onClick={onMoveToQueueClick}
                 ariaLabel="Add to Queue"
                 position="left"
               />
               <CardActionButton
-                icon={<Trash2 size={16} />}
+                icon={<X size={20} />}
                 onClick={onDeleteClick}
                 ariaLabel="Remove from watchlist"
                 position="right"
@@ -186,6 +192,13 @@ function ReusableTitleCard({
               isAdded={isAdded || false}
               onAdd={handleAddClick}
               onRemove={onRemoveClick}
+            />
+          )}
+
+          {/* Queue card action: Remove from queue (X button) */}
+          {showRemoveFromQueue && (
+            <RemoveFromQueueButton
+              onRemove={onRemoveFromQueueClick!}
             />
           )}
         </div>
@@ -226,6 +239,7 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, onRemoveFr
   const [loadingCastPage, setLoadingCastPage] = useState(false);
   const [detailsError, setDetailsError] = useState<string | null>(null);
   const isAdded = isItemAdded;
+  const isQueueItem = item.listType === 'top';
   const [trailerModalOpen, setTrailerModalOpen] = useState(false);
   const [selectedTrailer, setSelectedTrailer] = useState<string | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -487,6 +501,15 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, onRemoveFr
     }
   };
 
+  const handleRemoveFromQueue = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (onMove && item.listType === 'top') {
+      // Move from queue (top) back to watchlist (watch)
+      onMove(item.id, 'watch');
+    }
+  };
+
   // Close modal on escape key
   useEffect(() => {
     if (!detailsOpen) return;
@@ -578,6 +601,12 @@ export function TitleCard({ item, onDelete, onMove, onAddToWatchlist, onRemoveFr
             ? handleDelete
             : undefined
         }
+        onRemoveFromQueueClick={
+          cardVariant === 'manage' && onMove && item.listType === 'top'
+            ? handleRemoveFromQueue
+            : undefined
+        }
+        isQueueItem={isQueueItem}
       />
 
       {/* Details Modal - Rendered via Portal at document root */}

@@ -1699,7 +1699,8 @@ img {
 
 /* Reusable Card Action Button (used for Add to Queue, Delete, and Add to Watchlist) */
 .card-action-button,
-.add-to-watchlist-button {
+.add-to-watchlist-button,
+.remove-from-queue-button {
   background: rgba(0, 0, 0, 0.85) !important;
   border: none !important;
   border-radius: 50% !important;
@@ -1722,12 +1723,17 @@ img {
 }
 
 .card-action-button svg,
-.add-to-watchlist-button svg {
+.add-to-watchlist-button svg,
+.remove-from-queue-button svg {
   width: 20px !important;
   height: 20px !important;
   opacity: 1 !important;
   visibility: visible !important;
   display: block !important;
+}
+
+.remove-from-queue-button:hover {
+  background: var(--accent) !important;
 }
 
 /* Just added animation - rotate then checkmark */
